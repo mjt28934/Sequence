@@ -122,51 +122,58 @@ fun LibraryScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                 }
             }
 
-            when {
-                all.isEmpty() -> Box(Modifier.fillMaxSize()) {
-                    EmptyState(
-                        icon = SeqIcons.Library,
-                        title = "Your library is empty",
-                        body = "Franchises you start, or save with the bookmark, show up here with a count of what is left.",
-                        actionLabel = "Browse franchises",
-                        onAction = { vm.selectTab(AppTab.HOME) },
-                    )
-                }
+            SectionSwitcher(
+                target = Triple(all.isEmpty(), items.isEmpty(), state.libView),
+                modifier = Modifier.weight(1f),
+                axis = SectionAxis.VERTICAL,
+                direction = { _, to -> if (to.third == LibView.GRID) -1 else 1 },
+            ) { (emptyAll, emptyFiltered, view) ->
+                when {
+                    emptyAll -> Box(Modifier.fillMaxSize()) {
+                        EmptyState(
+                            icon = SeqIcons.Library,
+                            title = "Your library is empty",
+                            body = "Franchises you start, or save with the bookmark, show up here with a count of what is left.",
+                            actionLabel = "Browse franchises",
+                            onAction = { vm.selectTab(AppTab.HOME) },
+                        )
+                    }
 
-                items.isEmpty() -> Box(Modifier.fillMaxSize()) {
-                    EmptyState(
-                        icon = SeqIcons.Filter,
-                        title = "Nothing here",
-                        body = "No franchise in your library matches that filter.",
-                    )
-                }
+                    emptyFiltered -> Box(Modifier.fillMaxSize()) {
+                        EmptyState(
+                            icon = SeqIcons.Filter,
+                            title = "Nothing here",
+                            body = "No franchise in your library matches that filter.",
+                        )
+                    }
 
-                state.libView == LibView.GRID -> LazyVerticalGrid(
-                    columns = GridCells.Adaptive(152.dp),
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 4.dp, bottom = 96.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                ) {
-                    items(items, key = { it.franchise.id }) { item ->
-                        Box(Modifier.animateItem()) {
-                            PosterTile(
-                                franchise = item.franchise,
-                                subtitle = subtitleFor(item),
-                                progress = item.seen,
-                                accent = vm.catalog.accent(item.franchise.id).toPalette(),
-                                onClick = { vm.openFranchise(item.franchise.id) },
-                            )
+                    view == LibView.GRID -> LazyVerticalGrid(
+                        columns = GridCells.Adaptive(152.dp),
+                        modifier = Modifier.fillMaxSize(),
+                        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 4.dp, bottom = 96.dp),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        verticalArrangement = Arrangement.spacedBy(16.dp),
+                    ) {
+                        items(items, key = { it.franchise.id }) { item ->
+                            Box(Modifier.animateItem()) {
+                                PosterTile(
+                                    franchise = item.franchise,
+                                    subtitle = subtitleFor(item),
+                                    progress = item.seen,
+                                    accent = vm.catalog.accent(item.franchise.id).toPalette(),
+                                    onClick = { vm.openFranchise(item.franchise.id) },
+                                )
+                            }
                         }
                     }
-                }
 
-                else -> LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(bottom = 96.dp),
-                ) {
-                    items(items, key = { it.franchise.id }) { item ->
-                        Box(Modifier.animateItem()) { LibraryRow(vm, item) }
+                    else -> LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        contentPadding = PaddingValues(bottom = 96.dp),
+                    ) {
+                        items(items, key = { it.franchise.id }) { item ->
+                            Box(Modifier.animateItem()) { LibraryRow(vm, item) }
+                        }
                     }
                 }
             }

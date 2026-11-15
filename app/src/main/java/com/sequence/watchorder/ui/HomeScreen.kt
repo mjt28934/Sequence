@@ -101,167 +101,180 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
             )
         },
     ) { innerPadding ->
-        LazyColumn(
+        // Switching genre cross-fades the whole feed up or down instead of replacing it in place.
+        SectionSwitcher(
+            target = vm.genre,
             modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(
-                top = innerPadding.calculateTopPadding(),
-                bottom = 24.dp,
-            ),
-        ) {
-            item { EnterSection(enter, "genres", 0) { GenreFilterRow(vm) } }
+            axis = SectionAxis.VERTICAL,
+            direction = { _, to -> if (to == "all") -1 else 1 },
+        ) { genre ->
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                contentPadding = PaddingValues(
+                    top = innerPadding.calculateTopPadding(),
+                    bottom = 24.dp,
+                ),
+            ) {
+                item { EnterSection(enter, "genres", 0) { GenreFilterRow(vm) } }
 
-            if (vm.genre != "all") {
-                val list = vm.catalog.franchises.filter { it.genre == vm.genre }
-                item {
-                    EnterSection(enter, "genre-header", 1) {
-                        SectionHeader(vm.genre, subtitle = plural(list.size, "franchise", "franchises"))
-                    }
-                }
-                items(list.chunked(2)) { row ->
-                    Row(
-                        Modifier
-                            .fillMaxWidth()
-                            .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    ) {
-                        row.forEach { f ->
-                            val p = Logic.franchiseProgress(f, state.watched[f.id].orEmpty().toSet(), today)
-                            PosterTile(
-                                franchise = f,
-                                subtitle = Logic.describeCounts(f),
-                                progress = p,
-                                accent = vm.catalog.accent(f.id).toPalette(),
-                                onClick = { vm.openFranchise(f.id) },
-                                modifier = Modifier.weight(1f),
-                            )
-                        }
-                        if (row.size == 1) Spacer(Modifier.weight(1f))
-                    }
-                }
-                item { FooterHint(vm.catalog.dataAsOf) }
-                return@LazyColumn
-            }
-
-            if (cards.isNotEmpty()) {
-                item {
-                    EnterSection(enter, "hero", 1) {
-                        ContinueHero(
-                            card = cards.first(),
-                            accent = vm.catalog.accent(cards.first().franchise.id).toPalette(),
-                            onOpen = { vm.openFranchise(cards.first().franchise.id) },
-                            onMarkSeen = {
-                                val first = cards.first()
-                                first.next?.let { vm.toggleSeen(first.franchise.id, it) }
-                                    ?: first.nextBook?.let { vm.toggleRead(first.franchise.id, it) }
-                            },
-                        )
-                    }
-                }
-            }
-
-            if (seenTotal.done == 0 && readTotal.done == 0) {
-                item { EnterSection(enter, "demo", 2) { OrderDemoCard(vm) } }
-            } else {
-                item { EnterSection(enter, "totals", 2) { OverallProgressCard(seenTotal, readTotal) } }
-            }
-
-            if (cards.size > 1) {
-                item {
-                    EnterSection(enter, "continue-header", 3) {
-                        SectionHeader(
-                            title = "Continue",
-                            subtitle = plural(cards.size, "franchise in progress", "franchises in progress"),
-                        )
-                    }
-                }
-                item {
-                    EnterSection(enter, "continue-rail", 4) {
-                        LazyRow(
-                            contentPadding = PaddingValues(horizontal = 20.dp),
-                            horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        ) {
-                            items(cards.drop(1), key = { it.franchise.id }) { card ->
-                                ShelfCard(
-                                    franchise = card.franchise,
-                                    title = card.franchise.name,
-                                    subtitle = cardSubtitle(card),
-                                    progress = card.seen,
-                                    accent = vm.catalog.accent(card.franchise.id).toPalette(),
-                                    onClick = { vm.openFranchise(card.franchise.id) },
-                                )
-                            }
+                if (genre != "all") {
+                    val list = vm.catalog.franchises.filter { it.genre == genre }
+                    item {
+                        EnterSection(enter, "genre-header", 1) {
+                            SectionHeader(genre, subtitle = plural(list.size, "franchise", "franchises"))
                         }
                     }
-                }
-            }
-
-            val upNext = Logic.upNextList(cards)
-            if (upNext.isNotEmpty()) {
-                item {
-                    EnterSection(enter, "upnext-header", 5) {
-                        SectionHeader(
-                            title = "Up next",
-                            subtitle = "Tap the tick when you have watched it",
-                        )
-                    }
-                }
-                items(upNext, key = { "up-${it.franchise.id}-${it.entry.id}" }) { item ->
-                    UpNextRow(vm, item)
-                }
-            }
-
-            val readNext = Logic.readNextList(cards)
-            if (readNext.isNotEmpty()) {
-                item {
-                    EnterSection(enter, "reading-header", 6) { SectionHeader(title = "Keep reading") }
-                }
-                item {
-                    EnterSection(enter, "reading-rail", 7) {
-                        LazyRow(
-                            contentPadding = PaddingValues(horizontal = 20.dp),
+                    items(list.chunked(2), key = { row -> row.first().id }) { row ->
+                        Row(
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
                             horizontalArrangement = Arrangement.spacedBy(12.dp),
                         ) {
-                            items(readNext, key = { "rn-${it.franchise.id}-${it.work.id}" }) { item ->
-                                CoverTile(
-                                    work = item.work,
-                                    accent = vm.catalog.accent(item.franchise.id).toPalette(),
-                                    read = false,
-                                    isNext = true,
-                                    onClick = { vm.openFranchise(item.franchise.id, books = true) },
-                                    onToggleRead = { vm.toggleRead(item.franchise.id, item.work) },
-                                    modifier = Modifier.width(116.dp),
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-
-            shelves.forEach { (genre, franchises) ->
-                item { EnterSection(enter, "shelf-$genre", 8) { SectionHeader(title = genre) } }
-                item {
-                    EnterSection(enter, "rail-$genre", 9) {
-                        LazyRow(
-                            contentPadding = PaddingValues(horizontal = 20.dp),
-                            horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        ) {
-                            items(franchises, key = { "$genre-${it.id}" }) { f ->
+                            row.forEach { f ->
                                 val p = Logic.franchiseProgress(f, state.watched[f.id].orEmpty().toSet(), today)
                                 PosterTile(
                                     franchise = f,
-                                    subtitle = if (p.done > 0) "${p.done} of ${p.total}" else f.years,
+                                    // Two narrow columns: keep the line short enough to never ellipsise.
+                                    subtitle = buildString {
+                                        append(plural(f.entries.size, "title", "titles"))
+                                        val books = vm.catalog.worksFor(f.id).size
+                                        if (books > 0) append(" · ").append(plural(books, "book", "books"))
+                                    },
                                     progress = p,
                                     accent = vm.catalog.accent(f.id).toPalette(),
                                     onClick = { vm.openFranchise(f.id) },
-                                    modifier = Modifier.width(180.dp),
+                                    modifier = Modifier.weight(1f),
                                 )
+                            }
+                            if (row.size == 1) Spacer(Modifier.weight(1f))
+                        }
+                    }
+                    item { FooterHint(vm.catalog.dataAsOf) }
+                    return@LazyColumn
+                }
+
+                if (cards.isNotEmpty()) {
+                    item {
+                        EnterSection(enter, "hero", 1) {
+                            ContinueHero(
+                                card = cards.first(),
+                                accent = vm.catalog.accent(cards.first().franchise.id).toPalette(),
+                                onOpen = { vm.openFranchise(cards.first().franchise.id) },
+                                onMarkSeen = {
+                                    val first = cards.first()
+                                    first.next?.let { vm.toggleSeen(first.franchise.id, it) }
+                                        ?: first.nextBook?.let { vm.toggleRead(first.franchise.id, it) }
+                                },
+                            )
+                        }
+                    }
+                }
+
+                if (seenTotal.done == 0 && readTotal.done == 0) {
+                    item { EnterSection(enter, "demo", 2) { OrderDemoCard(vm) } }
+                } else {
+                    item { EnterSection(enter, "totals", 2) { OverallProgressCard(seenTotal, readTotal) } }
+                }
+
+                if (cards.size > 1) {
+                    item {
+                        EnterSection(enter, "continue-header", 3) {
+                            SectionHeader(
+                                title = "Continue",
+                                subtitle = plural(cards.size, "franchise in progress", "franchises in progress"),
+                            )
+                        }
+                    }
+                    item {
+                        EnterSection(enter, "continue-rail", 4) {
+                            LazyRow(
+                                contentPadding = PaddingValues(horizontal = 20.dp),
+                                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            ) {
+                                items(cards.drop(1), key = { it.franchise.id }) { card ->
+                                    ShelfCard(
+                                        franchise = card.franchise,
+                                        title = card.franchise.name,
+                                        subtitle = cardSubtitle(card),
+                                        progress = card.seen,
+                                        accent = vm.catalog.accent(card.franchise.id).toPalette(),
+                                        onClick = { vm.openFranchise(card.franchise.id) },
+                                    )
+                                }
                             }
                         }
                     }
                 }
-            }
 
-            item { FooterHint(vm.catalog.dataAsOf) }
+                val upNext = Logic.upNextList(cards)
+                if (upNext.isNotEmpty()) {
+                    item {
+                        EnterSection(enter, "upnext-header", 5) {
+                            SectionHeader(
+                                title = "Up next",
+                                subtitle = "Tap the tick when you have watched it",
+                            )
+                        }
+                    }
+                    items(upNext, key = { "up-${it.franchise.id}-${it.entry.id}" }) { item ->
+                        UpNextRow(vm, item)
+                    }
+                }
+
+                val readNext = Logic.readNextList(cards)
+                if (readNext.isNotEmpty()) {
+                    item {
+                        EnterSection(enter, "reading-header", 6) { SectionHeader(title = "Keep reading") }
+                    }
+                    item {
+                        EnterSection(enter, "reading-rail", 7) {
+                            LazyRow(
+                                contentPadding = PaddingValues(horizontal = 20.dp),
+                                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            ) {
+                                items(readNext, key = { "rn-${it.franchise.id}-${it.work.id}" }) { item ->
+                                    CoverTile(
+                                        work = item.work,
+                                        accent = vm.catalog.accent(item.franchise.id).toPalette(),
+                                        read = false,
+                                        isNext = true,
+                                        onClick = { vm.openFranchise(item.franchise.id, books = true) },
+                                        onToggleRead = { vm.toggleRead(item.franchise.id, item.work) },
+                                        modifier = Modifier.width(116.dp),
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+
+                shelves.forEach { (genre, franchises) ->
+                    item { EnterSection(enter, "shelf-$genre", 8) { SectionHeader(title = genre) } }
+                    item {
+                        EnterSection(enter, "rail-$genre", 9) {
+                            LazyRow(
+                                contentPadding = PaddingValues(horizontal = 20.dp),
+                                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            ) {
+                                items(franchises, key = { "$genre-${it.id}" }) { f ->
+                                    val p = Logic.franchiseProgress(f, state.watched[f.id].orEmpty().toSet(), today)
+                                    PosterTile(
+                                        franchise = f,
+                                        subtitle = if (p.done > 0) "${p.done} of ${p.total}" else f.years,
+                                        progress = p,
+                                        accent = vm.catalog.accent(f.id).toPalette(),
+                                        onClick = { vm.openFranchise(f.id) },
+                                        modifier = Modifier.width(180.dp),
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+
+                item { FooterHint(vm.catalog.dataAsOf) }
+            }
         }
     }
 }

@@ -3,14 +3,14 @@ package com.sequence.watchorder
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
-import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.clickable
@@ -46,6 +46,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.sequence.watchorder.data.ContinueCard
@@ -62,6 +63,8 @@ import com.sequence.watchorder.ui.HomeScreen
 import com.sequence.watchorder.ui.LibraryScreen
 import com.sequence.watchorder.ui.Motion
 import com.sequence.watchorder.ui.SearchScreen
+import com.sequence.watchorder.ui.SectionAxis
+import com.sequence.watchorder.ui.SectionSwitcher
 import com.sequence.watchorder.ui.SettingsScreen
 import com.sequence.watchorder.ui.UpcomingScreen
 import com.sequence.watchorder.ui.toPalette
@@ -98,24 +101,21 @@ fun SequenceApp(vm: MainViewModel) {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background,
         ) {
-            AnimatedContent(
-                targetState = Triple(vm.detailId, vm.settingsOpen, vm.tab),
-                transitionSpec = {
-                    val fromDetail = initialState.first != null
-                    val toDetail = targetState.first != null
+            SectionSwitcher(
+                target = Triple(vm.detailId, vm.settingsOpen, vm.tab),
+                modifier = Modifier.fillMaxSize(),
+                axis = SectionAxis.HORIZONTAL,
+                direction = { from, to ->
                     when {
-                        toDetail -> fadeIn(tween(220)) togetherWith fadeOut(tween(120))
-                        fromDetail -> fadeIn(tween(220)) togetherWith fadeOut(tween(120))
-                        else -> {
-                            val forward = targetState.third.ordinal > initialState.third.ordinal
-                            val offset = if (forward) 1 else -1
-                            (
-                                slideInHorizontally(tween(240)) { it / 12 * offset } + fadeIn(tween(240))
-                                ) togetherWith fadeOut(tween(120))
-                        }
+                        // Going deeper: the new screen owns the forward move.
+                        to.first != null && from.first == null -> 1
+                        from.first != null && to.first == null -> -1
+                        to.second && !from.second -> 1
+                        from.second && !to.second -> -1
+                        to.third.ordinal >= from.third.ordinal -> 1
+                        else -> -1
                     }
                 },
-                label = "destination",
             ) { (detailId, settingsOpen, _) ->
                 when {
                     detailId != null -> {
@@ -221,6 +221,11 @@ internal fun AppNavigationBar(vm: MainViewModel) {
                 selected = selected,
                 onClick = { vm.selectTab(tab) },
                 icon = {
+                    val pop by animateFloatAsState(
+                        targetValue = if (Motion.enabled && selected) 1.12f else 1f,
+                        animationSpec = spring(dampingRatio = 0.5f, stiffness = 700f),
+                        label = "navIcon",
+                    )
                     Icon(
                         imageVector = when (tab) {
                             AppTab.HOME -> SeqIcons.Home
@@ -229,7 +234,12 @@ internal fun AppNavigationBar(vm: MainViewModel) {
                             AppTab.SEARCH -> SeqIcons.Search
                         },
                         contentDescription = null,
-                        modifier = Modifier.size(24.dp),
+                        modifier = Modifier
+                            .size(24.dp)
+                            .graphicsLayer {
+                                scaleX = pop
+                                scaleY = pop
+                            },
                     )
                 },
                 label = { Text(tab.label) },

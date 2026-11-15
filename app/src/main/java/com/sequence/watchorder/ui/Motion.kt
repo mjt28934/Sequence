@@ -1,7 +1,17 @@
 package com.sequence.watchorder.ui
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.EnterExitState
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.togetherWith
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
@@ -16,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 
 /**
@@ -112,5 +123,79 @@ fun EnterSection(
 ) {
     Box(modifier = modifier.fillMaxWidth().enterUp(tracker, key, index)) {
         content()
+    }
+}
+
+/** Which way a section change travels. */
+enum class SectionAxis {
+    /** Sibling pages, e.g. tabs: the new section arrives from the side. */
+    HORIZONTAL,
+
+    /** Content inside one page, e.g. a genre filter: the new section rises into place. */
+    VERTICAL,
+}
+
+/**
+ * Swaps one section for another with a shared-axis move instead of a hard cut.
+ *
+ * The incoming section slides in the direction of travel and settles from 98% scale, while the
+ * outgoing one leaves in the opposite direction. [direction] returns 1 for forward, -1 for back and
+ * 0 to cross-fade in place, so tab order, list/grid and detail navigation all read correctly.
+ *
+ * With [Motion] off the target renders directly, so snapshot tests still capture settled frames.
+ */
+@Composable
+fun <T> SectionSwitcher(
+    target: T,
+    modifier: Modifier = Modifier,
+    axis: SectionAxis = SectionAxis.VERTICAL,
+    direction: (initial: T, target: T) -> Int = { _, _ -> 1 },
+    content: @Composable (T) -> Unit,
+) {
+    if (!Motion.enabled) {
+        content(target)
+        return
+    }
+
+    AnimatedContent(
+        targetState = target,
+        modifier = modifier,
+        transitionSpec = {
+            val dir = direction(initialState, targetState).coerceIn(-1, 1)
+            val enterMove = tween<IntOffset>(durationMillis = 360, easing = FastOutSlowInEasing)
+            val exitMove = tween<IntOffset>(durationMillis = 260, easing = FastOutSlowInEasing)
+            when (axis) {
+                SectionAxis.HORIZONTAL -> (
+                    slideInHorizontally(enterMove) { width -> (width / 5) * dir } +
+                        fadeIn(tween(durationMillis = 240, easing = FastOutSlowInEasing))
+                    ) togetherWith (
+                    slideOutHorizontally(exitMove) { width -> (-width / 8) * dir } +
+                        fadeOut(tween(durationMillis = 180))
+                    )
+
+                SectionAxis.VERTICAL -> (
+                    slideInVertically(enterMove) { height -> (height / 16) * dir } +
+                        fadeIn(tween(durationMillis = 220, easing = FastOutSlowInEasing))
+                    ) togetherWith (
+                    slideOutVertically(exitMove) { height -> (-height / 20) * dir } +
+                        fadeOut(tween(durationMillis = 160))
+                    )
+            }
+        },
+        label = "section",
+    ) { state ->
+        // A hair of scale on the way in gives the change depth without blurring body text for long.
+        val settle by transition.animateFloat(
+            transitionSpec = { tween(durationMillis = 360, easing = FastOutSlowInEasing) },
+            label = "sectionSettle",
+        ) { phase -> if (phase == EnterExitState.Visible) 1f else 0.985f }
+        Box(
+            Modifier.graphicsLayer {
+                scaleX = settle
+                scaleY = settle
+            },
+        ) {
+            content(state)
+        }
     }
 }

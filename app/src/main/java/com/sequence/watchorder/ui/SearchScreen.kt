@@ -127,10 +127,18 @@ fun SearchScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                 .padding(top = innerPadding.calculateTopPadding()),
         ) {
             val q = vm.query.trim()
-            if (q.isEmpty()) {
-                BrowseGenres(vm)
-            } else {
-                SearchResults(vm, q)
+            // Typing swaps browsing for results with the same vertical move as a genre change.
+            SectionSwitcher(
+                target = q.isEmpty(),
+                modifier = Modifier.fillMaxSize(),
+                axis = SectionAxis.VERTICAL,
+                direction = { from, _ -> if (from) 1 else -1 },
+            ) { browsing ->
+                if (browsing) {
+                    BrowseGenres(vm)
+                } else {
+                    SearchResults(vm, q)
+                }
             }
         }
     }

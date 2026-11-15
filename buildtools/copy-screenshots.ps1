@@ -16,6 +16,7 @@ $names = [ordered]@{
   "detail-books"   = "09-detail-books.png"
   "settings"       = "10-settings.png"
   "home-light"     = "11-home-light.png"
+  "home-genre"     = "12-home-genre.png"
 }
 
 $map = @{}

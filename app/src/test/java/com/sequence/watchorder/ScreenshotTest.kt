@@ -111,6 +111,12 @@ class ScreenshotTest {
     }
 
     @Test
+    fun homeGenre() {
+        val model = vm().apply { selectGenre("Sci-fi") }
+        shot("home-genre") { HomeScreen(model) }
+    }
+
+    @Test
     fun shell() {
         val model = vm()
         val mini = Logic.continueList(catalog, model.progress, model.today(), 1).firstOrNull()
