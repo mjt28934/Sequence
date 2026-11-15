@@ -25,8 +25,8 @@ import com.sequence.watchorder.ui.FallbackLight
 import com.sequence.watchorder.ui.HomeScreen
 import com.sequence.watchorder.ui.LibraryScreen
 import com.sequence.watchorder.ui.Motion
-import com.sequence.watchorder.ui.SearchScreen
 import com.sequence.watchorder.ui.SettingsScreen
+import com.sequence.watchorder.ui.TagsScreen
 import com.sequence.watchorder.ui.UpcomingScreen
 import org.junit.Before
 import org.junit.Rule
@@ -111,9 +111,18 @@ class ScreenshotTest {
     }
 
     @Test
-    fun homeGenre() {
-        val model = vm().apply { selectGenre("Sci-fi") }
-        shot("home-genre") { HomeScreen(model) }
+    fun homeSearch() {
+        val model = vm().apply {
+            openSearch()
+            updateQuery("star")
+        }
+        shot("home-search") { HomeScreen(model) }
+    }
+
+    @Test
+    fun homeSearchIndex() {
+        val model = vm().apply { openSearch() }
+        shot("home-search-index") { HomeScreen(model) }
     }
 
     @Test
@@ -150,18 +159,18 @@ class ScreenshotTest {
     }
 
     @Test
-    fun searchBrowse() {
-        val model = vm().apply { selectTab(AppTab.SEARCH) }
-        shot("search-browse") { SearchScreen(model) }
+    fun tags() {
+        val model = vm().apply { selectTab(AppTab.TAGS) }
+        shot("tags") { TagsScreen(model) }
     }
 
     @Test
-    fun searchResults() {
+    fun tagsGenre() {
         val model = vm().apply {
-            selectTab(AppTab.SEARCH)
-            updateQuery("star")
+            selectTab(AppTab.TAGS)
+            selectGenre("Sci-fi")
         }
-        shot("search-results") { SearchScreen(model) }
+        shot("tags-genre") { TagsScreen(model) }
     }
 
     @Test

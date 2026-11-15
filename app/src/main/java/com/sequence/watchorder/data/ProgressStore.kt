@@ -21,6 +21,11 @@ class ProgressStore(context: Context, private val franchiseIds: Set<String>) {
                 else -> LibSort.RECENT
             }
             val view = if (state.optString("libView") == "list") LibView.LIST else LibView.GRID
+            val theme = when (state.optString("theme")) {
+                "light" -> ThemeMode.LIGHT
+                "dark" -> ThemeMode.DARK
+                else -> ThemeMode.SYSTEM
+            }
             ProgressState(
                 watched = readMap(state.optJSONObject("watched")),
                 read = readMap(state.optJSONObject("read")),
@@ -29,6 +34,9 @@ class ProgressStore(context: Context, private val franchiseIds: Set<String>) {
                 recent = readList(state.optJSONArray("recent")),
                 libSort = sort,
                 libView = view,
+                theme = theme,
+                haptics = state.optBoolean("haptics", true),
+                reduceMotion = state.optBoolean("reduceMotion", false),
             )
         } catch (_: Exception) {
             ProgressState()
@@ -45,6 +53,9 @@ class ProgressStore(context: Context, private val franchiseIds: Set<String>) {
             .put("recent", JSONArray(state.recent))
             .put("libSort", state.libSort.name.lowercase())
             .put("libView", if (state.libView == LibView.LIST) "list" else "grid")
+            .put("theme", state.theme.name.lowercase())
+            .put("haptics", state.haptics)
+            .put("reduceMotion", state.reduceMotion)
         root.put("state", obj)
         root.put("version", 0)
         prefs.edit().putString(KEY, root.toString()).apply()

@@ -153,7 +153,8 @@ fun <T> SectionSwitcher(
     content: @Composable (T) -> Unit,
 ) {
     if (!Motion.enabled) {
-        content(target)
+        // The modifier still applies: otherwise a settled frame would lose padding or weight.
+        Box(modifier) { content(target) }
         return
     }
 

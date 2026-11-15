@@ -14,6 +14,7 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -51,8 +52,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.sequence.watchorder.data.ContinueCard
 import com.sequence.watchorder.data.Logic
+import com.sequence.watchorder.data.ThemeMode
 import com.sequence.watchorder.ui.ArtImage
 import com.sequence.watchorder.ui.ArtKind
+import com.sequence.watchorder.ui.Haptics
 import com.sequence.watchorder.ui.ProgressStrip
 import com.sequence.watchorder.ui.SeenToggle
 import com.sequence.watchorder.ui.SeqIcons
@@ -62,10 +65,10 @@ import com.sequence.watchorder.ui.DetailScreen
 import com.sequence.watchorder.ui.HomeScreen
 import com.sequence.watchorder.ui.LibraryScreen
 import com.sequence.watchorder.ui.Motion
-import com.sequence.watchorder.ui.SearchScreen
 import com.sequence.watchorder.ui.SectionAxis
 import com.sequence.watchorder.ui.SectionSwitcher
 import com.sequence.watchorder.ui.SettingsScreen
+import com.sequence.watchorder.ui.TagsScreen
 import com.sequence.watchorder.ui.UpcomingScreen
 import com.sequence.watchorder.ui.toPalette
 
@@ -91,12 +94,21 @@ fun SequenceApp(vm: MainViewModel) {
 
     BackHandler(
         enabled = vm.sheet == null &&
-            (vm.detailId != null || vm.settingsOpen || vm.tab != AppTab.HOME),
+            (vm.detailId != null || vm.settingsOpen || vm.searchOpen || vm.tab != AppTab.HOME),
     ) {
         vm.onBack()
     }
 
-    SequenceTheme {
+    val darkTheme = when (vm.progress.theme) {
+        ThemeMode.SYSTEM -> isSystemInDarkTheme()
+        ThemeMode.LIGHT -> false
+        ThemeMode.DARK -> true
+    }
+    // These two switches live in Settings; every timed animation and haptic tick reads them.
+    Motion.enabled = !vm.progress.reduceMotion
+    Haptics.enabled = vm.progress.haptics
+
+    SequenceTheme(darkTheme = darkTheme) {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background,
@@ -180,7 +192,7 @@ private fun MainTabs(vm: MainViewModel, snackbarHostState: SnackbarHostState) {
                     AppTab.HOME -> HomeScreen(vm)
                     AppTab.LIBRARY -> LibraryScreen(vm)
                     AppTab.UPCOMING -> UpcomingScreen(vm)
-                    AppTab.SEARCH -> SearchScreen(vm)
+                    AppTab.TAGS -> TagsScreen(vm)
                 }
             }
         }
@@ -231,7 +243,7 @@ internal fun AppNavigationBar(vm: MainViewModel) {
                             AppTab.HOME -> SeqIcons.Home
                             AppTab.LIBRARY -> SeqIcons.Library
                             AppTab.UPCOMING -> SeqIcons.Event
-                            AppTab.SEARCH -> SeqIcons.Search
+                            AppTab.TAGS -> SeqIcons.Tags
                         },
                         contentDescription = null,
                         modifier = Modifier
@@ -279,59 +291,28 @@ private fun MiniBar(vm: MainViewModel, card: ContinueCard) {
     ) {
         Column {
             // Sliding the strip's contents, rather than snapping them, when the next title changes.
-            AnimatedContent(
-                targetState = card.franchise.id,
-                transitionSpec = {
-                    (
-                        slideInVertically(tween(240)) { it / 3 } + fadeIn(tween(240))
-                        ) togetherWith (
-                        slideOutVertically(tween(160)) { -it / 3 } + fadeOut(tween(120))
-                        )
-                },
-                label = "miniBar",
-            ) { shownId ->
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 8.dp, end = 4.dp, top = 8.dp, bottom = 10.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                ) {
-                    Box(
-                        Modifier
-                            .width(56.dp)
-                            .aspectRatio(16f / 10f)
-                            .clip(RoundedCornerShape(10.dp)),
-                    ) {
-                        // Keeps the outgoing poster with the outgoing text during the slide.
-                        ArtImage(ArtKind.POSTER, shownId, Modifier.fillMaxSize())
+            if (Motion.enabled) {
+                AnimatedContent(
+                    targetState = card.franchise.id,
+                    transitionSpec = {
+                        (
+                            slideInVertically(tween(240)) { it / 3 } + fadeIn(tween(240))
+                            ) togetherWith (
+                            slideOutVertically(tween(160)) { -it / 3 } + fadeOut(tween(120))
+                            )
+                    },
+                    label = "miniBar",
+                ) { shownId ->
+                    MiniBarRow(card, shownId, kicker, title, hasNext) {
+                        card.next?.let { vm.toggleSeen(card.franchise.id, it) }
+                            ?: card.nextBook?.let { vm.toggleRead(card.franchise.id, it) }
                     }
-                    Column(Modifier.weight(1f)) {
-                        Text(
-                            text = card.franchise.name,
-                            style = MaterialTheme.typography.titleSmall,
-                            color = MaterialTheme.colorScheme.onSurface,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                        )
-                        Text(
-                            text = "$kicker · $title",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                        )
-                    }
-                    if (hasNext) {
-                        SeenToggle(
-                            checked = false,
-                            size = 40.dp,
-                            onToggle = {
-                                card.next?.let { vm.toggleSeen(card.franchise.id, it) }
-                                    ?: card.nextBook?.let { vm.toggleRead(card.franchise.id, it) }
-                            },
-                        )
-                    }
+                }
+            } else {
+                // Reduce motion: the new title replaces the old one without a slide.
+                MiniBarRow(card, card.franchise.id, kicker, title, hasNext) {
+                    card.next?.let { vm.toggleSeen(card.franchise.id, it) }
+                        ?: card.nextBook?.let { vm.toggleRead(card.franchise.id, it) }
                 }
             }
             ProgressStrip(
@@ -340,6 +321,54 @@ private fun MiniBar(vm: MainViewModel, card: ContinueCard) {
                 modifier = Modifier.padding(horizontal = 12.dp, vertical = 0.dp),
             )
             Box(Modifier.padding(bottom = 8.dp))
+        }
+    }
+}
+
+/** One line of the mini bar: poster, franchise, what is next, and the tick. */
+@Composable
+private fun MiniBarRow(
+    card: ContinueCard,
+    shownId: String,
+    kicker: String,
+    title: String,
+    hasNext: Boolean,
+    onToggle: () -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 8.dp, end = 4.dp, top = 8.dp, bottom = 10.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        Box(
+            Modifier
+                .width(56.dp)
+                .aspectRatio(16f / 10f)
+                .clip(RoundedCornerShape(10.dp)),
+        ) {
+            // Keeps the outgoing poster with the outgoing text during the slide.
+            ArtImage(ArtKind.POSTER, shownId, Modifier.fillMaxSize())
+        }
+        Column(Modifier.weight(1f)) {
+            Text(
+                text = card.franchise.name,
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onSurface,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+            Text(
+                text = "$kicker · $title",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+        }
+        if (hasNext) {
+            SeenToggle(checked = false, size = 40.dp, onToggle = onToggle)
         }
     }
 }

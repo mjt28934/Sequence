@@ -108,6 +108,13 @@ enum class LibSort(val label: String) {
 
 enum class LibView { GRID, LIST }
 
+/** App appearance choice; [SYSTEM] follows the phone's dark-mode setting. */
+enum class ThemeMode(val label: String) {
+    SYSTEM("System"),
+    LIGHT("Light"),
+    DARK("Dark"),
+}
+
 data class ProgressState(
     val watched: Map<String, List<String>> = emptyMap(),
     val read: Map<String, List<String>> = emptyMap(),
@@ -116,6 +123,9 @@ data class ProgressState(
     val recent: List<String> = emptyList(),
     val libSort: LibSort = LibSort.RECENT,
     val libView: LibView = LibView.GRID,
+    val theme: ThemeMode = ThemeMode.SYSTEM,
+    val haptics: Boolean = true,
+    val reduceMotion: Boolean = false,
 )
 
 data class WatchFilter(

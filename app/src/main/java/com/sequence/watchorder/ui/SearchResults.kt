@@ -1,21 +1,11 @@
 package com.sequence.watchorder.ui
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -26,14 +16,11 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
@@ -43,144 +30,122 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.sequence.watchorder.AppTab
 import com.sequence.watchorder.MainViewModel
 import com.sequence.watchorder.Sheet
 import com.sequence.watchorder.data.Franchise
 import com.sequence.watchorder.data.Logic
-import com.sequence.watchorder.data.Work
 
+/**
+ * The search field that grows under Home's app bar.
+ *
+ * It is a plain field rather than a new screen: Home keeps its scroll position underneath and the
+ * close button on the app bar puts everything back.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
-    val focusRequester = remember { FocusRequester() }
+fun HomeSearchField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    focusRequester: FocusRequester,
+    modifier: Modifier = Modifier,
+) {
     val keyboard = LocalSoftwareKeyboardController.current
-
-    LaunchedEffect(vm.searchFocusRequest, vm.searchFocusHandled) {
-        if (vm.searchFocusRequest > vm.searchFocusHandled) {
-            try {
-                focusRequester.requestFocus()
-                keyboard?.show()
-            } catch (_: IllegalStateException) {
-                // Field is not attached yet; a later request retries.
-            }
-            vm.markSearchFocusHandled(vm.searchFocusRequest)
-        }
-    }
-
-    Scaffold(
-        modifier = modifier,
-        containerColor = MaterialTheme.colorScheme.background,
-        contentWindowInsets = androidx.compose.foundation.layout.WindowInsets(0, 0, 0, 0),
-        topBar = {
-            Column(
-                Modifier
-                    .statusBarsPadding()
-                    .padding(top = 8.dp),
-            ) {
-                Text(
-                    "Search",
-                    modifier = Modifier.padding(start = 20.dp, top = 8.dp, bottom = 8.dp),
-                    style = MaterialTheme.typography.headlineMedium,
-                    color = MaterialTheme.colorScheme.onSurface,
-                )
-                Surface(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
-                    shape = RoundedCornerShape(28.dp),
-                    color = MaterialTheme.colorScheme.surfaceContainerHigh,
-                ) {
-                    TextField(
-                        value = vm.query,
-                        onValueChange = { vm.updateQuery(it) },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .focusRequester(focusRequester),
-                        placeholder = { Text("Franchises, titles, books") },
-                        leadingIcon = { Icon(SeqIcons.Search, contentDescription = null) },
-                        trailingIcon = {
-                            if (vm.query.isNotEmpty()) {
-                                IconButton(onClick = { vm.updateQuery("") }) {
-                                    Icon(SeqIcons.Close, contentDescription = "Clear search")
-                                }
-                            }
-                        },
-                        singleLine = true,
-                        shape = RoundedCornerShape(28.dp),
-                        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-                        keyboardActions = KeyboardActions(onSearch = { keyboard?.hide() }),
-                        colors = TextFieldDefaults.colors(
-                            focusedContainerColor = Color.Transparent,
-                            unfocusedContainerColor = Color.Transparent,
-                            focusedIndicatorColor = Color.Transparent,
-                            unfocusedIndicatorColor = Color.Transparent,
-                        ),
-                    )
-                }
-            }
-        },
-    ) { innerPadding ->
-        Box(
-            Modifier
-                .fillMaxSize()
-                .padding(top = innerPadding.calculateTopPadding()),
-        ) {
-            val q = vm.query.trim()
-            // Typing swaps browsing for results with the same vertical move as a genre change.
-            SectionSwitcher(
-                target = q.isEmpty(),
-                modifier = Modifier.fillMaxSize(),
-                axis = SectionAxis.VERTICAL,
-                direction = { from, _ -> if (from) 1 else -1 },
-            ) { browsing ->
-                if (browsing) {
-                    BrowseGenres(vm)
-                } else {
-                    SearchResults(vm, q)
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun BrowseGenres(vm: MainViewModel) {
-    val shelves = Logic.genreShelves(vm.catalog.franchises, vm.catalog.genres)
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
-        modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 32.dp),
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
+    Surface(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp, end = 16.dp, top = 2.dp, bottom = 10.dp),
+        shape = RoundedCornerShape(28.dp),
+        color = MaterialTheme.colorScheme.surfaceContainerHigh,
     ) {
-        item(span = { androidx.compose.foundation.lazy.grid.GridItemSpan(maxLineSpan) }) {
-            SectionHeader(
-                title = "Browse all",
-                subtitle = "${vm.catalog.genres.size} genres · ${vm.catalog.franchises.size} franchises",
-                modifier = Modifier.padding(horizontal = 0.dp),
-            )
-        }
-        items(shelves, key = { it.first }) { shelf ->
-            val first = shelf.second.firstOrNull() ?: return@items
-            GenreTile(
-                genre = shelf.first,
-                franchise = first,
-                accent = vm.catalog.accent(first.id).toPalette(),
-                onClick = {
-                    vm.selectGenre(shelf.first)
-                    vm.selectTab(AppTab.HOME)
-                },
-                modifier = Modifier.fillMaxWidth(),
-                count = shelf.second.size,
-            )
+        TextField(
+            value = value,
+            onValueChange = onValueChange,
+            modifier = Modifier
+                .fillMaxWidth()
+                .focusRequester(focusRequester),
+            placeholder = { Text("Franchises, titles, books") },
+            leadingIcon = { Icon(SeqIcons.Search, contentDescription = null) },
+            trailingIcon = {
+                if (value.isNotEmpty()) {
+                    IconButton(onClick = { onValueChange("") }) {
+                        Icon(SeqIcons.Close, contentDescription = "Clear search")
+                    }
+                }
+            },
+            singleLine = true,
+            shape = RoundedCornerShape(28.dp),
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+            keyboardActions = KeyboardActions(onSearch = { keyboard?.hide() }),
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = Color.Transparent,
+                unfocusedContainerColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+            ),
+        )
+    }
+}
+
+/**
+ * What Home shows while search is open: the full franchise index until the user types, then the
+ * matches. The two swap with the same vertical move the rest of the app uses.
+ */
+@Composable
+fun HomeSearchResults(vm: MainViewModel, modifier: Modifier = Modifier) {
+    val q = vm.query.trim()
+    SectionSwitcher(
+        target = q.isEmpty(),
+        modifier = modifier.fillMaxSize(),
+        axis = SectionAxis.VERTICAL,
+        direction = { from, _ -> if (from) 1 else -1 },
+    ) { indexing ->
+        if (indexing) {
+            FranchiseIndex(vm)
+        } else {
+            SearchResultsList(vm, q)
         }
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+/** Every franchise, A to Z, grouped under its first letter: the browse state before typing. */
 @Composable
-private fun SearchResults(vm: MainViewModel, q: String) {
+private fun FranchiseIndex(vm: MainViewModel) {
+    val sorted = vm.catalog.franchises.sortedWith(
+        compareBy(String.CASE_INSENSITIVE_ORDER) { it.name },
+    )
+    val groups = sorted.groupBy { it.name.firstOrNull()?.uppercaseChar() ?: '#' }
+
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(bottom = 32.dp),
+    ) {
+        item {
+            SectionHeader(
+                title = "All franchises",
+                subtitle = "${plural(sorted.size, "franchise", "franchises")} · start typing to narrow it down",
+            )
+        }
+        groups.forEach { (letter, list) ->
+            item(key = "letter-$letter") { LetterHeader(letter) }
+            items(list, key = { "f-${it.id}" }) { franchise ->
+                FranchiseRow(franchise, onClick = { vm.openFranchise(franchise.id) })
+            }
+        }
+    }
+}
+
+@Composable
+private fun LetterHeader(letter: Char) {
+    Text(
+        letter.toString(),
+        modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 14.dp, bottom = 2.dp),
+        style = MaterialTheme.typography.titleSmall,
+        color = MaterialTheme.colorScheme.primary,
+    )
+}
+
+@Composable
+private fun SearchResultsList(vm: MainViewModel, q: String) {
     val results = Logic.searchAll(vm.catalog, q)
     val empty = results.franchises.isEmpty() && results.titles.isEmpty() && results.works.isEmpty()
 

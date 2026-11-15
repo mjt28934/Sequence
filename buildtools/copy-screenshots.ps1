@@ -10,13 +10,14 @@ $names = [ordered]@{
   "library-grid"   = "03-library-grid.png"
   "library-list"   = "04-library-list.png"
   "upcoming"       = "05-upcoming.png"
-  "search-browse"  = "06-search-browse.png"
-  "search-results" = "07-search-results.png"
+  "tags"           = "06-tags.png"
+  "tags-genre"     = "07-tags-genre.png"
   "detail-watch"   = "08-detail-watch.png"
   "detail-books"   = "09-detail-books.png"
   "settings"       = "10-settings.png"
   "home-light"     = "11-home-light.png"
-  "home-genre"     = "12-home-genre.png"
+  "home-search"    = "12-home-search.png"
+  "home-search-index" = "13-home-search-index.png"
 }
 
 $map = @{}

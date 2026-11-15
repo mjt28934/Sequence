@@ -62,7 +62,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.semantics.contentDescription
@@ -76,6 +75,12 @@ import com.sequence.watchorder.data.Progress
 import com.sequence.watchorder.data.Work
 
 fun plural(n: Int, one: String, many: String): String = "$n ${if (n == 1) one else many}"
+
+/** "24 titles · 17 books", short enough to fit a two-column poster tile. */
+fun countLine(titles: Int, books: Int): String = buildString {
+    append(plural(titles, "title", "titles"))
+    if (books > 0) append(" · ").append(plural(books, "book", "books"))
+}
 
 @Composable
 fun BrandMark(modifier: Modifier = Modifier, color: Color = MaterialTheme.colorScheme.primary) {
@@ -180,7 +185,7 @@ fun SeenToggle(
     val scheme = MaterialTheme.colorScheme
     IconButton(
         onClick = {
-            haptics.performHapticFeedback(HapticFeedbackType.LongPress)
+            Haptics.tick(haptics)
             onToggle()
         },
         enabled = enabled,
@@ -549,7 +554,7 @@ fun CoverTile(
                         CircleShape,
                     )
                     .clickable {
-                        haptics.performHapticFeedback(HapticFeedbackType.LongPress)
+                        Haptics.tick(haptics)
                         onToggleRead()
                     }
                     .semantics { contentDescription = if (read) "Mark unread" else "Mark read" },

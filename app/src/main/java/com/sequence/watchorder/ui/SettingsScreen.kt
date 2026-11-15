@@ -13,6 +13,9 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonDefaults
+import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -24,6 +27,7 @@ import com.sequence.watchorder.MainViewModel
 import com.sequence.watchorder.Sheet
 import com.sequence.watchorder.data.Logic
 import com.sequence.watchorder.data.OrderMode
+import com.sequence.watchorder.data.ThemeMode
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,6 +57,40 @@ fun SettingsScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                     bottom = 32.dp,
                 ),
         ) {
+            SettingsGroup("Appearance")
+            SingleChoiceSegmentedButtonRow(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp),
+            ) {
+                ThemeMode.entries.forEachIndexed { index, mode ->
+                    SegmentedButton(
+                        selected = vm.progress.theme == mode,
+                        onClick = { vm.setTheme(mode) },
+                        shape = SegmentedButtonDefaults.itemShape(index, ThemeMode.entries.size),
+                    ) { Text(mode.label) }
+                }
+            }
+            Text(
+                "System follows your phone's dark mode.",
+                modifier = Modifier.padding(start = 24.dp, end = 24.dp, top = 6.dp, bottom = 8.dp),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            SheetToggleRow(
+                title = "Vibration",
+                subtitle = "A short buzz when you mark a title",
+                checked = vm.progress.haptics,
+                onCheckedChange = { vm.setHaptics(it) },
+            )
+            SheetToggleRow(
+                title = "Reduce motion",
+                subtitle = "Skip screen transitions and entrance animations",
+                checked = vm.progress.reduceMotion,
+                onCheckedChange = { vm.setReduceMotion(it) },
+            )
+
+            SettingsDivider()
             SettingsGroup("Watching order")
             Text(
                 "Applies everywhere in the app: the order list on each franchise, the " +

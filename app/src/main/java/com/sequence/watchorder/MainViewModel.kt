@@ -15,6 +15,7 @@ import com.sequence.watchorder.data.Logic
 import com.sequence.watchorder.data.OrderMode
 import com.sequence.watchorder.data.ProgressState
 import com.sequence.watchorder.data.ProgressStore
+import com.sequence.watchorder.data.ThemeMode
 import com.sequence.watchorder.data.WatchFilter
 import com.sequence.watchorder.data.Work
 
@@ -22,7 +23,7 @@ enum class AppTab(val label: String) {
     HOME("Home"),
     LIBRARY("Library"),
     UPCOMING("Upcoming"),
-    SEARCH("Search"),
+    TAGS("Tags"),
 }
 
 enum class DetailTab { WATCH, BOOKS }
@@ -90,9 +91,9 @@ class MainViewModel : AndroidViewModel {
 
     var snack by mutableStateOf<Snack?>(null)
         private set
-    var searchFocusRequest by mutableIntStateOf(0)
+    var searchOpen by mutableStateOf(false)
         private set
-    var searchFocusHandled by mutableIntStateOf(0)
+    var searchFocusRequest by mutableIntStateOf(0)
         private set
 
     private var snackId = 0L
@@ -110,13 +111,16 @@ class MainViewModel : AndroidViewModel {
         tab = value
     }
 
-    fun goSearch() {
-        tab = AppTab.SEARCH
+    /** Opens the search field on Home and asks it to take focus. */
+    fun openSearch() {
+        searchOpen = true
         searchFocusRequest += 1
     }
 
-    fun markSearchFocusHandled(value: Int) {
-        if (value > searchFocusHandled) searchFocusHandled = value
+    /** Closes search and clears the query so Home is not left filtered. */
+    fun closeSearch() {
+        searchOpen = false
+        query = ""
     }
 
     fun selectGenre(value: String) {
@@ -172,6 +176,14 @@ class MainViewModel : AndroidViewModel {
             closeSettings()
             return true
         }
+        if (searchOpen) {
+            closeSearch()
+            return true
+        }
+        if (tab == AppTab.TAGS && genre != "all") {
+            genre = "all"
+            return true
+        }
         if (tab != AppTab.HOME) {
             tab = AppTab.HOME
             return true
@@ -216,6 +228,22 @@ class MainViewModel : AndroidViewModel {
     fun toggleLibView() {
         val next = if (progress.libView == LibView.GRID) LibView.LIST else LibView.GRID
         mutate({ it.copy(libView = next) }, "", undoable = false, showSnack = false)
+    }
+
+    fun setTheme(value: ThemeMode) {
+        mutate({ it.copy(theme = value) }, "", undoable = false, showSnack = false)
+    }
+
+    fun setHaptics(on: Boolean) {
+        mutate({ it.copy(haptics = on) }, "", undoable = false, showSnack = false)
+    }
+
+    fun setReduceMotion(on: Boolean) {
+        mutate(
+            { it.copy(reduceMotion = on) },
+            if (on) "Animations reduced" else "Animations on",
+            undoable = false,
+        )
     }
 
     fun toggleSeen(franchiseId: String, entry: Entry) {

@@ -1,5 +1,11 @@
 package com.sequence.watchorder.ui
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -36,6 +42,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -43,15 +50,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.sequence.watchorder.MainViewModel
 import com.sequence.watchorder.data.ContinueCard
 import com.sequence.watchorder.data.Entry
-import com.sequence.watchorder.data.Franchise
 import com.sequence.watchorder.data.Logic
 import com.sequence.watchorder.data.OrderMode
 import com.sequence.watchorder.data.Progress
@@ -69,91 +77,102 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
         { vm.catalog.worksFor(it) },
         { state.read[it].orEmpty() },
     )
-    val shelves = Logic.genreShelves(vm.catalog.franchises, vm.catalog.genres)
+    val allFranchises = vm.catalog.franchises.sortedWith(
+        compareBy(String.CASE_INSENSITIVE_ORDER) { it.name },
+    )
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val enter = remember { EnterTracker() }
+    val searchOpen = vm.searchOpen
+    val focusRequester = remember { FocusRequester() }
+    val keyboard = LocalSoftwareKeyboardController.current
+
+    // Opening search grows the field under the app bar and parks the cursor in it. The focus
+    // request can land before the field is attached; that throws, so it stays a no-op.
+    LaunchedEffect(searchOpen, vm.searchFocusRequest) {
+        if (searchOpen) {
+            runCatching { focusRequester.requestFocus() }
+            keyboard?.show()
+        } else {
+            keyboard?.hide()
+        }
+    }
 
     androidx.compose.material3.Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         containerColor = MaterialTheme.colorScheme.background,
         contentWindowInsets = androidx.compose.foundation.layout.WindowInsets(0, 0, 0, 0),
         topBar = {
-            LargeTopAppBar(
-                title = {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(10.dp),
+            Column {
+                LargeTopAppBar(
+                    title = {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(10.dp),
+                        ) {
+                            BrandMark()
+                            Text("Sequence", style = MaterialTheme.typography.headlineSmall)
+                        }
+                    },
+                    actions = {
+                        BarIconButton(
+                            icon = if (searchOpen) SeqIcons.Close else SeqIcons.Search,
+                            contentDescription = if (searchOpen) "Close search" else "Search",
+                        ) {
+                            if (searchOpen) vm.closeSearch() else vm.openSearch()
+                        }
+                        BarIconButton(SeqIcons.Settings, "Settings") { vm.openSettings() }
+                        Spacer(Modifier.width(4.dp))
+                    },
+                    scrollBehavior = scrollBehavior,
+                    colors = TopAppBarDefaults.largeTopAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.background,
+                        scrolledContainerColor = MaterialTheme.colorScheme.surfaceContainer,
+                    ),
+                )
+                // The field unrolls from under the title instead of replacing the screen.
+                if (Motion.enabled) {
+                    AnimatedVisibility(
+                        visible = searchOpen,
+                        enter = expandVertically(tween(260), expandFrom = Alignment.Top) +
+                            fadeIn(tween(200)),
+                        exit = shrinkVertically(tween(220), shrinkTowards = Alignment.Top) +
+                            fadeOut(tween(140)),
                     ) {
-                        BrandMark()
-                        Text("Sequence", style = MaterialTheme.typography.headlineSmall)
+                        HomeSearchField(
+                            value = vm.query,
+                            onValueChange = vm::updateQuery,
+                            focusRequester = focusRequester,
+                        )
                     }
-                },
-                actions = {
-                    BarIconButton(SeqIcons.Search, "Search") { vm.goSearch() }
-                    BarIconButton(SeqIcons.Settings, "Settings") { vm.openSettings() }
-                    Spacer(Modifier.width(4.dp))
-                },
-                scrollBehavior = scrollBehavior,
-                colors = TopAppBarDefaults.largeTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.background,
-                    scrolledContainerColor = MaterialTheme.colorScheme.surfaceContainer,
-                ),
-            )
+                } else if (searchOpen) {
+                    // Settled state for snapshots, which have no time to run an enter transition.
+                    HomeSearchField(
+                        value = vm.query,
+                        onValueChange = vm::updateQuery,
+                        focusRequester = focusRequester,
+                    )
+                }
+            }
         },
     ) { innerPadding ->
-        // Switching genre cross-fades the whole feed up or down instead of replacing it in place.
+        val top = innerPadding.calculateTopPadding()
         SectionSwitcher(
-            target = vm.genre,
+            target = searchOpen,
             modifier = Modifier.fillMaxSize(),
             axis = SectionAxis.VERTICAL,
-            direction = { _, to -> if (to == "all") -1 else 1 },
-        ) { genre ->
+            direction = { from, _ -> if (from) -1 else 1 },
+        ) { searching ->
+            if (searching) {
+                HomeSearchResults(vm, Modifier.fillMaxSize().padding(top = top))
+                return@SectionSwitcher
+            }
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
                 contentPadding = PaddingValues(
-                    top = innerPadding.calculateTopPadding(),
+                    top = top,
                     bottom = 24.dp,
                 ),
             ) {
-                item { EnterSection(enter, "genres", 0) { GenreFilterRow(vm) } }
-
-                if (genre != "all") {
-                    val list = vm.catalog.franchises.filter { it.genre == genre }
-                    item {
-                        EnterSection(enter, "genre-header", 1) {
-                            SectionHeader(genre, subtitle = plural(list.size, "franchise", "franchises"))
-                        }
-                    }
-                    items(list.chunked(2), key = { row -> row.first().id }) { row ->
-                        Row(
-                            Modifier
-                                .fillMaxWidth()
-                                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
-                            horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        ) {
-                            row.forEach { f ->
-                                val p = Logic.franchiseProgress(f, state.watched[f.id].orEmpty().toSet(), today)
-                                PosterTile(
-                                    franchise = f,
-                                    // Two narrow columns: keep the line short enough to never ellipsise.
-                                    subtitle = buildString {
-                                        append(plural(f.entries.size, "title", "titles"))
-                                        val books = vm.catalog.worksFor(f.id).size
-                                        if (books > 0) append(" · ").append(plural(books, "book", "books"))
-                                    },
-                                    progress = p,
-                                    accent = vm.catalog.accent(f.id).toPalette(),
-                                    onClick = { vm.openFranchise(f.id) },
-                                    modifier = Modifier.weight(1f),
-                                )
-                            }
-                            if (row.size == 1) Spacer(Modifier.weight(1f))
-                        }
-                    }
-                    item { FooterHint(vm.catalog.dataAsOf) }
-                    return@LazyColumn
-                }
-
                 if (cards.isNotEmpty()) {
                     item {
                         EnterSection(enter, "hero", 1) {
@@ -249,46 +268,47 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                     }
                 }
 
-                shelves.forEach { (genre, franchises) ->
-                    item { EnterSection(enter, "shelf-$genre", 8) { SectionHeader(title = genre) } }
-                    item {
-                        EnterSection(enter, "rail-$genre", 9) {
-                            LazyRow(
-                                contentPadding = PaddingValues(horizontal = 20.dp),
-                                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                            ) {
-                                items(franchises, key = { "$genre-${it.id}" }) { f ->
-                                    val p = Logic.franchiseProgress(f, state.watched[f.id].orEmpty().toSet(), today)
-                                    PosterTile(
-                                        franchise = f,
-                                        subtitle = if (p.done > 0) "${p.done} of ${p.total}" else f.years,
-                                        progress = p,
-                                        accent = vm.catalog.accent(f.id).toPalette(),
-                                        onClick = { vm.openFranchise(f.id) },
-                                        modifier = Modifier.width(180.dp),
-                                    )
-                                }
-                            }
+                // No genre rails on Home any more: one flat A-Z grid of everything. Categories live
+                // on the Tags tab, so browsing here never hides a franchise behind its genre.
+                item {
+                    EnterSection(enter, "all-header", 8) {
+                        SectionHeader(
+                            title = "All franchises",
+                            subtitle = plural(allFranchises.size, "franchise", "franchises"),
+                        )
+                    }
+                }
+                items(allFranchises.chunked(2), key = { "all-${it.first().id}" }) { row ->
+                    Row(
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    ) {
+                        row.forEach { f ->
+                            val p = Logic.franchiseProgress(
+                                f,
+                                state.watched[f.id].orEmpty().toSet(),
+                                today,
+                            )
+                            PosterTile(
+                                franchise = f,
+                                subtitle = countLine(
+                                    f.entries.size,
+                                    vm.catalog.worksFor(f.id).size,
+                                ),
+                                progress = p,
+                                accent = vm.catalog.accent(f.id).toPalette(),
+                                onClick = { vm.openFranchise(f.id) },
+                                modifier = Modifier.weight(1f),
+                            )
                         }
+                        if (row.size == 1) Spacer(Modifier.weight(1f))
                     }
                 }
 
                 item { FooterHint(vm.catalog.dataAsOf) }
             }
-        }
-    }
-}
-
-@Composable
-private fun GenreFilterRow(vm: MainViewModel) {
-    ChipRow(
-        contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 4.dp, bottom = 12.dp),
-    ) {
-        item {
-            SeqFilterChip("All", vm.genre == "all", { vm.selectGenre("all") })
-        }
-        items(vm.catalog.genres) { genre ->
-            SeqFilterChip(genre, vm.genre == genre, { vm.selectGenre(genre) })
         }
     }
 }
