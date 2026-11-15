@@ -1,0 +1,26 @@
+# Gradle / Android build output
+.gradle/
+build/
+**/build/
+
+# Local machine configuration
+local.properties
+
+# Signing material — never publish
+*.jks
+*.keystore
+*.apk
+*.aab
+
+# Bundled toolchain (JDK + Gradle) and IDE state
+.toolchain/
+.idea/
+*.iml
+.kotlin/
+
+# Local artwork-generation dependencies
+buildtools/node_modules/
+
+# OS files
+Thumbs.db
+.DS_Store

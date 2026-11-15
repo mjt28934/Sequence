@@ -1,0 +1,4619 @@
+{
+  "version": "1.3",
+  "dataAsOf": "2026-11-09",
+  "genres": [
+    "Sci-fi",
+    "Superhero",
+    "Fantasy",
+    "Horror",
+    "Action",
+    "Monsters"
+  ],
+  "franchises": [
+    {
+      "id": "godzilla",
+      "name": "Godzilla",
+      "years": "1954–2026",
+      "hook": "Many continuities, one king",
+      "blurb": "Toho’s kaiju series resets more often than it continues. Release order is the clean marathon. Story order keeps each era intact and puts the Monsterverse on its in-universe timeline.",
+      "storyHint": "There is no single timeline. Story mode walks each continuity in order — Showa, Heisei, Millennium, the 1998 film, the anime trilogy, Reiwa, then the Monsterverse starting in 1973.",
+      "genre": "Monsters",
+      "accent": "#6fb07a",
+      "eraOrder": [
+        "Showa",
+        "Heisei",
+        "Millennium",
+        "TriStar",
+        "Anime",
+        "Reiwa",
+        "Monsterverse"
+      ],
+      "entries": [
+        {
+          "id": "gz-54",
+          "title": "Godzilla",
+          "date": "1954-11-03",
+          "year": 1954,
+          "kind": "film",
+          "era": "Showa",
+          "story": 1,
+          "note": "The original. Everything else is optional after this."
+        },
+        {
+          "id": "gz-55",
+          "title": "Godzilla Raids Again",
+          "date": "1955-04-24",
+          "year": 1955,
+          "kind": "film",
+          "era": "Showa",
+          "story": 2
+        },
+        {
+          "id": "gz-62",
+          "title": "King Kong vs. Godzilla",
+          "date": "1962-08-11",
+          "year": 1962,
+          "kind": "film",
+          "era": "Showa",
+          "story": 3
+        },
+        {
+          "id": "gz-64a",
+          "title": "Mothra vs. Godzilla",
+          "date": "1964-04-29",
+          "year": 1964,
+          "kind": "film",
+          "era": "Showa",
+          "story": 4
+        },
+        {
+          "id": "gz-64b",
+          "title": "Ghidorah, the Three-Headed Monster",
+          "date": "1964-12-20",
+          "year": 1964,
+          "kind": "film",
+          "era": "Showa",
+          "story": 5
+        },
+        {
+          "id": "gz-65",
+          "title": "Invasion of Astro-Monster",
+          "date": "1965-12-19",
+          "year": 1965,
+          "kind": "film",
+          "era": "Showa",
+          "story": 6
+        },
+        {
+          "id": "gz-66",
+          "title": "Ebirah, Horror of the Deep",
+          "date": "1966-12-17",
+          "year": 1966,
+          "kind": "film",
+          "era": "Showa",
+          "story": 7
+        },
+        {
+          "id": "gz-67",
+          "title": "Son of Godzilla",
+          "date": "1967-12-16",
+          "year": 1967,
+          "kind": "film",
+          "era": "Showa",
+          "story": 8
+        },
+        {
+          "id": "gz-68",
+          "title": "Destroy All Monsters",
+          "date": "1968-08-01",
+          "year": 1968,
+          "kind": "film",
+          "era": "Showa",
+          "story": 9
+        },
+        {
+          "id": "gz-69",
+          "title": "All Monsters Attack",
+          "date": "1969-12-20",
+          "year": 1969,
+          "kind": "film",
+          "era": "Showa",
+          "story": 10,
+          "note": "Largely a clip-show dream story. Easy skip.",
+          "optional": true
+        },
+        {
+          "id": "gz-71",
+          "title": "Godzilla vs. Hedorah",
+          "date": "1971-07-24",
+          "year": 1971,
+          "kind": "film",
+          "era": "Showa",
+          "story": 11
+        },
+        {
+          "id": "gz-72",
+          "title": "Godzilla vs. Gigan",
+          "date": "1972-03-12",
+          "year": 1972,
+          "kind": "film",
+          "era": "Showa",
+          "story": 12
+        },
+        {
+          "id": "gz-73",
+          "title": "Godzilla vs. Megalon",
+          "date": "1973-03-17",
+          "year": 1973,
+          "kind": "film",
+          "era": "Showa",
+          "story": 13
+        },
+        {
+          "id": "gz-74",
+          "title": "Godzilla vs. Mechagodzilla",
+          "date": "1974-03-21",
+          "year": 1974,
+          "kind": "film",
+          "era": "Showa",
+          "story": 14
+        },
+        {
+          "id": "gz-75",
+          "title": "Terror of Mechagodzilla",
+          "date": "1975-03-15",
+          "year": 1975,
+          "kind": "film",
+          "era": "Showa",
+          "story": 15
+        },
+        {
+          "id": "gz-84",
+          "title": "The Return of Godzilla",
+          "date": "1984-12-15",
+          "year": 1984,
+          "kind": "film",
+          "era": "Heisei",
+          "story": 1,
+          "note": "Reboot. Keeps only the 1954 film."
+        },
+        {
+          "id": "gz-89",
+          "title": "Godzilla vs. Biollante",
+          "date": "1989-12-16",
+          "year": 1989,
+          "kind": "film",
+          "era": "Heisei",
+          "story": 2
+        },
+        {
+          "id": "gz-91",
+          "title": "Godzilla vs. King Ghidorah",
+          "date": "1991-12-14",
+          "year": 1991,
+          "kind": "film",
+          "era": "Heisei",
+          "story": 3
+        },
+        {
+          "id": "gz-92",
+          "title": "Godzilla vs. Mothra",
+          "date": "1992-12-12",
+          "year": 1992,
+          "kind": "film",
+          "era": "Heisei",
+          "story": 4
+        },
+        {
+          "id": "gz-93",
+          "title": "Godzilla vs. Mechagodzilla II",
+          "date": "1993-12-11",
+          "year": 1993,
+          "kind": "film",
+          "era": "Heisei",
+          "story": 5
+        },
+        {
+          "id": "gz-94",
+          "title": "Godzilla vs. SpaceGodzilla",
+          "date": "1994-12-10",
+          "year": 1994,
+          "kind": "film",
+          "era": "Heisei",
+          "story": 6
+        },
+        {
+          "id": "gz-95",
+          "title": "Godzilla vs. Destoroyah",
+          "date": "1995-12-09",
+          "year": 1995,
+          "kind": "film",
+          "era": "Heisei",
+          "story": 7
+        },
+        {
+          "id": "gz-99",
+          "title": "Godzilla 2000: Millennium",
+          "date": "1999-12-11",
+          "year": 1999,
+          "kind": "film",
+          "era": "Millennium",
+          "story": 1,
+          "note": "Another reboot from 1954. Most Millennium films stand alone."
+        },
+        {
+          "id": "gz-00",
+          "title": "Godzilla vs. Megaguirus",
+          "date": "2000-12-16",
+          "year": 2000,
+          "kind": "film",
+          "era": "Millennium",
+          "story": 2
+        },
+        {
+          "id": "gz-01",
+          "title": "Godzilla, Mothra and King Ghidorah",
+          "date": "2001-12-15",
+          "year": 2001,
+          "kind": "film",
+          "era": "Millennium",
+          "story": 3,
+          "note": "GMK. Its own continuity."
+        },
+        {
+          "id": "gz-02",
+          "title": "Godzilla Against Mechagodzilla",
+          "date": "2002-12-14",
+          "year": 2002,
+          "kind": "film",
+          "era": "Millennium",
+          "story": 4
+        },
+        {
+          "id": "gz-03",
+          "title": "Godzilla: Tokyo S.O.S.",
+          "date": "2003-12-13",
+          "year": 2003,
+          "kind": "film",
+          "era": "Millennium",
+          "story": 5,
+          "note": "Direct sequel to Against Mechagodzilla."
+        },
+        {
+          "id": "gz-04",
+          "title": "Godzilla: Final Wars",
+          "date": "2004-12-04",
+          "year": 2004,
+          "kind": "film",
+          "era": "Millennium",
+          "story": 6
+        },
+        {
+          "id": "gz-98",
+          "title": "Godzilla",
+          "date": "1998-05-19",
+          "year": 1998,
+          "kind": "film",
+          "era": "TriStar",
+          "story": 1,
+          "note": "Hollywood one-off. Not part of Toho’s numbering."
+        },
+        {
+          "id": "gz-16",
+          "title": "Shin Godzilla",
+          "date": "2016-07-29",
+          "year": 2016,
+          "kind": "film",
+          "era": "Reiwa",
+          "story": 1,
+          "note": "Standalone political disaster film."
+        },
+        {
+          "id": "gz-a1",
+          "title": "Godzilla: Planet of the Monsters",
+          "date": "2017-11-17",
+          "year": 2017,
+          "kind": "film",
+          "era": "Anime",
+          "story": 1
+        },
+        {
+          "id": "gz-a2",
+          "title": "Godzilla: City on the Edge of Battle",
+          "date": "2018-05-18",
+          "year": 2018,
+          "kind": "film",
+          "era": "Anime",
+          "story": 2
+        },
+        {
+          "id": "gz-a3",
+          "title": "Godzilla: The Planet Eater",
+          "date": "2018-11-03",
+          "year": 2018,
+          "kind": "film",
+          "era": "Anime",
+          "story": 3
+        },
+        {
+          "id": "gz-m1",
+          "title": "Godzilla Minus One",
+          "date": "2023-11-03",
+          "year": 2023,
+          "kind": "film",
+          "era": "Reiwa",
+          "story": 2,
+          "note": "Postwar story. Sequel is Minus Zero."
+        },
+        {
+          "id": "gz-m0",
+          "title": "Godzilla Minus Zero",
+          "date": "2026-11-03",
+          "year": 2026,
+          "kind": "film",
+          "era": "Reiwa",
+          "story": 3,
+          "note": "Sequel set two years after Minus One."
+        },
+        {
+          "id": "gz-mv-kong",
+          "title": "Kong: Skull Island",
+          "date": "2017-03-10",
+          "year": 2017,
+          "kind": "film",
+          "era": "Monsterverse",
+          "story": 1,
+          "note": "Set in 1973. Godzilla is only glimpsed, but it opens the shared universe."
+        },
+        {
+          "id": "gz-mv-14",
+          "title": "Godzilla",
+          "date": "2014-05-16",
+          "year": 2014,
+          "kind": "film",
+          "era": "Monsterverse",
+          "story": 2
+        },
+        {
+          "id": "gz-mv-kotm",
+          "title": "Godzilla: King of the Monsters",
+          "date": "2019-05-31",
+          "year": 2019,
+          "kind": "film",
+          "era": "Monsterverse",
+          "story": 3
+        },
+        {
+          "id": "gz-mv-monarch",
+          "title": "Monarch: Legacy of Monsters",
+          "date": "2023-11-17",
+          "year": 2023,
+          "kind": "series",
+          "era": "Monsterverse",
+          "story": 4,
+          "note": "Splits time between 2015 and the 1950s. Optional before the later films.",
+          "optional": true
+        },
+        {
+          "id": "gz-mv-gvk",
+          "title": "Godzilla vs. Kong",
+          "date": "2021-03-31",
+          "year": 2021,
+          "kind": "film",
+          "era": "Monsterverse",
+          "story": 5
+        },
+        {
+          "id": "gz-mv-gxk",
+          "title": "Godzilla x Kong: The New Empire",
+          "date": "2024-03-29",
+          "year": 2024,
+          "kind": "film",
+          "era": "Monsterverse",
+          "story": 6
+        },
+        {
+          "id": "gz-mv-super",
+          "title": "Godzilla x Kong: Supernova",
+          "date": "2027-03-26",
+          "year": 2027,
+          "kind": "film",
+          "era": "Monsterverse",
+          "story": 7,
+          "note": "Scheduled theatrical release."
+        }
+      ]
+    },
+    {
+      "id": "star-wars",
+      "name": "Star Wars",
+      "years": "1977–2026",
+      "hook": "Saga films, two orders",
+      "blurb": "Release order is how audiences met the galaxy. Story order follows the timeline from the High Republic to the sequel trilogy and slots every animated and live-action series in where it happens.",
+      "storyHint": "The Acolyte, then the prequels with The Clone Wars between Episodes II and III, then Solo, Kenobi, Andor and Rebels leading into Rogue One, the original trilogy, the Mandalorian era, and the sequels. Switch the type filter to Films to see just the cinema spine.",
+      "genre": "Sci-fi",
+      "accent": "#6ea8e0",
+      "eraOrder": [
+        "High Republic",
+        "Prequels",
+        "Rise of the Empire",
+        "Original",
+        "New Republic",
+        "Sequels"
+      ],
+      "entries": [
+        {
+          "id": "sw-acolyte",
+          "title": "The Acolyte",
+          "date": "2024-06-04",
+          "year": 2024,
+          "kind": "series",
+          "era": "High Republic",
+          "story": 1,
+          "note": "Set a century before The Phantom Menace. Self-contained.",
+          "optional": true
+        },
+        {
+          "id": "sw-1",
+          "title": "Episode I — The Phantom Menace",
+          "date": "1999-05-19",
+          "year": 1999,
+          "kind": "film",
+          "era": "Prequels",
+          "story": 2
+        },
+        {
+          "id": "sw-2",
+          "title": "Episode II — Attack of the Clones",
+          "date": "2002-05-16",
+          "year": 2002,
+          "kind": "film",
+          "era": "Prequels",
+          "story": 3
+        },
+        {
+          "id": "sw-cw",
+          "title": "The Clone Wars",
+          "date": "2008-10-03",
+          "year": 2008,
+          "kind": "series",
+          "era": "Prequels",
+          "story": 4,
+          "note": "Start with the 2008 film. The war runs between Episodes II and III, with a final season that overlaps Episode III."
+        },
+        {
+          "id": "sw-3",
+          "title": "Episode III — Revenge of the Sith",
+          "date": "2005-05-19",
+          "year": 2005,
+          "kind": "film",
+          "era": "Prequels",
+          "story": 5
+        },
+        {
+          "id": "sw-bb",
+          "title": "The Bad Batch",
+          "date": "2021-05-04",
+          "year": 2021,
+          "kind": "series",
+          "era": "Prequels",
+          "story": 6,
+          "note": "Picks up as Episode III ends. Follows The Clone Wars."
+        },
+        {
+          "id": "sw-solo",
+          "title": "Solo: A Star Wars Story",
+          "date": "2018-05-25",
+          "year": 2018,
+          "kind": "film",
+          "era": "Rise of the Empire",
+          "story": 7
+        },
+        {
+          "id": "sw-ok",
+          "title": "Obi-Wan Kenobi",
+          "date": "2022-05-27",
+          "year": 2022,
+          "kind": "series",
+          "era": "Rise of the Empire",
+          "story": 8,
+          "note": "Set ten years after Episode III."
+        },
+        {
+          "id": "sw-an1",
+          "title": "Andor (Season 1)",
+          "date": "2022-09-21",
+          "year": 2022,
+          "kind": "series",
+          "era": "Rise of the Empire",
+          "story": 9,
+          "note": "Prequel to Rogue One. Needs no other series."
+        },
+        {
+          "id": "sw-reb",
+          "title": "Star Wars Rebels",
+          "date": "2014-10-03",
+          "year": 2014,
+          "kind": "series",
+          "era": "Rise of the Empire",
+          "story": 10,
+          "note": "Animated. Runs alongside Andor and sets up Ahsoka."
+        },
+        {
+          "id": "sw-an2",
+          "title": "Andor (Season 2)",
+          "date": "2025-04-22",
+          "year": 2025,
+          "kind": "series",
+          "era": "Rise of the Empire",
+          "story": 11,
+          "note": "Four time jumps that lead straight into Rogue One."
+        },
+        {
+          "id": "sw-ro",
+          "title": "Rogue One",
+          "date": "2016-12-16",
+          "year": 2016,
+          "kind": "film",
+          "era": "Rise of the Empire",
+          "story": 12,
+          "note": "Ends minutes before A New Hope."
+        },
+        {
+          "id": "sw-4",
+          "title": "Episode IV — A New Hope",
+          "date": "1977-05-25",
+          "year": 1977,
+          "kind": "film",
+          "era": "Original",
+          "story": 13
+        },
+        {
+          "id": "sw-5",
+          "title": "Episode V — The Empire Strikes Back",
+          "date": "1980-05-21",
+          "year": 1980,
+          "kind": "film",
+          "era": "Original",
+          "story": 14
+        },
+        {
+          "id": "sw-6",
+          "title": "Episode VI — Return of the Jedi",
+          "date": "1983-05-25",
+          "year": 1983,
+          "kind": "film",
+          "era": "Original",
+          "story": 15
+        },
+        {
+          "id": "sw-mando",
+          "title": "The Mandalorian (Seasons 1–2)",
+          "date": "2019-11-12",
+          "year": 2019,
+          "kind": "series",
+          "era": "New Republic",
+          "story": 16
+        },
+        {
+          "id": "sw-bobaf",
+          "title": "The Book of Boba Fett",
+          "date": "2021-12-29",
+          "year": 2021,
+          "kind": "series",
+          "era": "New Republic",
+          "story": 17,
+          "note": "Overlaps with The Mandalorian. Watch between seasons 2 and 3."
+        },
+        {
+          "id": "sw-mando3",
+          "title": "The Mandalorian (Season 3)",
+          "date": "2023-03-01",
+          "year": 2023,
+          "kind": "series",
+          "era": "New Republic",
+          "story": 18
+        },
+        {
+          "id": "sw-ahsoka",
+          "title": "Ahsoka",
+          "date": "2023-08-23",
+          "year": 2023,
+          "kind": "series",
+          "era": "New Republic",
+          "story": 19,
+          "note": "Continues Rebels. Watching Rebels first helps."
+        },
+        {
+          "id": "sw-skel",
+          "title": "Skeleton Crew",
+          "date": "2024-12-03",
+          "year": 2024,
+          "kind": "series",
+          "era": "New Republic",
+          "story": 20,
+          "note": "Kids stranded in the same era. Standalone.",
+          "optional": true
+        },
+        {
+          "id": "sw-mg",
+          "title": "The Mandalorian and Grogu",
+          "date": "2026-05-22",
+          "year": 2026,
+          "kind": "film",
+          "era": "New Republic",
+          "story": 21,
+          "note": "Follows The Mandalorian season 3."
+        },
+        {
+          "id": "sw-7",
+          "title": "Episode VII — The Force Awakens",
+          "date": "2015-12-18",
+          "year": 2015,
+          "kind": "film",
+          "era": "Sequels",
+          "story": 22
+        },
+        {
+          "id": "sw-8",
+          "title": "Episode VIII — The Last Jedi",
+          "date": "2017-12-15",
+          "year": 2017,
+          "kind": "film",
+          "era": "Sequels",
+          "story": 23
+        },
+        {
+          "id": "sw-9",
+          "title": "Episode IX — The Rise of Skywalker",
+          "date": "2019-12-20",
+          "year": 2019,
+          "kind": "film",
+          "era": "Sequels",
+          "story": 24
+        }
+      ]
+    },
+    {
+      "id": "fast",
+      "name": "Fast & Furious",
+      "years": "2001–2023",
+      "hook": "Tokyo Drift is out of order",
+      "blurb": "The street-racing saga looks linear until you notice Han’s timeline. Story order moves Tokyo Drift to after Fast & Furious 6.",
+      "storyHint": "Films 1, 2, 4, 5 and 6, then Tokyo Drift, then Furious 7 onward. Hobbs & Shaw sits between Fate and F9.",
+      "genre": "Action",
+      "accent": "#e5673f",
+      "eraOrder": [
+        "Main saga"
+      ],
+      "entries": [
+        {
+          "id": "ff-1",
+          "title": "The Fast and the Furious",
+          "date": "2001-06-22",
+          "year": 2001,
+          "kind": "film",
+          "era": "Main saga",
+          "story": 1
+        },
+        {
+          "id": "ff-2",
+          "title": "2 Fast 2 Furious",
+          "date": "2003-06-06",
+          "year": 2003,
+          "kind": "film",
+          "era": "Main saga",
+          "story": 2
+        },
+        {
+          "id": "ff-4",
+          "title": "Fast & Furious",
+          "date": "2009-04-03",
+          "year": 2009,
+          "kind": "film",
+          "era": "Main saga",
+          "story": 3
+        },
+        {
+          "id": "ff-5",
+          "title": "Fast Five",
+          "date": "2011-04-29",
+          "year": 2011,
+          "kind": "film",
+          "era": "Main saga",
+          "story": 4
+        },
+        {
+          "id": "ff-6",
+          "title": "Fast & Furious 6",
+          "date": "2013-05-24",
+          "year": 2013,
+          "kind": "film",
+          "era": "Main saga",
+          "story": 5
+        },
+        {
+          "id": "ff-3",
+          "title": "Tokyo Drift",
+          "date": "2006-06-16",
+          "year": 2006,
+          "kind": "film",
+          "era": "Main saga",
+          "story": 6,
+          "note": "Released third. Story-wise it follows part 6."
+        },
+        {
+          "id": "ff-7",
+          "title": "Furious 7",
+          "date": "2015-04-03",
+          "year": 2015,
+          "kind": "film",
+          "era": "Main saga",
+          "story": 7
+        },
+        {
+          "id": "ff-8",
+          "title": "The Fate of the Furious",
+          "date": "2017-04-14",
+          "year": 2017,
+          "kind": "film",
+          "era": "Main saga",
+          "story": 8
+        },
+        {
+          "id": "ff-hs",
+          "title": "Hobbs & Shaw",
+          "date": "2019-08-02",
+          "year": 2019,
+          "kind": "film",
+          "era": "Main saga",
+          "story": 9,
+          "note": "Spin-off. Safe to skip.",
+          "optional": true
+        },
+        {
+          "id": "ff-9",
+          "title": "F9",
+          "date": "2021-06-25",
+          "year": 2021,
+          "kind": "film",
+          "era": "Main saga",
+          "story": 10
+        },
+        {
+          "id": "ff-10",
+          "title": "Fast X",
+          "date": "2023-05-19",
+          "year": 2023,
+          "kind": "film",
+          "era": "Main saga",
+          "story": 11
+        }
+      ]
+    },
+    {
+      "id": "alien",
+      "name": "Alien",
+      "years": "1979–2025",
+      "hook": "Prequels were made last",
+      "blurb": "The crew of the Nostromo came first on screen. Story order starts decades earlier with the Prometheus expedition and the Alien: Earth series.",
+      "storyHint": "Prometheus, Covenant and Alien: Earth, then Alien, Romulus, Aliens, Alien 3, and Resurrection.",
+      "genre": "Sci-fi",
+      "accent": "#52c5a5",
+      "eraOrder": [
+        "Prequels",
+        "Classic"
+      ],
+      "entries": [
+        {
+          "id": "al-p",
+          "title": "Prometheus",
+          "date": "2012-06-08",
+          "year": 2012,
+          "kind": "film",
+          "era": "Prequels",
+          "story": 1
+        },
+        {
+          "id": "al-c",
+          "title": "Alien: Covenant",
+          "date": "2017-05-19",
+          "year": 2017,
+          "kind": "film",
+          "era": "Prequels",
+          "story": 2
+        },
+        {
+          "id": "al-e",
+          "title": "Alien: Earth",
+          "date": "2025-08-12",
+          "year": 2025,
+          "kind": "series",
+          "era": "Prequels",
+          "story": 3,
+          "note": "Set two years before Alien. Standalone, so you can watch it any time."
+        },
+        {
+          "id": "al-1",
+          "title": "Alien",
+          "date": "1979-05-25",
+          "year": 1979,
+          "kind": "film",
+          "era": "Classic",
+          "story": 4
+        },
+        {
+          "id": "al-r",
+          "title": "Alien: Romulus",
+          "date": "2024-08-16",
+          "year": 2024,
+          "kind": "film",
+          "era": "Classic",
+          "story": 5,
+          "note": "Set between Alien and Aliens."
+        },
+        {
+          "id": "al-2",
+          "title": "Aliens",
+          "date": "1986-07-18",
+          "year": 1986,
+          "kind": "film",
+          "era": "Classic",
+          "story": 6
+        },
+        {
+          "id": "al-3",
+          "title": "Alien 3",
+          "date": "1992-05-22",
+          "year": 1992,
+          "kind": "film",
+          "era": "Classic",
+          "story": 7
+        },
+        {
+          "id": "al-4",
+          "title": "Alien: Resurrection",
+          "date": "1997-11-26",
+          "year": 1997,
+          "kind": "film",
+          "era": "Classic",
+          "story": 8
+        }
+      ]
+    },
+    {
+      "id": "middle-earth",
+      "name": "Middle-earth",
+      "years": "2001–2024",
+      "hook": "Hobbit before the Ring",
+      "blurb": "The Lord of the Rings films arrived first and still play best that way. Story order starts centuries earlier with the animated War of the Rohirrim, then Bilbo.",
+      "storyHint": "The Rings of Power series, if you want it, then The War of the Rohirrim, the Hobbit trilogy, and The Fellowship, The Two Towers, and The Return of the King.",
+      "genre": "Fantasy",
+      "accent": "#cfae6a",
+      "eraOrder": [
+        "The Rings of Power",
+        "The War of the Rohirrim",
+        "The Hobbit",
+        "The Lord of the Rings"
+      ],
+      "entries": [
+        {
+          "id": "me-rop",
+          "title": "The Rings of Power",
+          "date": "2022-09-01",
+          "year": 2022,
+          "kind": "series",
+          "era": "The Rings of Power",
+          "story": 1,
+          "note": "Amazon’s Second Age series. Same world, separate continuity from the films.",
+          "optional": true
+        },
+        {
+          "id": "me-wotr",
+          "title": "The War of the Rohirrim",
+          "date": "2024-12-13",
+          "year": 2024,
+          "kind": "film",
+          "era": "The War of the Rohirrim",
+          "story": 2,
+          "note": "Anime prequel set centuries before The Hobbit.",
+          "optional": true
+        },
+        {
+          "id": "me-h1",
+          "title": "The Hobbit: An Unexpected Journey",
+          "date": "2012-12-14",
+          "year": 2012,
+          "kind": "film",
+          "era": "The Hobbit",
+          "story": 3
+        },
+        {
+          "id": "me-h2",
+          "title": "The Hobbit: The Desolation of Smaug",
+          "date": "2013-12-13",
+          "year": 2013,
+          "kind": "film",
+          "era": "The Hobbit",
+          "story": 4
+        },
+        {
+          "id": "me-h3",
+          "title": "The Hobbit: The Battle of the Five Armies",
+          "date": "2014-12-17",
+          "year": 2014,
+          "kind": "film",
+          "era": "The Hobbit",
+          "story": 5
+        },
+        {
+          "id": "me-f",
+          "title": "The Fellowship of the Ring",
+          "date": "2001-12-19",
+          "year": 2001,
+          "kind": "film",
+          "era": "The Lord of the Rings",
+          "story": 6
+        },
+        {
+          "id": "me-t",
+          "title": "The Two Towers",
+          "date": "2002-12-18",
+          "year": 2002,
+          "kind": "film",
+          "era": "The Lord of the Rings",
+          "story": 7
+        },
+        {
+          "id": "me-r",
+          "title": "The Return of the King",
+          "date": "2003-12-17",
+          "year": 2003,
+          "kind": "film",
+          "era": "The Lord of the Rings",
+          "story": 8
+        }
+      ]
+    },
+    {
+      "id": "jurassic",
+      "name": "Jurassic",
+      "years": "1993–2025",
+      "hook": "Two trilogies, then a restart",
+      "blurb": "Park, then World. Release order matches the films. Story order only changes once the animated series are included.",
+      "storyHint": "Original trilogy, Jurassic World, Fallen Kingdom, Camp Cretaceous, Dominion, Chaos Theory, then Rebirth.",
+      "genre": "Monsters",
+      "accent": "#d6b648",
+      "eraOrder": [
+        "Jurassic Park",
+        "Jurassic World"
+      ],
+      "entries": [
+        {
+          "id": "jp-1",
+          "title": "Jurassic Park",
+          "date": "1993-06-11",
+          "year": 1993,
+          "kind": "film",
+          "era": "Jurassic Park",
+          "story": 1
+        },
+        {
+          "id": "jp-2",
+          "title": "The Lost World: Jurassic Park",
+          "date": "1997-05-23",
+          "year": 1997,
+          "kind": "film",
+          "era": "Jurassic Park",
+          "story": 2
+        },
+        {
+          "id": "jp-3",
+          "title": "Jurassic Park III",
+          "date": "2001-07-18",
+          "year": 2001,
+          "kind": "film",
+          "era": "Jurassic Park",
+          "story": 3
+        },
+        {
+          "id": "jw-1",
+          "title": "Jurassic World",
+          "date": "2015-06-12",
+          "year": 2015,
+          "kind": "film",
+          "era": "Jurassic World",
+          "story": 4
+        },
+        {
+          "id": "jw-2",
+          "title": "Jurassic World: Fallen Kingdom",
+          "date": "2018-06-22",
+          "year": 2018,
+          "kind": "film",
+          "era": "Jurassic World",
+          "story": 5
+        },
+        {
+          "id": "jw-cc",
+          "title": "Camp Cretaceous",
+          "date": "2020-09-18",
+          "year": 2020,
+          "kind": "series",
+          "era": "Jurassic World",
+          "story": 6,
+          "note": "Starts during Jurassic World and runs through the gap before Dominion."
+        },
+        {
+          "id": "jw-3",
+          "title": "Jurassic World: Dominion",
+          "date": "2022-06-10",
+          "year": 2022,
+          "kind": "film",
+          "era": "Jurassic World",
+          "story": 7
+        },
+        {
+          "id": "jw-ct",
+          "title": "Chaos Theory",
+          "date": "2024-05-24",
+          "year": 2024,
+          "kind": "series",
+          "era": "Jurassic World",
+          "story": 8,
+          "note": "Follows the Camp Cretaceous kids after Dominion."
+        },
+        {
+          "id": "jw-4",
+          "title": "Jurassic World: Rebirth",
+          "date": "2025-07-02",
+          "year": 2025,
+          "kind": "film",
+          "era": "Jurassic World",
+          "story": 9
+        }
+      ]
+    },
+    {
+      "id": "mcu",
+      "name": "Marvel Cinematic Universe",
+      "years": "2008–2026",
+      "hook": "One universe, a timeline of its own",
+      "blurb": "Marvel Studios’ films, Disney+ series and specials. Release order is the safest run. Story order follows Marvel’s own timeline, which starts in World War II. The Netflix and ABC shows are not included.",
+      "storyHint": "Captain America: The First Avenger and Captain Marvel come first, then the Infinity Saga. Placement of the newer series and the multiverse titles is approximate, because Marvel itself keeps adjusting it.",
+      "genre": "Superhero",
+      "accent": "#e5484d",
+      "eraOrder": [
+        "Origins",
+        "Infinity Saga",
+        "Multiverse Saga",
+        "Other worlds"
+      ],
+      "entries": [
+        {
+          "id": "mcu-eow",
+          "title": "Eyes of Wakanda",
+          "date": "2025-08-01",
+          "year": 2025,
+          "kind": "series",
+          "era": "Origins",
+          "story": 1,
+          "note": "Animated. Follows Wakandan guardians across history.",
+          "optional": true
+        },
+        {
+          "id": "mcu-ca1",
+          "title": "Captain America: The First Avenger",
+          "date": "2011-07-22",
+          "year": 2011,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 2
+        },
+        {
+          "id": "mcu-cm",
+          "title": "Captain Marvel",
+          "date": "2019-03-08",
+          "year": 2019,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 3,
+          "note": "Set in 1995, long before it was released."
+        },
+        {
+          "id": "mcu-im",
+          "title": "Iron Man",
+          "date": "2008-05-02",
+          "year": 2008,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 4,
+          "note": "Where the release-order run begins."
+        },
+        {
+          "id": "mcu-im2",
+          "title": "Iron Man 2",
+          "date": "2010-05-07",
+          "year": 2010,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 5
+        },
+        {
+          "id": "mcu-hulk",
+          "title": "The Incredible Hulk",
+          "date": "2008-06-13",
+          "year": 2008,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 6
+        },
+        {
+          "id": "mcu-thor",
+          "title": "Thor",
+          "date": "2011-05-06",
+          "year": 2011,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 7
+        },
+        {
+          "id": "mcu-av",
+          "title": "The Avengers",
+          "date": "2012-05-04",
+          "year": 2012,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 8
+        },
+        {
+          "id": "mcu-thor2",
+          "title": "Thor: The Dark World",
+          "date": "2013-11-08",
+          "year": 2013,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 9
+        },
+        {
+          "id": "mcu-im3",
+          "title": "Iron Man 3",
+          "date": "2013-05-03",
+          "year": 2013,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 10
+        },
+        {
+          "id": "mcu-ca2",
+          "title": "Captain America: The Winter Soldier",
+          "date": "2014-04-04",
+          "year": 2014,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 11
+        },
+        {
+          "id": "mcu-gotg",
+          "title": "Guardians of the Galaxy",
+          "date": "2014-08-01",
+          "year": 2014,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 12
+        },
+        {
+          "id": "mcu-gotg2",
+          "title": "Guardians of the Galaxy Vol. 2",
+          "date": "2017-05-05",
+          "year": 2017,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 13
+        },
+        {
+          "id": "mcu-ultron",
+          "title": "Avengers: Age of Ultron",
+          "date": "2015-05-01",
+          "year": 2015,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 14
+        },
+        {
+          "id": "mcu-ant",
+          "title": "Ant-Man",
+          "date": "2015-07-17",
+          "year": 2015,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 15
+        },
+        {
+          "id": "mcu-cw",
+          "title": "Captain America: Civil War",
+          "date": "2016-05-06",
+          "year": 2016,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 16
+        },
+        {
+          "id": "mcu-yfns",
+          "title": "Your Friendly Neighborhood Spider-Man",
+          "date": "2025-01-29",
+          "year": 2025,
+          "kind": "series",
+          "era": "Infinity Saga",
+          "story": 17,
+          "note": "Animated. Early days of Peter Parker as Spider-Man.",
+          "optional": true
+        },
+        {
+          "id": "mcu-bw",
+          "title": "Black Widow",
+          "date": "2021-07-09",
+          "year": 2021,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 18,
+          "note": "Set just after Civil War, released after Endgame."
+        },
+        {
+          "id": "mcu-bp",
+          "title": "Black Panther",
+          "date": "2018-02-16",
+          "year": 2018,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 19
+        },
+        {
+          "id": "mcu-sm1",
+          "title": "Spider-Man: Homecoming",
+          "date": "2017-07-07",
+          "year": 2017,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 20
+        },
+        {
+          "id": "mcu-ds",
+          "title": "Doctor Strange",
+          "date": "2016-11-04",
+          "year": 2016,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 21
+        },
+        {
+          "id": "mcu-rag",
+          "title": "Thor: Ragnarok",
+          "date": "2017-11-03",
+          "year": 2017,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 22
+        },
+        {
+          "id": "mcu-aw",
+          "title": "Ant-Man and the Wasp",
+          "date": "2018-07-06",
+          "year": 2018,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 23
+        },
+        {
+          "id": "mcu-iw",
+          "title": "Avengers: Infinity War",
+          "date": "2018-04-27",
+          "year": 2018,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 24
+        },
+        {
+          "id": "mcu-eg",
+          "title": "Avengers: Endgame",
+          "date": "2019-04-26",
+          "year": 2019,
+          "kind": "film",
+          "era": "Infinity Saga",
+          "story": 25,
+          "note": "Closes the Infinity Saga."
+        },
+        {
+          "id": "mcu-loki",
+          "title": "Loki",
+          "date": "2021-06-09",
+          "year": 2021,
+          "kind": "series",
+          "era": "Multiverse Saga",
+          "story": 26,
+          "note": "Two seasons. Opens the multiverse, so watch it before the later films."
+        },
+        {
+          "id": "mcu-wv",
+          "title": "WandaVision",
+          "date": "2021-01-15",
+          "year": 2021,
+          "kind": "series",
+          "era": "Multiverse Saga",
+          "story": 27
+        },
+        {
+          "id": "mcu-fatws",
+          "title": "The Falcon and the Winter Soldier",
+          "date": "2021-03-19",
+          "year": 2021,
+          "kind": "series",
+          "era": "Multiverse Saga",
+          "story": 28
+        },
+        {
+          "id": "mcu-sm2",
+          "title": "Spider-Man: Far From Home",
+          "date": "2019-07-02",
+          "year": 2019,
+          "kind": "film",
+          "era": "Multiverse Saga",
+          "story": 29
+        },
+        {
+          "id": "mcu-sc",
+          "title": "Shang-Chi and the Legend of the Ten Rings",
+          "date": "2021-09-03",
+          "year": 2021,
+          "kind": "film",
+          "era": "Multiverse Saga",
+          "story": 30
+        },
+        {
+          "id": "mcu-et",
+          "title": "Eternals",
+          "date": "2021-11-05",
+          "year": 2021,
+          "kind": "film",
+          "era": "Multiverse Saga",
+          "story": 31
+        },
+        {
+          "id": "mcu-sm3",
+          "title": "Spider-Man: No Way Home",
+          "date": "2021-12-17",
+          "year": 2021,
+          "kind": "film",
+          "era": "Multiverse Saga",
+          "story": 32
+        },
+        {
+          "id": "mcu-hawk",
+          "title": "Hawkeye",
+          "date": "2021-11-24",
+          "year": 2021,
+          "kind": "series",
+          "era": "Multiverse Saga",
+          "story": 33
+        },
+        {
+          "id": "mcu-dsm",
+          "title": "Doctor Strange in the Multiverse of Madness",
+          "date": "2022-05-06",
+          "year": 2022,
+          "kind": "film",
+          "era": "Multiverse Saga",
+          "story": 34,
+          "note": "Watch WandaVision and No Way Home first."
+        },
+        {
+          "id": "mcu-mk",
+          "title": "Moon Knight",
+          "date": "2022-03-30",
+          "year": 2022,
+          "kind": "series",
+          "era": "Multiverse Saga",
+          "story": 35
+        },
+        {
+          "id": "mcu-bp2",
+          "title": "Black Panther: Wakanda Forever",
+          "date": "2022-11-11",
+          "year": 2022,
+          "kind": "film",
+          "era": "Multiverse Saga",
+          "story": 36
+        },
+        {
+          "id": "mcu-mm",
+          "title": "Ms. Marvel",
+          "date": "2022-06-08",
+          "year": 2022,
+          "kind": "series",
+          "era": "Multiverse Saga",
+          "story": 37
+        },
+        {
+          "id": "mcu-tlat",
+          "title": "Thor: Love and Thunder",
+          "date": "2022-07-08",
+          "year": 2022,
+          "kind": "film",
+          "era": "Multiverse Saga",
+          "story": 38
+        },
+        {
+          "id": "mcu-sh",
+          "title": "She-Hulk: Attorney at Law",
+          "date": "2022-08-18",
+          "year": 2022,
+          "kind": "series",
+          "era": "Multiverse Saga",
+          "story": 39
+        },
+        {
+          "id": "mcu-wbn",
+          "title": "Werewolf by Night",
+          "date": "2022-10-07",
+          "year": 2022,
+          "kind": "special",
+          "era": "Multiverse Saga",
+          "story": 40,
+          "note": "A short black-and-white special. Standalone.",
+          "optional": true
+        },
+        {
+          "id": "mcu-hs",
+          "title": "The Guardians of the Galaxy Holiday Special",
+          "date": "2022-11-25",
+          "year": 2022,
+          "kind": "special",
+          "era": "Multiverse Saga",
+          "story": 41,
+          "note": "Light and festive. Skippable.",
+          "optional": true
+        },
+        {
+          "id": "mcu-amq",
+          "title": "Ant-Man and the Wasp: Quantumania",
+          "date": "2023-02-17",
+          "year": 2023,
+          "kind": "film",
+          "era": "Multiverse Saga",
+          "story": 42
+        },
+        {
+          "id": "mcu-gotg3",
+          "title": "Guardians of the Galaxy Vol. 3",
+          "date": "2023-05-05",
+          "year": 2023,
+          "kind": "film",
+          "era": "Multiverse Saga",
+          "story": 43
+        },
+        {
+          "id": "mcu-si",
+          "title": "Secret Invasion",
+          "date": "2023-06-21",
+          "year": 2023,
+          "kind": "series",
+          "era": "Multiverse Saga",
+          "story": 44
+        },
+        {
+          "id": "mcu-marvels",
+          "title": "The Marvels",
+          "date": "2023-11-10",
+          "year": 2023,
+          "kind": "film",
+          "era": "Multiverse Saga",
+          "story": 45
+        },
+        {
+          "id": "mcu-echo",
+          "title": "Echo",
+          "date": "2024-01-09",
+          "year": 2024,
+          "kind": "series",
+          "era": "Multiverse Saga",
+          "story": 46
+        },
+        {
+          "id": "mcu-agatha",
+          "title": "Agatha All Along",
+          "date": "2024-09-18",
+          "year": 2024,
+          "kind": "series",
+          "era": "Multiverse Saga",
+          "story": 47,
+          "note": "Follows WandaVision."
+        },
+        {
+          "id": "mcu-ir",
+          "title": "Ironheart",
+          "date": "2025-06-24",
+          "year": 2025,
+          "kind": "series",
+          "era": "Multiverse Saga",
+          "story": 48
+        },
+        {
+          "id": "mcu-cabnw",
+          "title": "Captain America: Brave New World",
+          "date": "2025-02-14",
+          "year": 2025,
+          "kind": "film",
+          "era": "Multiverse Saga",
+          "story": 49
+        },
+        {
+          "id": "mcu-dd1",
+          "title": "Daredevil: Born Again (Season 1)",
+          "date": "2025-03-04",
+          "year": 2025,
+          "kind": "series",
+          "era": "Multiverse Saga",
+          "story": 50,
+          "note": "Helps to have seen the Netflix Daredevil seasons, but not required."
+        },
+        {
+          "id": "mcu-tb",
+          "title": "Thunderbolts*",
+          "date": "2025-05-02",
+          "year": 2025,
+          "kind": "film",
+          "era": "Multiverse Saga",
+          "story": 51
+        },
+        {
+          "id": "mcu-dd2",
+          "title": "Daredevil: Born Again (Season 2)",
+          "date": "2026-03-24",
+          "year": 2026,
+          "kind": "series",
+          "era": "Multiverse Saga",
+          "story": 52
+        },
+        {
+          "id": "mcu-wm",
+          "title": "Wonder Man",
+          "date": "2026-01-27",
+          "year": 2026,
+          "kind": "series",
+          "era": "Multiverse Saga",
+          "story": 53
+        },
+        {
+          "id": "mcu-pun",
+          "title": "The Punisher: One Last Kill",
+          "date": "2026-05-12",
+          "year": 2026,
+          "kind": "special",
+          "era": "Multiverse Saga",
+          "story": 54,
+          "note": "A one-off special that follows Daredevil: Born Again."
+        },
+        {
+          "id": "mcu-vq",
+          "title": "VisionQuest",
+          "date": "2026-10-14",
+          "year": 2026,
+          "kind": "series",
+          "era": "Multiverse Saga",
+          "story": 55,
+          "note": "Continues Vision’s story after WandaVision."
+        },
+        {
+          "id": "mcu-bnd",
+          "title": "Spider-Man: Brand New Day",
+          "date": "2026-07-31",
+          "year": 2026,
+          "kind": "film",
+          "era": "Multiverse Saga",
+          "story": 56
+        },
+        {
+          "id": "mcu-doom",
+          "title": "Avengers: Doomsday",
+          "date": "2026-12-18",
+          "year": 2026,
+          "kind": "film",
+          "era": "Multiverse Saga",
+          "story": 57,
+          "note": "Scheduled theatrical release."
+        },
+        {
+          "id": "mcu-sw",
+          "title": "Avengers: Secret Wars",
+          "date": "2027-12-17",
+          "year": 2027,
+          "kind": "film",
+          "era": "Multiverse Saga",
+          "story": 58,
+          "note": "Scheduled theatrical release."
+        },
+        {
+          "id": "mcu-ff",
+          "title": "The Fantastic Four: First Steps",
+          "date": "2025-07-25",
+          "year": 2025,
+          "kind": "film",
+          "era": "Other worlds",
+          "story": 59,
+          "note": "Set on a different Earth. Its heroes cross over later."
+        },
+        {
+          "id": "mcu-xm",
+          "title": "X-Men ’97",
+          "date": "2024-03-20",
+          "year": 2024,
+          "kind": "series",
+          "era": "Other worlds",
+          "story": 60,
+          "note": "Animated revival of the 1990s cartoon."
+        },
+        {
+          "id": "mcu-wi",
+          "title": "What If…?",
+          "date": "2021-08-11",
+          "year": 2021,
+          "kind": "series",
+          "era": "Other worlds",
+          "story": 61,
+          "note": "Animated anthology of alternate realities. Three seasons.",
+          "optional": true
+        },
+        {
+          "id": "mcu-mz",
+          "title": "Marvel Zombies",
+          "date": "2025-09-24",
+          "year": 2025,
+          "kind": "series",
+          "era": "Other worlds",
+          "story": 62,
+          "note": "Animated horror spin-off from What If…?.",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "id": "star-trek",
+      "name": "Star Trek",
+      "years": "1966–2026",
+      "hook": "Sixty years of sequels and prequels",
+      "blurb": "Release order is a tour through the decades. Story order runs from the 22nd century to the 32nd, with the alternate Kelvin timeline kept apart so it cannot tangle the main sequence.",
+      "storyHint": "Enterprise, Discovery seasons 1–2 and Strange New Worlds, then the original series and its films, the 24th-century shows and films, the Kelvin timeline, and finally the 32nd century. The 24th-century shows overlap each other and the films, so each is placed whole.",
+      "genre": "Sci-fi",
+      "accent": "#4ea8de",
+      "eraOrder": [
+        "22nd century",
+        "Early 23rd century",
+        "Original series era",
+        "24th century",
+        "32nd century",
+        "Kelvin timeline"
+      ],
+      "entries": [
+        {
+          "id": "st-ent",
+          "title": "Star Trek: Enterprise",
+          "date": "2001-09-26",
+          "year": 2001,
+          "kind": "series",
+          "era": "22nd century",
+          "story": 1
+        },
+        {
+          "id": "st-dis12",
+          "title": "Star Trek: Discovery (Seasons 1–2)",
+          "date": "2017-09-24",
+          "year": 2017,
+          "kind": "series",
+          "era": "Early 23rd century",
+          "story": 2
+        },
+        {
+          "id": "st-snw",
+          "title": "Star Trek: Strange New Worlds",
+          "date": "2022-05-05",
+          "year": 2022,
+          "kind": "series",
+          "era": "Early 23rd century",
+          "story": 3,
+          "note": "Leads straight into the original series. Four seasons so far."
+        },
+        {
+          "id": "st-tos",
+          "title": "Star Trek: The Original Series",
+          "date": "1966-09-08",
+          "year": 1966,
+          "kind": "series",
+          "era": "Original series era",
+          "story": 4
+        },
+        {
+          "id": "st-tas",
+          "title": "Star Trek: The Animated Series",
+          "date": "1973-09-08",
+          "year": 1973,
+          "kind": "series",
+          "era": "Original series era",
+          "story": 5,
+          "note": "Animated follow-up to the original series.",
+          "optional": true
+        },
+        {
+          "id": "st-tmp",
+          "title": "Star Trek: The Motion Picture",
+          "date": "1979-12-07",
+          "year": 1979,
+          "kind": "film",
+          "era": "Original series era",
+          "story": 6
+        },
+        {
+          "id": "st-wok",
+          "title": "Star Trek II: The Wrath of Khan",
+          "date": "1982-06-04",
+          "year": 1982,
+          "kind": "film",
+          "era": "Original series era",
+          "story": 7
+        },
+        {
+          "id": "st-sfs",
+          "title": "Star Trek III: The Search for Spock",
+          "date": "1984-06-01",
+          "year": 1984,
+          "kind": "film",
+          "era": "Original series era",
+          "story": 8
+        },
+        {
+          "id": "st-tvh",
+          "title": "Star Trek IV: The Voyage Home",
+          "date": "1986-11-26",
+          "year": 1986,
+          "kind": "film",
+          "era": "Original series era",
+          "story": 9
+        },
+        {
+          "id": "st-tff",
+          "title": "Star Trek V: The Final Frontier",
+          "date": "1989-06-09",
+          "year": 1989,
+          "kind": "film",
+          "era": "Original series era",
+          "story": 10
+        },
+        {
+          "id": "st-tuc",
+          "title": "Star Trek VI: The Undiscovered Country",
+          "date": "1991-12-06",
+          "year": 1991,
+          "kind": "film",
+          "era": "Original series era",
+          "story": 11
+        },
+        {
+          "id": "st-s31",
+          "title": "Star Trek: Section 31",
+          "date": "2025-01-24",
+          "year": 2025,
+          "kind": "film",
+          "era": "24th century",
+          "story": 12,
+          "note": "Streaming film set in 2324. Standalone.",
+          "optional": true
+        },
+        {
+          "id": "st-tng",
+          "title": "Star Trek: The Next Generation",
+          "date": "1987-09-28",
+          "year": 1987,
+          "kind": "series",
+          "era": "24th century",
+          "story": 13
+        },
+        {
+          "id": "st-ds9",
+          "title": "Star Trek: Deep Space Nine",
+          "date": "1993-01-03",
+          "year": 1993,
+          "kind": "series",
+          "era": "24th century",
+          "story": 14,
+          "note": "Starts while The Next Generation is still running."
+        },
+        {
+          "id": "st-voy",
+          "title": "Star Trek: Voyager",
+          "date": "1995-01-16",
+          "year": 1995,
+          "kind": "series",
+          "era": "24th century",
+          "story": 15
+        },
+        {
+          "id": "st-gen",
+          "title": "Star Trek: Generations",
+          "date": "1994-11-18",
+          "year": 1994,
+          "kind": "film",
+          "era": "24th century",
+          "story": 16,
+          "note": "Hands the films from the original crew to the Next Generation crew."
+        },
+        {
+          "id": "st-fc",
+          "title": "Star Trek: First Contact",
+          "date": "1996-11-22",
+          "year": 1996,
+          "kind": "film",
+          "era": "24th century",
+          "story": 17
+        },
+        {
+          "id": "st-ins",
+          "title": "Star Trek: Insurrection",
+          "date": "1998-12-11",
+          "year": 1998,
+          "kind": "film",
+          "era": "24th century",
+          "story": 18
+        },
+        {
+          "id": "st-nem",
+          "title": "Star Trek: Nemesis",
+          "date": "2002-12-13",
+          "year": 2002,
+          "kind": "film",
+          "era": "24th century",
+          "story": 19
+        },
+        {
+          "id": "st-ld",
+          "title": "Star Trek: Lower Decks",
+          "date": "2020-08-06",
+          "year": 2020,
+          "kind": "series",
+          "era": "24th century",
+          "story": 20,
+          "note": "Animated comedy. Works best after The Next Generation."
+        },
+        {
+          "id": "st-pro",
+          "title": "Star Trek: Prodigy",
+          "date": "2021-10-28",
+          "year": 2021,
+          "kind": "series",
+          "era": "24th century",
+          "story": 21
+        },
+        {
+          "id": "st-pic",
+          "title": "Star Trek: Picard",
+          "date": "2020-01-23",
+          "year": 2020,
+          "kind": "series",
+          "era": "24th century",
+          "story": 22,
+          "note": "Best after The Next Generation and Voyager."
+        },
+        {
+          "id": "st-dis35",
+          "title": "Star Trek: Discovery (Seasons 3–5)",
+          "date": "2020-10-15",
+          "year": 2020,
+          "kind": "series",
+          "era": "32nd century",
+          "story": 23,
+          "note": "The crew jumps nine centuries into the future."
+        },
+        {
+          "id": "st-sfa",
+          "title": "Star Trek: Starfleet Academy",
+          "date": "2026-01-15",
+          "year": 2026,
+          "kind": "series",
+          "era": "32nd century",
+          "story": 24
+        },
+        {
+          "id": "st-09",
+          "title": "Star Trek",
+          "date": "2009-05-08",
+          "year": 2009,
+          "kind": "film",
+          "era": "Kelvin timeline",
+          "story": 25,
+          "note": "Alternate timeline reboot. Needs no earlier Trek."
+        },
+        {
+          "id": "st-id",
+          "title": "Star Trek Into Darkness",
+          "date": "2013-05-16",
+          "year": 2013,
+          "kind": "film",
+          "era": "Kelvin timeline",
+          "story": 26
+        },
+        {
+          "id": "st-bey",
+          "title": "Star Trek Beyond",
+          "date": "2016-07-22",
+          "year": 2016,
+          "kind": "film",
+          "era": "Kelvin timeline",
+          "story": 27
+        }
+      ]
+    },
+    {
+      "id": "x-men",
+      "name": "X-Men",
+      "years": "2000–2020",
+      "hook": "A timeline that rewrites itself",
+      "blurb": "Fox’s mutant films were never planned as one story. Release order is how the tangle formed. Story order follows the set years, so the 1960s prequel comes first.",
+      "storyHint": "First Class, Origins: Wolverine, Days of Future Past, Apocalypse and Dark Phoenix, then the original trilogy, then The Wolverine, Deadpool, and Logan. Deadpool & Wolverine belongs to the Marvel Cinematic Universe list.",
+      "genre": "Superhero",
+      "accent": "#f0c23a",
+      "eraOrder": [
+        "Prequels",
+        "Original trilogy",
+        "Wolverine and Deadpool"
+      ],
+      "entries": [
+        {
+          "id": "xm-fc",
+          "title": "X-Men: First Class",
+          "date": "2011-06-03",
+          "year": 2011,
+          "kind": "film",
+          "era": "Prequels",
+          "story": 1,
+          "note": "Set in 1962."
+        },
+        {
+          "id": "xm-ow",
+          "title": "X-Men Origins: Wolverine",
+          "date": "2009-05-01",
+          "year": 2009,
+          "kind": "film",
+          "era": "Prequels",
+          "story": 2,
+          "note": "Widely considered skippable.",
+          "optional": true
+        },
+        {
+          "id": "xm-dofp",
+          "title": "X-Men: Days of Future Past",
+          "date": "2014-05-23",
+          "year": 2014,
+          "kind": "film",
+          "era": "Prequels",
+          "story": 3,
+          "note": "Rewrites the timeline. Later films follow the new version."
+        },
+        {
+          "id": "xm-apoc",
+          "title": "X-Men: Apocalypse",
+          "date": "2016-05-27",
+          "year": 2016,
+          "kind": "film",
+          "era": "Prequels",
+          "story": 4,
+          "note": "Set in 1983."
+        },
+        {
+          "id": "xm-dp",
+          "title": "Dark Phoenix",
+          "date": "2019-06-07",
+          "year": 2019,
+          "kind": "film",
+          "era": "Prequels",
+          "story": 5,
+          "note": "Set in 1992."
+        },
+        {
+          "id": "xm-1",
+          "title": "X-Men",
+          "date": "2000-07-14",
+          "year": 2000,
+          "kind": "film",
+          "era": "Original trilogy",
+          "story": 6
+        },
+        {
+          "id": "xm-2",
+          "title": "X2",
+          "date": "2003-05-02",
+          "year": 2003,
+          "kind": "film",
+          "era": "Original trilogy",
+          "story": 7
+        },
+        {
+          "id": "xm-3",
+          "title": "X-Men: The Last Stand",
+          "date": "2006-05-26",
+          "year": 2006,
+          "kind": "film",
+          "era": "Original trilogy",
+          "story": 8
+        },
+        {
+          "id": "xm-wolv",
+          "title": "The Wolverine",
+          "date": "2013-07-26",
+          "year": 2013,
+          "kind": "film",
+          "era": "Wolverine and Deadpool",
+          "story": 9,
+          "note": "Set after The Last Stand."
+        },
+        {
+          "id": "xm-dp1",
+          "title": "Deadpool",
+          "date": "2016-02-12",
+          "year": 2016,
+          "kind": "film",
+          "era": "Wolverine and Deadpool",
+          "story": 10
+        },
+        {
+          "id": "xm-dp2",
+          "title": "Deadpool 2",
+          "date": "2018-05-18",
+          "year": 2018,
+          "kind": "film",
+          "era": "Wolverine and Deadpool",
+          "story": 11
+        },
+        {
+          "id": "xm-nm",
+          "title": "The New Mutants",
+          "date": "2020-08-28",
+          "year": 2020,
+          "kind": "film",
+          "era": "Wolverine and Deadpool",
+          "story": 12,
+          "note": "Standalone teen horror spin-off.",
+          "optional": true
+        },
+        {
+          "id": "xm-logan",
+          "title": "Logan",
+          "date": "2017-03-03",
+          "year": 2017,
+          "kind": "film",
+          "era": "Wolverine and Deadpool",
+          "story": 13,
+          "note": "Set in 2029. The farewell for this version of the X-Men."
+        }
+      ]
+    },
+    {
+      "id": "dc",
+      "name": "DC Films & Shows",
+      "years": "2013–2026",
+      "hook": "Two universes, one reboot",
+      "blurb": "The DC Extended Universe ran from 2013 to 2023, then DC Studios started over with a new DC Universe. Release order shows how the first gave way to the second. Story order keeps each universe together.",
+      "storyHint": "The DC Extended Universe first, with Wonder Woman’s two films moved to their own decades, then the new DC Universe in release order.",
+      "genre": "Superhero",
+      "accent": "#4a86e0",
+      "eraOrder": [
+        "DC Extended Universe",
+        "DC Universe"
+      ],
+      "entries": [
+        {
+          "id": "dc-ww",
+          "title": "Wonder Woman",
+          "date": "2017-06-02",
+          "year": 2017,
+          "kind": "film",
+          "era": "DC Extended Universe",
+          "story": 1,
+          "note": "Set in 1918."
+        },
+        {
+          "id": "dc-ww84",
+          "title": "Wonder Woman 1984",
+          "date": "2020-12-25",
+          "year": 2020,
+          "kind": "film",
+          "era": "DC Extended Universe",
+          "story": 2
+        },
+        {
+          "id": "dc-mos",
+          "title": "Man of Steel",
+          "date": "2013-06-14",
+          "year": 2013,
+          "kind": "film",
+          "era": "DC Extended Universe",
+          "story": 3
+        },
+        {
+          "id": "dc-bvs",
+          "title": "Batman v Superman: Dawn of Justice",
+          "date": "2016-03-25",
+          "year": 2016,
+          "kind": "film",
+          "era": "DC Extended Universe",
+          "story": 4
+        },
+        {
+          "id": "dc-ss",
+          "title": "Suicide Squad",
+          "date": "2016-08-05",
+          "year": 2016,
+          "kind": "film",
+          "era": "DC Extended Universe",
+          "story": 5
+        },
+        {
+          "id": "dc-jl",
+          "title": "Justice League",
+          "date": "2017-11-17",
+          "year": 2017,
+          "kind": "film",
+          "era": "DC Extended Universe",
+          "story": 6,
+          "note": "Theatrical cut. Skip it if you watch the Snyder Cut.",
+          "optional": true
+        },
+        {
+          "id": "dc-zsjl",
+          "title": "Zack Snyder’s Justice League",
+          "date": "2021-03-18",
+          "year": 2021,
+          "kind": "film",
+          "era": "DC Extended Universe",
+          "story": 7
+        },
+        {
+          "id": "dc-aq",
+          "title": "Aquaman",
+          "date": "2018-12-21",
+          "year": 2018,
+          "kind": "film",
+          "era": "DC Extended Universe",
+          "story": 8
+        },
+        {
+          "id": "dc-sh1",
+          "title": "Shazam!",
+          "date": "2019-04-05",
+          "year": 2019,
+          "kind": "film",
+          "era": "DC Extended Universe",
+          "story": 9
+        },
+        {
+          "id": "dc-bop",
+          "title": "Birds of Prey",
+          "date": "2020-02-07",
+          "year": 2020,
+          "kind": "film",
+          "era": "DC Extended Universe",
+          "story": 10
+        },
+        {
+          "id": "dc-tss",
+          "title": "The Suicide Squad",
+          "date": "2021-08-06",
+          "year": 2021,
+          "kind": "film",
+          "era": "DC Extended Universe",
+          "story": 11
+        },
+        {
+          "id": "dc-pm1",
+          "title": "Peacemaker (Season 1)",
+          "date": "2022-01-13",
+          "year": 2022,
+          "kind": "series",
+          "era": "DC Extended Universe",
+          "story": 12,
+          "note": "Follows The Suicide Squad."
+        },
+        {
+          "id": "dc-ba",
+          "title": "Black Adam",
+          "date": "2022-10-21",
+          "year": 2022,
+          "kind": "film",
+          "era": "DC Extended Universe",
+          "story": 13
+        },
+        {
+          "id": "dc-sh2",
+          "title": "Shazam! Fury of the Gods",
+          "date": "2023-03-17",
+          "year": 2023,
+          "kind": "film",
+          "era": "DC Extended Universe",
+          "story": 14
+        },
+        {
+          "id": "dc-fl",
+          "title": "The Flash",
+          "date": "2023-06-16",
+          "year": 2023,
+          "kind": "film",
+          "era": "DC Extended Universe",
+          "story": 15,
+          "note": "Resets part of the timeline."
+        },
+        {
+          "id": "dc-bb",
+          "title": "Blue Beetle",
+          "date": "2023-08-18",
+          "year": 2023,
+          "kind": "film",
+          "era": "DC Extended Universe",
+          "story": 16
+        },
+        {
+          "id": "dc-aq2",
+          "title": "Aquaman and the Lost Kingdom",
+          "date": "2023-12-22",
+          "year": 2023,
+          "kind": "film",
+          "era": "DC Extended Universe",
+          "story": 17,
+          "note": "Last film of the DC Extended Universe."
+        },
+        {
+          "id": "dc-cc",
+          "title": "Creature Commandos",
+          "date": "2024-12-05",
+          "year": 2024,
+          "kind": "series",
+          "era": "DC Universe",
+          "story": 18,
+          "note": "Animated. First title of the new DC Universe."
+        },
+        {
+          "id": "dc-sup",
+          "title": "Superman",
+          "date": "2025-07-11",
+          "year": 2025,
+          "kind": "film",
+          "era": "DC Universe",
+          "story": 19
+        },
+        {
+          "id": "dc-pm2",
+          "title": "Peacemaker (Season 2)",
+          "date": "2025-08-21",
+          "year": 2025,
+          "kind": "series",
+          "era": "DC Universe",
+          "story": 20,
+          "note": "Moves the character into the new DC Universe."
+        },
+        {
+          "id": "dc-sg",
+          "title": "Supergirl",
+          "date": "2026-06-26",
+          "year": 2026,
+          "kind": "film",
+          "era": "DC Universe",
+          "story": 21
+        },
+        {
+          "id": "dc-lan",
+          "title": "Lanterns",
+          "date": "2026-08-16",
+          "year": 2026,
+          "kind": "series",
+          "era": "DC Universe",
+          "story": 22
+        },
+        {
+          "id": "dc-clay",
+          "title": "Clayface",
+          "date": "2026-10-23",
+          "year": 2026,
+          "kind": "film",
+          "era": "DC Universe",
+          "story": 23
+        },
+        {
+          "id": "dc-mot",
+          "title": "Man of Tomorrow",
+          "date": "2027-07-09",
+          "year": 2027,
+          "kind": "film",
+          "era": "DC Universe",
+          "story": 24,
+          "note": "Scheduled theatrical release."
+        }
+      ]
+    },
+    {
+      "id": "wizarding-world",
+      "name": "Wizarding World",
+      "years": "2001–2022",
+      "hook": "The prequels come first in the story",
+      "blurb": "Harry Potter first, Fantastic Beasts later, is how audiences saw it. Story order puts Newt Scamander’s 1920s films before Hogwarts. HBO’s new Harry Potter series is a fresh adaptation, not a sequel.",
+      "storyHint": "The three Fantastic Beasts films, then the eight Harry Potter films. HBO’s reboot comes last.",
+      "genre": "Fantasy",
+      "accent": "#b48ae6",
+      "eraOrder": [
+        "Fantastic Beasts",
+        "Harry Potter",
+        "HBO series"
+      ],
+      "entries": [
+        {
+          "id": "ww-fb1",
+          "title": "Fantastic Beasts and Where to Find Them",
+          "date": "2016-11-18",
+          "year": 2016,
+          "kind": "film",
+          "era": "Fantastic Beasts",
+          "story": 1,
+          "note": "Set in 1926."
+        },
+        {
+          "id": "ww-fb2",
+          "title": "Fantastic Beasts: The Crimes of Grindelwald",
+          "date": "2018-11-16",
+          "year": 2018,
+          "kind": "film",
+          "era": "Fantastic Beasts",
+          "story": 2
+        },
+        {
+          "id": "ww-fb3",
+          "title": "Fantastic Beasts: The Secrets of Dumbledore",
+          "date": "2022-04-15",
+          "year": 2022,
+          "kind": "film",
+          "era": "Fantastic Beasts",
+          "story": 3
+        },
+        {
+          "id": "ww-hp1",
+          "title": "Harry Potter and the Philosopher’s Stone",
+          "date": "2001-11-16",
+          "year": 2001,
+          "kind": "film",
+          "era": "Harry Potter",
+          "story": 4
+        },
+        {
+          "id": "ww-hp2",
+          "title": "Harry Potter and the Chamber of Secrets",
+          "date": "2002-11-15",
+          "year": 2002,
+          "kind": "film",
+          "era": "Harry Potter",
+          "story": 5
+        },
+        {
+          "id": "ww-hp3",
+          "title": "Harry Potter and the Prisoner of Azkaban",
+          "date": "2004-06-04",
+          "year": 2004,
+          "kind": "film",
+          "era": "Harry Potter",
+          "story": 6
+        },
+        {
+          "id": "ww-hp4",
+          "title": "Harry Potter and the Goblet of Fire",
+          "date": "2005-11-18",
+          "year": 2005,
+          "kind": "film",
+          "era": "Harry Potter",
+          "story": 7
+        },
+        {
+          "id": "ww-hp5",
+          "title": "Harry Potter and the Order of the Phoenix",
+          "date": "2007-07-11",
+          "year": 2007,
+          "kind": "film",
+          "era": "Harry Potter",
+          "story": 8
+        },
+        {
+          "id": "ww-hp6",
+          "title": "Harry Potter and the Half-Blood Prince",
+          "date": "2009-07-15",
+          "year": 2009,
+          "kind": "film",
+          "era": "Harry Potter",
+          "story": 9
+        },
+        {
+          "id": "ww-hp7",
+          "title": "Harry Potter and the Deathly Hallows — Part 1",
+          "date": "2010-11-19",
+          "year": 2010,
+          "kind": "film",
+          "era": "Harry Potter",
+          "story": 10
+        },
+        {
+          "id": "ww-hp8",
+          "title": "Harry Potter and the Deathly Hallows — Part 2",
+          "date": "2011-07-15",
+          "year": 2011,
+          "kind": "film",
+          "era": "Harry Potter",
+          "story": 11
+        },
+        {
+          "id": "ww-hbo",
+          "title": "Harry Potter (HBO series)",
+          "date": "2026-12-25",
+          "year": 2026,
+          "kind": "series",
+          "era": "HBO series",
+          "story": 12,
+          "note": "A new adaptation that starts again from the first book. Scheduled release."
+        }
+      ]
+    },
+    {
+      "id": "conjuring",
+      "name": "The Conjuring Universe",
+      "years": "2013–2025",
+      "hook": "Released out of order on purpose",
+      "blurb": "The horror films were made in whatever order they were green-lit, so release order jumps between decades. Story order runs from 1952 to 1986 and makes the cases read as one long haunting.",
+      "storyHint": "The Nun, Annabelle: Creation, The Nun II, Annabelle, The Conjuring, Annabelle Comes Home, The Curse of La Llorona, The Conjuring 2, The Devil Made Me Do It, then Last Rites.",
+      "genre": "Horror",
+      "accent": "#b8b2a2",
+      "eraOrder": [
+        "Main series"
+      ],
+      "entries": [
+        {
+          "id": "cj-nun",
+          "title": "The Nun",
+          "date": "2018-09-07",
+          "year": 2018,
+          "kind": "film",
+          "era": "Main series",
+          "story": 1,
+          "note": "Set in 1952."
+        },
+        {
+          "id": "cj-ac",
+          "title": "Annabelle: Creation",
+          "date": "2017-08-11",
+          "year": 2017,
+          "kind": "film",
+          "era": "Main series",
+          "story": 2,
+          "note": "Set in 1955."
+        },
+        {
+          "id": "cj-nun2",
+          "title": "The Nun II",
+          "date": "2023-09-08",
+          "year": 2023,
+          "kind": "film",
+          "era": "Main series",
+          "story": 3,
+          "note": "Set in 1956."
+        },
+        {
+          "id": "cj-an",
+          "title": "Annabelle",
+          "date": "2014-10-03",
+          "year": 2014,
+          "kind": "film",
+          "era": "Main series",
+          "story": 4,
+          "note": "Set in 1967."
+        },
+        {
+          "id": "cj-1",
+          "title": "The Conjuring",
+          "date": "2013-07-19",
+          "year": 2013,
+          "kind": "film",
+          "era": "Main series",
+          "story": 5,
+          "note": "Set in 1971."
+        },
+        {
+          "id": "cj-ach",
+          "title": "Annabelle Comes Home",
+          "date": "2019-06-26",
+          "year": 2019,
+          "kind": "film",
+          "era": "Main series",
+          "story": 6,
+          "note": "Set in 1972."
+        },
+        {
+          "id": "cj-ll",
+          "title": "The Curse of La Llorona",
+          "date": "2019-04-19",
+          "year": 2019,
+          "kind": "film",
+          "era": "Main series",
+          "story": 7,
+          "note": "Set in 1973. Only loosely connected.",
+          "optional": true
+        },
+        {
+          "id": "cj-2",
+          "title": "The Conjuring 2",
+          "date": "2016-06-10",
+          "year": 2016,
+          "kind": "film",
+          "era": "Main series",
+          "story": 8,
+          "note": "Set in 1977."
+        },
+        {
+          "id": "cj-3",
+          "title": "The Conjuring: The Devil Made Me Do It",
+          "date": "2021-06-04",
+          "year": 2021,
+          "kind": "film",
+          "era": "Main series",
+          "story": 9,
+          "note": "Set in 1981."
+        },
+        {
+          "id": "cj-lr",
+          "title": "The Conjuring: Last Rites",
+          "date": "2025-09-05",
+          "year": 2025,
+          "kind": "film",
+          "era": "Main series",
+          "story": 10,
+          "note": "Set in 1986."
+        }
+      ]
+    },
+    {
+      "id": "halloween",
+      "name": "Halloween",
+      "years": "1978–2022",
+      "hook": "Five continuities, one mask",
+      "blurb": "Nearly every sequel pretends some of the earlier ones never happened. Release order is the history. Story order keeps each continuity together so you can pick one path through them.",
+      "storyHint": "The 1978 original and Halloween II are shared. Then choose a path: the Thorn cult films, the H20 pair, the 2018 trilogy, or Rob Zombie’s remakes. Halloween III is a standalone.",
+      "genre": "Horror",
+      "accent": "#f08c2a",
+      "eraOrder": [
+        "Original",
+        "Standalone",
+        "Thorn cult",
+        "H20",
+        "2018 trilogy",
+        "Rob Zombie"
+      ],
+      "entries": [
+        {
+          "id": "hw-78",
+          "title": "Halloween",
+          "date": "1978-10-25",
+          "year": 1978,
+          "kind": "film",
+          "era": "Original",
+          "story": 1,
+          "note": "The start of every continuity."
+        },
+        {
+          "id": "hw-2",
+          "title": "Halloween II",
+          "date": "1981-10-30",
+          "year": 1981,
+          "kind": "film",
+          "era": "Original",
+          "story": 2,
+          "note": "Picks up the same night. The H20 films and the 2018 trilogy handle it differently."
+        },
+        {
+          "id": "hw-3",
+          "title": "Halloween III: Season of the Witch",
+          "date": "1982-10-22",
+          "year": 1982,
+          "kind": "film",
+          "era": "Standalone",
+          "story": 3,
+          "note": "No Michael Myers. Its own story.",
+          "optional": true
+        },
+        {
+          "id": "hw-4",
+          "title": "Halloween 4: The Return of Michael Myers",
+          "date": "1988-10-21",
+          "year": 1988,
+          "kind": "film",
+          "era": "Thorn cult",
+          "story": 4
+        },
+        {
+          "id": "hw-5",
+          "title": "Halloween 5: The Revenge of Michael Myers",
+          "date": "1989-10-13",
+          "year": 1989,
+          "kind": "film",
+          "era": "Thorn cult",
+          "story": 5
+        },
+        {
+          "id": "hw-6",
+          "title": "Halloween: The Curse of Michael Myers",
+          "date": "1995-09-29",
+          "year": 1995,
+          "kind": "film",
+          "era": "Thorn cult",
+          "story": 6
+        },
+        {
+          "id": "hw-h20",
+          "title": "Halloween H20: 20 Years Later",
+          "date": "1998-08-05",
+          "year": 1998,
+          "kind": "film",
+          "era": "H20",
+          "story": 7,
+          "note": "Follows the first two films and ignores 4 to 6."
+        },
+        {
+          "id": "hw-res",
+          "title": "Halloween: Resurrection",
+          "date": "2002-07-12",
+          "year": 2002,
+          "kind": "film",
+          "era": "H20",
+          "story": 8
+        },
+        {
+          "id": "hw-18",
+          "title": "Halloween",
+          "date": "2018-10-19",
+          "year": 2018,
+          "kind": "film",
+          "era": "2018 trilogy",
+          "story": 9,
+          "note": "A direct sequel to the 1978 film. Ignores everything else."
+        },
+        {
+          "id": "hw-kills",
+          "title": "Halloween Kills",
+          "date": "2021-10-15",
+          "year": 2021,
+          "kind": "film",
+          "era": "2018 trilogy",
+          "story": 10
+        },
+        {
+          "id": "hw-ends",
+          "title": "Halloween Ends",
+          "date": "2022-10-14",
+          "year": 2022,
+          "kind": "film",
+          "era": "2018 trilogy",
+          "story": 11
+        },
+        {
+          "id": "hw-rz1",
+          "title": "Halloween (2007)",
+          "date": "2007-08-31",
+          "year": 2007,
+          "kind": "film",
+          "era": "Rob Zombie",
+          "story": 12,
+          "note": "Rob Zombie’s remake."
+        },
+        {
+          "id": "hw-rz2",
+          "title": "Halloween II (2009)",
+          "date": "2009-08-28",
+          "year": 2009,
+          "kind": "film",
+          "era": "Rob Zombie",
+          "story": 13
+        }
+      ]
+    },
+    {
+      "id": "terminator",
+      "name": "Terminator",
+      "years": "1984–2024",
+      "hook": "Each sequel picks its own timeline",
+      "blurb": "After Judgment Day, every new film or show chose which earlier ones still count. Release order is how they appeared. Story order walks each branch in turn.",
+      "storyHint": "The first two films and Dark Fate form the core branch. The Sarah Connor Chronicles, the T3 branch, Genisys and Terminator Zero each go their own way.",
+      "genre": "Sci-fi",
+      "accent": "#d8504a",
+      "eraOrder": [
+        "Core timeline",
+        "The Sarah Connor Chronicles",
+        "T3 timeline",
+        "Genisys",
+        "Terminator Zero"
+      ],
+      "entries": [
+        {
+          "id": "tm-1",
+          "title": "The Terminator",
+          "date": "1984-10-26",
+          "year": 1984,
+          "kind": "film",
+          "era": "Core timeline",
+          "story": 1
+        },
+        {
+          "id": "tm-2",
+          "title": "Terminator 2: Judgment Day",
+          "date": "1991-07-03",
+          "year": 1991,
+          "kind": "film",
+          "era": "Core timeline",
+          "story": 2
+        },
+        {
+          "id": "tm-df",
+          "title": "Terminator: Dark Fate",
+          "date": "2019-11-01",
+          "year": 2019,
+          "kind": "film",
+          "era": "Core timeline",
+          "story": 3,
+          "note": "Direct sequel to Terminator 2. Ignores films 3 to 5."
+        },
+        {
+          "id": "tm-scc",
+          "title": "Terminator: The Sarah Connor Chronicles",
+          "date": "2008-01-13",
+          "year": 2008,
+          "kind": "series",
+          "era": "The Sarah Connor Chronicles",
+          "story": 4,
+          "note": "Follows Terminator 2 and ignores Terminator 3."
+        },
+        {
+          "id": "tm-3",
+          "title": "Terminator 3: Rise of the Machines",
+          "date": "2003-07-02",
+          "year": 2003,
+          "kind": "film",
+          "era": "T3 timeline",
+          "story": 5
+        },
+        {
+          "id": "tm-sal",
+          "title": "Terminator Salvation",
+          "date": "2009-05-21",
+          "year": 2009,
+          "kind": "film",
+          "era": "T3 timeline",
+          "story": 6
+        },
+        {
+          "id": "tm-gen",
+          "title": "Terminator Genisys",
+          "date": "2015-07-01",
+          "year": 2015,
+          "kind": "film",
+          "era": "Genisys",
+          "story": 7,
+          "note": "A reboot that rewrites the first film. Widely considered skippable.",
+          "optional": true
+        },
+        {
+          "id": "tm-zero",
+          "title": "Terminator Zero",
+          "date": "2024-08-29",
+          "year": 2024,
+          "kind": "series",
+          "era": "Terminator Zero",
+          "story": 8,
+          "note": "Animated Netflix series in its own continuity."
+        }
+      ]
+    },
+    {
+      "id": "transformers",
+      "name": "Transformers",
+      "years": "2007–2024",
+      "hook": "The prequels came later",
+      "blurb": "The live-action series began with Michael Bay in 2007, then looked backward. Story order starts on Cybertron and runs through the 1980s and 1990s before reaching the original film.",
+      "storyHint": "Transformers One, Bumblebee, Rise of the Beasts, then the five Bay films.",
+      "genre": "Action",
+      "accent": "#e8863a",
+      "eraOrder": [
+        "Cybertron",
+        "Bumblebee era",
+        "Bay films"
+      ],
+      "entries": [
+        {
+          "id": "tf-one",
+          "title": "Transformers One",
+          "date": "2024-09-20",
+          "year": 2024,
+          "kind": "film",
+          "era": "Cybertron",
+          "story": 1,
+          "note": "Animated origin story of Optimus Prime and Megatron."
+        },
+        {
+          "id": "tf-bee",
+          "title": "Bumblebee",
+          "date": "2018-12-21",
+          "year": 2018,
+          "kind": "film",
+          "era": "Bumblebee era",
+          "story": 2,
+          "note": "Set in 1987."
+        },
+        {
+          "id": "tf-rotb",
+          "title": "Transformers: Rise of the Beasts",
+          "date": "2023-06-09",
+          "year": 2023,
+          "kind": "film",
+          "era": "Bumblebee era",
+          "story": 3,
+          "note": "Set in 1994. A sequel to Bumblebee."
+        },
+        {
+          "id": "tf-1",
+          "title": "Transformers",
+          "date": "2007-07-03",
+          "year": 2007,
+          "kind": "film",
+          "era": "Bay films",
+          "story": 4
+        },
+        {
+          "id": "tf-2",
+          "title": "Transformers: Revenge of the Fallen",
+          "date": "2009-06-24",
+          "year": 2009,
+          "kind": "film",
+          "era": "Bay films",
+          "story": 5
+        },
+        {
+          "id": "tf-3",
+          "title": "Transformers: Dark of the Moon",
+          "date": "2011-06-29",
+          "year": 2011,
+          "kind": "film",
+          "era": "Bay films",
+          "story": 6
+        },
+        {
+          "id": "tf-4",
+          "title": "Transformers: Age of Extinction",
+          "date": "2014-06-27",
+          "year": 2014,
+          "kind": "film",
+          "era": "Bay films",
+          "story": 7
+        },
+        {
+          "id": "tf-5",
+          "title": "Transformers: The Last Knight",
+          "date": "2017-06-23",
+          "year": 2017,
+          "kind": "film",
+          "era": "Bay films",
+          "story": 8
+        }
+      ]
+    },
+    {
+      "id": "predator",
+      "name": "Predator",
+      "years": "1987–2025",
+      "hook": "The hunt starts centuries earlier",
+      "blurb": "The newest films reach back to 1719 and forward to the far future. Story order starts with Prey and runs through the crossovers to Badlands.",
+      "storyHint": "Prey and Killer of Killers, then the modern-day films from Predator to The Predator, then Badlands in the far future.",
+      "genre": "Sci-fi",
+      "accent": "#84d65a",
+      "eraOrder": [
+        "Early hunts",
+        "Modern era",
+        "Far future"
+      ],
+      "entries": [
+        {
+          "id": "pr-prey",
+          "title": "Prey",
+          "date": "2022-08-05",
+          "year": 2022,
+          "kind": "film",
+          "era": "Early hunts",
+          "story": 1,
+          "note": "Set in 1719."
+        },
+        {
+          "id": "pr-kok",
+          "title": "Predator: Killer of Killers",
+          "date": "2025-06-06",
+          "year": 2025,
+          "kind": "film",
+          "era": "Early hunts",
+          "story": 2,
+          "note": "Animated anthology across three eras of history."
+        },
+        {
+          "id": "pr-1",
+          "title": "Predator",
+          "date": "1987-06-12",
+          "year": 1987,
+          "kind": "film",
+          "era": "Modern era",
+          "story": 3
+        },
+        {
+          "id": "pr-2",
+          "title": "Predator 2",
+          "date": "1990-11-21",
+          "year": 1990,
+          "kind": "film",
+          "era": "Modern era",
+          "story": 4,
+          "note": "Set in 1997."
+        },
+        {
+          "id": "pr-avp",
+          "title": "Alien vs. Predator",
+          "date": "2004-08-13",
+          "year": 2004,
+          "kind": "film",
+          "era": "Modern era",
+          "story": 5,
+          "note": "Crossover with the Alien films. Standalone.",
+          "optional": true
+        },
+        {
+          "id": "pr-avpr",
+          "title": "Aliens vs. Predator: Requiem",
+          "date": "2007-12-25",
+          "year": 2007,
+          "kind": "film",
+          "era": "Modern era",
+          "story": 6,
+          "note": "Direct sequel to the first crossover.",
+          "optional": true
+        },
+        {
+          "id": "pr-s",
+          "title": "Predators",
+          "date": "2010-07-09",
+          "year": 2010,
+          "kind": "film",
+          "era": "Modern era",
+          "story": 7
+        },
+        {
+          "id": "pr-4",
+          "title": "The Predator",
+          "date": "2018-09-14",
+          "year": 2018,
+          "kind": "film",
+          "era": "Modern era",
+          "story": 8
+        },
+        {
+          "id": "pr-bad",
+          "title": "Predator: Badlands",
+          "date": "2025-11-07",
+          "year": 2025,
+          "kind": "film",
+          "era": "Far future",
+          "story": 9,
+          "note": "Set in the far future, in the same universe as the Alien films."
+        }
+      ]
+    },
+    {
+      "id": "mad-max",
+      "name": "Mad Max",
+      "years": "1979–2024",
+      "hook": "The prequel comes last",
+      "blurb": "Fury Road looked like a sequel in 2015 and Furiosa then went back to tell her story. Story order puts the prequel just before Fury Road.",
+      "storyHint": "The original trilogy, then Furiosa, then Fury Road.",
+      "genre": "Action",
+      "accent": "#e99a4f",
+      "eraOrder": [
+        "Original trilogy",
+        "The Wasteland"
+      ],
+      "entries": [
+        {
+          "id": "mm-1",
+          "title": "Mad Max",
+          "date": "1979-04-12",
+          "year": 1979,
+          "kind": "film",
+          "era": "Original trilogy",
+          "story": 1
+        },
+        {
+          "id": "mm-2",
+          "title": "Mad Max 2: The Road Warrior",
+          "date": "1981-12-24",
+          "year": 1981,
+          "kind": "film",
+          "era": "Original trilogy",
+          "story": 2
+        },
+        {
+          "id": "mm-3",
+          "title": "Mad Max Beyond Thunderdome",
+          "date": "1985-07-10",
+          "year": 1985,
+          "kind": "film",
+          "era": "Original trilogy",
+          "story": 3
+        },
+        {
+          "id": "mm-fur",
+          "title": "Furiosa: A Mad Max Saga",
+          "date": "2024-05-24",
+          "year": 2024,
+          "kind": "film",
+          "era": "The Wasteland",
+          "story": 4,
+          "note": "Prequel to Fury Road. Spans about fifteen years."
+        },
+        {
+          "id": "mm-fr",
+          "title": "Mad Max: Fury Road",
+          "date": "2015-05-15",
+          "year": 2015,
+          "kind": "film",
+          "era": "The Wasteland",
+          "story": 5
+        }
+      ]
+    },
+    {
+      "id": "indiana-jones",
+      "name": "Indiana Jones",
+      "years": "1981–2023",
+      "hook": "The second film is really the first",
+      "blurb": "Temple of Doom is a prequel to Raiders of the Lost Ark. Story order puts it first and optionally begins with the television series about the young Indy.",
+      "storyHint": "The Young Indiana Jones Chronicles, then Temple of Doom, Raiders, The Last Crusade, Kingdom of the Crystal Skull, and Dial of Destiny.",
+      "genre": "Action",
+      "accent": "#c9a15a",
+      "eraOrder": [
+        "Young Indy",
+        "The films"
+      ],
+      "entries": [
+        {
+          "id": "ij-yic",
+          "title": "The Young Indiana Jones Chronicles",
+          "date": "1992-03-04",
+          "year": 1992,
+          "kind": "series",
+          "era": "Young Indy",
+          "story": 1,
+          "note": "Follows Indy from childhood. Not needed for the films.",
+          "optional": true
+        },
+        {
+          "id": "ij-2",
+          "title": "Indiana Jones and the Temple of Doom",
+          "date": "1984-05-23",
+          "year": 1984,
+          "kind": "film",
+          "era": "The films",
+          "story": 2,
+          "note": "Set in 1935, a year before Raiders."
+        },
+        {
+          "id": "ij-1",
+          "title": "Raiders of the Lost Ark",
+          "date": "1981-06-12",
+          "year": 1981,
+          "kind": "film",
+          "era": "The films",
+          "story": 3,
+          "note": "Set in 1936."
+        },
+        {
+          "id": "ij-3",
+          "title": "Indiana Jones and the Last Crusade",
+          "date": "1989-05-24",
+          "year": 1989,
+          "kind": "film",
+          "era": "The films",
+          "story": 4
+        },
+        {
+          "id": "ij-4",
+          "title": "Indiana Jones and the Kingdom of the Crystal Skull",
+          "date": "2008-05-22",
+          "year": 2008,
+          "kind": "film",
+          "era": "The films",
+          "story": 5
+        },
+        {
+          "id": "ij-5",
+          "title": "Indiana Jones and the Dial of Destiny",
+          "date": "2023-06-30",
+          "year": 2023,
+          "kind": "film",
+          "era": "The films",
+          "story": 6
+        }
+      ]
+    },
+    {
+      "id": "hunger-games",
+      "name": "The Hunger Games",
+      "years": "2012–2023",
+      "hook": "Two prequels, decades earlier",
+      "blurb": "Katniss’s story came first. The prequels follow earlier Games, so story order starts decades before the first film.",
+      "storyHint": "The Ballad of Songbirds & Snakes, then Sunrise on the Reaping, then the four original films.",
+      "genre": "Sci-fi",
+      "accent": "#e6c14b",
+      "eraOrder": [
+        "Prequels",
+        "Original saga"
+      ],
+      "entries": [
+        {
+          "id": "hg-b",
+          "title": "The Ballad of Songbirds & Snakes",
+          "date": "2023-11-17",
+          "year": 2023,
+          "kind": "film",
+          "era": "Prequels",
+          "story": 1,
+          "note": "Set 64 years before the first film."
+        },
+        {
+          "id": "hg-s",
+          "title": "Sunrise on the Reaping",
+          "date": "2026-11-20",
+          "year": 2026,
+          "kind": "film",
+          "era": "Prequels",
+          "story": 2,
+          "note": "Set 24 years before the first film. Scheduled release."
+        },
+        {
+          "id": "hg-1",
+          "title": "The Hunger Games",
+          "date": "2012-03-23",
+          "year": 2012,
+          "kind": "film",
+          "era": "Original saga",
+          "story": 3
+        },
+        {
+          "id": "hg-2",
+          "title": "Catching Fire",
+          "date": "2013-11-22",
+          "year": 2013,
+          "kind": "film",
+          "era": "Original saga",
+          "story": 4
+        },
+        {
+          "id": "hg-3",
+          "title": "Mockingjay — Part 1",
+          "date": "2014-11-21",
+          "year": 2014,
+          "kind": "film",
+          "era": "Original saga",
+          "story": 5
+        },
+        {
+          "id": "hg-4",
+          "title": "Mockingjay — Part 2",
+          "date": "2015-11-20",
+          "year": 2015,
+          "kind": "film",
+          "era": "Original saga",
+          "story": 6
+        }
+      ]
+    },
+    {
+      "id": "dune",
+      "name": "Dune",
+      "years": "2021–2024",
+      "hook": "A prequel set 10,000 years earlier",
+      "blurb": "Denis Villeneuve’s films tell the story of Paul Atreides. HBO’s Dune: Prophecy goes ten millennia back, so story order starts there.",
+      "storyHint": "Dune: Prophecy, then Dune, Part Two, and Part Three.",
+      "genre": "Sci-fi",
+      "accent": "#d9a75e",
+      "eraOrder": [
+        "Prophecy",
+        "Villeneuve films"
+      ],
+      "entries": [
+        {
+          "id": "dn-p",
+          "title": "Dune: Prophecy",
+          "date": "2024-11-17",
+          "year": 2024,
+          "kind": "series",
+          "era": "Prophecy",
+          "story": 1,
+          "note": "Set 10,000 years before the films. Not needed for them.",
+          "optional": true
+        },
+        {
+          "id": "dn-1",
+          "title": "Dune",
+          "date": "2021-10-22",
+          "year": 2021,
+          "kind": "film",
+          "era": "Villeneuve films",
+          "story": 2
+        },
+        {
+          "id": "dn-2",
+          "title": "Dune: Part Two",
+          "date": "2024-03-01",
+          "year": 2024,
+          "kind": "film",
+          "era": "Villeneuve films",
+          "story": 3
+        },
+        {
+          "id": "dn-3",
+          "title": "Dune: Part Three",
+          "date": "2026-12-18",
+          "year": 2026,
+          "kind": "film",
+          "era": "Villeneuve films",
+          "story": 4,
+          "note": "Scheduled theatrical release."
+        }
+      ]
+    }
+  ],
+  "works": {
+    "godzilla": [
+      {
+        "id": "bk-gz-marvel",
+        "title": "Godzilla, King of the Monsters",
+        "year": 1977,
+        "format": "comic",
+        "by": "Doug Moench and Herb Trimpe",
+        "path": "Classic comics",
+        "note": "Marvel's 1970s series, in which Godzilla meets Marvel heroes such as the Avengers."
+      },
+      {
+        "id": "bk-gz-half",
+        "title": "Godzilla: The Half-Century War",
+        "year": 2012,
+        "format": "comic",
+        "by": "James Stokoe",
+        "path": "IDW comics",
+        "note": "One man's story across fifty years of Godzilla attacks."
+      },
+      {
+        "id": "bk-gz-rulers",
+        "title": "Godzilla: Rulers of Earth",
+        "year": 2013,
+        "format": "comic",
+        "by": "Chris Mowry and Matt Frank",
+        "path": "IDW comics"
+      },
+      {
+        "id": "bk-gz-hell",
+        "title": "Godzilla in Hell",
+        "year": 2015,
+        "format": "comic",
+        "by": "James Stokoe and others",
+        "path": "IDW comics",
+        "optional": true,
+        "note": "A five-issue miniseries set in Hell."
+      },
+      {
+        "id": "bk-gz-rage",
+        "title": "Godzilla: Rage Across Time",
+        "year": 2016,
+        "format": "comic",
+        "by": "Various",
+        "path": "IDW comics",
+        "optional": true,
+        "note": "An anthology that drops Godzilla into different eras of history."
+      },
+      {
+        "id": "bk-gz-awake",
+        "title": "Godzilla: Awakening",
+        "year": 2014,
+        "format": "graphic-novel",
+        "by": "Max Borenstein, Greg Borenstein and Eric Battle",
+        "path": "Legendary MonsterVerse",
+        "note": "A prequel to the 2014 film."
+      },
+      {
+        "id": "bk-gz-after",
+        "title": "Godzilla: Aftershock",
+        "year": 2019,
+        "format": "graphic-novel",
+        "by": "Arvid Nelson and Drew Edward Johnson",
+        "path": "Legendary MonsterVerse",
+        "note": "A prequel to Godzilla: King of the Monsters."
+      }
+    ],
+    "star-wars": [
+      {
+        "id": "bk-sw-lotj",
+        "title": "Star Wars: The High Republic: Light of the Jedi",
+        "year": 2021,
+        "format": "novel",
+        "by": "Charles Soule",
+        "path": "Stand-alone novels",
+        "note": "Opens The High Republic, set centuries before the films."
+      },
+      {
+        "id": "bk-sw-ma",
+        "title": "Star Wars: Master & Apprentice",
+        "year": 2019,
+        "format": "novel",
+        "by": "Claudia Gray",
+        "path": "Stand-alone novels",
+        "note": "Qui-Gon Jinn and a young Obi-Wan Kenobi, before The Phantom Menace."
+      },
+      {
+        "id": "bk-sw-cat",
+        "title": "Star Wars: Catalyst: A Rogue One Novel",
+        "year": 2016,
+        "format": "novel",
+        "by": "James Luceno",
+        "path": "Stand-alone novels",
+        "note": "The story behind the Death Star and the people who built it."
+      },
+      {
+        "id": "bk-sw-tarkin",
+        "title": "Star Wars: Tarkin",
+        "year": 2014,
+        "format": "novel",
+        "by": "James Luceno",
+        "path": "Stand-alone novels",
+        "optional": true
+      },
+      {
+        "id": "bk-sw-nd",
+        "title": "Star Wars: A New Dawn",
+        "year": 2014,
+        "format": "novel",
+        "by": "John Jackson Miller",
+        "path": "Stand-alone novels",
+        "note": "A prequel to the animated series Star Wars Rebels."
+      },
+      {
+        "id": "bk-sw-ls",
+        "title": "Star Wars: Lost Stars",
+        "year": 2015,
+        "format": "novel",
+        "by": "Claudia Gray",
+        "path": "Stand-alone novels",
+        "note": "Two friends on opposite sides of the Rebellion, told across the original trilogy."
+      },
+      {
+        "id": "bk-sw-bl",
+        "title": "Star Wars: Bloodline",
+        "year": 2016,
+        "format": "novel",
+        "by": "Claudia Gray",
+        "path": "Stand-alone novels",
+        "note": "Leia's story before The Force Awakens."
+      },
+      {
+        "id": "bk-sw-th1",
+        "title": "Star Wars: Thrawn",
+        "year": 2017,
+        "format": "novel",
+        "by": "Timothy Zahn",
+        "path": "Thrawn (canon)",
+        "note": "How Grand Admiral Thrawn rose in the Empire."
+      },
+      {
+        "id": "bk-sw-th2",
+        "title": "Star Wars: Thrawn: Alliances",
+        "year": 2018,
+        "format": "novel",
+        "by": "Timothy Zahn",
+        "path": "Thrawn (canon)"
+      },
+      {
+        "id": "bk-sw-th3",
+        "title": "Star Wars: Thrawn: Treason",
+        "year": 2019,
+        "format": "novel",
+        "by": "Timothy Zahn",
+        "path": "Thrawn (canon)"
+      },
+      {
+        "id": "bk-sw-aaron",
+        "title": "Star Wars (2015)",
+        "year": 2015,
+        "format": "comic",
+        "by": "Jason Aaron and John Cassaday",
+        "path": "Marvel comics",
+        "note": "Set between A New Hope and The Empire Strikes Back."
+      },
+      {
+        "id": "bk-sw-vader",
+        "title": "Darth Vader (2015)",
+        "year": 2015,
+        "format": "comic",
+        "by": "Kieron Gillen and Salvador Larroca",
+        "path": "Marvel comics",
+        "note": "Vader after the destruction of the first Death Star."
+      },
+      {
+        "id": "bk-sw-aphra",
+        "title": "Doctor Aphra (2016)",
+        "year": 2016,
+        "format": "comic",
+        "by": "Kieron Gillen and Kev Walker",
+        "path": "Marvel comics",
+        "optional": true
+      },
+      {
+        "id": "bk-sw-her",
+        "title": "Heir to the Empire",
+        "year": 1991,
+        "format": "novel",
+        "by": "Timothy Zahn",
+        "path": "Thrawn trilogy (Legends)",
+        "optional": true,
+        "note": "Legends, so not canon. The novel that made Thrawn a fan favourite."
+      },
+      {
+        "id": "bk-sw-dfr",
+        "title": "Dark Force Rising",
+        "year": 1992,
+        "format": "novel",
+        "by": "Timothy Zahn",
+        "path": "Thrawn trilogy (Legends)",
+        "optional": true
+      },
+      {
+        "id": "bk-sw-tlc",
+        "title": "The Last Command",
+        "year": 1993,
+        "format": "novel",
+        "by": "Timothy Zahn",
+        "path": "Thrawn trilogy (Legends)",
+        "optional": true
+      },
+      {
+        "id": "bk-sw-de",
+        "title": "Dark Empire",
+        "year": 1991,
+        "format": "comic",
+        "by": "Tom Veitch and Cam Kennedy",
+        "path": "Thrawn trilogy (Legends)",
+        "optional": true,
+        "note": "Legends. The Dark Horse comic that restarted Star Wars stories after the films."
+      }
+    ],
+    "alien": [
+      {
+        "id": "bk-al-n1",
+        "title": "Alien",
+        "year": 1979,
+        "format": "novelization",
+        "by": "Alan Dean Foster",
+        "path": "Novelizations"
+      },
+      {
+        "id": "bk-al-n2",
+        "title": "Aliens",
+        "year": 1986,
+        "format": "novelization",
+        "by": "Alan Dean Foster",
+        "path": "Novelizations"
+      },
+      {
+        "id": "bk-al-is",
+        "title": "Alien: The Illustrated Story",
+        "year": 1979,
+        "format": "graphic-novel",
+        "by": "Archie Goodwin and Walt Simonson",
+        "path": "Comics"
+      },
+      {
+        "id": "bk-al-dh",
+        "title": "Aliens (Dark Horse)",
+        "year": 1988,
+        "format": "comic",
+        "by": "Mark Verheiden and Mark Nelson",
+        "path": "Comics",
+        "note": "The Dark Horse series that continued the story after the second film."
+      },
+      {
+        "id": "bk-al-mv",
+        "title": "Alien (Marvel, 2021)",
+        "year": 2021,
+        "format": "comic",
+        "by": "Phillip Kennedy Johnson and Salvador Larroca",
+        "path": "Comics"
+      },
+      {
+        "id": "bk-al-ios",
+        "title": "Alien: Isolation",
+        "year": 2014,
+        "format": "novel",
+        "by": "Keith R. A. DeCandido",
+        "path": "Newer novels",
+        "optional": true,
+        "note": "Based on the video game."
+      },
+      {
+        "id": "bk-al-oots",
+        "title": "Alien: Out of the Shadows",
+        "year": 2014,
+        "format": "novel",
+        "by": "Tim Lebbon",
+        "path": "Newer novels",
+        "note": "The first of a trilogy of official Alien novels from Titan Books."
+      },
+      {
+        "id": "bk-al-sos",
+        "title": "Alien: Sea of Sorrows",
+        "year": 2014,
+        "format": "novel",
+        "by": "James A. Moore",
+        "path": "Newer novels",
+        "optional": true
+      },
+      {
+        "id": "bk-al-rop",
+        "title": "Alien: River of Pain",
+        "year": 2014,
+        "format": "novel",
+        "by": "Christopher Golden",
+        "path": "Newer novels",
+        "optional": true
+      },
+      {
+        "id": "bk-al-cov",
+        "title": "Alien: Covenant",
+        "year": 2017,
+        "format": "novelization",
+        "by": "Alan Dean Foster",
+        "path": "Later novelization",
+        "optional": true
+      }
+    ],
+    "middle-earth": [
+      {
+        "id": "bk-me-hob",
+        "title": "The Hobbit",
+        "year": 1937,
+        "format": "novel",
+        "by": "J. R. R. Tolkien",
+        "path": "The Hobbit and The Lord of the Rings"
+      },
+      {
+        "id": "bk-me-fotr",
+        "title": "The Fellowship of the Ring",
+        "year": 1954,
+        "format": "novel",
+        "by": "J. R. R. Tolkien",
+        "path": "The Hobbit and The Lord of the Rings"
+      },
+      {
+        "id": "bk-me-tt",
+        "title": "The Two Towers",
+        "year": 1954,
+        "format": "novel",
+        "by": "J. R. R. Tolkien",
+        "path": "The Hobbit and The Lord of the Rings"
+      },
+      {
+        "id": "bk-me-rotk",
+        "title": "The Return of the King",
+        "year": 1955,
+        "format": "novel",
+        "by": "J. R. R. Tolkien",
+        "path": "The Hobbit and The Lord of the Rings"
+      },
+      {
+        "id": "bk-me-sil",
+        "title": "The Silmarillion",
+        "year": 1977,
+        "format": "novel",
+        "by": "J. R. R. Tolkien, edited by Christopher Tolkien",
+        "path": "Earlier ages",
+        "note": "The creation of the world and the First Age. Hard going, but it is the backbone of the setting."
+      },
+      {
+        "id": "bk-me-ut",
+        "title": "Unfinished Tales",
+        "year": 1980,
+        "format": "short-stories",
+        "by": "J. R. R. Tolkien, edited by Christopher Tolkien",
+        "path": "Earlier ages",
+        "optional": true
+      },
+      {
+        "id": "bk-me-coh",
+        "title": "The Children of Húrin",
+        "year": 2007,
+        "format": "novel",
+        "by": "J. R. R. Tolkien, edited by Christopher Tolkien",
+        "path": "Earlier ages"
+      },
+      {
+        "id": "bk-me-bl",
+        "title": "Beren and Lúthien",
+        "year": 2017,
+        "format": "novel",
+        "by": "J. R. R. Tolkien, edited by Christopher Tolkien",
+        "path": "Earlier ages",
+        "optional": true
+      },
+      {
+        "id": "bk-me-fog",
+        "title": "The Fall of Gondolin",
+        "year": 2018,
+        "format": "novel",
+        "by": "J. R. R. Tolkien, edited by Christopher Tolkien",
+        "path": "Earlier ages",
+        "optional": true
+      },
+      {
+        "id": "bk-me-fon",
+        "title": "The Fall of Númenor",
+        "year": 2022,
+        "format": "short-stories",
+        "by": "J. R. R. Tolkien, edited by Brian Sibley",
+        "path": "Earlier ages",
+        "note": "The Second Age, the setting of The Rings of Power."
+      }
+    ],
+    "jurassic": [
+      {
+        "id": "bk-jp-n1",
+        "title": "Jurassic Park",
+        "year": 1990,
+        "format": "novel",
+        "by": "Michael Crichton",
+        "path": "Michael Crichton"
+      },
+      {
+        "id": "bk-jp-n2",
+        "title": "The Lost World",
+        "year": 1995,
+        "format": "novel",
+        "by": "Michael Crichton",
+        "path": "Michael Crichton"
+      },
+      {
+        "id": "bk-jp-mk",
+        "title": "The Making of Jurassic Park",
+        "year": 1993,
+        "format": "companion",
+        "by": "Don Shay and Jody Duncan",
+        "path": "Behind the scenes",
+        "optional": true
+      }
+    ],
+    "mcu": [
+      {
+        "id": "bk-mcu-ee",
+        "title": "Iron Man: Extremis",
+        "year": 2005,
+        "format": "comic",
+        "by": "Warren Ellis and Adi Granov",
+        "path": "Where the films came from",
+        "note": "Its ideas fed Iron Man 3."
+      },
+      {
+        "id": "bk-mcu-ws",
+        "title": "Captain America: The Winter Soldier",
+        "year": 2005,
+        "format": "comic",
+        "by": "Ed Brubaker and Steve Epting",
+        "path": "Where the films came from",
+        "note": "The comic run behind the second Captain America film."
+      },
+      {
+        "id": "bk-mcu-ph",
+        "title": "Planet Hulk",
+        "year": 2006,
+        "format": "comic",
+        "by": "Greg Pak",
+        "path": "Where the films came from",
+        "note": "Inspired parts of Thor: Ragnarok."
+      },
+      {
+        "id": "bk-mcu-cw",
+        "title": "Civil War",
+        "year": 2006,
+        "format": "comic",
+        "by": "Mark Millar and Steve McNiven",
+        "path": "Where the films came from"
+      },
+      {
+        "id": "bk-mcu-ks",
+        "title": "The Kree-Skrull War",
+        "year": 1971,
+        "format": "comic",
+        "by": "Roy Thomas and Neal Adams",
+        "path": "Where the films came from",
+        "optional": true
+      },
+      {
+        "id": "bk-mcu-gg",
+        "title": "The Infinity Gauntlet",
+        "year": 1991,
+        "format": "comic",
+        "by": "Jim Starlin, George Pérez and Ron Lim",
+        "path": "Where the films came from",
+        "note": "The story the Infinity Saga is built on."
+      },
+      {
+        "id": "bk-mcu-gotg",
+        "title": "Guardians of the Galaxy (2008)",
+        "year": 2008,
+        "format": "comic",
+        "by": "Dan Abnett and Andy Lanning",
+        "path": "Where the films came from",
+        "optional": true
+      },
+      {
+        "id": "bk-mcu-hawk",
+        "title": "Hawkeye (2012)",
+        "year": 2012,
+        "format": "comic",
+        "by": "Matt Fraction and David Aja",
+        "path": "Newer favourites",
+        "note": "Clint Barton's days off. Lent its tone to the Hawkeye series."
+      },
+      {
+        "id": "bk-mcu-cm",
+        "title": "Captain Marvel: Higher, Further, Faster, More",
+        "year": 2012,
+        "format": "comic",
+        "by": "Kelly Sue DeConnick and Dexter Soy",
+        "path": "Newer favourites",
+        "optional": true
+      },
+      {
+        "id": "bk-mcu-ms",
+        "title": "Ms. Marvel: No Normal",
+        "year": 2014,
+        "format": "comic",
+        "by": "G. Willow Wilson and Adrian Alphona",
+        "path": "Newer favourites",
+        "note": "The first collection of Kamala Khan's series."
+      },
+      {
+        "id": "bk-mcu-vis",
+        "title": "The Vision",
+        "year": 2015,
+        "format": "comic",
+        "by": "Tom King and Gabriel Hernandez Walta",
+        "path": "Newer favourites",
+        "optional": true
+      },
+      {
+        "id": "bk-mcu-sw",
+        "title": "Secret Wars (2015)",
+        "year": 2015,
+        "format": "comic",
+        "by": "Jonathan Hickman and Esad Ribić",
+        "path": "Newer favourites",
+        "note": "A story about colliding universes."
+      },
+      {
+        "id": "bk-mcu-bp",
+        "title": "Black Panther: A Nation Under Our Feet",
+        "year": 2016,
+        "format": "comic",
+        "by": "Ta-Nehisi Coates and Brian Stelfreeze",
+        "path": "Newer favourites",
+        "optional": true
+      }
+    ],
+    "star-trek": [
+      {
+        "id": "bk-st-tmp",
+        "title": "Star Trek: The Motion Picture",
+        "year": 1979,
+        "format": "novelization",
+        "by": "Gene Roddenberry",
+        "path": "Original series era",
+        "optional": true
+      },
+      {
+        "id": "bk-st-vam",
+        "title": "The Vulcan Academy Murders",
+        "year": 1984,
+        "format": "novel",
+        "by": "Jean Lorrah",
+        "path": "Original series era",
+        "optional": true
+      },
+      {
+        "id": "bk-st-wok",
+        "title": "Star Trek II: The Wrath of Khan",
+        "year": 1982,
+        "format": "novelization",
+        "by": "Vonda N. McIntyre",
+        "path": "Original series era",
+        "optional": true
+      },
+      {
+        "id": "bk-st-sw",
+        "title": "Spock's World",
+        "year": 1988,
+        "format": "novel",
+        "by": "Diane Duane",
+        "path": "Original series era",
+        "optional": true
+      },
+      {
+        "id": "bk-st-cd",
+        "title": "Star Trek: Countdown",
+        "year": 2009,
+        "format": "comic",
+        "by": "Mike Johnson, Tim Jones and others",
+        "path": "Kelvin timeline",
+        "note": "Set before the 2009 film."
+      },
+      {
+        "id": "bk-st-d1",
+        "title": "Star Trek: Destiny: Gods of Night",
+        "year": 2008,
+        "format": "novel",
+        "by": "David Mack",
+        "path": "Modern era",
+        "note": "The first of three novels in a major later-era storyline."
+      },
+      {
+        "id": "bk-st-d2",
+        "title": "Star Trek: Destiny: Mere Mortals",
+        "year": 2008,
+        "format": "novel",
+        "by": "David Mack",
+        "path": "Modern era",
+        "optional": true
+      },
+      {
+        "id": "bk-st-d3",
+        "title": "Star Trek: Destiny: Lost Souls",
+        "year": 2008,
+        "format": "novel",
+        "by": "David Mack",
+        "path": "Modern era",
+        "optional": true
+      },
+      {
+        "id": "bk-st-dh",
+        "title": "Star Trek: Discovery: Desperate Hours",
+        "year": 2018,
+        "format": "novel",
+        "by": "David Mack",
+        "path": "Streaming-era tie-ins",
+        "note": "A prequel to the first season of Discovery."
+      },
+      {
+        "id": "bk-st-lbh",
+        "title": "Star Trek: Picard: The Last Best Hope",
+        "year": 2020,
+        "format": "novel",
+        "by": "Una McCormack",
+        "path": "Streaming-era tie-ins",
+        "note": "Leads into the first season of Picard."
+      }
+    ],
+    "x-men": [
+      {
+        "id": "bk-xm-dp",
+        "title": "The Dark Phoenix Saga",
+        "year": 1980,
+        "format": "comic",
+        "by": "Chris Claremont and John Byrne",
+        "path": "Claremont's X-Men",
+        "note": "The comic behind The Last Stand and Dark Phoenix."
+      },
+      {
+        "id": "bk-xm-dofp",
+        "title": "X-Men: Days of Future Past",
+        "year": 1981,
+        "format": "comic",
+        "by": "Chris Claremont and John Byrne",
+        "path": "Claremont's X-Men"
+      },
+      {
+        "id": "bk-xm-gl",
+        "title": "X-Men: God Loves, Man Kills",
+        "year": 1982,
+        "format": "graphic-novel",
+        "by": "Chris Claremont and Brent Anderson",
+        "path": "Claremont's X-Men",
+        "note": "Feeds into X2."
+      },
+      {
+        "id": "bk-xm-wolv",
+        "title": "Wolverine (1982)",
+        "year": 1982,
+        "format": "comic",
+        "by": "Chris Claremont and Frank Miller",
+        "path": "Wolverine",
+        "note": "The Japan story that inspired The Wolverine."
+      },
+      {
+        "id": "bk-xm-wx",
+        "title": "Weapon X",
+        "year": 1991,
+        "format": "comic",
+        "by": "Barry Windsor-Smith",
+        "path": "Wolverine",
+        "optional": true
+      },
+      {
+        "id": "bk-xm-oml",
+        "title": "Old Man Logan",
+        "year": 2008,
+        "format": "comic",
+        "by": "Mark Millar and Steve McNiven",
+        "path": "Wolverine",
+        "note": "The comic that inspired Logan."
+      },
+      {
+        "id": "bk-xm-nxm",
+        "title": "New X-Men: E Is for Extinction",
+        "year": 2001,
+        "format": "comic",
+        "by": "Grant Morrison and Frank Quitely",
+        "path": "Modern X-Men"
+      },
+      {
+        "id": "bk-xm-axm",
+        "title": "Astonishing X-Men: Gifted",
+        "year": 2004,
+        "format": "comic",
+        "by": "Joss Whedon and John Cassaday",
+        "path": "Modern X-Men"
+      },
+      {
+        "id": "bk-xm-hox",
+        "title": "House of X / Powers of X",
+        "year": 2019,
+        "format": "comic",
+        "by": "Jonathan Hickman",
+        "path": "Modern X-Men",
+        "note": "The reboot that set up the current era of X-Men comics."
+      }
+    ],
+    "dc": [
+      {
+        "id": "bk-dc-cris",
+        "title": "Crisis on Infinite Earths",
+        "year": 1985,
+        "format": "comic",
+        "by": "Marv Wolfman and George Pérez",
+        "path": "Foundations",
+        "note": "Merged DC's parallel worlds into one universe."
+      },
+      {
+        "id": "bk-dc-wm",
+        "title": "Watchmen",
+        "year": 1986,
+        "format": "graphic-novel",
+        "by": "Alan Moore and Dave Gibbons",
+        "path": "Foundations"
+      },
+      {
+        "id": "bk-dc-dkr",
+        "title": "The Dark Knight Returns",
+        "year": 1986,
+        "format": "graphic-novel",
+        "by": "Frank Miller",
+        "path": "Batman"
+      },
+      {
+        "id": "bk-dc-yo",
+        "title": "Batman: Year One",
+        "year": 1987,
+        "format": "graphic-novel",
+        "by": "Frank Miller and David Mazzucchelli",
+        "path": "Batman",
+        "note": "Batman's first year, and the base for several films."
+      },
+      {
+        "id": "bk-dc-lh",
+        "title": "Batman: The Long Halloween",
+        "year": 1996,
+        "format": "graphic-novel",
+        "by": "Jeph Loeb and Tim Sale",
+        "path": "Batman"
+      },
+      {
+        "id": "bk-dc-kc",
+        "title": "Kingdom Come",
+        "year": 1996,
+        "format": "graphic-novel",
+        "by": "Mark Waid and Alex Ross",
+        "path": "Superman and friends"
+      },
+      {
+        "id": "bk-dc-asm",
+        "title": "All-Star Superman",
+        "year": 2005,
+        "format": "graphic-novel",
+        "by": "Grant Morrison and Frank Quitely",
+        "path": "Superman and friends"
+      },
+      {
+        "id": "bk-dc-sg",
+        "title": "Supergirl: Woman of Tomorrow",
+        "year": 2021,
+        "format": "graphic-novel",
+        "by": "Tom King and Bilquis Evely",
+        "path": "Superman and friends",
+        "note": "The comic the Supergirl film is based on."
+      },
+      {
+        "id": "bk-dc-wwb",
+        "title": "Wonder Woman: Blood",
+        "year": 2011,
+        "format": "graphic-novel",
+        "by": "Brian Azzarello and Cliff Chiang",
+        "path": "Superman and friends",
+        "optional": true
+      },
+      {
+        "id": "bk-dc-glr",
+        "title": "Green Lantern: Rebirth",
+        "year": 2004,
+        "format": "graphic-novel",
+        "by": "Geoff Johns and Ethan Van Sciver",
+        "path": "Superman and friends",
+        "optional": true
+      }
+    ],
+    "wizarding-world": [
+      {
+        "id": "bk-ww-1",
+        "title": "Harry Potter and the Philosopher's Stone",
+        "year": 1997,
+        "format": "novel",
+        "by": "J. K. Rowling",
+        "path": "The seven novels",
+        "note": "Published in the US as Harry Potter and the Sorcerer's Stone."
+      },
+      {
+        "id": "bk-ww-2",
+        "title": "Harry Potter and the Chamber of Secrets",
+        "year": 1998,
+        "format": "novel",
+        "by": "J. K. Rowling",
+        "path": "The seven novels"
+      },
+      {
+        "id": "bk-ww-3",
+        "title": "Harry Potter and the Prisoner of Azkaban",
+        "year": 1999,
+        "format": "novel",
+        "by": "J. K. Rowling",
+        "path": "The seven novels"
+      },
+      {
+        "id": "bk-ww-4",
+        "title": "Harry Potter and the Goblet of Fire",
+        "year": 2000,
+        "format": "novel",
+        "by": "J. K. Rowling",
+        "path": "The seven novels"
+      },
+      {
+        "id": "bk-ww-5",
+        "title": "Harry Potter and the Order of the Phoenix",
+        "year": 2003,
+        "format": "novel",
+        "by": "J. K. Rowling",
+        "path": "The seven novels"
+      },
+      {
+        "id": "bk-ww-6",
+        "title": "Harry Potter and the Half-Blood Prince",
+        "year": 2005,
+        "format": "novel",
+        "by": "J. K. Rowling",
+        "path": "The seven novels"
+      },
+      {
+        "id": "bk-ww-7",
+        "title": "Harry Potter and the Deathly Hallows",
+        "year": 2007,
+        "format": "novel",
+        "by": "J. K. Rowling",
+        "path": "The seven novels"
+      },
+      {
+        "id": "bk-ww-cc",
+        "title": "Harry Potter and the Cursed Child",
+        "year": 2016,
+        "format": "companion",
+        "by": "Jack Thorne, John Tiffany and J. K. Rowling",
+        "path": "Beyond the novels",
+        "note": "The stage play's script, set nineteen years after the last novel."
+      },
+      {
+        "id": "bk-ww-fb",
+        "title": "Fantastic Beasts and Where to Find Them",
+        "year": 2001,
+        "format": "companion",
+        "by": "J. K. Rowling",
+        "path": "Beyond the novels",
+        "optional": true
+      },
+      {
+        "id": "bk-ww-qa",
+        "title": "Quidditch Through the Ages",
+        "year": 2001,
+        "format": "companion",
+        "by": "J. K. Rowling",
+        "path": "Beyond the novels",
+        "optional": true
+      },
+      {
+        "id": "bk-ww-bb",
+        "title": "The Tales of Beedle the Bard",
+        "year": 2008,
+        "format": "short-stories",
+        "by": "J. K. Rowling",
+        "path": "Beyond the novels",
+        "note": "The fairy tales of the wizarding world. One of them matters in the last novel."
+      }
+    ],
+    "conjuring": [
+      {
+        "id": "bk-cj-dem",
+        "title": "The Demonologist",
+        "year": 1980,
+        "format": "companion",
+        "by": "Gerald Brittle",
+        "path": "True-case books",
+        "note": "A book about Ed and Lorraine Warren, the paranormal investigators the films follow."
+      },
+      {
+        "id": "bk-cj-hod",
+        "title": "House of Darkness, House of Light",
+        "year": 2011,
+        "format": "companion",
+        "by": "Andrea Perron",
+        "path": "True-case books",
+        "note": "A memoir by a member of the Perron family, whose haunting is the basis of the first film."
+      }
+    ],
+    "halloween": [
+      {
+        "id": "bk-hl-1",
+        "title": "Halloween",
+        "year": 1979,
+        "format": "novelization",
+        "by": "Curtis Richards",
+        "path": "Novelizations"
+      },
+      {
+        "id": "bk-hl-2",
+        "title": "Halloween II",
+        "year": 1981,
+        "format": "novelization",
+        "by": "Jack Martin",
+        "path": "Novelizations"
+      }
+    ],
+    "terminator": [
+      {
+        "id": "bk-tm-1",
+        "title": "The Terminator",
+        "year": 1985,
+        "format": "novelization",
+        "by": "Shaun Hutson",
+        "path": "Novelizations"
+      },
+      {
+        "id": "bk-tm-2",
+        "title": "Terminator 2: Judgment Day",
+        "year": 1991,
+        "format": "novelization",
+        "by": "Randall Frakes",
+        "path": "Novelizations"
+      },
+      {
+        "id": "bk-tm-br",
+        "title": "Terminator: The Burning Earth",
+        "year": 1990,
+        "format": "comic",
+        "by": "Ron Fortier and Alex Ross",
+        "path": "Comics and novels",
+        "optional": true
+      },
+      {
+        "id": "bk-tm-ff",
+        "title": "Terminator Salvation: From the Ashes",
+        "year": 2009,
+        "format": "novel",
+        "by": "Timothy Zahn",
+        "path": "Comics and novels",
+        "optional": true
+      }
+    ],
+    "transformers": [
+      {
+        "id": "bk-tf-m",
+        "title": "The Transformers (Marvel)",
+        "year": 1984,
+        "format": "comic",
+        "by": "Bob Budiansky and others",
+        "path": "Marvel era",
+        "note": "The original comic series that came with the first toys."
+      },
+      {
+        "id": "bk-tf-mtmte",
+        "title": "Transformers: More than Meets the Eye",
+        "year": 2012,
+        "format": "comic",
+        "by": "James Roberts and Alex Milne",
+        "path": "IDW era",
+        "note": "A crew of misfits on a long voyage. Widely praised by fans."
+      },
+      {
+        "id": "bk-tf-rid",
+        "title": "Transformers: Robots in Disguise",
+        "year": 2012,
+        "format": "comic",
+        "by": "John Barber and Andrew Griffith",
+        "path": "IDW era"
+      },
+      {
+        "id": "bk-tf-ll",
+        "title": "Transformers: Lost Light",
+        "year": 2016,
+        "format": "comic",
+        "by": "James Roberts and Jack Lawrence",
+        "path": "IDW era",
+        "optional": true
+      }
+    ],
+    "predator": [
+      {
+        "id": "bk-pd-dh",
+        "title": "Predator (Dark Horse)",
+        "year": 1989,
+        "format": "comic",
+        "by": "Mark Verheiden and Chris Warner",
+        "path": "Comics and novels"
+      },
+      {
+        "id": "bk-pd-avp",
+        "title": "Aliens vs. Predator",
+        "year": 1990,
+        "format": "comic",
+        "by": "Randy Stradley and Phill Norwood",
+        "path": "Comics and novels",
+        "note": "The crossover that began the long-running Aliens vs. Predator franchise."
+      },
+      {
+        "id": "bk-pd-prey",
+        "title": "Aliens vs. Predator: Prey",
+        "year": 1994,
+        "format": "novel",
+        "by": "Steve Perry and Stephani Perry",
+        "path": "Comics and novels",
+        "optional": true
+      }
+    ],
+    "mad-max": [
+      {
+        "id": "bk-mm-f",
+        "title": "Mad Max: Fury Road: Furiosa",
+        "year": 2015,
+        "format": "comic",
+        "by": "George Miller, Nico Lathouris and Mark Sexton",
+        "path": "Fury Road tie-ins",
+        "note": "A prequel comic about Furiosa."
+      },
+      {
+        "id": "bk-mm-n",
+        "title": "Mad Max: Fury Road: Nux & Immortan Joe",
+        "year": 2015,
+        "format": "comic",
+        "by": "George Miller, Nico Lathouris and Mark Sexton",
+        "path": "Fury Road tie-ins"
+      },
+      {
+        "id": "bk-mm-m",
+        "title": "Mad Max: Fury Road: Mad Max",
+        "year": 2015,
+        "format": "comic",
+        "by": "George Miller, Nico Lathouris and Mark Sexton",
+        "path": "Fury Road tie-ins"
+      }
+    ],
+    "indiana-jones": [
+      {
+        "id": "bk-ij-1",
+        "title": "Raiders of the Lost Ark",
+        "year": 1981,
+        "format": "novelization",
+        "by": "Campbell Black",
+        "path": "Novelizations"
+      },
+      {
+        "id": "bk-ij-2",
+        "title": "Indiana Jones and the Temple of Doom",
+        "year": 1984,
+        "format": "novelization",
+        "by": "James Kahn",
+        "path": "Novelizations"
+      },
+      {
+        "id": "bk-ij-3",
+        "title": "Indiana Jones and the Last Crusade",
+        "year": 1989,
+        "format": "novelization",
+        "by": "Rob MacGregor",
+        "path": "Novelizations"
+      },
+      {
+        "id": "bk-ij-4",
+        "title": "Indiana Jones and the Kingdom of the Crystal Skull",
+        "year": 2008,
+        "format": "novelization",
+        "by": "James Rollins",
+        "path": "Novelizations"
+      }
+    ],
+    "hunger-games": [
+      {
+        "id": "bk-hg-1",
+        "title": "The Hunger Games",
+        "year": 2008,
+        "format": "novel",
+        "by": "Suzanne Collins",
+        "path": "The original trilogy"
+      },
+      {
+        "id": "bk-hg-2",
+        "title": "Catching Fire",
+        "year": 2009,
+        "format": "novel",
+        "by": "Suzanne Collins",
+        "path": "The original trilogy"
+      },
+      {
+        "id": "bk-hg-3",
+        "title": "Mockingjay",
+        "year": 2010,
+        "format": "novel",
+        "by": "Suzanne Collins",
+        "path": "The original trilogy"
+      },
+      {
+        "id": "bk-hg-b",
+        "title": "The Ballad of Songbirds and Snakes",
+        "year": 2020,
+        "format": "novel",
+        "by": "Suzanne Collins",
+        "path": "The prequels",
+        "note": "Set 64 years before the first novel."
+      },
+      {
+        "id": "bk-hg-s",
+        "title": "Sunrise on the Reaping",
+        "year": 2025,
+        "format": "novel",
+        "by": "Suzanne Collins",
+        "path": "The prequels",
+        "note": "Set 24 years before the first novel."
+      }
+    ],
+    "dune": [
+      {
+        "id": "bk-du-1",
+        "title": "Dune",
+        "year": 1965,
+        "format": "novel",
+        "by": "Frank Herbert",
+        "path": "Frank Herbert's six"
+      },
+      {
+        "id": "bk-du-2",
+        "title": "Dune Messiah",
+        "year": 1969,
+        "format": "novel",
+        "by": "Frank Herbert",
+        "path": "Frank Herbert's six"
+      },
+      {
+        "id": "bk-du-3",
+        "title": "Children of Dune",
+        "year": 1976,
+        "format": "novel",
+        "by": "Frank Herbert",
+        "path": "Frank Herbert's six",
+        "optional": true
+      },
+      {
+        "id": "bk-du-4",
+        "title": "God Emperor of Dune",
+        "year": 1981,
+        "format": "novel",
+        "by": "Frank Herbert",
+        "path": "Frank Herbert's six",
+        "optional": true
+      },
+      {
+        "id": "bk-du-5",
+        "title": "Heretics of Dune",
+        "year": 1984,
+        "format": "novel",
+        "by": "Frank Herbert",
+        "path": "Frank Herbert's six",
+        "optional": true
+      },
+      {
+        "id": "bk-du-6",
+        "title": "Chapterhouse: Dune",
+        "year": 1985,
+        "format": "novel",
+        "by": "Frank Herbert",
+        "path": "Frank Herbert's six",
+        "optional": true
+      },
+      {
+        "id": "bk-du-sod",
+        "title": "Sisterhood of Dune",
+        "year": 2012,
+        "format": "novel",
+        "by": "Brian Herbert and Kevin J. Anderson",
+        "path": "Prequels",
+        "note": "The book behind the series Dune: Prophecy."
+      },
+      {
+        "id": "bk-du-ha",
+        "title": "House Atreides",
+        "year": 1999,
+        "format": "novel",
+        "by": "Brian Herbert and Kevin J. Anderson",
+        "path": "Prequels",
+        "optional": true
+      }
+    ]
+  },
+  "accents": {
+    "godzilla": {
+      "accent": "#68b776",
+      "ink": "#0c0d11",
+      "deep": "#1e2f25",
+      "soft": "#151e1b"
+    },
+    "star-wars": {
+      "accent": "#6ea8e0",
+      "ink": "#0c0d11",
+      "deep": "#202c3a",
+      "soft": "#161d26"
+    },
+    "fast": {
+      "accent": "#e5673f",
+      "ink": "#0c0d11",
+      "deep": "#371f1a",
+      "soft": "#221616"
+    },
+    "alien": {
+      "accent": "#52c5a5",
+      "ink": "#0c0d11",
+      "deep": "#1a322f",
+      "soft": "#131f20"
+    },
+    "middle-earth": {
+      "accent": "#cfae6a",
+      "ink": "#0c0d11",
+      "deep": "#332d23",
+      "soft": "#201d1a"
+    },
+    "jurassic": {
+      "accent": "#d6b648",
+      "ink": "#0c0d11",
+      "deep": "#342f1c",
+      "soft": "#201e17"
+    },
+    "mcu": {
+      "accent": "#e5484d",
+      "ink": "#0c0d11",
+      "deep": "#37191d",
+      "soft": "#221317"
+    },
+    "star-trek": {
+      "accent": "#4ea8de",
+      "ink": "#0c0d11",
+      "deep": "#192c3a",
+      "soft": "#131d26"
+    },
+    "x-men": {
+      "accent": "#f0c23a",
+      "ink": "#0c0d11",
+      "deep": "#3a3119",
+      "soft": "#231f15"
+    },
+    "dc": {
+      "accent": "#4a86e0",
+      "ink": "#0c0d11",
+      "deep": "#18253a",
+      "soft": "#121926"
+    },
+    "wizarding-world": {
+      "accent": "#b48ae6",
+      "ink": "#0c0d11",
+      "deep": "#2e263c",
+      "soft": "#1d1a26"
+    },
+    "conjuring": {
+      "accent": "#caba90",
+      "ink": "#0c0d11",
+      "deep": "#32302a",
+      "soft": "#1f1e1e"
+    },
+    "halloween": {
+      "accent": "#f08c2a",
+      "ink": "#0c0d11",
+      "deep": "#3a2616",
+      "soft": "#231a14"
+    },
+    "terminator": {
+      "accent": "#d8504a",
+      "ink": "#0c0d11",
+      "deep": "#351a1c",
+      "soft": "#201417"
+    },
+    "transformers": {
+      "accent": "#e8863a",
+      "ink": "#0c0d11",
+      "deep": "#382519",
+      "soft": "#221915"
+    },
+    "predator": {
+      "accent": "#84d65a",
+      "ink": "#0c0d11",
+      "deep": "#243520",
+      "soft": "#182118"
+    },
+    "mad-max": {
+      "accent": "#e99a4f",
+      "ink": "#0c0d11",
+      "deep": "#38291d",
+      "soft": "#221b17"
+    },
+    "indiana-jones": {
+      "accent": "#c9a15a",
+      "ink": "#0c0d11",
+      "deep": "#322b20",
+      "soft": "#1f1c18"
+    },
+    "hunger-games": {
+      "accent": "#e6c14b",
+      "ink": "#0c0d11",
+      "deep": "#38311d",
+      "soft": "#221f17"
+    },
+    "dune": {
+      "accent": "#d9a75e",
+      "ink": "#0c0d11",
+      "deep": "#352c20",
+      "soft": "#211c19"
+    }
+  }
+}
