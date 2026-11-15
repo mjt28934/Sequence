@@ -1,7 +1,7 @@
-# Sequence 1.4 — native Android rebuild
+# Sequence 1.5 — native Android rebuild
 
 A native Kotlin / Jetpack Compose rebuild of the original WebView-based **Sequence** watch-order app.
-No WebView, no JavaScript bridge, no network permission. The catalogue and all generated artwork are
+No WebView, no JavaScript bridge, no network permission. The catalogue and all artwork are
 bundled, and progress is stored locally in `SharedPreferences` using the same `sequence-progress` JSON
 shape as the web build.
 
@@ -11,8 +11,8 @@ sheets, segmented buttons, swipe-to-mark-seen with haptics, and edge-to-edge ins
 
 ## Ready to install
 
-- `Sequence-1.4.apk` — signed release build (`com.sequence.watchorder`, versionCode 150,
-  versionName `1.4`).
+- `Sequence-1.5.apk` — signed release build (`com.sequence.watchorder`, versionCode 160,
+  versionName `1.5`).
 - Minimum Android 8.0 (API 26), targets Android 15 (API 35).
 - Rendered previews of every screen are in `screenshots/`.
 
@@ -25,7 +25,7 @@ Each change ships under a new name so builds never get confused:
 | 1.3 | `Sequence-1.3.apk` | Original WebView build |
 | 1.3-native | `Sequence-1.3-native.apk` | First native Kotlin/Compose port |
 | 1.4 | `Sequence-1.4.apk` | Material 3 redesign: dynamic colour, collapsing bars, nav bar, motion, sheets |
-| next | `Sequence-1.5.apk` | Any further change bumps the version again |
+| 1.5 | `Sequence-1.5.apk` | Real film posters replace the generated franchise art |
 
 The `versionName` in `app/build.gradle.kts` is the single source of truth; the settings screen and the
 APK name both follow it.
@@ -47,8 +47,21 @@ APK name both follow it.
   "mark everything up to here", reading paths, cover checkmarks, and a next-up FAB.
 - **Settings** — order mode, clear all progress (confirmed), and about/offline notices.
 - **Undo snackbar** after progress and save changes, matching the original behaviour.
-- All 20 poster and 135 cover artworks were rasterized from the original generator's SVG output to
-  WebP and are served from `assets/art`.
+- **Real film posters** for all 20 franchises, plus the original 135 book covers, served from
+  `assets/art`.
+
+## Artwork
+
+Each franchise banner is 960x600 and shows the actual theatrical poster: the poster sits on the right
+at full sharpness over a blurred, darkened copy of itself, which keeps the 16:10 crop the layouts use
+and leaves the left side clear for the title text laid over it.
+
+Posters come from the lead image of each film's English Wikipedia article and are re-composed locally
+by `buildtools/fetch-posters.mjs` (Sharp), then written straight into
+`app/src/main/assets/art/posters`. Source images are kept out of git; only the finished banners ship.
+See `POSTERS.md` for the exact page behind each one.
+
+Book covers are still the generated WebP art from the original 1.3 bundle.
 
 ## Native UI details
 
@@ -144,9 +157,9 @@ $env:JAVA_HOME = "C:\Projects\Orderly\.toolchain\jdk17"
 
 Outputs:
 
-- `app/build/outputs/apk/debug/app-debug.apk` (`com.sequence.watchorder.debug`, `1.4-debug`)
+- `app/build/outputs/apk/debug/app-debug.apk` (`com.sequence.watchorder.debug`, `1.5-debug`)
 - `app/build/outputs/apk/release/app-release.apk` (signed with `sequence-release.jks`)
-- `Sequence-1.4.apk` — the release build copied to the project root for installing
+- `Sequence-1.5.apk` — the release build copied to the project root for installing
 
 ### Android Studio
 

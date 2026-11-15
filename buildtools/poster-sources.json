@@ -1,0 +1,142 @@
+[
+  {
+    "franchise": "Alien",
+    "id": "alien",
+    "name": "Alien (film)",
+    "page": "https://en.wikipedia.org/wiki/Alien_(film)",
+    "url": "https://upload.wikimedia.org/wikipedia/en/c/c3/Alien_movie_poster.jpg"
+  },
+  {
+    "franchise": "The Conjuring Universe",
+    "id": "conjuring",
+    "name": "The Conjuring",
+    "page": "https://en.wikipedia.org/wiki/The_Conjuring",
+    "url": "https://upload.wikimedia.org/wikipedia/en/8/8c/The_Conjuring_poster.jpg"
+  },
+  {
+    "franchise": "DC Films & Shows",
+    "id": "dc",
+    "name": "The Dark Knight",
+    "page": "https://en.wikipedia.org/wiki/The_Dark_Knight",
+    "url": "https://upload.wikimedia.org/wikipedia/en/1/1c/The_Dark_Knight_%282008_film%29.jpg"
+  },
+  {
+    "franchise": "Dune",
+    "id": "dune",
+    "name": "Dune (2021 film)",
+    "page": "https://en.wikipedia.org/wiki/Dune_(2021_film)",
+    "url": "https://upload.wikimedia.org/wikipedia/en/8/8e/Dune_%282021_film%29.jpg"
+  },
+  {
+    "franchise": "Fast & Furious",
+    "id": "fast",
+    "name": "The Fast and the Furious (2001 film)",
+    "page": "https://en.wikipedia.org/wiki/The_Fast_and_the_Furious_(2001_film)",
+    "url": "https://upload.wikimedia.org/wikipedia/en/5/54/Fast_and_the_furious_poster.jpg"
+  },
+  {
+    "franchise": "Godzilla",
+    "id": "godzilla",
+    "name": "Godzilla (1954 film)",
+    "page": "https://en.wikipedia.org/wiki/Godzilla_(1954_film)",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/9/95/Gojira_1954_Japanese_poster.jpg"
+  },
+  {
+    "franchise": "Halloween",
+    "id": "halloween",
+    "name": "Halloween (1978 film)",
+    "page": "https://en.wikipedia.org/wiki/Halloween_(1978_film)",
+    "url": "https://upload.wikimedia.org/wikipedia/en/a/af/Halloween_%281978%29_theatrical_poster.jpg"
+  },
+  {
+    "franchise": "The Hunger Games",
+    "id": "hunger-games",
+    "name": "The Hunger Games (film)",
+    "page": "https://en.wikipedia.org/wiki/The_Hunger_Games_(film)",
+    "url": "https://upload.wikimedia.org/wikipedia/en/4/42/HungerGamesPoster.jpg"
+  },
+  {
+    "franchise": "Indiana Jones",
+    "id": "indiana-jones",
+    "name": "Raiders of the Lost Ark",
+    "page": "https://en.wikipedia.org/wiki/Raiders_of_the_Lost_Ark",
+    "url": "https://upload.wikimedia.org/wikipedia/en/4/4c/Raiders_of_the_Lost_Ark.jpg"
+  },
+  {
+    "franchise": "Jurassic",
+    "id": "jurassic",
+    "name": "Jurassic Park",
+    "page": "https://en.wikipedia.org/wiki/Jurassic_Park",
+    "url": "https://upload.wikimedia.org/wikipedia/en/e/e7/Jurassic_Park_poster.jpg"
+  },
+  {
+    "franchise": "Mad Max",
+    "id": "mad-max",
+    "name": "Mad Max: Fury Road",
+    "page": "https://en.wikipedia.org/wiki/Mad_Max%3A_Fury_Road",
+    "url": "https://upload.wikimedia.org/wikipedia/en/6/6e/Mad_Max_Fury_Road.jpg"
+  },
+  {
+    "franchise": "Marvel Cinematic Universe",
+    "id": "mcu",
+    "name": "The Avengers (2012 film)",
+    "page": "https://en.wikipedia.org/wiki/The_Avengers_(2012_film)",
+    "url": "https://upload.wikimedia.org/wikipedia/en/8/8a/The_Avengers_%282012_film%29_poster.jpg"
+  },
+  {
+    "franchise": "Middle-earth",
+    "id": "middle-earth",
+    "name": "The Lord of the Rings: The Fellowship of the Ring",
+    "page": "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings%3A_The_Fellowship_of_the_Ring",
+    "url": "https://upload.wikimedia.org/wikipedia/en/f/fb/Lord_Rings_Fellowship_Ring.jpg"
+  },
+  {
+    "franchise": "Predator",
+    "id": "predator",
+    "name": "Predator (film)",
+    "page": "https://en.wikipedia.org/wiki/Predator_(film)",
+    "url": "https://upload.wikimedia.org/wikipedia/en/9/95/Predator_Movie.jpg"
+  },
+  {
+    "franchise": "Star Trek",
+    "id": "star-trek",
+    "name": "Star Trek (2009 film)",
+    "page": "https://en.wikipedia.org/wiki/Star_Trek_(2009_film)",
+    "url": "https://upload.wikimedia.org/wikipedia/en/2/29/Startrekposter.jpg"
+  },
+  {
+    "franchise": "Star Wars",
+    "id": "star-wars",
+    "name": "Star Wars (film)",
+    "page": "https://en.wikipedia.org/wiki/Star_Wars_(film)",
+    "url": "https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg"
+  },
+  {
+    "franchise": "Terminator",
+    "id": "terminator",
+    "name": "The Terminator",
+    "page": "https://en.wikipedia.org/wiki/The_Terminator",
+    "url": "https://upload.wikimedia.org/wikipedia/en/6/6d/The_Terminator.png"
+  },
+  {
+    "franchise": "Transformers",
+    "id": "transformers",
+    "name": "Transformers (film)",
+    "page": "https://en.wikipedia.org/wiki/Transformers_(film)",
+    "url": "https://upload.wikimedia.org/wikipedia/en/6/66/Transformers07.jpg"
+  },
+  {
+    "franchise": "Wizarding World",
+    "id": "wizarding-world",
+    "name": "Fantastic Beasts and Where to Find Them (film)",
+    "page": "https://en.wikipedia.org/wiki/Fantastic_Beasts_and_Where_to_Find_Them_(film)",
+    "url": "https://upload.wikimedia.org/wikipedia/en/0/0b/FBAWTFT-poster.jpg"
+  },
+  {
+    "franchise": "X-Men",
+    "id": "x-men",
+    "name": "X-Men (film)",
+    "page": "https://en.wikipedia.org/wiki/X-Men_(film)",
+    "url": "https://upload.wikimedia.org/wikipedia/en/8/81/X-MenfilmPoster.jpg"
+  }
+]

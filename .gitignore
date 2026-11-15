@@ -20,6 +20,8 @@ local.properties
 
 # Local artwork-generation dependencies
 buildtools/node_modules/
+buildtools/posters-src/
+buildtools/out/
 
 # OS files
 Thumbs.db
