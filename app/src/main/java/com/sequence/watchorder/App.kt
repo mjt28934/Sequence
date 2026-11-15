@@ -11,7 +11,7 @@ import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -40,6 +40,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.SaveableStateHolder
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -64,14 +65,19 @@ import com.sequence.watchorder.ui.LibraryScreen
 import com.sequence.watchorder.ui.Motion
 import com.sequence.watchorder.ui.SectionAxis
 import com.sequence.watchorder.ui.SectionSwitcher
+import com.sequence.watchorder.ui.SeqMotion
 import com.sequence.watchorder.ui.SettingsScreen
 import com.sequence.watchorder.ui.TagsScreen
 import com.sequence.watchorder.ui.UpcomingScreen
+import com.sequence.watchorder.ui.pressScale
 import com.sequence.watchorder.ui.toPalette
 
 @Composable
 fun SequenceApp(vm: MainViewModel) {
     val snackbarHostState = remember { SnackbarHostState() }
+    // Kept above the screen switcher so a tab's scroll position, search state and remembered list
+    // work survive both tab changes and trips into a detail screen.
+    val tabStates = rememberSaveableStateHolder()
 
     LaunchedEffect(vm.snack?.id) {
         val snack = vm.snack
@@ -111,7 +117,7 @@ fun SequenceApp(vm: MainViewModel) {
             color = MaterialTheme.colorScheme.background,
         ) {
             SectionSwitcher(
-                target = Triple(vm.detailId, vm.settingsOpen, vm.tab),
+                target = vm.detailId to vm.settingsOpen,
                 modifier = Modifier.fillMaxSize(),
                 axis = SectionAxis.HORIZONTAL,
                 direction = { from, to ->
@@ -121,11 +127,10 @@ fun SequenceApp(vm: MainViewModel) {
                         from.first != null && to.first == null -> -1
                         to.second && !from.second -> 1
                         from.second && !to.second -> -1
-                        to.third.ordinal >= from.third.ordinal -> 1
-                        else -> -1
+                        else -> 1
                     }
                 },
-            ) { (detailId, settingsOpen, _) ->
+            ) { (detailId, settingsOpen) ->
                 when {
                     detailId != null -> {
                         val franchise = vm.catalog.franchise(detailId)
@@ -152,7 +157,7 @@ fun SequenceApp(vm: MainViewModel) {
                         ) { SeqSnackbar(it) }
                     }
 
-                    else -> MainTabs(vm, snackbarHostState)
+                    else -> MainTabs(vm, snackbarHostState, tabStates)
                 }
             }
         }
@@ -162,9 +167,12 @@ fun SequenceApp(vm: MainViewModel) {
 }
 
 @Composable
-private fun MainTabs(vm: MainViewModel, snackbarHostState: SnackbarHostState) {
-    val stateHolder = rememberSaveableStateHolder()
-    val miniCard = remember(vm.progress, vm.tab) {
+private fun MainTabs(
+    vm: MainViewModel,
+    snackbarHostState: SnackbarHostState,
+    stateHolder: SaveableStateHolder,
+) {
+    val miniCard = remember(vm.progress) {
         Logic.continueList(vm.catalog, vm.progress, vm.today(), 1).firstOrNull()
     }
 
@@ -184,12 +192,21 @@ private fun MainTabs(vm: MainViewModel, snackbarHostState: SnackbarHostState) {
                 .fillMaxSize()
                 .padding(bottom = padding.calculateBottomPadding()),
         ) {
-            stateHolder.SaveableStateProvider(vm.tab.name) {
-                when (vm.tab) {
-                    AppTab.HOME -> HomeScreen(vm)
-                    AppTab.LIBRARY -> LibraryScreen(vm)
-                    AppTab.UPCOMING -> UpcomingScreen(vm)
-                    AppTab.TAGS -> TagsScreen(vm)
+            // Only the page moves. The strip and the navigation bar live outside the switcher, so
+            // they never re-create, flash or lose the selected state mid-transition.
+            SectionSwitcher(
+                target = vm.tab,
+                modifier = Modifier.fillMaxSize(),
+                axis = SectionAxis.HORIZONTAL,
+                direction = { from, to -> if (to.ordinal >= from.ordinal) 1 else -1 },
+            ) { tab ->
+                stateHolder.SaveableStateProvider(tab.name) {
+                    when (tab) {
+                        AppTab.HOME -> HomeScreen(vm)
+                        AppTab.LIBRARY -> LibraryScreen(vm)
+                        AppTab.UPCOMING -> UpcomingScreen(vm)
+                        AppTab.TAGS -> TagsScreen(vm)
+                    }
                 }
             }
         }
@@ -203,8 +220,10 @@ internal fun AppBottomBar(vm: MainViewModel, miniCard: ContinueCard?) {
         if (Motion.enabled) {
             AnimatedVisibility(
                 visible = miniCard != null,
-                enter = fadeIn(tween(200)) + expandVertically(tween(280), expandFrom = Alignment.Bottom),
-                exit = fadeOut(tween(140)) + shrinkVertically(tween(220), shrinkTowards = Alignment.Bottom),
+                enter = fadeIn(tween(SeqMotion.SHORT_MS)) +
+                    expandVertically(tween(SeqMotion.STANDARD_MS), expandFrom = Alignment.Bottom),
+                exit = fadeOut(tween(SeqMotion.PRESS_MS)) +
+                    shrinkVertically(tween(SeqMotion.STANDARD_MS), shrinkTowards = Alignment.Bottom),
             ) {
                 if (miniCard != null) {
                     MiniBar(vm, miniCard)
@@ -267,12 +286,15 @@ private fun MiniBar(vm: MainViewModel, card: ContinueCard) {
         card.nextBook != null -> "Read next"
         else -> "Finished"
     }
+    val interaction = remember { MutableInteractionSource() }
 
     Surface(
         onClick = { vm.openFranchise(card.franchise.id) },
+        interactionSource = interaction,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 12.dp, vertical = 6.dp),
+            .padding(horizontal = 12.dp, vertical = 6.dp)
+            .pressScale(interaction, pressedScale = 0.985f),
         shape = RoundedCornerShape(16.dp),
         color = MaterialTheme.colorScheme.surfaceContainerHigh,
         tonalElevation = 3.dp,
@@ -284,9 +306,11 @@ private fun MiniBar(vm: MainViewModel, card: ContinueCard) {
                     targetState = card.franchise.id,
                     transitionSpec = {
                         (
-                            slideInVertically(tween(240)) { it / 3 } + fadeIn(tween(240))
+                            slideInVertically(tween(SeqMotion.STANDARD_MS)) { it / 3 } +
+                                fadeIn(tween(SeqMotion.STANDARD_MS))
                             ) togetherWith (
-                            slideOutVertically(tween(160)) { -it / 3 } + fadeOut(tween(120))
+                            slideOutVertically(tween(SeqMotion.SHORT_MS)) { -it / 3 } +
+                                fadeOut(tween(SeqMotion.PRESS_MS))
                             )
                     },
                     label = "miniBar",

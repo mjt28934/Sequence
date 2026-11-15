@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -46,10 +47,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -58,6 +59,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.sequence.watchorder.MainViewModel
+import com.sequence.watchorder.Sheet
 import com.sequence.watchorder.data.ContinueCard
 import com.sequence.watchorder.data.Entry
 import com.sequence.watchorder.data.Logic
@@ -70,24 +72,38 @@ import com.sequence.watchorder.data.UpNextItem
 fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
     val state = vm.progress
     val today = vm.today()
-    val cards = Logic.continueList(vm.catalog, state, today)
-    val seenTotal = Logic.overallProgress(vm.catalog.franchises, { state.watched[it].orEmpty() }, today)
-    val readTotal = Logic.overallReadProgress(
-        vm.catalog.franchises,
-        { vm.catalog.worksFor(it) },
-        { state.read[it].orEmpty() },
-    )
-    val allFranchises = vm.catalog.franchises
-        .filter {
-            !state.hideFinished ||
-                Logic.franchiseProgress(it, state.watched[it.id].orEmpty().toSet(), today).pct < 100
-        }
-        .sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.name })
+    // These read the catalogue and the whole watched map, so they only re-run when something
+    // they depend on changes, not on every scroll tick or search keystroke.
+    val cards = remember(state, today) { Logic.continueList(vm.catalog, state, today) }
+    val seenTotal = remember(state, today) {
+        Logic.overallProgress(vm.catalog.franchises, { state.watched[it].orEmpty() }, today)
+    }
+    val readTotal = remember(state) {
+        Logic.overallReadProgress(
+            vm.catalog.franchises,
+            { vm.catalog.worksFor(it) },
+            { state.read[it].orEmpty() },
+        )
+    }
+    val allFranchises = remember(state, today) {
+        vm.catalog.franchises
+            .filter {
+                !state.hideFinished ||
+                    Logic.franchiseProgress(it, state.watched[it.id].orEmpty().toSet(), today).pct < 100
+            }
+            .sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.name })
+    }
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
-    val enter = remember { EnterTracker() }
+    // Saveable, so returning to Home after a tab change keeps the page settled instead of
+    // replaying the entrance from the top.
+    val enter = rememberSaveable(saver = EnterTrackerSaver) { EnterTracker() }
     val searchOpen = vm.searchOpen
     val focusRequester = remember { FocusRequester() }
     val keyboard = LocalSoftwareKeyboardController.current
+    val upNext = remember(cards) { Logic.upNextList(cards) }
+    val readNext = remember(cards) { Logic.readNextList(cards) }
+    // Held outside the search switcher, so opening and closing search returns to the same place.
+    val listState = rememberLazyListState()
 
     // Opening search grows the field under the app bar and parks the cursor in it. The focus
     // request can land before the field is attached; that throws, so it stays a no-op.
@@ -136,10 +152,10 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                 if (Motion.enabled) {
                     AnimatedVisibility(
                         visible = searchOpen,
-                        enter = expandVertically(tween(260), expandFrom = Alignment.Top) +
-                            fadeIn(tween(200)),
-                        exit = shrinkVertically(tween(220), shrinkTowards = Alignment.Top) +
-                            fadeOut(tween(140)),
+                        enter = expandVertically(tween(SeqMotion.STANDARD_MS), expandFrom = Alignment.Top) +
+                            fadeIn(tween(SeqMotion.SHORT_MS)),
+                        exit = shrinkVertically(tween(SeqMotion.SHORT_MS), shrinkTowards = Alignment.Top) +
+                            fadeOut(tween(SeqMotion.PRESS_MS)),
                     ) {
                         HomeSearchField(
                             value = vm.query,
@@ -170,6 +186,7 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                 return@SectionSwitcher
             }
             LazyColumn(
+                state = listState,
                 modifier = Modifier.fillMaxSize(),
                 contentPadding = PaddingValues(
                     top = top,
@@ -240,11 +257,10 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                         }
                     }
                     items(upNext, key = { "up-${it.franchise.id}-${it.entry.id}" }) { item ->
-                        UpNextRow(vm, item)
+                        UpNextRow(vm, item, Modifier.animateItem())
                     }
                 }
 
-                val readNext = Logic.readNextList(cards)
                 if (readNext.isNotEmpty()) {
                     item {
                         EnterSection(enter, "reading-header", 6) { SectionHeader(title = "Keep reading") }
@@ -285,6 +301,7 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                     Row(
                         Modifier
                             .fillMaxWidth()
+                            .animateItem()
                             .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
                         horizontalArrangement = Arrangement.spacedBy(12.dp),
                     ) {
@@ -311,12 +328,13 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                 }
                 if (allFranchises.isEmpty()) {
                     item {
-                        Text(
-                            "Every franchise is finished. Turn off \u201CHide finished franchises\u201D " +
-                                "in Settings to see them here again.",
-                            modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 4.dp),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        EmptyState(
+                            icon = SeqIcons.Check,
+                            title = "Every franchise is finished",
+                            body = "You have completed everything in the catalog. Show finished " +
+                                "franchises again to browse them, or clear a few marks to replay.",
+                            actionLabel = "Show finished franchises",
+                            onAction = { vm.setHideFinished(false) },
                         )
                     }
                 }
@@ -474,39 +492,44 @@ private fun ProgressColumn(label: String, progress: Progress, modifier: Modifier
 }
 
 @Composable
-private fun UpNextRow(vm: MainViewModel, item: UpNextItem) {
-    val accent = vm.catalog.accent(item.franchise.id).toPalette()
+private fun UpNextRow(vm: MainViewModel, item: UpNextItem, modifier: Modifier = Modifier) {
     val seen = item.entry.id in vm.progress.watched[item.franchise.id].orEmpty()
 
-    ListItem(
-        headlineContent = {
-            Text(
-                item.entry.title,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
+    PressableRow(
+        onClick = {
+            vm.openFranchise(item.franchise.id)
+            vm.openSheet(Sheet.EntrySheet(item.entry.id))
         },
-        supportingContent = {
-            Text(
-                "${item.franchise.name} · #${item.position}",
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
-        },
-        leadingContent = { RowThumb(item.franchise, width = 64.dp) },
-        trailingContent = {
-            SeenToggle(
-                checked = seen,
-                onToggle = { vm.toggleSeen(item.franchise.id, item.entry) },
-            )
-        },
-        colors = ListItemDefaults.colors(containerColor = Color.Transparent),
-        modifier = Modifier
-            .padding(horizontal = 8.dp)
-            .clip(RoundedCornerShape(16.dp))
-            .background(MaterialTheme.colorScheme.surfaceContainerLow.copy(alpha = 0.6f))
-            .padding(horizontal = 8.dp, vertical = 2.dp),
-    )
+        modifier = modifier.padding(horizontal = 8.dp),
+        shape = RoundedCornerShape(16.dp),
+        color = MaterialTheme.colorScheme.surfaceContainerLow.copy(alpha = 0.6f),
+    ) {
+        ListItem(
+            headlineContent = {
+                Text(
+                    item.entry.title,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+            },
+            supportingContent = {
+                Text(
+                    "${item.franchise.name} · #${item.position}",
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+            },
+            leadingContent = { RowThumb(item.franchise, width = 64.dp) },
+            trailingContent = {
+                SeenToggle(
+                    checked = seen,
+                    onToggle = { vm.toggleSeen(item.franchise.id, item.entry) },
+                )
+            },
+            colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

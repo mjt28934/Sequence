@@ -1,6 +1,13 @@
 package com.sequence.watchorder.ui
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -42,8 +49,21 @@ fun TagsScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
             TopAppBar(
                 title = { Text("Tags") },
                 navigationIcon = {
-                    if (vm.genre != "all") {
-                        BarIconButton(SeqIcons.Back, "All tags") { vm.selectGenre("all") }
+                    if (!Motion.enabled) {
+                        if (vm.genre != "all") {
+                            BarIconButton(SeqIcons.Back, "All tags") { vm.selectGenre("all") }
+                        }
+                    } else {
+                        // The back affordance belongs to the genre view, so it slides in with it.
+                        AnimatedVisibility(
+                            visible = vm.genre != "all",
+                            enter = fadeIn(tween(SeqMotion.SHORT_MS)) +
+                                slideInHorizontally(tween(SeqMotion.SHORT_MS)) { -it / 3 },
+                            exit = fadeOut(tween(SeqMotion.PRESS_MS)) +
+                                slideOutHorizontally(tween(SeqMotion.PRESS_MS)) { -it / 3 },
+                        ) {
+                            BarIconButton(SeqIcons.Back, "All tags") { vm.selectGenre("all") }
+                        }
                     }
                 },
                 actions = {
@@ -91,14 +111,16 @@ private fun TagGrid(vm: MainViewModel) {
         }
         items(shelves, key = { it.first }) { shelf ->
             val first = shelf.second.firstOrNull() ?: return@items
-            GenreTile(
-                genre = shelf.first,
-                franchise = first,
-                accent = vm.catalog.accent(first.id).toPalette(),
-                onClick = { vm.selectGenre(shelf.first) },
-                modifier = Modifier.fillMaxWidth(),
-                count = shelf.second.size,
-            )
+            Box(Modifier.animateItem()) {
+                GenreTile(
+                    genre = shelf.first,
+                    franchise = first,
+                    accent = vm.catalog.accent(first.id).toPalette(),
+                    onClick = { vm.selectGenre(shelf.first) },
+                    modifier = Modifier.fillMaxWidth(),
+                    count = shelf.second.size,
+                )
+            }
         }
     }
 }
@@ -125,6 +147,7 @@ private fun GenreFranchises(vm: MainViewModel, genre: String) {
             Row(
                 Modifier
                     .fillMaxWidth()
+                    .animateItem()
                     .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {

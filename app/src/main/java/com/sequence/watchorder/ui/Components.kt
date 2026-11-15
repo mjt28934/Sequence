@@ -1,8 +1,18 @@
 package com.sequence.watchorder.ui
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.snap
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
@@ -60,7 +70,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalHapticFeedback
@@ -150,10 +162,14 @@ fun ProgressStrip(
 ) {
     val target = pct.coerceIn(0, 100) / 100f
     // Marking something seen moves the bar rather than teleporting it, which is what makes the
-    // action feel like it did something. The first frame already shows the true value.
+    // action feel like it did something. Reduce motion keeps the bar honest and still.
     val animated by animateFloatAsState(
         targetValue = target,
-        animationSpec = tween(durationMillis = 420, easing = FastOutSlowInEasing),
+        animationSpec = if (Motion.enabled) {
+            tween(durationMillis = SeqMotion.PROGRESS_MS, easing = FastOutSlowInEasing)
+        } else {
+            snap()
+        },
         label = "progress",
     )
     LinearProgressIndicator(
@@ -183,6 +199,20 @@ fun SeenToggle(
 ) {
     val haptics = LocalHapticFeedback.current
     val scheme = MaterialTheme.colorScheme
+    // The fill and the tick ease between states instead of hard-swapping, and the tick lands with
+    // a short spring so the action feels acknowledged.
+    val container by animateColorAsState(
+        targetValue = if (checked) scheme.primary else Color.Transparent,
+        animationSpec = tween(SeqMotion.SHORT_MS),
+        label = "seenContainer",
+    )
+    val content by animateColorAsState(
+        targetValue = if (checked) scheme.onPrimary else scheme.onSurfaceVariant,
+        animationSpec = tween(SeqMotion.SHORT_MS),
+        label = "seenContent",
+    )
+    val pop = rememberFlagPop(checked)
+
     IconButton(
         onClick = {
             Haptics.tick(haptics)
@@ -193,14 +223,19 @@ fun SeenToggle(
             .size(size)
             .semantics { contentDescription = if (checked) "Mark as unseen" else "Mark as seen" },
         colors = IconButtonDefaults.iconButtonColors(
-            containerColor = if (checked) scheme.primary else Color.Transparent,
-            contentColor = if (checked) scheme.onPrimary else scheme.onSurfaceVariant,
+            containerColor = container,
+            contentColor = content,
         ),
     ) {
         Icon(
             imageVector = if (checked) SeqIcons.Check else SeqIcons.CheckOutline,
             contentDescription = null,
-            modifier = Modifier.size(size * 0.55f),
+            modifier = Modifier
+                .size(size * 0.55f)
+                .graphicsLayer {
+                    scaleX = pop
+                    scaleY = pop
+                },
         )
     }
 }
@@ -433,24 +468,17 @@ fun PosterTile(
                             ),
                         ),
                 )
-                if (complete) {
-                    // One glance should tell you which franchises are finished.
-                    Box(
+                if (Motion.enabled) {
+                    // The check arrives with the progress, rather than being there from the start.
+                    FinishedBadgeSlot(
+                        complete = complete,
+                        accent = accent,
                         modifier = Modifier
                             .align(Alignment.TopEnd)
-                            .padding(8.dp)
-                            .size(24.dp)
-                            .clip(CircleShape)
-                            .background(accent.accent),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Icon(
-                            SeqIcons.Check,
-                            contentDescription = "Finished",
-                            tint = accent.ink,
-                            modifier = Modifier.size(15.dp),
-                        )
-                    }
+                            .padding(8.dp),
+                    )
+                } else if (complete) {
+                    FinishedBadge(accent, Modifier.align(Alignment.TopEnd).padding(8.dp))
                 }
                 if (subtitle.isNotEmpty()) {
                     Text(
@@ -492,6 +520,49 @@ fun PosterTile(
     }
 }
 
+/** The "finished" tick in the corner of a poster. */
+@Composable
+private fun FinishedBadge(accent: AccentPalette, modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier
+            .size(24.dp)
+            .clip(CircleShape)
+            .background(accent.accent),
+        contentAlignment = Alignment.Center,
+    ) {
+        Icon(
+            SeqIcons.Check,
+            contentDescription = "Finished",
+            tint = accent.ink,
+            modifier = Modifier.size(15.dp),
+        )
+    }
+}
+
+/**
+ * Scrolls the finished tick in and out with the poster. A separate composable so the top-level
+ * [AnimatedVisibility] overload is used rather than a scoped one from the surrounding layout.
+ */
+@Composable
+private fun FinishedBadgeSlot(complete: Boolean, accent: AccentPalette, modifier: Modifier = Modifier) {
+    AnimatedVisibility(
+        visible = complete,
+        modifier = modifier,
+        enter = fadeIn(tween(SeqMotion.SHORT_MS)) +
+            scaleIn(
+                initialScale = 0.7f,
+                animationSpec = spring(
+                    dampingRatio = SeqMotion.BADGE_DAMPING,
+                    stiffness = SeqMotion.BADGE_STIFFNESS,
+                ),
+            ),
+        exit = fadeOut(tween(SeqMotion.PRESS_MS)) +
+            scaleOut(targetScale = 0.85f, animationSpec = tween(SeqMotion.PRESS_MS)),
+    ) {
+        FinishedBadge(accent)
+    }
+}
+
 /** Book cover tile with a check badge, used on shelves and reading paths. */
 @Composable
 fun CoverTile(
@@ -508,9 +579,30 @@ fun CoverTile(
     // Dimming a read cover is a state change, so ease it instead of snapping to half opacity.
     val artAlpha by animateFloatAsState(
         targetValue = if (read) 0.45f else 1f,
-        animationSpec = tween(durationMillis = 240),
+        animationSpec = if (Motion.enabled) tween(SeqMotion.STANDARD_MS) else snap(),
         label = "coverRead",
     )
+    val badgeFill by animateColorAsState(
+        targetValue = if (read) accent.accent else MaterialTheme.colorScheme.scrim.copy(alpha = 0.55f),
+        animationSpec = tween(SeqMotion.SHORT_MS),
+        label = "badgeFill",
+    )
+    val badgeStroke by animateColorAsState(
+        targetValue = if (read) accent.accent else Color.White.copy(alpha = 0.75f),
+        animationSpec = tween(SeqMotion.SHORT_MS),
+        label = "badgeStroke",
+    )
+    val badgeInk by animateColorAsState(
+        targetValue = if (read) accent.ink else Color.White,
+        animationSpec = tween(SeqMotion.SHORT_MS),
+        label = "badgeInk",
+    )
+    val nextBorder by animateColorAsState(
+        targetValue = if (isNext) accent.accent else Color.Transparent,
+        animationSpec = tween(SeqMotion.STANDARD_MS),
+        label = "nextBorder",
+    )
+    val pop = rememberFlagPop(read)
     Column(modifier = modifier.pressScale(interaction)) {
         Box(
             modifier = Modifier
@@ -531,11 +623,11 @@ fun CoverTile(
                     .fillMaxSize(),
                 alpha = artAlpha,
             )
-            if (isNext) {
+            if (isNext || nextBorder.alpha > 0f) {
                 Box(
                     Modifier
                         .fillMaxSize()
-                        .border(2.dp, accent.accent, MaterialTheme.shapes.medium),
+                        .border(2.dp, nextBorder, MaterialTheme.shapes.medium),
                 )
             }
             val haptics = LocalHapticFeedback.current
@@ -543,16 +635,14 @@ fun CoverTile(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
                     .padding(8.dp)
+                    .graphicsLayer {
+                        scaleX = pop
+                        scaleY = pop
+                    }
                     .size(32.dp)
                     .clip(CircleShape)
-                    .background(
-                        if (read) accent.accent else MaterialTheme.colorScheme.scrim.copy(alpha = 0.55f),
-                    )
-                    .border(
-                        1.5.dp,
-                        if (read) accent.accent else Color.White.copy(alpha = 0.75f),
-                        CircleShape,
-                    )
+                    .background(badgeFill)
+                    .border(1.5.dp, badgeStroke, CircleShape)
                     .clickable {
                         Haptics.tick(haptics)
                         onToggleRead()
@@ -563,7 +653,7 @@ fun CoverTile(
                 Icon(
                     imageVector = if (read) SeqIcons.Check else SeqIcons.CheckOutline,
                     contentDescription = null,
-                    tint = if (read) accent.ink else Color.White,
+                    tint = badgeInk,
                     modifier = Modifier.size(18.dp),
                 )
             }
@@ -587,6 +677,31 @@ fun CoverTile(
             )
         }
     }
+}
+
+/**
+ * A full-width tappable row with the same feedback as a card: ripple, tonal surface and the shared
+ * press scale, all driven by one interaction source so they react to a single gesture.
+ */
+@Composable
+fun PressableRow(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    shape: Shape = RoundedCornerShape(16.dp),
+    color: Color = MaterialTheme.colorScheme.surfaceContainerLow,
+    contentColor: Color = MaterialTheme.colorScheme.onSurface,
+    content: @Composable () -> Unit,
+) {
+    val interaction = remember { MutableInteractionSource() }
+    Surface(
+        onClick = onClick,
+        interactionSource = interaction,
+        modifier = modifier.pressScale(interaction, pressedScale = 0.98f),
+        shape = shape,
+        color = color,
+        contentColor = contentColor,
+        content = content,
+    )
 }
 
 @Composable
@@ -856,7 +971,22 @@ fun BarIconButton(
     onClick: () -> Unit,
 ) {
     IconButton(onClick = onClick, enabled = enabled, modifier = modifier) {
-        Icon(icon, contentDescription = contentDescription)
+        // Swapping between two meanings (search/close, save/unsave, grid/list) is a small state
+        // change, so the glyph crossfades instead of snapping.
+        if (!Motion.enabled) {
+            Icon(icon, contentDescription = contentDescription)
+        } else {
+            AnimatedContent(
+                targetState = icon,
+                transitionSpec = {
+                    (fadeIn(tween(SeqMotion.SHORT_MS)) + scaleIn(initialScale = 0.84f)) togetherWith
+                        (fadeOut(tween(SeqMotion.PRESS_MS)) + scaleOut(targetScale = 0.9f))
+                },
+                label = "barIcon",
+            ) { shown ->
+                Icon(shown, contentDescription = contentDescription)
+            }
+        }
     }
 }
 

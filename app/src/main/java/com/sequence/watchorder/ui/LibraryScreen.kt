@@ -71,6 +71,7 @@ fun LibraryScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                         if (state.libView == LibView.GRID) SeqIcons.List else SeqIcons.Grid,
                         if (state.libView == LibView.GRID) "Show as list" else "Show as grid",
                     ) { vm.toggleLibView() }
+                    BarIconButton(SeqIcons.Settings, "Settings") { vm.openSettings() }
                 },
                 scrollBehavior = scrollBehavior,
                 colors = TopAppBarDefaults.largeTopAppBarColors(
@@ -144,6 +145,8 @@ fun LibraryScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                             icon = SeqIcons.Filter,
                             title = "Nothing here",
                             body = "No franchise in your library matches that filter.",
+                            actionLabel = "Show all franchises",
+                            onAction = { vm.selectLibraryFilter("all") },
                         )
                     }
 

@@ -1,5 +1,9 @@
 package com.sequence.watchorder.ui
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -94,10 +98,21 @@ fun DetailScreen(vm: MainViewModel, franchise: Franchise) {
     val listState = rememberLazyListState()
     val scope = rememberCoroutineScope()
 
-    val rows: List<DetailRow> = if (showingBooks) {
-        buildBookRows(vm, franchise, read)
-    } else {
-        buildWatchRows(vm, franchise, watched, today)
+    val rows: List<DetailRow> = remember(
+        franchise,
+        showingBooks,
+        watched,
+        read,
+        today,
+        state.mode,
+        vm.watchFilter,
+        vm.bookFilter,
+    ) {
+        if (showingBooks) {
+            buildBookRows(vm, franchise, read)
+        } else {
+            buildWatchRows(vm, franchise, watched, today)
+        }
     }
 
     val nextWatch = Logic.nextUp(
@@ -381,7 +396,19 @@ private fun BlurbCard(franchise: Franchise, accent: AccentPalette, open: Boolean
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
     ) {
-        Column(Modifier.padding(16.dp)) {
+        Column(
+            Modifier
+                .padding(16.dp)
+                .then(
+                    if (Motion.enabled) {
+                        Modifier.animateContentSize(
+                            animationSpec = tween(SeqMotion.STANDARD_MS, easing = FastOutSlowInEasing),
+                        )
+                    } else {
+                        Modifier
+                    },
+                ),
+        ) {
             Text(
                 franchise.hook,
                 style = MaterialTheme.typography.titleMedium,
@@ -581,6 +608,31 @@ private fun WatchRow(
     upcoming: Boolean,
 ) {
     val interaction = remember { MutableInteractionSource() }
+    // Watching a title dims its row and fills its position chip; both ease so the list reads as
+    // one state change instead of two hard cuts.
+    val rowColor by animateColorAsState(
+        targetValue = if (watched) {
+            MaterialTheme.colorScheme.surfaceContainerLow.copy(alpha = 0.55f)
+        } else {
+            MaterialTheme.colorScheme.surfaceContainerLow
+        },
+        animationSpec = tween(SeqMotion.STANDARD_MS),
+        label = "rowColor",
+    )
+    val chipColor by animateColorAsState(
+        targetValue = if (watched) {
+            accent.accent
+        } else {
+            MaterialTheme.colorScheme.surfaceContainerHighest
+        },
+        animationSpec = tween(SeqMotion.STANDARD_MS),
+        label = "chipColor",
+    )
+    val chipInk by animateColorAsState(
+        targetValue = if (watched) accent.ink else MaterialTheme.colorScheme.onSurfaceVariant,
+        animationSpec = tween(SeqMotion.STANDARD_MS),
+        label = "chipInk",
+    )
     Surface(
         onClick = { vm.openSheet(Sheet.EntrySheet(entry.id)) },
         interactionSource = interaction,
@@ -589,11 +641,7 @@ private fun WatchRow(
             .padding(horizontal = 12.dp, vertical = 3.dp)
             .pressScale(interaction, pressedScale = 0.98f),
         shape = RoundedCornerShape(16.dp),
-        color = if (watched) {
-            MaterialTheme.colorScheme.surfaceContainerLow.copy(alpha = 0.55f)
-        } else {
-            MaterialTheme.colorScheme.surfaceContainerLow
-        },
+        color = rowColor,
     ) {
         Row(
             modifier = Modifier.padding(start = 12.dp, end = 4.dp, top = 8.dp, bottom = 8.dp),
@@ -602,14 +650,14 @@ private fun WatchRow(
         ) {
             Surface(
                 shape = CircleShape,
-                color = if (watched) accent.accent else MaterialTheme.colorScheme.surfaceContainerHighest,
+                color = chipColor,
                 modifier = Modifier.size(30.dp),
             ) {
                 Box(contentAlignment = Alignment.Center) {
                     Text(
                         position.toString(),
                         style = MaterialTheme.typography.labelMedium,
-                        color = if (watched) accent.ink else MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = chipInk,
                     )
                 }
             }

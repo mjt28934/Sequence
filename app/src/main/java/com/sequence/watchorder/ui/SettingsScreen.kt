@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.sequence.watchorder.BuildConfig
 import com.sequence.watchorder.MainViewModel
@@ -144,7 +145,15 @@ fun SettingsScreen(
                         selected = vm.progress.startTab == tab,
                         onClick = { vm.setStartTab(tab) },
                         shape = SegmentedButtonDefaults.itemShape(index, StartTab.entries.size),
-                    ) { Text(tab.label) }
+                    ) {
+                        // Four segments have to fit a 360dp phone; leaner labels keep them on one line.
+                        Text(
+                            tab.label,
+                            style = MaterialTheme.typography.labelMedium,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                        )
+                    }
                 }
             }
             Text(

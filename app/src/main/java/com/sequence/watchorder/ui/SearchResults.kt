@@ -1,6 +1,15 @@
 package com.sequence.watchorder.ui
 
-import androidx.compose.foundation.clickable
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
+import androidx.compose.foundation.border
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,8 +30,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
@@ -50,30 +60,57 @@ fun HomeSearchField(
     modifier: Modifier = Modifier,
 ) {
     val keyboard = LocalSoftwareKeyboardController.current
+    val interaction = remember { MutableInteractionSource() }
+    val focused by interaction.collectIsFocusedAsState()
+    val shape = RoundedCornerShape(28.dp)
+    // Focus is worth showing on an inline field: the border picks up the accent instead of
+    // moving anything or replacing the field.
+    val borderColor by animateColorAsState(
+        targetValue = if (focused) MaterialTheme.colorScheme.primary else Color.Transparent,
+        animationSpec = tween(SeqMotion.SHORT_MS),
+        label = "searchFocus",
+    )
     Surface(
         modifier = modifier
             .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp, top = 2.dp, bottom = 10.dp),
-        shape = RoundedCornerShape(28.dp),
+            .padding(start = 16.dp, end = 16.dp, top = 2.dp, bottom = 10.dp)
+            .border(1.5.dp, borderColor, shape),
+        shape = shape,
         color = MaterialTheme.colorScheme.surfaceContainerHigh,
     ) {
         TextField(
             value = value,
             onValueChange = onValueChange,
+            interactionSource = interaction,
             modifier = Modifier
                 .fillMaxWidth()
                 .focusRequester(focusRequester),
             placeholder = { Text("Franchises, titles, books") },
             leadingIcon = { Icon(SeqIcons.Search, contentDescription = null) },
             trailingIcon = {
-                if (value.isNotEmpty()) {
-                    IconButton(onClick = { onValueChange("") }) {
-                        Icon(SeqIcons.Close, contentDescription = "Clear search")
+                // The clear button appears only when there is something to clear.
+                if (!Motion.enabled) {
+                    if (value.isNotEmpty()) {
+                        IconButton(onClick = { onValueChange("") }) {
+                            Icon(SeqIcons.Close, contentDescription = "Clear search")
+                        }
+                    }
+                } else {
+                    AnimatedVisibility(
+                        visible = value.isNotEmpty(),
+                        enter = fadeIn(tween(SeqMotion.SHORT_MS)) +
+                            scaleIn(initialScale = 0.75f),
+                        exit = fadeOut(tween(SeqMotion.PRESS_MS)) +
+                            scaleOut(targetScale = 0.75f),
+                    ) {
+                        IconButton(onClick = { onValueChange("") }) {
+                            Icon(SeqIcons.Close, contentDescription = "Clear search")
+                        }
                     }
                 }
             },
             singleLine = true,
-            shape = RoundedCornerShape(28.dp),
+            shape = shape,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
             keyboardActions = KeyboardActions(onSearch = { keyboard?.hide() }),
             colors = TextFieldDefaults.colors(
@@ -214,23 +251,25 @@ private fun SearchResultsList(vm: MainViewModel, q: String) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun FranchiseRow(franchise: Franchise, onClick: () -> Unit) {
-    ListItem(
-        headlineContent = { Text(franchise.name, maxLines = 1, overflow = TextOverflow.Ellipsis) },
-        supportingContent = {
-            Text(
-                "${franchise.genre} · ${franchise.years}",
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
-        },
-        leadingContent = { RowThumb(franchise, width = 64.dp) },
-        colors = ListItemDefaults.colors(containerColor = Color.Transparent),
-        modifier = Modifier
-            .padding(horizontal = 8.dp)
-            .fillMaxWidth()
-            .clip(MaterialTheme.shapes.medium)
-            .clickable(onClick = onClick),
-    )
+    PressableRow(
+        onClick = onClick,
+        modifier = Modifier.padding(horizontal = 8.dp),
+        shape = MaterialTheme.shapes.medium,
+        color = Color.Transparent,
+    ) {
+        ListItem(
+            headlineContent = { Text(franchise.name, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+            supportingContent = {
+                Text(
+                    "${franchise.genre} · ${franchise.years}",
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+            },
+            leadingContent = { RowThumb(franchise, width = 64.dp) },
+            colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -241,15 +280,17 @@ private fun ResultRow(
     subtitle: String,
     onClick: () -> Unit,
 ) {
-    ListItem(
-        headlineContent = { Text(title, maxLines = 1, overflow = TextOverflow.Ellipsis) },
-        supportingContent = { Text(subtitle, maxLines = 1, overflow = TextOverflow.Ellipsis) },
-        leadingContent = thumb,
-        colors = ListItemDefaults.colors(containerColor = Color.Transparent),
-        modifier = Modifier
-            .padding(horizontal = 8.dp)
-            .fillMaxWidth()
-            .clip(MaterialTheme.shapes.medium)
-            .clickable(onClick = onClick),
-    )
+    PressableRow(
+        onClick = onClick,
+        modifier = Modifier.padding(horizontal = 8.dp),
+        shape = MaterialTheme.shapes.medium,
+        color = Color.Transparent,
+    ) {
+        ListItem(
+            headlineContent = { Text(title, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+            supportingContent = { Text(subtitle, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+            leadingContent = thumb,
+            colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+        )
+    }
 }

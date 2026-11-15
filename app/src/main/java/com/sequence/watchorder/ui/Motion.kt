@@ -22,7 +22,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.listSaver
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
@@ -42,15 +45,72 @@ object Motion {
 }
 
 /**
+ * The handful of durations every animation draws from, so a press, a toggle and a badge all feel
+ * like they belong to the same app. Values sit inside the ranges Material 3 uses for motion.
+ */
+object SeqMotion {
+    /** Immediate touch acknowledgement (press scale, icon settle). */
+    const val PRESS_MS = 140
+
+    /** Small state changes: checks, badges, colour swaps. */
+    const val SHORT_MS = 180
+
+    /** Standard content change: rows, cards, expand/collapse. */
+    const val STANDARD_MS = 240
+
+    /** The mpvEx navigation move. */
+    const val NAV_MS = 250
+
+    /** Progress fills, long enough to read as movement. */
+    const val PROGRESS_MS = 420
+
+    /** Spring for small controls that should settle without a visible bounce. */
+    const val PRESS_DAMPING = 0.78f
+    const val PRESS_STIFFNESS = 900f
+
+    /** Spring for a check badge landing: a little quicker, still no visible wobble. */
+    const val BADGE_DAMPING = 0.55f
+    const val BADGE_STIFFNESS = 1400f
+}
+
+/**
  * Remembers which entrance animations have already played, keyed by a stable name.
  *
  * List items are disposed when they scroll away. Without this, every scroll back up would replay
  * the entrance and the content would flicker. A key that has already played stays settled.
  */
-class EnterTracker {
-    private val played = mutableSetOf<String>()
-
+class EnterTracker(private val played: MutableSet<String> = mutableSetOf()) {
     fun claim(key: String): Boolean = played.add(key)
+
+    fun keys(): List<String> = played.toList()
+}
+
+/** Keeps the "already played" set across tab switches, so Home does not re-stagger every return. */
+val EnterTrackerSaver = listSaver<EnterTracker, String>(
+    save = { it.keys() },
+    restore = { EnterTracker(it.toMutableSet()) },
+)
+
+/**
+ * A one-shot settle for small state badges: the icon snaps in slightly small and springs back to
+ * full size. The first composition reports the current state and stays still, so a list of
+ * already-watched titles does not animate as it scrolls into view.
+ */
+@Composable
+fun rememberFlagPop(flag: Boolean): Float {
+    val pop = remember { Animatable(1f) }
+    var last by remember { mutableStateOf(flag) }
+    LaunchedEffect(flag) {
+        if (flag == last) return@LaunchedEffect
+        last = flag
+        if (!Motion.enabled) return@LaunchedEffect
+        pop.snapTo(0.72f)
+        pop.animateTo(
+            1f,
+            spring(dampingRatio = SeqMotion.BADGE_DAMPING, stiffness = SeqMotion.BADGE_STIFFNESS),
+        )
+    }
+    return pop.value
 }
 
 /**
@@ -68,7 +128,10 @@ fun Modifier.pressScale(
     val pressed by source.collectIsPressedAsState()
     val scale by animateFloatAsState(
         targetValue = if (pressed) pressedScale else 1f,
-        animationSpec = spring(dampingRatio = 0.62f, stiffness = 900f),
+        animationSpec = spring(
+            dampingRatio = SeqMotion.PRESS_DAMPING,
+            stiffness = SeqMotion.PRESS_STIFFNESS,
+        ),
         label = "pressScale",
     )
     return graphicsLayer {
@@ -173,13 +236,26 @@ fun <T> SectionSwitcher(
                     // the full 250ms and out over the first 125ms. No scale, so sibling pages
                     // read as peers rather than one sinking under the other.
                     val slide = with(density) { 48.dp.roundToPx() }
-                    val move = tween<IntOffset>(durationMillis = 250, easing = FastOutSlowInEasing)
+                    val move = tween<IntOffset>(
+                        durationMillis = SeqMotion.NAV_MS,
+                        easing = FastOutSlowInEasing,
+                    )
                     (
                         slideInHorizontally(move) { slide * dir } +
-                            fadeIn(tween(durationMillis = 250, easing = FastOutSlowInEasing))
+                            fadeIn(
+                                tween(
+                                    durationMillis = SeqMotion.NAV_MS,
+                                    easing = FastOutSlowInEasing,
+                                ),
+                            )
                         ) togetherWith (
                         slideOutHorizontally(move) { -slide * dir } +
-                            fadeOut(tween(durationMillis = 125, easing = FastOutSlowInEasing))
+                            fadeOut(
+                                tween(
+                                    durationMillis = SeqMotion.NAV_MS / 2,
+                                    easing = FastOutSlowInEasing,
+                                ),
+                            )
                         )
                 }
 
