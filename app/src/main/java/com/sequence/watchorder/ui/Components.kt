@@ -757,6 +757,7 @@ fun SheetActionRow(
     onClick: () -> Unit,
     enabled: Boolean = true,
     danger: Boolean = false,
+    subtitle: String? = null,
 ) {
     val tint = if (danger) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant
     ListItem(
@@ -766,6 +767,7 @@ fun SheetActionRow(
                 color = if (danger) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface,
             )
         },
+        supportingContent = subtitle?.let { { Text(it) } },
         leadingContent = { Icon(icon, contentDescription = null, tint = tint) },
         colors = ListItemDefaults.colors(containerColor = Color.Transparent),
         modifier = Modifier

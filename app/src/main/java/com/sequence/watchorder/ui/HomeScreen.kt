@@ -77,9 +77,12 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
         { vm.catalog.worksFor(it) },
         { state.read[it].orEmpty() },
     )
-    val allFranchises = vm.catalog.franchises.sortedWith(
-        compareBy(String.CASE_INSENSITIVE_ORDER) { it.name },
-    )
+    val allFranchises = vm.catalog.franchises
+        .filter {
+            !state.hideFinished ||
+                Logic.franchiseProgress(it, state.watched[it.id].orEmpty().toSet(), today).pct < 100
+        }
+        .sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.name })
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val enter = remember { EnterTracker() }
     val searchOpen = vm.searchOpen
@@ -304,6 +307,17 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                             )
                         }
                         if (row.size == 1) Spacer(Modifier.weight(1f))
+                    }
+                }
+                if (allFranchises.isEmpty()) {
+                    item {
+                        Text(
+                            "Every franchise is finished. Turn off \u201CHide finished franchises\u201D " +
+                                "in Settings to see them here again.",
+                            modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 4.dp),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
                     }
                 }
 

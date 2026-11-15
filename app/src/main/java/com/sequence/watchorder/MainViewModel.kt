@@ -15,6 +15,7 @@ import com.sequence.watchorder.data.Logic
 import com.sequence.watchorder.data.OrderMode
 import com.sequence.watchorder.data.ProgressState
 import com.sequence.watchorder.data.ProgressStore
+import com.sequence.watchorder.data.StartTab
 import com.sequence.watchorder.data.ThemeMode
 import com.sequence.watchorder.data.WatchFilter
 import com.sequence.watchorder.data.Work
@@ -52,6 +53,7 @@ class MainViewModel : AndroidViewModel {
         catalog = Catalog.load(app)
         store = ProgressStore(app, catalog.franchises.map { it.id }.toSet())
         progress = store.load()
+        tab = progress.startTab.toTab()
     }
 
     /**
@@ -62,6 +64,7 @@ class MainViewModel : AndroidViewModel {
         this.catalog = catalog
         this.store = null
         this.progress = initial
+        tab = initial.startTab.toTab()
     }
 
     var tab by mutableStateOf(AppTab.HOME)
@@ -230,6 +233,10 @@ class MainViewModel : AndroidViewModel {
         mutate({ it.copy(libView = next) }, "", undoable = false, showSnack = false)
     }
 
+    fun setLibView(value: LibView) {
+        mutate({ it.copy(libView = value) }, "", undoable = false, showSnack = false)
+    }
+
     fun setTheme(value: ThemeMode) {
         mutate({ it.copy(theme = value) }, "", undoable = false, showSnack = false)
     }
@@ -244,6 +251,57 @@ class MainViewModel : AndroidViewModel {
             if (on) "Animations reduced" else "Animations on",
             undoable = false,
         )
+    }
+
+    fun setStartTab(value: StartTab) {
+        mutate({ it.copy(startTab = value) }, "", undoable = false, showSnack = false)
+    }
+
+    fun setHideFinished(on: Boolean) {
+        mutate(
+            { it.copy(hideFinished = on) },
+            if (on) "Finished franchises hidden on Home" else "Finished franchises shown on Home",
+            undoable = false,
+        )
+    }
+
+    /** Back to the shipped defaults; progress, saved titles and every mark stay untouched. */
+    fun resetSettings() {
+        mutate(
+            {
+                it.copy(
+                    mode = OrderMode.RELEASE,
+                    libSort = LibSort.RECENT,
+                    libView = LibView.GRID,
+                    theme = ThemeMode.SYSTEM,
+                    haptics = true,
+                    reduceMotion = false,
+                    startTab = StartTab.HOME,
+                    hideFinished = false,
+                )
+            },
+            "Settings reset to defaults",
+            undoable = false,
+        )
+        tab = AppTab.HOME
+    }
+
+    /** The saved state as a JSON backup, or null when nothing is persisted (screenshot tests). */
+    fun exportProgress(): String? = store?.encode(progress)
+
+    /** Replaces everything with a backup; false when the text is not a Sequence backup. */
+    fun importProgress(text: String): Boolean {
+        val loaded = store?.decode(text) ?: return false
+        progress = loaded
+        store.save(loaded)
+        tab = loaded.startTab.toTab()
+        snack = Snack(++snackId, "Progress and settings imported")
+        return true
+    }
+
+    /** Shows a one-off message, used by the backup actions. */
+    fun notify(text: String) {
+        snack = Snack(++snackId, text)
     }
 
     fun toggleSeen(franchiseId: String, entry: Entry) {
@@ -372,4 +430,11 @@ class MainViewModel : AndroidViewModel {
         copy(recent = (listOf(id) + recent.filter { it != id }).take(12))
 
     fun today(): String = Logic.today()
+}
+
+private fun StartTab.toTab(): AppTab = when (this) {
+    StartTab.HOME -> AppTab.HOME
+    StartTab.LIBRARY -> AppTab.LIBRARY
+    StartTab.UPCOMING -> AppTab.UPCOMING
+    StartTab.TAGS -> AppTab.TAGS
 }

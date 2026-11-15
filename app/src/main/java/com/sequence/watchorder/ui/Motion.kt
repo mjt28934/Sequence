@@ -25,6 +25,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -158,42 +159,55 @@ fun <T> SectionSwitcher(
         return
     }
 
+    val density = LocalDensity.current
+
     AnimatedContent(
         targetState = target,
         modifier = modifier,
         transitionSpec = {
             val dir = direction(initialState, targetState).coerceIn(-1, 1)
-            val enterMove = tween<IntOffset>(durationMillis = 360, easing = FastOutSlowInEasing)
-            val exitMove = tween<IntOffset>(durationMillis = 260, easing = FastOutSlowInEasing)
             when (axis) {
-                SectionAxis.HORIZONTAL -> (
-                    slideInHorizontally(enterMove) { width -> (width / 5) * dir } +
-                        fadeIn(tween(durationMillis = 240, easing = FastOutSlowInEasing))
-                    ) togetherWith (
-                    slideOutHorizontally(exitMove) { width -> (-width / 8) * dir } +
-                        fadeOut(tween(durationMillis = 180))
-                    )
+                SectionAxis.HORIZONTAL -> {
+                    // Exactly the mpvEx tab change (also the Material 3 Expressive motion in
+                    // Google's Phone app): a fixed 48dp slide, 250ms in and out, fading in over
+                    // the full 250ms and out over the first 125ms. No scale, so sibling pages
+                    // read as peers rather than one sinking under the other.
+                    val slide = with(density) { 48.dp.roundToPx() }
+                    val move = tween<IntOffset>(durationMillis = 250, easing = FastOutSlowInEasing)
+                    (
+                        slideInHorizontally(move) { slide * dir } +
+                            fadeIn(tween(durationMillis = 250, easing = FastOutSlowInEasing))
+                        ) togetherWith (
+                        slideOutHorizontally(move) { -slide * dir } +
+                            fadeOut(tween(durationMillis = 125, easing = FastOutSlowInEasing))
+                        )
+                }
 
-                SectionAxis.VERTICAL -> (
-                    slideInVertically(enterMove) { height -> (height / 16) * dir } +
-                        fadeIn(tween(durationMillis = 220, easing = FastOutSlowInEasing))
-                    ) togetherWith (
-                    slideOutVertically(exitMove) { height -> (-height / 20) * dir } +
-                        fadeOut(tween(durationMillis = 160))
-                    )
+                SectionAxis.VERTICAL -> {
+                    val enterMove = tween<IntOffset>(durationMillis = 360, easing = FastOutSlowInEasing)
+                    val exitMove = tween<IntOffset>(durationMillis = 260, easing = FastOutSlowInEasing)
+                    (
+                        slideInVertically(enterMove) { height -> (height / 16) * dir } +
+                            fadeIn(tween(durationMillis = 220, easing = FastOutSlowInEasing))
+                        ) togetherWith (
+                        slideOutVertically(exitMove) { height -> (-height / 20) * dir } +
+                            fadeOut(tween(durationMillis = 160))
+                        )
+                }
             }
         },
         label = "section",
     ) { state ->
-        // A hair of scale on the way in gives the change depth without blurring body text for long.
+        // A hair of scale on the way in gives in-page moves depth; sibling pages do not scale.
         val settle by transition.animateFloat(
             transitionSpec = { tween(durationMillis = 360, easing = FastOutSlowInEasing) },
             label = "sectionSettle",
         ) { phase -> if (phase == EnterExitState.Visible) 1f else 0.985f }
+        val scale = if (axis == SectionAxis.HORIZONTAL) 1f else settle
         Box(
             Modifier.graphicsLayer {
-                scaleX = settle
-                scaleY = settle
+                scaleX = scale
+                scaleY = scale
             },
         ) {
             content(state)

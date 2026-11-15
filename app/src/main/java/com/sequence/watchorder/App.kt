@@ -3,8 +3,6 @@ package com.sequence.watchorder
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
@@ -47,7 +45,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.sequence.watchorder.data.ContinueCard
@@ -226,18 +223,14 @@ internal fun AppNavigationBar(vm: MainViewModel) {
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.surfaceContainer,
         tonalElevation = 0.dp,
+        // mpvEx rounds the top of its bar; the content behind it stays visible in the corners.
+        modifier = Modifier.clip(RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp)),
     ) {
         for (tab in AppTab.entries) {
-            val selected = vm.tab == tab
             NavigationBarItem(
-                selected = selected,
+                selected = vm.tab == tab,
                 onClick = { vm.selectTab(tab) },
                 icon = {
-                    val pop by animateFloatAsState(
-                        targetValue = if (Motion.enabled && selected) 1.12f else 1f,
-                        animationSpec = spring(dampingRatio = 0.5f, stiffness = 700f),
-                        label = "navIcon",
-                    )
                     Icon(
                         imageVector = when (tab) {
                             AppTab.HOME -> SeqIcons.Home
@@ -246,12 +239,7 @@ internal fun AppNavigationBar(vm: MainViewModel) {
                             AppTab.TAGS -> SeqIcons.Tags
                         },
                         contentDescription = null,
-                        modifier = Modifier
-                            .size(24.dp)
-                            .graphicsLayer {
-                                scaleX = pop
-                                scaleY = pop
-                            },
+                        modifier = Modifier.size(24.dp),
                     )
                 },
                 label = { Text(tab.label) },

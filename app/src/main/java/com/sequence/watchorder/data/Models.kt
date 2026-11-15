@@ -115,6 +115,14 @@ enum class ThemeMode(val label: String) {
     DARK("Dark"),
 }
 
+/** The tab Sequence opens on; kept in the data layer so the store can persist it. */
+enum class StartTab(val label: String) {
+    HOME("Home"),
+    LIBRARY("Library"),
+    UPCOMING("Upcoming"),
+    TAGS("Tags"),
+}
+
 data class ProgressState(
     val watched: Map<String, List<String>> = emptyMap(),
     val read: Map<String, List<String>> = emptyMap(),
@@ -126,6 +134,8 @@ data class ProgressState(
     val theme: ThemeMode = ThemeMode.SYSTEM,
     val haptics: Boolean = true,
     val reduceMotion: Boolean = false,
+    val startTab: StartTab = StartTab.HOME,
+    val hideFinished: Boolean = false,
 )
 
 data class WatchFilter(

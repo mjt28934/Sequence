@@ -134,6 +134,20 @@ object SeqIcons {
     val Swap by lazy {
         vec("swap", "M6.99 11 3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z")
     }
+    val Upload by lazy {
+        vec("upload", "M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z")
+    }
+    val Download by lazy {
+        vec("download", "M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z")
+    }
+    val Refresh by lazy {
+        vec(
+            "refresh",
+            "M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-8 8s3.57 8 8 8c3.73 " +
+                "0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 " +
+                "6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z",
+        )
+    }
 
     /** Hollow circle with a tick outline, used for "not seen yet". */
     val CheckOutline by lazy {

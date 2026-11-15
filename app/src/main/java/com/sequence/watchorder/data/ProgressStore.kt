@@ -11,8 +11,30 @@ class ProgressStore(context: Context, private val franchiseIds: Set<String>) {
 
     fun load(): ProgressState {
         val raw = prefs.getString(KEY, null) ?: return ProgressState()
+        return decode(raw) ?: ProgressState()
+    }
+
+    /** The exact JSON written to prefs, also used for exported backups. */
+    fun encode(state: ProgressState): String {
+        val root = JSONObject()
+        root.put("state", stateJson(state))
+        root.put("version", 0)
+        return root.toString()
+    }
+
+    /**
+     * Parses saved text or an exported backup. Both the wrapped `{"state": ...}` shape and a bare
+     * state object are accepted; null means the text is not a Sequence backup.
+     */
+    fun decode(raw: String): ProgressState? {
         return try {
-            val state = JSONObject(raw).optJSONObject("state") ?: return ProgressState()
+            val root = JSONObject(raw)
+            val state = root.optJSONObject("state") ?: root
+            // A wrapped backup is always ours; a bare object has to carry at least one known mark,
+            // so importing an unrelated JSON file cannot silently wipe progress.
+            val isBackup = root.has("state") ||
+                state.has("watched") || state.has("read") || state.has("mode")
+            if (!isBackup) return null
             val mode = if (state.optString("mode") == "story") OrderMode.STORY else OrderMode.RELEASE
             val sort = when (state.optString("libSort")) {
                 "az" -> LibSort.AZ
@@ -26,6 +48,12 @@ class ProgressStore(context: Context, private val franchiseIds: Set<String>) {
                 "dark" -> ThemeMode.DARK
                 else -> ThemeMode.SYSTEM
             }
+            val startTab = when (state.optString("startTab")) {
+                "library" -> StartTab.LIBRARY
+                "upcoming" -> StartTab.UPCOMING
+                "tags" -> StartTab.TAGS
+                else -> StartTab.HOME
+            }
             ProgressState(
                 watched = readMap(state.optJSONObject("watched")),
                 read = readMap(state.optJSONObject("read")),
@@ -37,29 +65,31 @@ class ProgressStore(context: Context, private val franchiseIds: Set<String>) {
                 theme = theme,
                 haptics = state.optBoolean("haptics", true),
                 reduceMotion = state.optBoolean("reduceMotion", false),
+                startTab = startTab,
+                hideFinished = state.optBoolean("hideFinished", false),
             )
         } catch (_: Exception) {
-            ProgressState()
+            null
         }
     }
 
     fun save(state: ProgressState) {
-        val root = JSONObject()
-        val obj = JSONObject()
-            .put("watched", writeMap(state.watched))
-            .put("read", writeMap(state.read))
-            .put("mode", if (state.mode == OrderMode.STORY) "story" else "release")
-            .put("saved", JSONArray(state.saved))
-            .put("recent", JSONArray(state.recent))
-            .put("libSort", state.libSort.name.lowercase())
-            .put("libView", if (state.libView == LibView.LIST) "list" else "grid")
-            .put("theme", state.theme.name.lowercase())
-            .put("haptics", state.haptics)
-            .put("reduceMotion", state.reduceMotion)
-        root.put("state", obj)
-        root.put("version", 0)
-        prefs.edit().putString(KEY, root.toString()).apply()
+        prefs.edit().putString(KEY, encode(state)).apply()
     }
+
+    private fun stateJson(state: ProgressState): JSONObject = JSONObject()
+        .put("watched", writeMap(state.watched))
+        .put("read", writeMap(state.read))
+        .put("mode", if (state.mode == OrderMode.STORY) "story" else "release")
+        .put("saved", JSONArray(state.saved))
+        .put("recent", JSONArray(state.recent))
+        .put("libSort", state.libSort.name.lowercase())
+        .put("libView", if (state.libView == LibView.LIST) "list" else "grid")
+        .put("theme", state.theme.name.lowercase())
+        .put("haptics", state.haptics)
+        .put("reduceMotion", state.reduceMotion)
+        .put("startTab", state.startTab.name.lowercase())
+        .put("hideFinished", state.hideFinished)
 
     private fun readMap(o: JSONObject?): Map<String, List<String>> {
         if (o == null) return emptyMap()
