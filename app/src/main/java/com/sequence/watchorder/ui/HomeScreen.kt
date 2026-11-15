@@ -1,6 +1,7 @@
 package com.sequence.watchorder.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -70,6 +71,7 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
     )
     val shelves = Logic.genreShelves(vm.catalog.franchises, vm.catalog.genres)
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+    val enter = remember { EnterTracker() }
 
     androidx.compose.material3.Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -106,12 +108,14 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                 bottom = 24.dp,
             ),
         ) {
-            item { GenreFilterRow(vm) }
+            item { EnterSection(enter, "genres", 0) { GenreFilterRow(vm) } }
 
             if (vm.genre != "all") {
                 val list = vm.catalog.franchises.filter { it.genre == vm.genre }
                 item {
-                    SectionHeader(vm.genre, subtitle = plural(list.size, "franchise", "franchises"))
+                    EnterSection(enter, "genre-header", 1) {
+                        SectionHeader(vm.genre, subtitle = plural(list.size, "franchise", "franchises"))
+                    }
                 }
                 items(list.chunked(2)) { row ->
                     Row(
@@ -140,46 +144,52 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
 
             if (cards.isNotEmpty()) {
                 item {
-                    ContinueHero(
-                        card = cards.first(),
-                        accent = vm.catalog.accent(cards.first().franchise.id).toPalette(),
-                        onOpen = { vm.openFranchise(cards.first().franchise.id) },
-                        onMarkSeen = {
-                            val first = cards.first()
-                            first.next?.let { vm.toggleSeen(first.franchise.id, it) }
-                                ?: first.nextBook?.let { vm.toggleRead(first.franchise.id, it) }
-                        },
-                    )
+                    EnterSection(enter, "hero", 1) {
+                        ContinueHero(
+                            card = cards.first(),
+                            accent = vm.catalog.accent(cards.first().franchise.id).toPalette(),
+                            onOpen = { vm.openFranchise(cards.first().franchise.id) },
+                            onMarkSeen = {
+                                val first = cards.first()
+                                first.next?.let { vm.toggleSeen(first.franchise.id, it) }
+                                    ?: first.nextBook?.let { vm.toggleRead(first.franchise.id, it) }
+                            },
+                        )
+                    }
                 }
             }
 
             if (seenTotal.done == 0 && readTotal.done == 0) {
-                item { OrderDemoCard(vm) }
+                item { EnterSection(enter, "demo", 2) { OrderDemoCard(vm) } }
             } else {
-                item { OverallProgressCard(seenTotal, readTotal) }
+                item { EnterSection(enter, "totals", 2) { OverallProgressCard(seenTotal, readTotal) } }
             }
 
             if (cards.size > 1) {
                 item {
-                    SectionHeader(
-                        title = "Continue",
-                        subtitle = plural(cards.size, "franchise in progress", "franchises in progress"),
-                    )
+                    EnterSection(enter, "continue-header", 3) {
+                        SectionHeader(
+                            title = "Continue",
+                            subtitle = plural(cards.size, "franchise in progress", "franchises in progress"),
+                        )
+                    }
                 }
                 item {
-                    LazyRow(
-                        contentPadding = PaddingValues(horizontal = 20.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    ) {
-                        items(cards.drop(1), key = { it.franchise.id }) { card ->
-                            ShelfCard(
-                                franchise = card.franchise,
-                                title = card.franchise.name,
-                                subtitle = cardSubtitle(card),
-                                progress = card.seen,
-                                accent = vm.catalog.accent(card.franchise.id).toPalette(),
-                                onClick = { vm.openFranchise(card.franchise.id) },
-                            )
+                    EnterSection(enter, "continue-rail", 4) {
+                        LazyRow(
+                            contentPadding = PaddingValues(horizontal = 20.dp),
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        ) {
+                            items(cards.drop(1), key = { it.franchise.id }) { card ->
+                                ShelfCard(
+                                    franchise = card.franchise,
+                                    title = card.franchise.name,
+                                    subtitle = cardSubtitle(card),
+                                    progress = card.seen,
+                                    accent = vm.catalog.accent(card.franchise.id).toPalette(),
+                                    onClick = { vm.openFranchise(card.franchise.id) },
+                                )
+                            }
                         }
                     }
                 }
@@ -188,10 +198,12 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
             val upNext = Logic.upNextList(cards)
             if (upNext.isNotEmpty()) {
                 item {
-                    SectionHeader(
-                        title = "Up next",
-                        subtitle = "Tap the tick when you have watched it",
-                    )
+                    EnterSection(enter, "upnext-header", 5) {
+                        SectionHeader(
+                            title = "Up next",
+                            subtitle = "Tap the tick when you have watched it",
+                        )
+                    }
                 }
                 items(upNext, key = { "up-${it.franchise.id}-${it.entry.id}" }) { item ->
                     UpNextRow(vm, item)
@@ -200,44 +212,50 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
 
             val readNext = Logic.readNextList(cards)
             if (readNext.isNotEmpty()) {
-                item { SectionHeader(title = "Keep reading") }
                 item {
-                    LazyRow(
-                        contentPadding = PaddingValues(horizontal = 20.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    ) {
-                        items(readNext, key = { "rn-${it.franchise.id}-${it.work.id}" }) { item ->
-                            CoverTile(
-                                work = item.work,
-                                accent = vm.catalog.accent(item.franchise.id).toPalette(),
-                                read = false,
-                                isNext = true,
-                                onClick = { vm.openFranchise(item.franchise.id, books = true) },
-                                onToggleRead = { vm.toggleRead(item.franchise.id, item.work) },
-                                modifier = Modifier.width(116.dp),
-                            )
+                    EnterSection(enter, "reading-header", 6) { SectionHeader(title = "Keep reading") }
+                }
+                item {
+                    EnterSection(enter, "reading-rail", 7) {
+                        LazyRow(
+                            contentPadding = PaddingValues(horizontal = 20.dp),
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        ) {
+                            items(readNext, key = { "rn-${it.franchise.id}-${it.work.id}" }) { item ->
+                                CoverTile(
+                                    work = item.work,
+                                    accent = vm.catalog.accent(item.franchise.id).toPalette(),
+                                    read = false,
+                                    isNext = true,
+                                    onClick = { vm.openFranchise(item.franchise.id, books = true) },
+                                    onToggleRead = { vm.toggleRead(item.franchise.id, item.work) },
+                                    modifier = Modifier.width(116.dp),
+                                )
+                            }
                         }
                     }
                 }
             }
 
             shelves.forEach { (genre, franchises) ->
-                item { SectionHeader(title = genre) }
+                item { EnterSection(enter, "shelf-$genre", 8) { SectionHeader(title = genre) } }
                 item {
-                    LazyRow(
-                        contentPadding = PaddingValues(horizontal = 20.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    ) {
-                        items(franchises, key = { "$genre-${it.id}" }) { f ->
-                            val p = Logic.franchiseProgress(f, state.watched[f.id].orEmpty().toSet(), today)
-                            PosterTile(
-                                franchise = f,
-                                subtitle = if (p.done > 0) "${p.done} of ${p.total}" else f.years,
-                                progress = p,
-                                accent = vm.catalog.accent(f.id).toPalette(),
-                                onClick = { vm.openFranchise(f.id) },
-                                modifier = Modifier.width(180.dp),
-                            )
+                    EnterSection(enter, "rail-$genre", 9) {
+                        LazyRow(
+                            contentPadding = PaddingValues(horizontal = 20.dp),
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        ) {
+                            items(franchises, key = { "$genre-${it.id}" }) { f ->
+                                val p = Logic.franchiseProgress(f, state.watched[f.id].orEmpty().toSet(), today)
+                                PosterTile(
+                                    franchise = f,
+                                    subtitle = if (p.done > 0) "${p.done} of ${p.total}" else f.years,
+                                    progress = p,
+                                    accent = vm.catalog.accent(f.id).toPalette(),
+                                    onClick = { vm.openFranchise(f.id) },
+                                    modifier = Modifier.width(180.dp),
+                                )
+                            }
                         }
                     }
                 }
@@ -277,12 +295,15 @@ private fun ContinueHero(
         nextBook != null -> "Continue reading"
         else -> "Finished"
     }
+    val interaction = remember { MutableInteractionSource() }
 
     Card(
         onClick = onOpen,
+        interactionSource = interaction,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .pressScale(interaction, pressedScale = 0.976f),
         shape = RoundedCornerShape(24.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh),
     ) {

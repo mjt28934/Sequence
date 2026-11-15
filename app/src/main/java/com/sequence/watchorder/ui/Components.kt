@@ -1,9 +1,14 @@
 package com.sequence.watchorder.ui
 
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -47,6 +52,8 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -136,8 +143,16 @@ fun ProgressStrip(
     track: Color = MaterialTheme.colorScheme.surfaceContainerHighest,
     height: Dp = 4.dp,
 ) {
+    val target = pct.coerceIn(0, 100) / 100f
+    // Marking something seen moves the bar rather than teleporting it, which is what makes the
+    // action feel like it did something. The first frame already shows the true value.
+    val animated by animateFloatAsState(
+        targetValue = target,
+        animationSpec = tween(durationMillis = 420, easing = FastOutSlowInEasing),
+        label = "progress",
+    )
     LinearProgressIndicator(
-        progress = { (pct.coerceIn(0, 100)) / 100f },
+        progress = { animated },
         modifier = modifier
             .fillMaxWidth()
             .height(height),
@@ -317,9 +332,13 @@ fun ShelfCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val interaction = remember { MutableInteractionSource() }
     Card(
         onClick = onClick,
-        modifier = modifier.width(268.dp),
+        interactionSource = interaction,
+        modifier = modifier
+            .width(268.dp)
+            .pressScale(interaction),
         shape = MaterialTheme.shapes.large,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh),
     ) {
@@ -383,9 +402,12 @@ fun PosterTile(
     longClickLabel: String? = null,
     onLongClick: (() -> Unit)? = null,
 ) {
-    Column(modifier = modifier) {
+    val interaction = remember { MutableInteractionSource() }
+    val complete = progress.total > 0 && progress.done >= progress.total
+    Column(modifier = modifier.pressScale(interaction)) {
         Card(
             onClick = onClick,
+            interactionSource = interaction,
             modifier = Modifier.fillMaxWidth(),
             shape = MaterialTheme.shapes.medium,
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh),
@@ -406,6 +428,25 @@ fun PosterTile(
                             ),
                         ),
                 )
+                if (complete) {
+                    // One glance should tell you which franchises are finished.
+                    Box(
+                        modifier = Modifier
+                            .align(Alignment.TopEnd)
+                            .padding(8.dp)
+                            .size(24.dp)
+                            .clip(CircleShape)
+                            .background(accent.accent),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Icon(
+                            SeqIcons.Check,
+                            contentDescription = "Finished",
+                            tint = accent.ink,
+                            modifier = Modifier.size(15.dp),
+                        )
+                    }
+                }
                 if (subtitle.isNotEmpty()) {
                     Text(
                         text = subtitle,
@@ -458,21 +499,32 @@ fun CoverTile(
     modifier: Modifier = Modifier,
     showTitle: Boolean = true,
 ) {
-    Column(modifier = modifier) {
+    val interaction = remember { MutableInteractionSource() }
+    // Dimming a read cover is a state change, so ease it instead of snapping to half opacity.
+    val artAlpha by animateFloatAsState(
+        targetValue = if (read) 0.45f else 1f,
+        animationSpec = tween(durationMillis = 240),
+        label = "coverRead",
+    )
+    Column(modifier = modifier.pressScale(interaction)) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(2f / 3f)
                 .clip(MaterialTheme.shapes.medium)
                 .background(MaterialTheme.colorScheme.surfaceContainerHigh)
-                .clickable(onClick = onClick),
+                .clickable(
+                    interactionSource = interaction,
+                    indication = LocalIndication.current,
+                    onClick = onClick,
+                ),
         ) {
             ArtImage(
                 ArtKind.COVER,
                 work.id,
                 Modifier
                     .fillMaxSize(),
-                alpha = if (read) 0.45f else 1f,
+                alpha = artAlpha,
             )
             if (isNext) {
                 Box(
@@ -565,17 +617,20 @@ fun GenreTile(
     accent: AccentPalette,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    count: Int = 0,
 ) {
+    val interaction = remember { MutableInteractionSource() }
     Card(
         onClick = onClick,
-        modifier = modifier,
+        interactionSource = interaction,
+        modifier = modifier.pressScale(interaction),
         shape = MaterialTheme.shapes.large,
         colors = CardDefaults.cardColors(containerColor = accent.deep),
     ) {
         Box(
             Modifier
                 .fillMaxWidth()
-                .height(104.dp),
+                .height(108.dp),
         ) {
             ArtImage(
                 ArtKind.POSTER,
@@ -595,15 +650,35 @@ fun GenreTile(
                         ),
                     ),
             )
-            Text(
-                genre,
+            Column(
                 modifier = Modifier
                     .align(Alignment.CenterStart)
-                    .padding(horizontal = 14.dp),
-                color = Color.White,
-                style = MaterialTheme.typography.titleMedium,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
+                    .padding(start = 14.dp, end = 40.dp),
+            ) {
+                Text(
+                    genre,
+                    color = Color.White,
+                    style = MaterialTheme.typography.titleMedium,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+                if (count > 0) {
+                    Text(
+                        plural(count, "franchise", "franchises"),
+                        color = Color.White.copy(alpha = 0.78f),
+                        style = MaterialTheme.typography.bodySmall,
+                        maxLines = 1,
+                    )
+                }
+            }
+            Icon(
+                SeqIcons.ArrowForward,
+                contentDescription = null,
+                tint = Color.White.copy(alpha = 0.7f),
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .padding(end = 12.dp)
+                    .size(18.dp),
             )
         }
     }

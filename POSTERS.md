@@ -8,23 +8,40 @@ same script, so it always matches what was downloaded.
 | Franchise | id | Wikipedia article | Poster file |
 | --- | --- | --- | --- |
 | Alien | `alien` | [Alien (film)](https://en.wikipedia.org/wiki/Alien_(film)) | `…/wikipedia/en/c/c3/Alien_movie_poster.jpg` |
+| Avatar | `avatar` | [Avatar (2009 film)](https://en.wikipedia.org/wiki/Avatar_(2009_film)) | `…/wikipedia/en/d/d6/Avatar_%282009_film%29_poster.jpg` |
+| Back to the Future | `back-to-the-future` | [Back to the Future](https://en.wikipedia.org/wiki/Back_to_the_Future) | `…/wikipedia/en/d/d2/Back_to_the_Future.jpg` |
+| James Bond | `bond` | [Dr. No (film)](https://en.wikipedia.org/wiki/Dr._No_(film)) | `…/wikipedia/en/4/43/Dr._No_-_UK_cinema_poster.jpg` |
+| Jason Bourne | `bourne` | [The Bourne Identity (2002 film)](https://en.wikipedia.org/wiki/The_Bourne_Identity_(2002_film)) | `…/wikipedia/en/4/49/The_Bourne_Identity_%282002%29_US_poster.jpg` |
 | The Conjuring Universe | `conjuring` | [The Conjuring](https://en.wikipedia.org/wiki/The_Conjuring) | `…/wikipedia/en/8/8c/The_Conjuring_poster.jpg` |
 | DC Films & Shows | `dc` | [The Dark Knight](https://en.wikipedia.org/wiki/The_Dark_Knight) | `…/wikipedia/en/1/1c/The_Dark_Knight_%282008_film%29.jpg` |
+| Die Hard | `die-hard` | [Die Hard](https://en.wikipedia.org/wiki/Die_Hard) | `…/wikipedia/en/c/ca/Die_Hard_%281988_film%29_poster.jpg` |
 | Dune | `dune` | [Dune (2021 film)](https://en.wikipedia.org/wiki/Dune_(2021_film)) | `…/wikipedia/en/8/8e/Dune_%282021_film%29.jpg` |
 | Fast & Furious | `fast` | [The Fast and the Furious (2001 film)](https://en.wikipedia.org/wiki/The_Fast_and_the_Furious_(2001_film)) | `…/wikipedia/en/5/54/Fast_and_the_furious_poster.jpg` |
+| Ghostbusters | `ghostbusters` | [Ghostbusters](https://en.wikipedia.org/wiki/Ghostbusters) | `…/wikipedia/en/2/2f/Ghostbusters_%281984%29_theatrical_poster.png` |
 | Godzilla | `godzilla` | [Godzilla (1954 film)](https://en.wikipedia.org/wiki/Godzilla_(1954_film)) | `…/wikipedia/commons/9/95/Gojira_1954_Japanese_poster.jpg` |
 | Halloween | `halloween` | [Halloween (1978 film)](https://en.wikipedia.org/wiki/Halloween_(1978_film)) | `…/wikipedia/en/a/af/Halloween_%281978%29_theatrical_poster.jpg` |
 | The Hunger Games | `hunger-games` | [The Hunger Games (film)](https://en.wikipedia.org/wiki/The_Hunger_Games_(film)) | `…/wikipedia/en/4/42/HungerGamesPoster.jpg` |
 | Indiana Jones | `indiana-jones` | [Raiders of the Lost Ark](https://en.wikipedia.org/wiki/Raiders_of_the_Lost_Ark) | `…/wikipedia/en/4/4c/Raiders_of_the_Lost_Ark.jpg` |
+| John Wick | `john-wick` | [John Wick (film)](https://en.wikipedia.org/wiki/John_Wick_(film)) | `…/wikipedia/en/9/98/John_Wick_TeaserPoster.jpg` |
 | Jurassic | `jurassic` | [Jurassic Park](https://en.wikipedia.org/wiki/Jurassic_Park) | `…/wikipedia/en/e/e7/Jurassic_Park_poster.jpg` |
 | Mad Max | `mad-max` | [Mad Max: Fury Road](https://en.wikipedia.org/wiki/Mad_Max%3A_Fury_Road) | `…/wikipedia/en/6/6e/Mad_Max_Fury_Road.jpg` |
+| The Matrix | `matrix` | [The Matrix](https://en.wikipedia.org/wiki/The_Matrix) | `…/wikipedia/en/d/db/The_Matrix.png` |
 | Marvel Cinematic Universe | `mcu` | [The Avengers (2012 film)](https://en.wikipedia.org/wiki/The_Avengers_(2012_film)) | `…/wikipedia/en/8/8a/The_Avengers_%282012_film%29_poster.jpg` |
+| Men in Black | `men-in-black` | [Men in Black (1997 film)](https://en.wikipedia.org/wiki/Men_in_Black_(1997_film)) | `…/wikipedia/en/f/fb/Men_in_Black_Poster.jpg` |
 | Middle-earth | `middle-earth` | [The Lord of the Rings: The Fellowship of the Ring](https://en.wikipedia.org/wiki/The_Lord_of_the_Rings%3A_The_Fellowship_of_the_Ring) | `…/wikipedia/en/f/fb/Lord_Rings_Fellowship_Ring.jpg` |
+| Mission: Impossible | `mission-impossible` | [Mission: Impossible (film)](https://en.wikipedia.org/wiki/Mission%3A_Impossible_(film)) | `…/wikipedia/en/e/e1/MissionImpossiblePoster.jpg` |
+| Pirates of the Caribbean | `pirates` | [Pirates of the Caribbean: The Curse of the Black Pearl](https://en.wikipedia.org/wiki/Pirates_of_the_Caribbean%3A_The_Curse_of_the_Black_Pearl) | `…/wikipedia/en/8/89/Pirates_of_the_Caribbean_-_The_Curse_of_the_Black_Pearl.png` |
+| Planet of the Apes | `planet-of-the-apes` | [Planet of the Apes (1968 film)](https://en.wikipedia.org/wiki/Planet_of_the_Apes_(1968_film)) | `…/wikipedia/en/f/fd/PlanetoftheapesPoster.jpg` |
 | Predator | `predator` | [Predator (film)](https://en.wikipedia.org/wiki/Predator_(film)) | `…/wikipedia/en/9/95/Predator_Movie.jpg` |
+| Rocky & Creed | `rocky` | [Rocky](https://en.wikipedia.org/wiki/Rocky) | `…/wikipedia/en/1/18/Rocky_poster.jpg` |
+| Shrek | `shrek` | [Shrek](https://en.wikipedia.org/wiki/Shrek) | `…/wikipedia/en/7/7b/Shrek_%282001_animated_feature_film%29.jpg` |
+| Sonic the Hedgehog | `sonic` | [Sonic the Hedgehog (film)](https://en.wikipedia.org/wiki/Sonic_the_Hedgehog_(film)) | `…/wikipedia/en/4/45/Sonic_the_Hedgehog_film_poster.jpg` |
 | Star Trek | `star-trek` | [Star Trek (2009 film)](https://en.wikipedia.org/wiki/Star_Trek_(2009_film)) | `…/wikipedia/en/2/29/Startrekposter.jpg` |
 | Star Wars | `star-wars` | [Star Wars (film)](https://en.wikipedia.org/wiki/Star_Wars_(film)) | `…/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg` |
 | Terminator | `terminator` | [The Terminator](https://en.wikipedia.org/wiki/The_Terminator) | `…/wikipedia/en/6/6d/The_Terminator.png` |
+| Toy Story | `toy-story` | [Toy Story](https://en.wikipedia.org/wiki/Toy_Story) | `…/wikipedia/en/1/13/Toy_Story.jpg` |
 | Transformers | `transformers` | [Transformers (film)](https://en.wikipedia.org/wiki/Transformers_(film)) | `…/wikipedia/en/6/66/Transformers07.jpg` |
+| The Twilight Saga | `twilight` | [Twilight (2008 film)](https://en.wikipedia.org/wiki/Twilight_(2008_film)) | `…/wikipedia/en/b/b6/Twilight_%282008_film%29_poster.jpg` |
 | Wizarding World | `wizarding-world` | [Fantastic Beasts and Where to Find Them (film)](https://en.wikipedia.org/wiki/Fantastic_Beasts_and_Where_to_Find_Them_(film)) | `…/wikipedia/en/0/0b/FBAWTFT-poster.jpg` |
 | X-Men | `x-men` | [X-Men (film)](https://en.wikipedia.org/wiki/X-Men_(film)) | `…/wikipedia/en/8/81/X-MenfilmPoster.jpg` |
 

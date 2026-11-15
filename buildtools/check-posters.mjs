@@ -1,31 +1,24 @@
 /**
  * Checks the composed banners without needing to look at them.
  *
- * For each banner it measures local detail (standard deviation of luma over 8x8 tiles) in two
- * regions: where the real poster was placed and where only the blurred backdrop is. A real poster
- * has noticeably more detail than a blur, so the ratio tells us the poster is present, sharp and
- * not washed out by the scrim.
+ * For each banner it measures local detail (standard deviation of luma over 8x8 tiles) where the real
+ * poster was placed and where only blurred backdrop is. A real poster carries far more detail than a
+ * blur, so a blank, missing or washed-out poster shows up as a low ratio.
+ *
+ * Geometry comes from buildtools/poster-sources.json, so this stays in step with fetch-posters.mjs.
  */
 import fs from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
 
-const dir = "C:/Projects/Orderly/buildtools/images/posters";
+const root = "C:/Projects/Orderly/buildtools";
+const dir = path.join(root, "images", "posters");
+const sourcesPath = path.join(root, "poster-sources.json");
+
 const W = 960;
 const H = 600;
 const POSTER_H = 430;
 const MARGIN_RIGHT = 52;
-
-/** Same source aspect ratios the fetch script measured, used to locate the poster. */
-const RATIOS = {
-  alien: 250 / 382, conjuring: 220 / 326, dc: 259 / 383, dune: 259 / 384,
-  fast: 235 / 350, godzilla: 2135 / 3000, halloween: 259 / 384,
-  "hunger-games": 220 / 326, "indiana-jones": 257 / 388, jurassic: 220 / 328,
-  "mad-max": 264 / 378, mcu: 260 / 384, "middle-earth": 218 / 326,
-  predator: 258 / 382, "star-trek": 259 / 383, "star-wars": 252 / 385,
-  terminator: 260 / 385, transformers: 265 / 376, "wizarding-world": 259 / 384,
-  "x-men": 248 / 368,
-};
 
 /** Mean of per-tile luma standard deviations for one crop. */
 async function detail(file, left, top, width, height) {
@@ -57,29 +50,51 @@ async function detail(file, left, top, width, height) {
   return { mean: +mean.toFixed(2), p90: +tiles[Math.floor(tiles.length * 0.9)].toFixed(2) };
 }
 
+const sources = JSON.parse(fs.readFileSync(sourcesPath, "utf8"));
+const byId = new Map(sources.map((s) => [s.id, s]));
 const files = fs.readdirSync(dir).filter((f) => f.endsWith(".webp")).sort();
 let bad = 0;
 
-console.log("id               size       backdrop      poster     ratio");
+console.log("id               size       wide     backdrop      poster     ratio");
 for (const f of files) {
   const id = f.replace(/\.webp$/, "");
   const file = path.join(dir, f);
+  const source = byId.get(id);
+  if (!source) {
+    console.log(`${id.padEnd(16)} no source entry  <-- CHECK`);
+    bad++;
+    continue;
+  }
+
   const meta = await sharp(file).metadata();
-  const ratio = RATIOS[id];
-  if (!ratio) throw new Error(`no measured ratio for ${id}`);
-  const w = Math.round(POSTER_H * ratio);
-  const h = POSTER_H;
-  const x = W - w - MARGIN_RIGHT;
+  if (meta.width !== W || meta.height !== H) {
+    console.log(`${id.padEnd(16)} ${meta.width}x${meta.height}  <-- CHECK`);
+    bad++;
+    continue;
+  }
 
-  const backdrop = await detail(file, 20, 300, 200, 200);
-  const poster = await detail(file, x + 8, 56, w - 16, h - 16);
-  const ratioDetail = +(poster.mean / Math.max(backdrop.mean, 0.01)).toFixed(2);
+  const isWide = source.width / source.height > 0.95;
+  let backdropCrop;
+  let posterCrop;
+  if (isWide) {
+    // Full-bleed: the whole frame is the poster, so sample the middle against a corner scrim.
+    backdropCrop = [12, 12, 140, 140];
+    posterCrop = [Math.round(W * 0.35), 120, 320, 320];
+  } else {
+    const w = Math.round(POSTER_H * (source.width / source.height));
+    const x = W - w - MARGIN_RIGHT;
+    backdropCrop = [20, 300, 200, 200];
+    posterCrop = [x + 10, 58, w - 20, POSTER_H - 20];
+  }
 
-  const ok = meta.width === W && meta.height === H && ratioDetail > 2.5;
+  const backdrop = await detail(file, ...backdropCrop);
+  const poster = await detail(file, ...posterCrop);
+  const ratio = +(poster.mean / Math.max(backdrop.mean, 0.01)).toFixed(2);
+  const ok = ratio > (isWide ? 1.6 : 2.5);
   if (!ok) bad++;
   console.log(
-    `${id.padEnd(16)} ${`${meta.width}x${meta.height}`.padEnd(10)} ` +
-      `${String(backdrop.mean).padStart(8)} ${String(poster.mean).padStart(12)} ${String(ratioDetail).padStart(10)}  ${ok ? "" : "  <-- CHECK"}`,
+    `${id.padEnd(16)} ${`${meta.width}x${meta.height}`.padEnd(10)} ${String(isWide ? "yes" : "no").padEnd(6)} ` +
+      `${String(backdrop.mean).padStart(8)} ${String(poster.mean).padStart(12)} ${String(ratio).padStart(10)}  ${ok ? "" : "<-- CHECK"}`,
   );
 }
 console.log(bad === 0 ? `\nall ${files.length} banners look right` : `\n${bad} of ${files.length} need a look`);

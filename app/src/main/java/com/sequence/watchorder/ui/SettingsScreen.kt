@@ -98,8 +98,9 @@ fun SettingsScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
             )
             Spacer(Modifier.height(12.dp))
             SettingsNote(
-                "Everything works offline. Progress is saved only on this phone. Covers are " +
-                    "original artwork drawn by Sequence for each title, not the official cover art.",
+                "Everything works offline. Progress is saved only on this phone. Posters and " +
+                    "covers come from each title's Wikipedia article and stay bundled; the art " +
+                    "belongs to its studios and publishers.",
             )
             Spacer(Modifier.height(12.dp))
             SettingsNote(

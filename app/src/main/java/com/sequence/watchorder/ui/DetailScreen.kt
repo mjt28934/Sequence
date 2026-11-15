@@ -2,6 +2,7 @@ package com.sequence.watchorder.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -41,13 +42,17 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -171,6 +176,7 @@ fun DetailScreen(vm: MainViewModel, franchise: Franchise) {
                     seen = seen,
                     saved = saved,
                     onSave = { vm.toggleSaved(franchise.id) },
+                    scrollState = listState,
                 )
             }
 
@@ -220,17 +226,19 @@ fun DetailScreen(vm: MainViewModel, franchise: Franchise) {
                         else -> "row-$index"
                     }
                 }) { index, row ->
-                    when (row) {
-                        is DetailRow.PathHeader -> EraLabel(row.label)
-                        is DetailRow.CoverRow -> CoverRow(
-                            vm = vm,
-                            franchise = franchise,
-                            items = row.items,
-                            accent = accent,
-                            read = read,
-                            nextBookId = nextBook?.id,
-                        )
-                        else -> Unit
+                    Box(Modifier.animateItem()) {
+                        when (row) {
+                            is DetailRow.PathHeader -> EraLabel(row.label)
+                            is DetailRow.CoverRow -> CoverRow(
+                                vm = vm,
+                                franchise = franchise,
+                                items = row.items,
+                                accent = accent,
+                                read = read,
+                                nextBookId = nextBook?.id,
+                            )
+                            else -> Unit
+                        }
                     }
                 }
             } else {
@@ -249,18 +257,20 @@ fun DetailScreen(vm: MainViewModel, franchise: Franchise) {
                         else -> "row-$index"
                     }
                 }) { _, row ->
-                    when (row) {
-                        is DetailRow.EraHeader -> EraLabel(row.label)
-                        is DetailRow.WatchRow -> SwipeableWatchRow(
-                            vm = vm,
-                            franchise = franchise,
-                            entry = row.entry,
-                            position = row.position,
-                            accent = accent,
-                            watched = row.entry.id in watched,
-                            upcoming = Logic.isUpcoming(row.entry, today),
-                        )
-                        else -> Unit
+                    Box(Modifier.animateItem()) {
+                        when (row) {
+                            is DetailRow.EraHeader -> EraLabel(row.label)
+                            is DetailRow.WatchRow -> SwipeableWatchRow(
+                                vm = vm,
+                                franchise = franchise,
+                                entry = row.entry,
+                                position = row.position,
+                                accent = accent,
+                                watched = row.entry.id in watched,
+                                upcoming = Logic.isUpcoming(row.entry, today),
+                            )
+                            else -> Unit
+                        }
                     }
                 }
             }
@@ -275,13 +285,40 @@ private fun Hero(
     seen: com.sequence.watchorder.data.Progress,
     saved: Boolean,
     onSave: () -> Unit,
+    scrollState: LazyListState,
 ) {
+    val drift by remember(scrollState) {
+        derivedStateOf {
+            if (scrollState.firstVisibleItemIndex == 0) {
+                scrollState.firstVisibleItemScrollOffset.toFloat()
+            } else {
+                0f
+            }
+        }
+    }
     Box(
         Modifier
             .fillMaxWidth()
-            .aspectRatio(16f / 10f),
+            .aspectRatio(16f / 10f)
+            .clipToBounds(),
     ) {
-        ArtImage(ArtKind.POSTER, franchise.id, Modifier.fillMaxSize())
+        ArtImage(
+            ArtKind.POSTER,
+            franchise.id,
+            Modifier
+                .fillMaxSize()
+                .graphicsLayer {
+                    if (Motion.enabled) {
+                        // The art trails the page as it scrolls, and grows just enough that the
+                        // parallax never exposes an edge of the box.
+                        val lift = drift * 0.38f
+                        translationY = -lift
+                        val grow = if (size.height > 0f) 2f * lift / size.height else 0f
+                        scaleX = 1.02f + grow
+                        scaleY = 1.02f + grow
+                    }
+                },
+        )
         Box(
             Modifier
                 .fillMaxSize()
@@ -543,11 +580,14 @@ private fun WatchRow(
     watched: Boolean,
     upcoming: Boolean,
 ) {
+    val interaction = remember { MutableInteractionSource() }
     Surface(
         onClick = { vm.openSheet(Sheet.EntrySheet(entry.id)) },
+        interactionSource = interaction,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 12.dp, vertical = 3.dp),
+            .padding(horizontal = 12.dp, vertical = 3.dp)
+            .pressScale(interaction, pressedScale = 0.98f),
         shape = RoundedCornerShape(16.dp),
         color = if (watched) {
             MaterialTheme.colorScheme.surfaceContainerLow.copy(alpha = 0.55f)

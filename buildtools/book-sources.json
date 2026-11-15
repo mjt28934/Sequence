@@ -1,0 +1,112 @@
+{
+  "bk-bd-1": {
+    "title": "Casino Royale",
+    "page": "Casino Royale (novel)",
+    "franchise": "bond"
+  },
+  "bk-bd-2": {
+    "title": "Live and Let Die",
+    "page": "Live and Let Die (novel)",
+    "franchise": "bond"
+  },
+  "bk-bd-3": {
+    "title": "Moonraker",
+    "page": "Moonraker (novel)",
+    "franchise": "bond"
+  },
+  "bk-bd-4": {
+    "title": "Diamonds Are Forever",
+    "page": "Diamonds Are Forever (novel)",
+    "franchise": "bond"
+  },
+  "bk-bd-5": {
+    "title": "From Russia, with Love",
+    "page": "From Russia, with Love (novel)",
+    "franchise": "bond"
+  },
+  "bk-bd-6": {
+    "title": "Dr. No",
+    "page": "Dr. No (novel)",
+    "franchise": "bond"
+  },
+  "bk-bd-7": {
+    "title": "Goldfinger",
+    "page": "Goldfinger (novel)",
+    "franchise": "bond"
+  },
+  "bk-bd-8": {
+    "title": "Thunderball",
+    "page": "Thunderball (novel)",
+    "franchise": "bond"
+  },
+  "bk-bd-9": {
+    "title": "The Spy Who Loved Me",
+    "page": "The Spy Who Loved Me (novel)",
+    "franchise": "bond"
+  },
+  "bk-bd-10": {
+    "title": "On Her Majesty's Secret Service",
+    "page": "On Her Majesty's Secret Service (novel)",
+    "franchise": "bond"
+  },
+  "bk-bd-11": {
+    "title": "You Only Live Twice",
+    "page": "You Only Live Twice (novel)",
+    "franchise": "bond"
+  },
+  "bk-bd-12": {
+    "title": "The Man with the Golden Gun",
+    "page": "The Man with the Golden Gun (novel)",
+    "franchise": "bond"
+  },
+  "bk-bd-13": {
+    "title": "Octopussy and The Living Daylights",
+    "page": "Octopussy and The Living Daylights",
+    "franchise": "bond"
+  },
+  "bk-pota-1": {
+    "title": "Planet of the Apes",
+    "page": "Planet of the Apes (novel)",
+    "franchise": "planet-of-the-apes"
+  },
+  "bk-sh-1": {
+    "title": "Shrek!",
+    "page": "Shrek!",
+    "franchise": "shrek"
+  },
+  "bk-tw-1": {
+    "title": "Twilight",
+    "page": "Twilight (Meyer novel)",
+    "franchise": "twilight"
+  },
+  "bk-tw-2": {
+    "title": "New Moon",
+    "page": "New Moon (novel)",
+    "franchise": "twilight"
+  },
+  "bk-tw-3": {
+    "title": "Eclipse",
+    "page": "Eclipse (Meyer novel)",
+    "franchise": "twilight"
+  },
+  "bk-tw-4": {
+    "title": "Breaking Dawn",
+    "page": "Breaking Dawn",
+    "franchise": "twilight"
+  },
+  "bk-bn-1": {
+    "title": "The Bourne Identity",
+    "page": "The Bourne Identity (novel)",
+    "franchise": "bourne"
+  },
+  "bk-bn-2": {
+    "title": "The Bourne Supremacy",
+    "page": "The Bourne Supremacy",
+    "franchise": "bourne"
+  },
+  "bk-bn-3": {
+    "title": "The Bourne Ultimatum",
+    "page": "The Bourne Ultimatum",
+    "franchise": "bourne"
+  }
+}

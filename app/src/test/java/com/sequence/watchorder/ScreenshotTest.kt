@@ -14,6 +14,7 @@ import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import com.sequence.watchorder.data.Catalog
 import com.sequence.watchorder.data.LibView
+import com.sequence.watchorder.data.Logic
 import com.sequence.watchorder.data.OrderMode
 import com.sequence.watchorder.data.ProgressState
 import com.sequence.watchorder.ui.ArtKind
@@ -23,6 +24,7 @@ import com.sequence.watchorder.ui.FallbackDark
 import com.sequence.watchorder.ui.FallbackLight
 import com.sequence.watchorder.ui.HomeScreen
 import com.sequence.watchorder.ui.LibraryScreen
+import com.sequence.watchorder.ui.Motion
 import com.sequence.watchorder.ui.SearchScreen
 import com.sequence.watchorder.ui.SettingsScreen
 import com.sequence.watchorder.ui.UpcomingScreen
@@ -48,22 +50,31 @@ class ScreenshotTest {
 
     @Before
     fun setUpArt() {
+        // Snapshots are a single frame, so timed motion would be caught mid-fade. Screens render
+        // settled instead; the animations themselves are covered by the numeric checks in the app.
+        Motion.enabled = false
+        // Keep every poster and cover resident so a snapshot never catches a decode in progress.
+        ArtRepository.budgetKbOverride = 320 * 1024
         ArtRepository.overrideLoader = { kind, id ->
             val folder = if (kind == ArtKind.POSTER) "posters" else "covers"
             val file = File(assets, "art/$folder/$id.webp")
             if (file.exists()) BitmapFactory.decodeFile(file.absolutePath)?.asImageBitmap() else null
         }
         catalog.franchises.forEach { ArtRepository.warm(ArtKind.POSTER, it.id) }
+        // The home fixture has wizarding-world open for reading, so its covers appear there too.
+        catalog.worksFor("wizarding-world").forEach { ArtRepository.warm(ArtKind.COVER, it.id) }
     }
 
     private fun fixture(): ProgressState {
         val starWars = listOf("sw-acolyte", "sw-1", "sw-2")
         val mcu = listOf("mcu-eow", "mcu-ca1", "mcu-cm")
+        // One finished franchise, so the screenshots show the completed state too.
+        val toyStory = catalog.franchise("toy-story")!!.entries.map { it.id }
         return ProgressState(
-            watched = mapOf("star-wars" to starWars, "mcu" to mcu),
+            watched = mapOf("star-wars" to starWars, "mcu" to mcu, "toy-story" to toyStory),
             read = mapOf("wizarding-world" to listOf("bk-ww-1", "bk-ww-2")),
             mode = OrderMode.RELEASE,
-            saved = listOf("star-wars", "mcu", "alien", "middle-earth"),
+            saved = listOf("star-wars", "mcu", "alien", "middle-earth", "toy-story"),
             recent = listOf("star-wars", "mcu", "middle-earth"),
             libView = LibView.GRID,
         )
@@ -102,10 +113,11 @@ class ScreenshotTest {
     @Test
     fun shell() {
         val model = vm()
+        val mini = Logic.continueList(catalog, model.progress, model.today(), 1).firstOrNull()
         shot("shell") {
             Column(Modifier.fillMaxSize()) {
                 Box(Modifier.weight(1f)) { HomeScreen(model) }
-                AppNavigationBar(model)
+                AppBottomBar(model, mini)
             }
         }
     }

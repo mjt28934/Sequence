@@ -1,6 +1,7 @@
 package com.sequence.watchorder.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -148,13 +149,15 @@ fun LibraryScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
                     items(items, key = { it.franchise.id }) { item ->
-                        PosterTile(
-                            franchise = item.franchise,
-                            subtitle = subtitleFor(item),
-                            progress = item.seen,
-                            accent = vm.catalog.accent(item.franchise.id).toPalette(),
-                            onClick = { vm.openFranchise(item.franchise.id) },
-                        )
+                        Box(Modifier.animateItem()) {
+                            PosterTile(
+                                franchise = item.franchise,
+                                subtitle = subtitleFor(item),
+                                progress = item.seen,
+                                accent = vm.catalog.accent(item.franchise.id).toPalette(),
+                                onClick = { vm.openFranchise(item.franchise.id) },
+                            )
+                        }
                     }
                 }
 
@@ -163,7 +166,7 @@ fun LibraryScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                     contentPadding = PaddingValues(bottom = 96.dp),
                 ) {
                     items(items, key = { it.franchise.id }) { item ->
-                        LibraryRow(vm, item)
+                        Box(Modifier.animateItem()) { LibraryRow(vm, item) }
                     }
                 }
             }
@@ -181,11 +184,14 @@ private fun subtitleFor(item: LibraryItem): String = when {
 @Composable
 private fun LibraryRow(vm: MainViewModel, item: LibraryItem) {
     val accent = vm.catalog.accent(item.franchise.id).toPalette()
+    val interaction = remember { MutableInteractionSource() }
     Card(
         onClick = { vm.openFranchise(item.franchise.id) },
+        interactionSource = interaction,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 12.dp, vertical = 4.dp),
+            .padding(horizontal = 12.dp, vertical = 4.dp)
+            .pressScale(interaction, pressedScale = 0.98f),
         shape = RoundedCornerShape(18.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
     ) {

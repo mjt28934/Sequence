@@ -4,10 +4,14 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -56,6 +60,7 @@ import com.sequence.watchorder.ui.SequenceTheme
 import com.sequence.watchorder.ui.DetailScreen
 import com.sequence.watchorder.ui.HomeScreen
 import com.sequence.watchorder.ui.LibraryScreen
+import com.sequence.watchorder.ui.Motion
 import com.sequence.watchorder.ui.SearchScreen
 import com.sequence.watchorder.ui.SettingsScreen
 import com.sequence.watchorder.ui.UpcomingScreen
@@ -157,16 +162,7 @@ private fun MainTabs(vm: MainViewModel, snackbarHostState: SnackbarHostState) {
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         contentWindowInsets = androidx.compose.foundation.layout.WindowInsets(0, 0, 0, 0),
-        bottomBar = {
-            Column {
-                AnimatedVisibility(visible = miniCard != null) {
-                    if (miniCard != null) {
-                        MiniBar(vm, miniCard)
-                    }
-                }
-                AppNavigationBar(vm)
-            }
-        },
+        bottomBar = { AppBottomBar(vm, miniCard) },
         snackbarHost = {
             SnackbarHost(
                 hostState = snackbarHostState,
@@ -188,6 +184,28 @@ private fun MainTabs(vm: MainViewModel, snackbarHostState: SnackbarHostState) {
                 }
             }
         }
+    }
+}
+
+/** Everything pinned under the content: the continue strip, then the navigation bar. */
+@Composable
+internal fun AppBottomBar(vm: MainViewModel, miniCard: ContinueCard?) {
+    Column {
+        if (Motion.enabled) {
+            AnimatedVisibility(
+                visible = miniCard != null,
+                enter = fadeIn(tween(200)) + expandVertically(tween(280), expandFrom = Alignment.Bottom),
+                exit = fadeOut(tween(140)) + shrinkVertically(tween(220), shrinkTowards = Alignment.Bottom),
+            ) {
+                if (miniCard != null) {
+                    MiniBar(vm, miniCard)
+                }
+            }
+        } else if (miniCard != null) {
+            // Settled state: a snapshot has no time to run an enter transition.
+            MiniBar(vm, miniCard)
+        }
+        AppNavigationBar(vm)
     }
 }
 
@@ -250,46 +268,60 @@ private fun MiniBar(vm: MainViewModel, card: ContinueCard) {
         tonalElevation = 3.dp,
     ) {
         Column {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 8.dp, end = 4.dp, top = 8.dp, bottom = 10.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-            ) {
-                Box(
-                    Modifier
-                        .width(56.dp)
-                        .aspectRatio(16f / 10f)
-                        .clip(RoundedCornerShape(10.dp)),
+            // Sliding the strip's contents, rather than snapping them, when the next title changes.
+            AnimatedContent(
+                targetState = card.franchise.id,
+                transitionSpec = {
+                    (
+                        slideInVertically(tween(240)) { it / 3 } + fadeIn(tween(240))
+                        ) togetherWith (
+                        slideOutVertically(tween(160)) { -it / 3 } + fadeOut(tween(120))
+                        )
+                },
+                label = "miniBar",
+            ) { shownId ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 8.dp, end = 4.dp, top = 8.dp, bottom = 10.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
-                    ArtImage(ArtKind.POSTER, card.franchise.id, Modifier.fillMaxSize())
-                }
-                Column(Modifier.weight(1f)) {
-                    Text(
-                        text = card.franchise.name,
-                        style = MaterialTheme.typography.titleSmall,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                    )
-                    Text(
-                        text = "$kicker · $title",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                    )
-                }
-                if (hasNext) {
-                    SeenToggle(
-                        checked = false,
-                        size = 40.dp,
-                        onToggle = {
-                            card.next?.let { vm.toggleSeen(card.franchise.id, it) }
-                                ?: card.nextBook?.let { vm.toggleRead(card.franchise.id, it) }
-                        },
-                    )
+                    Box(
+                        Modifier
+                            .width(56.dp)
+                            .aspectRatio(16f / 10f)
+                            .clip(RoundedCornerShape(10.dp)),
+                    ) {
+                        // Keeps the outgoing poster with the outgoing text during the slide.
+                        ArtImage(ArtKind.POSTER, shownId, Modifier.fillMaxSize())
+                    }
+                    Column(Modifier.weight(1f)) {
+                        Text(
+                            text = card.franchise.name,
+                            style = MaterialTheme.typography.titleSmall,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                        )
+                        Text(
+                            text = "$kicker · $title",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                        )
+                    }
+                    if (hasNext) {
+                        SeenToggle(
+                            checked = false,
+                            size = 40.dp,
+                            onToggle = {
+                                card.next?.let { vm.toggleSeen(card.franchise.id, it) }
+                                    ?: card.nextBook?.let { vm.toggleRead(card.franchise.id, it) }
+                            },
+                        )
+                    }
                 }
             }
             ProgressStrip(

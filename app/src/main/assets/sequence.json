@@ -3278,6 +3278,1341 @@
           "note": "Scheduled theatrical release."
         }
       ]
+    },
+    {
+      "id": "bond",
+      "name": "James Bond",
+      "years": "1962â€“2021",
+      "hook": "Twenty-five Eon films, one man, loose continuity",
+      "blurb": "The Eon series ran from 1962 to 2021 and rebooted itself twice, so there is no single story order. Watch it in release order and you get every era, every Bond and every gadget in the order audiences met them.",
+      "storyHint": "Release order is the honest answer. The two non-Eon films are optional and sit outside the series.",
+      "genre": "Action",
+      "accent": "#c9a227",
+      "eraOrder": [
+        "Eon",
+        "Other"
+      ],
+      "entries": [
+        {
+          "id": "bd-dn",
+          "title": "Dr. No",
+          "date": "1962-10-05",
+          "year": 1962,
+          "kind": "film",
+          "era": "Eon",
+          "story": 1
+        },
+        {
+          "id": "bd-fr",
+          "title": "From Russia with Love",
+          "date": "1963-10-10",
+          "year": 1963,
+          "kind": "film",
+          "era": "Eon",
+          "story": 2
+        },
+        {
+          "id": "bd-gf",
+          "title": "Goldfinger",
+          "date": "1964-09-17",
+          "year": 1964,
+          "kind": "film",
+          "era": "Eon",
+          "story": 3
+        },
+        {
+          "id": "bd-tb",
+          "title": "Thunderball",
+          "date": "1965-12-09",
+          "year": 1965,
+          "kind": "film",
+          "era": "Eon",
+          "story": 4
+        },
+        {
+          "id": "bd-cr67",
+          "title": "Casino Royale",
+          "date": "1967-04-14",
+          "year": 1967,
+          "kind": "film",
+          "era": "Other",
+          "story": 27,
+          "note": "A 1967 comedy parody, unrelated to the Eon series.",
+          "optional": true
+        },
+        {
+          "id": "bd-yl",
+          "title": "You Only Live Twice",
+          "date": "1967-06-12",
+          "year": 1967,
+          "kind": "film",
+          "era": "Eon",
+          "story": 5
+        },
+        {
+          "id": "bd-oh",
+          "title": "On Her Majesty's Secret Service",
+          "date": "1969-12-19",
+          "year": 1969,
+          "kind": "film",
+          "era": "Eon",
+          "story": 6
+        },
+        {
+          "id": "bd-da",
+          "title": "Diamonds Are Forever",
+          "date": "1971-12-14",
+          "year": 1971,
+          "kind": "film",
+          "era": "Eon",
+          "story": 7
+        },
+        {
+          "id": "bd-ll",
+          "title": "Live and Let Die",
+          "date": "1973-06-27",
+          "year": 1973,
+          "kind": "film",
+          "era": "Eon",
+          "story": 8
+        },
+        {
+          "id": "bd-mg",
+          "title": "The Man with the Golden Gun",
+          "date": "1974-12-19",
+          "year": 1974,
+          "kind": "film",
+          "era": "Eon",
+          "story": 9
+        },
+        {
+          "id": "bd-sm",
+          "title": "The Spy Who Loved Me",
+          "date": "1977-08-25",
+          "year": 1977,
+          "kind": "film",
+          "era": "Eon",
+          "story": 10
+        },
+        {
+          "id": "bd-mr",
+          "title": "Moonraker",
+          "date": "1979-06-26",
+          "year": 1979,
+          "kind": "film",
+          "era": "Eon",
+          "story": 11
+        },
+        {
+          "id": "bd-fy",
+          "title": "For Your Eyes Only",
+          "date": "1981-06-26",
+          "year": 1981,
+          "kind": "film",
+          "era": "Eon",
+          "story": 12
+        },
+        {
+          "id": "bd-oc",
+          "title": "Octopussy",
+          "date": "1983-06-06",
+          "year": 1983,
+          "kind": "film",
+          "era": "Eon",
+          "story": 13
+        },
+        {
+          "id": "bd-ns",
+          "title": "Never Say Never Again",
+          "date": "1983-10-07",
+          "year": 1983,
+          "kind": "film",
+          "era": "Other",
+          "story": 14,
+          "note": "A remake of Thunderball made outside Eon, with Sean Connery back as Bond.",
+          "optional": true
+        },
+        {
+          "id": "bd-vk",
+          "title": "A View to a Kill",
+          "date": "1985-05-24",
+          "year": 1985,
+          "kind": "film",
+          "era": "Eon",
+          "story": 15
+        },
+        {
+          "id": "bd-ld",
+          "title": "The Living Daylights",
+          "date": "1987-06-27",
+          "year": 1987,
+          "kind": "film",
+          "era": "Eon",
+          "story": 16
+        },
+        {
+          "id": "bd-lk",
+          "title": "Licence to Kill",
+          "date": "1989-07-07",
+          "year": 1989,
+          "kind": "film",
+          "era": "Eon",
+          "story": 17
+        },
+        {
+          "id": "bd-ge",
+          "title": "GoldenEye",
+          "date": "1995-11-17",
+          "year": 1995,
+          "kind": "film",
+          "era": "Eon",
+          "story": 18
+        },
+        {
+          "id": "bd-tn",
+          "title": "Tomorrow Never Dies",
+          "date": "1997-12-18",
+          "year": 1997,
+          "kind": "film",
+          "era": "Eon",
+          "story": 19
+        },
+        {
+          "id": "bd-we",
+          "title": "The World Is Not Enough",
+          "date": "1999-11-08",
+          "year": 1999,
+          "kind": "film",
+          "era": "Eon",
+          "story": 20
+        },
+        {
+          "id": "bd-dad",
+          "title": "Die Another Day",
+          "date": "2002-11-22",
+          "year": 2002,
+          "kind": "film",
+          "era": "Eon",
+          "story": 21
+        },
+        {
+          "id": "bd-cr",
+          "title": "Casino Royale",
+          "date": "2006-11-14",
+          "year": 2006,
+          "kind": "film",
+          "era": "Eon",
+          "story": 22,
+          "note": "The first Craig film and a hard reboot of the series."
+        },
+        {
+          "id": "bd-qs",
+          "title": "Quantum of Solace",
+          "date": "2008-10-29",
+          "year": 2008,
+          "kind": "film",
+          "era": "Eon",
+          "story": 23,
+          "note": "Picks up minutes after Casino Royale ends."
+        },
+        {
+          "id": "bd-sf",
+          "title": "Skyfall",
+          "date": "2012-10-23",
+          "year": 2012,
+          "kind": "film",
+          "era": "Eon",
+          "story": 24
+        },
+        {
+          "id": "bd-sp",
+          "title": "Spectre",
+          "date": "2015-10-26",
+          "year": 2015,
+          "kind": "film",
+          "era": "Eon",
+          "story": 25
+        },
+        {
+          "id": "bd-nt",
+          "title": "No Time to Die",
+          "date": "2021-09-30",
+          "year": 2021,
+          "kind": "film",
+          "era": "Eon",
+          "story": 26
+        }
+      ]
+    },
+    {
+      "id": "mission-impossible",
+      "name": "Mission: Impossible",
+      "years": "1996â€“2025",
+      "hook": "Eight films, one increasingly impossible stunt",
+      "blurb": "The film series rebooted the 1960s show with Ethan Hunt and has kept a single loose continuity ever since. Each film hands the director a new style, so release order is the only order that makes sense.",
+      "storyHint": "Release order. Dead Reckoning and The Final Reckoning are one story split in two.",
+      "genre": "Action",
+      "accent": "#d0463f",
+      "eraOrder": [
+        "Films"
+      ],
+      "entries": [
+        {
+          "id": "mi-1",
+          "title": "Mission: Impossible",
+          "date": "1996-05-22",
+          "year": 1996,
+          "kind": "film",
+          "era": "Films",
+          "story": 1
+        },
+        {
+          "id": "mi-2",
+          "title": "Mission: Impossible 2",
+          "date": "2000-05-24",
+          "year": 2000,
+          "kind": "film",
+          "era": "Films",
+          "story": 2
+        },
+        {
+          "id": "mi-3",
+          "title": "Mission: Impossible III",
+          "date": "2006-04-24",
+          "year": 2006,
+          "kind": "film",
+          "era": "Films",
+          "story": 3
+        },
+        {
+          "id": "mi-4",
+          "title": "Mission: Impossible â€“ Ghost Protocol",
+          "date": "2011-12-21",
+          "year": 2011,
+          "kind": "film",
+          "era": "Films",
+          "story": 4
+        },
+        {
+          "id": "mi-5",
+          "title": "Mission: Impossible â€“ Rogue Nation",
+          "date": "2015-07-31",
+          "year": 2015,
+          "kind": "film",
+          "era": "Films",
+          "story": 5
+        },
+        {
+          "id": "mi-6",
+          "title": "Mission: Impossible â€“ Fallout",
+          "date": "2018-07-27",
+          "year": 2018,
+          "kind": "film",
+          "era": "Films",
+          "story": 6,
+          "note": "Direct follow-on from Rogue Nation."
+        },
+        {
+          "id": "mi-7",
+          "title": "Mission: Impossible â€“ Dead Reckoning Part One",
+          "date": "2023-07-12",
+          "year": 2023,
+          "kind": "film",
+          "era": "Films",
+          "story": 7
+        },
+        {
+          "id": "mi-8",
+          "title": "Mission: Impossible â€“ The Final Reckoning",
+          "date": "2025-05-23",
+          "year": 2025,
+          "kind": "film",
+          "era": "Films",
+          "story": 8,
+          "note": "Second half of the Dead Reckoning story."
+        }
+      ]
+    },
+    {
+      "id": "john-wick",
+      "name": "John Wick",
+      "years": "2014â€“2025",
+      "hook": "A hitman, a dog, and a very expensive suit",
+      "blurb": "Four films, one prequel series and one spin-off, all built on the same hotel-for-assassins mythology. Story order puts the 1970s Continental series first, then the films, with Ballerina tucked between Chapters 3 and 4.",
+      "storyHint": "The Continental is a 1970s prequel; Ballerina runs alongside Chapter 3 and ends before Chapter 4.",
+      "genre": "Action",
+      "accent": "#8b7cf0",
+      "eraOrder": [
+        "Prequel",
+        "Main"
+      ],
+      "entries": [
+        {
+          "id": "jw-1",
+          "title": "John Wick",
+          "date": "2014-10-24",
+          "year": 2014,
+          "kind": "film",
+          "era": "Main",
+          "story": 2
+        },
+        {
+          "id": "jw-2",
+          "title": "John Wick: Chapter 2",
+          "date": "2017-02-10",
+          "year": 2017,
+          "kind": "film",
+          "era": "Main",
+          "story": 3
+        },
+        {
+          "id": "jw-3",
+          "title": "John Wick: Chapter 3 â€“ Parabellum",
+          "date": "2019-05-17",
+          "year": 2019,
+          "kind": "film",
+          "era": "Main",
+          "story": 4
+        },
+        {
+          "id": "jw-4",
+          "title": "John Wick: Chapter 4",
+          "date": "2023-03-22",
+          "year": 2023,
+          "kind": "film",
+          "era": "Main",
+          "story": 6
+        },
+        {
+          "id": "jw-cont",
+          "title": "The Continental",
+          "date": "2023-09-22",
+          "year": 2023,
+          "kind": "series",
+          "era": "Prequel",
+          "story": 1,
+          "note": "A three-part prequel set in 1975. Optional, but it explains the hotel.",
+          "optional": true
+        },
+        {
+          "id": "jw-bal",
+          "title": "Ballerina",
+          "date": "2025-06-05",
+          "year": 2025,
+          "kind": "film",
+          "era": "Main",
+          "story": 5,
+          "note": "Set during the events of Chapter 3."
+        }
+      ]
+    },
+    {
+      "id": "matrix",
+      "name": "The Matrix",
+      "years": "1999â€“2021",
+      "hook": "Follow the white rabbit, then the sequels",
+      "blurb": "The 1999 original, two sequels released six months apart, an animated anthology that fills in the world, and a 2021 epilogue. The Animatrix sits between the first two films.",
+      "storyHint": "The Matrix, The Animatrix, Reloaded, Revolutions, then Resurrections twenty years later.",
+      "genre": "Sci-fi",
+      "accent": "#35c46a",
+      "eraOrder": [
+        "Films"
+      ],
+      "entries": [
+        {
+          "id": "mx-1",
+          "title": "The Matrix",
+          "date": "1999-03-31",
+          "year": 1999,
+          "kind": "film",
+          "era": "Films",
+          "story": 1
+        },
+        {
+          "id": "mx-2",
+          "title": "The Matrix Reloaded",
+          "date": "2003-05-15",
+          "year": 2003,
+          "kind": "film",
+          "era": "Films",
+          "story": 3
+        },
+        {
+          "id": "mx-an",
+          "title": "The Animatrix",
+          "date": "2003-06-03",
+          "year": 2003,
+          "kind": "special",
+          "era": "Films",
+          "story": 2,
+          "note": "Nine animated shorts that set up the world and the war. Watch after the first film.",
+          "optional": true
+        },
+        {
+          "id": "mx-3",
+          "title": "The Matrix Revolutions",
+          "date": "2003-11-05",
+          "year": 2003,
+          "kind": "film",
+          "era": "Films",
+          "story": 4
+        },
+        {
+          "id": "mx-4",
+          "title": "The Matrix Resurrections",
+          "date": "2021-12-17",
+          "year": 2021,
+          "kind": "film",
+          "era": "Films",
+          "story": 5
+        }
+      ]
+    },
+    {
+      "id": "back-to-the-future",
+      "name": "Back to the Future",
+      "years": "1985â€“1991",
+      "hook": "Three films, one DeLorean, no reboots",
+      "blurb": "A single tight trilogy about the same afternoon in 1985 going wrong in three directions, plus an animated series that continues after Part III. Release order is story order.",
+      "storyHint": "Parts I, II and III in order. The animated series is optional and runs after the trilogy.",
+      "genre": "Sci-fi",
+      "accent": "#e8b23c",
+      "eraOrder": [
+        "Films",
+        "Animated"
+      ],
+      "entries": [
+        {
+          "id": "bttf-1",
+          "title": "Back to the Future",
+          "date": "1985-07-03",
+          "year": 1985,
+          "kind": "film",
+          "era": "Films",
+          "story": 1
+        },
+        {
+          "id": "bttf-2",
+          "title": "Back to the Future Part II",
+          "date": "1989-11-22",
+          "year": 1989,
+          "kind": "film",
+          "era": "Films",
+          "story": 2
+        },
+        {
+          "id": "bttf-3",
+          "title": "Back to the Future Part III",
+          "date": "1990-05-25",
+          "year": 1990,
+          "kind": "film",
+          "era": "Films",
+          "story": 3
+        },
+        {
+          "id": "bttf-as",
+          "title": "Back to the Future: The Animated Series",
+          "date": "1991-09-14",
+          "year": 1991,
+          "kind": "series",
+          "era": "Animated",
+          "story": 4,
+          "optional": true
+        }
+      ]
+    },
+    {
+      "id": "pirates",
+      "name": "Pirates of the Caribbean",
+      "years": "2003â€“2017",
+      "hook": "Five films, one curse, a lot of rum",
+      "blurb": "The first three films are one continuous story; the last two are stand-alone adventures with the same crew. Release order keeps the trilogy intact.",
+      "storyHint": "Release order. Dead Men Tell No Tales brings back characters from the trilogy.",
+      "genre": "Fantasy",
+      "accent": "#2fb1a8",
+      "eraOrder": [
+        "Films"
+      ],
+      "entries": [
+        {
+          "id": "potc-1",
+          "title": "Pirates of the Caribbean: The Curse of the Black Pearl",
+          "date": "2003-07-09",
+          "year": 2003,
+          "kind": "film",
+          "era": "Films",
+          "story": 1
+        },
+        {
+          "id": "potc-2",
+          "title": "Pirates of the Caribbean: Dead Man's Chest",
+          "date": "2006-07-07",
+          "year": 2006,
+          "kind": "film",
+          "era": "Films",
+          "story": 2
+        },
+        {
+          "id": "potc-3",
+          "title": "Pirates of the Caribbean: At World's End",
+          "date": "2007-05-23",
+          "year": 2007,
+          "kind": "film",
+          "era": "Films",
+          "story": 3
+        },
+        {
+          "id": "potc-4",
+          "title": "Pirates of the Caribbean: On Stranger Tides",
+          "date": "2011-05-18",
+          "year": 2011,
+          "kind": "film",
+          "era": "Films",
+          "story": 4
+        },
+        {
+          "id": "potc-5",
+          "title": "Pirates of the Caribbean: Dead Men Tell No Tales",
+          "date": "2017-05-24",
+          "year": 2017,
+          "kind": "film",
+          "era": "Films",
+          "story": 5
+        }
+      ]
+    },
+    {
+      "id": "planet-of-the-apes",
+      "name": "Planet of the Apes",
+      "years": "1968â€“2024",
+      "hook": "Three separate timelines about the same planet",
+      "blurb": "The 1968 original and its four sequels, Tim Burton's 2001 remake, and the modern Caesar trilogy that leads into Kingdom. They are three different continuities, so pick one lane and stay in it.",
+      "storyHint": "Caesar timeline: Rise, Dawn, War, Kingdom. Original timeline: Planet, Beneath, Escape, Conquest, Battle. The 2001 remake stands alone.",
+      "genre": "Sci-fi",
+      "accent": "#8c9a6b",
+      "eraOrder": [
+        "Original",
+        "Remake",
+        "Caesar"
+      ],
+      "entries": [
+        {
+          "id": "pota-1",
+          "title": "Planet of the Apes",
+          "date": "1968-02-08",
+          "year": 1968,
+          "kind": "film",
+          "era": "Original",
+          "story": 1
+        },
+        {
+          "id": "pota-2",
+          "title": "Beneath the Planet of the Apes",
+          "date": "1970-05-01",
+          "year": 1970,
+          "kind": "film",
+          "era": "Original",
+          "story": 2
+        },
+        {
+          "id": "pota-3",
+          "title": "Escape from the Planet of the Apes",
+          "date": "1971-05-12",
+          "year": 1971,
+          "kind": "film",
+          "era": "Original",
+          "story": 3
+        },
+        {
+          "id": "pota-4",
+          "title": "Conquest of the Planet of the Apes",
+          "date": "1972-06-29",
+          "year": 1972,
+          "kind": "film",
+          "era": "Original",
+          "story": 4
+        },
+        {
+          "id": "pota-5",
+          "title": "Battle for the Planet of the Apes",
+          "date": "1973-05-23",
+          "year": 1973,
+          "kind": "film",
+          "era": "Original",
+          "story": 5
+        },
+        {
+          "id": "pota-01",
+          "title": "Planet of the Apes",
+          "date": "2001-07-27",
+          "year": 2001,
+          "kind": "film",
+          "era": "Remake",
+          "story": 6,
+          "note": "Tim Burton's remake. Its own continuity, safe to skip.",
+          "optional": true
+        },
+        {
+          "id": "pota-r",
+          "title": "Rise of the Planet of the Apes",
+          "date": "2011-08-05",
+          "year": 2011,
+          "kind": "film",
+          "era": "Caesar",
+          "story": 7
+        },
+        {
+          "id": "pota-d",
+          "title": "Dawn of the Planet of the Apes",
+          "date": "2014-06-26",
+          "year": 2014,
+          "kind": "film",
+          "era": "Caesar",
+          "story": 8
+        },
+        {
+          "id": "pota-w",
+          "title": "War for the Planet of the Apes",
+          "date": "2017-07-13",
+          "year": 2017,
+          "kind": "film",
+          "era": "Caesar",
+          "story": 9
+        },
+        {
+          "id": "pota-k",
+          "title": "Kingdom of the Planet of the Apes",
+          "date": "2024-05-08",
+          "year": 2024,
+          "kind": "film",
+          "era": "Caesar",
+          "story": 10,
+          "note": "Set generations after War."
+        }
+      ]
+    },
+    {
+      "id": "rocky",
+      "name": "Rocky & Creed",
+      "years": "1976â€“2023",
+      "hook": "Nine films, one staircase",
+      "blurb": "Rocky ran from 1976 to 2006, then handed the gloves to Adonis Creed in 2015. It is one continuous story, so release order is story order.",
+      "storyHint": "Rocky Iâ€“V, Rocky Balboa, then Creed, Creed II and Creed III.",
+      "genre": "Action",
+      "accent": "#b6562d",
+      "eraOrder": [
+        "Rocky",
+        "Creed"
+      ],
+      "entries": [
+        {
+          "id": "rk-1",
+          "title": "Rocky",
+          "date": "1976-11-21",
+          "year": 1976,
+          "kind": "film",
+          "era": "Rocky",
+          "story": 1
+        },
+        {
+          "id": "rk-2",
+          "title": "Rocky II",
+          "date": "1979-06-15",
+          "year": 1979,
+          "kind": "film",
+          "era": "Rocky",
+          "story": 2
+        },
+        {
+          "id": "rk-3",
+          "title": "Rocky III",
+          "date": "1982-05-28",
+          "year": 1982,
+          "kind": "film",
+          "era": "Rocky",
+          "story": 3
+        },
+        {
+          "id": "rk-4",
+          "title": "Rocky IV",
+          "date": "1985-11-27",
+          "year": 1985,
+          "kind": "film",
+          "era": "Rocky",
+          "story": 4
+        },
+        {
+          "id": "rk-5",
+          "title": "Rocky V",
+          "date": "1990-11-16",
+          "year": 1990,
+          "kind": "film",
+          "era": "Rocky",
+          "story": 5
+        },
+        {
+          "id": "rk-6",
+          "title": "Rocky Balboa",
+          "date": "2006-12-20",
+          "year": 2006,
+          "kind": "film",
+          "era": "Rocky",
+          "story": 6,
+          "note": "Ignores most of Rocky V and closes the original run."
+        },
+        {
+          "id": "cr-1",
+          "title": "Creed",
+          "date": "2015-11-25",
+          "year": 2015,
+          "kind": "film",
+          "era": "Creed",
+          "story": 7
+        },
+        {
+          "id": "cr-2",
+          "title": "Creed II",
+          "date": "2018-11-21",
+          "year": 2018,
+          "kind": "film",
+          "era": "Creed",
+          "story": 8,
+          "note": "Brings back Ivan Drago from Rocky IV."
+        },
+        {
+          "id": "cr-3",
+          "title": "Creed III",
+          "date": "2023-03-01",
+          "year": 2023,
+          "kind": "film",
+          "era": "Creed",
+          "story": 9,
+          "note": "The first film without Rocky."
+        }
+      ]
+    },
+    {
+      "id": "die-hard",
+      "name": "Die Hard",
+      "years": "1988â€“2013",
+      "hook": "One man, five very bad days",
+      "blurb": "The 1988 original invented a genre and the sequels keep finding new buildings for John McClane to wreck. Each film stands alone; release order is enough.",
+      "storyHint": "Release order. Only the first two are closely linked.",
+      "genre": "Action",
+      "accent": "#5b7fae",
+      "eraOrder": [
+        "Films"
+      ],
+      "entries": [
+        {
+          "id": "dh-1",
+          "title": "Die Hard",
+          "date": "1988-07-15",
+          "year": 1988,
+          "kind": "film",
+          "era": "Films",
+          "story": 1
+        },
+        {
+          "id": "dh-2",
+          "title": "Die Hard 2",
+          "date": "1990-07-04",
+          "year": 1990,
+          "kind": "film",
+          "era": "Films",
+          "story": 2
+        },
+        {
+          "id": "dh-3",
+          "title": "Die Hard with a Vengeance",
+          "date": "1995-05-19",
+          "year": 1995,
+          "kind": "film",
+          "era": "Films",
+          "story": 3
+        },
+        {
+          "id": "dh-4",
+          "title": "Live Free or Die Hard",
+          "date": "2007-06-27",
+          "year": 2007,
+          "kind": "film",
+          "era": "Films",
+          "story": 4
+        },
+        {
+          "id": "dh-5",
+          "title": "A Good Day to Die Hard",
+          "date": "2013-02-14",
+          "year": 2013,
+          "kind": "film",
+          "era": "Films",
+          "story": 5
+        }
+      ]
+    },
+    {
+      "id": "ghostbusters",
+      "name": "Ghostbusters",
+      "years": "1984â€“2024",
+      "hook": "Two timelines, four proton packs",
+      "blurb": "The 1984 original and its 1989 sequel, a 2016 reboot that ignores both, then Afterlife and Frozen Empire which return to the original story. Watch the original two first or Afterlife will not land.",
+      "storyHint": "Ghostbusters, Ghostbusters II, Afterlife, Frozen Empire. The 2016 film is a separate reboot.",
+      "genre": "Horror",
+      "accent": "#e0562d",
+      "eraOrder": [
+        "Original",
+        "Reboot",
+        "Afterlife"
+      ],
+      "entries": [
+        {
+          "id": "gb-1",
+          "title": "Ghostbusters",
+          "date": "1984-06-08",
+          "year": 1984,
+          "kind": "film",
+          "era": "Original",
+          "story": 1
+        },
+        {
+          "id": "gb-2",
+          "title": "Ghostbusters II",
+          "date": "1989-06-16",
+          "year": 1989,
+          "kind": "film",
+          "era": "Original",
+          "story": 2
+        },
+        {
+          "id": "gb-16",
+          "title": "Ghostbusters",
+          "date": "2016-07-15",
+          "year": 2016,
+          "kind": "film",
+          "era": "Reboot",
+          "story": 3,
+          "note": "A standalone reboot with a new cast. Nothing later depends on it.",
+          "optional": true
+        },
+        {
+          "id": "gb-al",
+          "title": "Ghostbusters: Afterlife",
+          "date": "2021-11-11",
+          "year": 2021,
+          "kind": "film",
+          "era": "Afterlife",
+          "story": 4
+        },
+        {
+          "id": "gb-fe",
+          "title": "Ghostbusters: Frozen Empire",
+          "date": "2024-03-14",
+          "year": 2024,
+          "kind": "film",
+          "era": "Afterlife",
+          "story": 5
+        }
+      ]
+    },
+    {
+      "id": "men-in-black",
+      "name": "Men in Black",
+      "years": "1997â€“2019",
+      "hook": "Four films, one neuralyzer",
+      "blurb": "A comic-book adaptation that turned into a trilogy about agents K and J, plus a 2019 spin-off with a different pair. Light, episodic and easy to watch in release order.",
+      "storyHint": "Release order. Men in Black 3 involves time travel but is seen after the second film.",
+      "genre": "Sci-fi",
+      "accent": "#7c8b99",
+      "eraOrder": [
+        "Films"
+      ],
+      "entries": [
+        {
+          "id": "mib-1",
+          "title": "Men in Black",
+          "date": "1997-07-02",
+          "year": 1997,
+          "kind": "film",
+          "era": "Films",
+          "story": 1
+        },
+        {
+          "id": "mib-2",
+          "title": "Men in Black II",
+          "date": "2002-07-03",
+          "year": 2002,
+          "kind": "film",
+          "era": "Films",
+          "story": 2
+        },
+        {
+          "id": "mib-3",
+          "title": "Men in Black 3",
+          "date": "2012-05-23",
+          "year": 2012,
+          "kind": "film",
+          "era": "Films",
+          "story": 3
+        },
+        {
+          "id": "mib-4",
+          "title": "Men in Black: International",
+          "date": "2019-06-12",
+          "year": 2019,
+          "kind": "film",
+          "era": "Films",
+          "story": 4,
+          "note": "A spin-off with new leads, set in the same world.",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "id": "toy-story",
+      "name": "Toy Story",
+      "years": "1995â€“2026",
+      "hook": "Five films, one toy chest",
+      "blurb": "Pixar's first film and still its most reliable series. Each entry stands alone but the endings build on each other, so release order gets the emotional payoff.",
+      "storyHint": "Release order, all five films.",
+      "genre": "Fantasy",
+      "accent": "#f2a03d",
+      "eraOrder": [
+        "Films"
+      ],
+      "entries": [
+        {
+          "id": "ts-1",
+          "title": "Toy Story",
+          "date": "1995-11-22",
+          "year": 1995,
+          "kind": "film",
+          "era": "Films",
+          "story": 1
+        },
+        {
+          "id": "ts-2",
+          "title": "Toy Story 2",
+          "date": "1999-11-24",
+          "year": 1999,
+          "kind": "film",
+          "era": "Films",
+          "story": 2
+        },
+        {
+          "id": "ts-3",
+          "title": "Toy Story 3",
+          "date": "2010-06-12",
+          "year": 2010,
+          "kind": "film",
+          "era": "Films",
+          "story": 3
+        },
+        {
+          "id": "ts-4",
+          "title": "Toy Story 4",
+          "date": "2019-06-20",
+          "year": 2019,
+          "kind": "film",
+          "era": "Films",
+          "story": 4
+        },
+        {
+          "id": "ts-5",
+          "title": "Toy Story 5",
+          "date": "2026-06-19",
+          "year": 2026,
+          "kind": "film",
+          "era": "Films",
+          "story": 5
+        }
+      ]
+    },
+    {
+      "id": "shrek",
+      "name": "Shrek",
+      "years": "2001â€“2022",
+      "hook": "Four films and two Puss in Boots side stories",
+      "blurb": "DreamWorks' fairy-tale spoof, plus the Puss in Boots spin-offs. The first Puss film is a prequel; The Last Wish is set after the main series.",
+      "storyHint": "Shrek, Shrek 2, Shrek the Third, Shrek Forever After, then the two Puss in Boots films.",
+      "genre": "Fantasy",
+      "accent": "#7cb342",
+      "eraOrder": [
+        "Shrek",
+        "Spin-offs"
+      ],
+      "entries": [
+        {
+          "id": "sh-1",
+          "title": "Shrek",
+          "date": "2001-04-22",
+          "year": 2001,
+          "kind": "film",
+          "era": "Shrek",
+          "story": 1
+        },
+        {
+          "id": "sh-2",
+          "title": "Shrek 2",
+          "date": "2004-05-15",
+          "year": 2004,
+          "kind": "film",
+          "era": "Shrek",
+          "story": 2
+        },
+        {
+          "id": "sh-3",
+          "title": "Shrek the Third",
+          "date": "2007-05-06",
+          "year": 2007,
+          "kind": "film",
+          "era": "Shrek",
+          "story": 3
+        },
+        {
+          "id": "sh-4",
+          "title": "Shrek Forever After",
+          "date": "2010-04-21",
+          "year": 2010,
+          "kind": "film",
+          "era": "Shrek",
+          "story": 4
+        },
+        {
+          "id": "sh-p1",
+          "title": "Puss in Boots",
+          "date": "2011-10-23",
+          "year": 2011,
+          "kind": "film",
+          "era": "Spin-offs",
+          "story": 5,
+          "note": "A prequel, so it can also be watched first."
+        },
+        {
+          "id": "sh-p2",
+          "title": "Puss in Boots: The Last Wish",
+          "date": "2022-12-07",
+          "year": 2022,
+          "kind": "film",
+          "era": "Spin-offs",
+          "story": 6
+        }
+      ]
+    },
+    {
+      "id": "sonic",
+      "name": "Sonic the Hedgehog",
+      "years": "2020â€“2024",
+      "hook": "Three films and a Knuckles series",
+      "blurb": "The film series that started as a joke and became a solid family action trilogy. Knuckles sits between the second and third films and explains where he went.",
+      "storyHint": "Sonic, Sonic 2, Knuckles, then Sonic 3.",
+      "genre": "Action",
+      "accent": "#3d6df0",
+      "eraOrder": [
+        "Films"
+      ],
+      "entries": [
+        {
+          "id": "sn-1",
+          "title": "Sonic the Hedgehog",
+          "date": "2020-02-13",
+          "year": 2020,
+          "kind": "film",
+          "era": "Films",
+          "story": 1
+        },
+        {
+          "id": "sn-2",
+          "title": "Sonic the Hedgehog 2",
+          "date": "2022-03-30",
+          "year": 2022,
+          "kind": "film",
+          "era": "Films",
+          "story": 2
+        },
+        {
+          "id": "sn-k",
+          "title": "Knuckles",
+          "date": "2024-04-26",
+          "year": 2024,
+          "kind": "series",
+          "era": "Films",
+          "story": 3,
+          "note": "Six episodes set between Sonic 2 and Sonic 3."
+        },
+        {
+          "id": "sn-3",
+          "title": "Sonic the Hedgehog 3",
+          "date": "2024-12-20",
+          "year": 2024,
+          "kind": "film",
+          "era": "Films",
+          "story": 4
+        }
+      ]
+    },
+    {
+      "id": "avatar",
+      "name": "Avatar",
+      "years": "2009â€“2025",
+      "hook": "One story, told in four instalments",
+      "blurb": "James Cameron's Pandora films are one continuous story with years between chapters. The 2009 original, The Way of Water, then Fire and Ash.",
+      "storyHint": "Release order. Each film picks up shortly after the last.",
+      "genre": "Sci-fi",
+      "accent": "#21b6c9",
+      "eraOrder": [
+        "Films"
+      ],
+      "entries": [
+        {
+          "id": "av-1",
+          "title": "Avatar",
+          "date": "2009-12-16",
+          "year": 2009,
+          "kind": "film",
+          "era": "Films",
+          "story": 1
+        },
+        {
+          "id": "av-2",
+          "title": "Avatar: The Way of Water",
+          "date": "2022-12-14",
+          "year": 2022,
+          "kind": "film",
+          "era": "Films",
+          "story": 2
+        },
+        {
+          "id": "av-3",
+          "title": "Avatar: Fire and Ash",
+          "date": "2025-12-19",
+          "year": 2025,
+          "kind": "film",
+          "era": "Films",
+          "story": 3
+        }
+      ]
+    },
+    {
+      "id": "twilight",
+      "name": "The Twilight Saga",
+      "years": "2008â€“2012",
+      "hook": "Five films, one love triangle",
+      "blurb": "Four novels adapted into five films, with the last book split in two. Straight release order, and the books are a genuinely different experience from the films.",
+      "storyHint": "Twilight, New Moon, Eclipse, Breaking Dawn Parts 1 and 2.",
+      "genre": "Fantasy",
+      "accent": "#8e6fa8",
+      "eraOrder": [
+        "Films"
+      ],
+      "entries": [
+        {
+          "id": "tw-1",
+          "title": "Twilight",
+          "date": "2008-11-17",
+          "year": 2008,
+          "kind": "film",
+          "era": "Films",
+          "story": 1
+        },
+        {
+          "id": "tw-2",
+          "title": "The Twilight Saga: New Moon",
+          "date": "2009-11-16",
+          "year": 2009,
+          "kind": "film",
+          "era": "Films",
+          "story": 2
+        },
+        {
+          "id": "tw-3",
+          "title": "The Twilight Saga: Eclipse",
+          "date": "2010-06-24",
+          "year": 2010,
+          "kind": "film",
+          "era": "Films",
+          "story": 3
+        },
+        {
+          "id": "tw-4",
+          "title": "The Twilight Saga: Breaking Dawn â€“ Part 1",
+          "date": "2011-11-18",
+          "year": 2011,
+          "kind": "film",
+          "era": "Films",
+          "story": 4
+        },
+        {
+          "id": "tw-5",
+          "title": "The Twilight Saga: Breaking Dawn â€“ Part 2",
+          "date": "2012-11-16",
+          "year": 2012,
+          "kind": "film",
+          "era": "Films",
+          "story": 5
+        }
+      ]
+    },
+    {
+      "id": "bourne",
+      "name": "Jason Bourne",
+      "years": "2002â€“2016",
+      "hook": "Five films, one lost identity",
+      "blurb": "The Ludlum novels became a trilogy about amnesia and surveillance, then a spin-off and a reunion. Legacy runs alongside Ultimatum rather than after it.",
+      "storyHint": "Identity, Supremacy, Ultimatum, Jason Bourne. Legacy happens at the same time as Ultimatum.",
+      "genre": "Action",
+      "accent": "#9aa7b2",
+      "eraOrder": [
+        "Films"
+      ],
+      "entries": [
+        {
+          "id": "bn-1",
+          "title": "The Bourne Identity",
+          "date": "2002-06-06",
+          "year": 2002,
+          "kind": "film",
+          "era": "Films",
+          "story": 1
+        },
+        {
+          "id": "bn-2",
+          "title": "The Bourne Supremacy",
+          "date": "2004-07-15",
+          "year": 2004,
+          "kind": "film",
+          "era": "Films",
+          "story": 2
+        },
+        {
+          "id": "bn-3",
+          "title": "The Bourne Ultimatum",
+          "date": "2007-07-25",
+          "year": 2007,
+          "kind": "film",
+          "era": "Films",
+          "story": 3
+        },
+        {
+          "id": "bn-l",
+          "title": "The Bourne Legacy",
+          "date": "2012-07-30",
+          "year": 2012,
+          "kind": "film",
+          "era": "Films",
+          "story": 4,
+          "note": "Set during Ultimatum with a new lead."
+        },
+        {
+          "id": "bn-jb",
+          "title": "Jason Bourne",
+          "date": "2016-07-28",
+          "year": 2016,
+          "kind": "film",
+          "era": "Films",
+          "story": 5
+        }
+      ]
     }
   ],
   "works": {
@@ -4492,6 +5827,192 @@
         "path": "Prequels",
         "optional": true
       }
+    ],
+    "bond": [
+      {
+        "id": "bk-bd-1",
+        "title": "Casino Royale",
+        "year": 1953,
+        "format": "novel",
+        "by": "Ian Fleming",
+        "path": "Fleming"
+      },
+      {
+        "id": "bk-bd-2",
+        "title": "Live and Let Die",
+        "year": 1954,
+        "format": "novel",
+        "by": "Ian Fleming",
+        "path": "Fleming"
+      },
+      {
+        "id": "bk-bd-3",
+        "title": "Moonraker",
+        "year": 1955,
+        "format": "novel",
+        "by": "Ian Fleming",
+        "path": "Fleming"
+      },
+      {
+        "id": "bk-bd-4",
+        "title": "Diamonds Are Forever",
+        "year": 1956,
+        "format": "novel",
+        "by": "Ian Fleming",
+        "path": "Fleming"
+      },
+      {
+        "id": "bk-bd-5",
+        "title": "From Russia, with Love",
+        "year": 1957,
+        "format": "novel",
+        "by": "Ian Fleming",
+        "path": "Fleming"
+      },
+      {
+        "id": "bk-bd-6",
+        "title": "Dr. No",
+        "year": 1958,
+        "format": "novel",
+        "by": "Ian Fleming",
+        "path": "Fleming"
+      },
+      {
+        "id": "bk-bd-7",
+        "title": "Goldfinger",
+        "year": 1959,
+        "format": "novel",
+        "by": "Ian Fleming",
+        "path": "Fleming"
+      },
+      {
+        "id": "bk-bd-8",
+        "title": "Thunderball",
+        "year": 1961,
+        "format": "novel",
+        "by": "Ian Fleming",
+        "path": "Fleming"
+      },
+      {
+        "id": "bk-bd-9",
+        "title": "The Spy Who Loved Me",
+        "year": 1962,
+        "format": "novel",
+        "by": "Ian Fleming",
+        "path": "Fleming"
+      },
+      {
+        "id": "bk-bd-10",
+        "title": "On Her Majesty's Secret Service",
+        "year": 1963,
+        "format": "novel",
+        "by": "Ian Fleming",
+        "path": "Fleming"
+      },
+      {
+        "id": "bk-bd-11",
+        "title": "You Only Live Twice",
+        "year": 1964,
+        "format": "novel",
+        "by": "Ian Fleming",
+        "path": "Fleming"
+      },
+      {
+        "id": "bk-bd-12",
+        "title": "The Man with the Golden Gun",
+        "year": 1965,
+        "format": "novel",
+        "by": "Ian Fleming",
+        "path": "Fleming"
+      },
+      {
+        "id": "bk-bd-13",
+        "title": "Octopussy and The Living Daylights",
+        "year": 1966,
+        "format": "short-stories",
+        "by": "Ian Fleming",
+        "path": "Fleming"
+      }
+    ],
+    "planet-of-the-apes": [
+      {
+        "id": "bk-pota-1",
+        "title": "Planet of the Apes",
+        "year": 1963,
+        "format": "novel",
+        "by": "Pierre Boulle",
+        "path": "Novels"
+      }
+    ],
+    "shrek": [
+      {
+        "id": "bk-sh-1",
+        "title": "Shrek!",
+        "year": 1990,
+        "format": "novel",
+        "by": "William Steig",
+        "path": "Source books"
+      }
+    ],
+    "twilight": [
+      {
+        "id": "bk-tw-1",
+        "title": "Twilight",
+        "year": 2005,
+        "format": "novel",
+        "by": "Stephenie Meyer",
+        "path": "The Saga"
+      },
+      {
+        "id": "bk-tw-2",
+        "title": "New Moon",
+        "year": 2006,
+        "format": "novel",
+        "by": "Stephenie Meyer",
+        "path": "The Saga"
+      },
+      {
+        "id": "bk-tw-3",
+        "title": "Eclipse",
+        "year": 2007,
+        "format": "novel",
+        "by": "Stephenie Meyer",
+        "path": "The Saga"
+      },
+      {
+        "id": "bk-tw-4",
+        "title": "Breaking Dawn",
+        "year": 2008,
+        "format": "novel",
+        "by": "Stephenie Meyer",
+        "path": "The Saga"
+      }
+    ],
+    "bourne": [
+      {
+        "id": "bk-bn-1",
+        "title": "The Bourne Identity",
+        "year": 1980,
+        "format": "novel",
+        "by": "Robert Ludlum",
+        "path": "Novels"
+      },
+      {
+        "id": "bk-bn-2",
+        "title": "The Bourne Supremacy",
+        "year": 1986,
+        "format": "novel",
+        "by": "Robert Ludlum",
+        "path": "Novels"
+      },
+      {
+        "id": "bk-bn-3",
+        "title": "The Bourne Ultimatum",
+        "year": 1990,
+        "format": "novel",
+        "by": "Robert Ludlum",
+        "path": "Novels"
+      }
     ]
   },
   "accents": {
@@ -4614,6 +6135,108 @@
       "ink": "#0c0d11",
       "deep": "#352c20",
       "soft": "#211c19"
+    },
+    "bond": {
+      "accent": "#c9a227",
+      "ink": "#0c0d11",
+      "deep": "#352f1c",
+      "soft": "#221f16"
+    },
+    "mission-impossible": {
+      "accent": "#d0463f",
+      "ink": "#0c0d11",
+      "deep": "#341f1e",
+      "soft": "#211717"
+    },
+    "john-wick": {
+      "accent": "#8b7cf0",
+      "ink": "#0c0d11",
+      "deep": "#1e1a37",
+      "soft": "#171523"
+    },
+    "matrix": {
+      "accent": "#35c46a",
+      "ink": "#0c0d11",
+      "deep": "#1e3326",
+      "soft": "#17211b"
+    },
+    "back-to-the-future": {
+      "accent": "#e8b23c",
+      "ink": "#0c0d11",
+      "deep": "#372e1a",
+      "soft": "#231f15"
+    },
+    "pirates": {
+      "accent": "#2fb1a8",
+      "ink": "#0c0d11",
+      "deep": "#1e3332",
+      "soft": "#172120"
+    },
+    "planet-of-the-apes": {
+      "accent": "#8c9a6b",
+      "ink": "#0c0d11",
+      "deep": "#2a2c25",
+      "soft": "#1d1e1a"
+    },
+    "rocky": {
+      "accent": "#b6562d",
+      "ink": "#0c0d11",
+      "deep": "#34241e",
+      "soft": "#211a17"
+    },
+    "die-hard": {
+      "accent": "#5b7fae",
+      "ink": "#0c0d11",
+      "deep": "#23282f",
+      "soft": "#191c1f"
+    },
+    "ghostbusters": {
+      "accent": "#e0562d",
+      "ink": "#0c0d11",
+      "deep": "#36211b",
+      "soft": "#221916"
+    },
+    "men-in-black": {
+      "accent": "#7c8b99",
+      "ink": "#0c0d11",
+      "deep": "#27292b",
+      "soft": "#1b1c1d"
+    },
+    "toy-story": {
+      "accent": "#f2a03d",
+      "ink": "#0c0d11",
+      "deep": "#392a19",
+      "soft": "#231d15"
+    },
+    "shrek": {
+      "accent": "#7cb342",
+      "ink": "#0c0d11",
+      "deep": "#293120",
+      "soft": "#1c2018"
+    },
+    "sonic": {
+      "accent": "#3d6df0",
+      "ink": "#0c0d11",
+      "deep": "#192239",
+      "soft": "#151923"
+    },
+    "avatar": {
+      "accent": "#21b6c9",
+      "ink": "#0c0d11",
+      "deep": "#1c3336",
+      "soft": "#162122"
+    },
+    "twilight": {
+      "accent": "#8e6fa8",
+      "ink": "#0c0d11",
+      "deep": "#29242d",
+      "soft": "#1c1a1e"
+    },
+    "bourne": {
+      "accent": "#9aa7b2",
+      "ink": "#0c0d11",
+      "deep": "#26292b",
+      "soft": "#1b1c1d"
     }
   }
 }

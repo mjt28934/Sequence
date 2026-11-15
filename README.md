@@ -1,4 +1,4 @@
-# Sequence 1.5 — native Android rebuild
+# Sequence 1.6 — 37 franchises, redesigned motion
 
 A native Kotlin / Jetpack Compose rebuild of the original WebView-based **Sequence** watch-order app.
 No WebView, no JavaScript bridge, no network permission. The catalogue and all artwork are
@@ -11,8 +11,8 @@ sheets, segmented buttons, swipe-to-mark-seen with haptics, and edge-to-edge ins
 
 ## Ready to install
 
-- `Sequence-1.5.apk` — signed release build (`com.sequence.watchorder`, versionCode 160,
-  versionName `1.5`).
+- `Sequence-1.6.apk` — signed release build (`com.sequence.watchorder`, versionCode 170,
+  versionName `1.6`).
 - Minimum Android 8.0 (API 26), targets Android 15 (API 35).
 - Rendered previews of every screen are in `screenshots/`.
 
@@ -26,6 +26,7 @@ Each change ships under a new name so builds never get confused:
 | 1.3-native | `Sequence-1.3-native.apk` | First native Kotlin/Compose port |
 | 1.4 | `Sequence-1.4.apk` | Material 3 redesign: dynamic colour, collapsing bars, nav bar, motion, sheets |
 | 1.5 | `Sequence-1.5.apk` | Real film posters replace the generated franchise art |
+| 1.6 | `Sequence-1.6.apk` | 17 more franchises (37 total), 116 more titles, 22 more books, real covers, and a motion pass over every screen |
 
 The `versionName` in `app/build.gradle.kts` is the single source of truth; the settings screen and the
 APK name both follow it.
@@ -37,31 +38,58 @@ APK name both follow it.
 
 - **Home** — genre chips, demo order comparison, overall screen/print progress, continue shelf,
   up-next rows with one-tap seen checks, keep-reading shelf, genre shelves, and a media-player style
-  mini bar above the navigation.
+  mini bar above the navigation. A finished franchise carries a tick badge on its poster, and genre
+  tiles show how many franchises they hold.
 - **Library** — saved and started franchises, grid/list views, progress filters, and sort by recent,
-  A–Z, most left, or furthest along.
+  A–Z, most left, or furthest along. Rows animate into place as the filter changes.
 - **Upcoming** — future releases grouped by month, plus releases from the last 90 days with seen toggles.
-- **Search** — franchises, films/series, books and comics, with genre tiles for browsing.
-- **Franchise detail** — hero art, expandable blurb, release/story ordering, watch filters, book format
-  filters, series/special markers, optional-entry markers, swipe-right to toggle seen, per-title sheets,
-  "mark everything up to here", reading paths, cover checkmarks, and a next-up FAB.
+- **Search** — franchises, films/series, books and comics, with genre tiles for browsing and a match
+  count on every result section.
+- **Franchise detail** — hero art with a scroll parallax, expandable blurb, release/story ordering,
+  watch filters, book format filters, series/special markers, optional-entry markers, swipe-right to
+  toggle seen, per-title sheets, "mark everything up to here", reading paths, cover checkmarks, and a
+  next-up FAB.
 - **Settings** — order mode, clear all progress (confirmed), and about/offline notices.
 - **Undo snackbar** after progress and save changes, matching the original behaviour.
-- **Real film posters** for all 20 franchises, plus the original 135 book covers, served from
-  `assets/art`.
+- **Real artwork** for all 37 franchises and 156 of 157 books and comics, served from `assets/art`.
 
 ## Artwork
 
 Each franchise banner is 960x600 and shows the actual theatrical poster: the poster sits on the right
 at full sharpness over a blurred, darkened copy of itself, which keeps the 16:10 crop the layouts use
-and leaves the left side clear for the title text laid over it.
+and leaves the left side clear for the title text laid over it. Bond is the exception: its landscape
+UK quad posters are used full-bleed, so the set reads as one run of films.
 
 Posters come from the lead image of each film's English Wikipedia article and are re-composed locally
 by `buildtools/fetch-posters.mjs` (Sharp), then written straight into
 `app/src/main/assets/art/posters`. Source images are kept out of git; only the finished banners ship.
+`buildtools/check-posters.mjs` re-reads every banner and fails if one is missing, too small or flat.
 See `POSTERS.md` for the exact page behind each one.
 
-Book covers are still the generated WebP art from the original 1.3 bundle.
+Book covers follow the same rule: `buildtools/fetch-covers.mjs` takes the lead image of the book's
+English Wikipedia article and crops it to a 2:3 cover. 1.6 adds 22 covers for the new franchises;
+`bk-bd-12` has no usable cover (its only scan is a landscape wraparound jacket) and falls back to the
+placeholder tile.
+
+## UI and motion
+
+- **One motion switch** — `ui/Motion.kt` holds `Motion.enabled`, which every timed animation checks.
+  Snapshot tests turn it off so renders are settled frames rather than half-faded ones.
+- **Press feedback** — cards, poster tiles, cover tiles, genre tiles, library rows, watch rows and the
+  continue hero shrink slightly while pressed, driven by the same `InteractionSource` as the ripple.
+- **Entrance** — Home sections fade and lift in with a short stagger the first time they are shown;
+  an `EnterTracker` means scrolling back up never replays them.
+- **Art** — a poster or cover decoded on demand fades in with a 3% overscale that settles, so cards do
+  not pop into place mid-scroll. Already-cached art appears instantly.
+- **Progress** — progress strips animate to their new value, so marking something seen visibly moves
+  the bar instead of teleporting it.
+- **Lists** — detail and library rows use `Modifier.animateItem()`, so filtering reflows smoothly.
+- **Detail hero** — the artwork trails the page as it scrolls and grows just enough to avoid exposing
+  an edge.
+- **Mini bar** — slides in and out above the navigation, and its contents slide vertically when the
+  next title changes.
+- **Tabs and destinations** — `AnimatedContent` slides between tabs and cross-fades into detail and
+  settings.
 
 ## Native UI details
 
@@ -69,8 +97,6 @@ Book covers are still the generated WebP art from the original 1.3 bundle.
   blue Material 3 scheme below that. No hard-coded surface greys in screens.
 - **Chrome** — `LargeTopAppBar` with `exitUntilCollapsed` scroll on Home, Library and Upcoming; a
   compact bar on detail and settings; `NavigationBar` with selected-item indicator and labels.
-- **Motion** — `AnimatedContent` slides between tabs and cross-fades into detail/settings; collapsing
-  bars animate; chips and segmented buttons use M3 state animations.
 - **Components** — cards for artwork, `FilterChip` rows, `ListItem` rows, `SingleChoiceSegmentedButtonRow`
   for watch/books and release/story, `SwipeToDismissBox` to mark an episode seen, `ExtendedFloatingActionButton`
   for "Next up", `ModalBottomSheet` for every order/filter/detail sheet.
@@ -93,9 +119,10 @@ app/src/main/java/com/sequence/watchorder/
     ProgressStore.kt       SharedPreferences persistence (sequence-progress JSON)
   ui/
     Theme.kt               Material 3 colour schemes (dynamic + fallback) and accent palettes
+    Motion.kt              shared motion: Motion.enabled, press scale, section entrance
     Components.kt          cards, chips, rows, sheet controls, check circles
     Icons.kt               original Material SVG paths as Compose ImageVectors
-    Art.kt                 bundled WebP loader with an in-memory LruCache
+    Art.kt                 bundled WebP loader with a heap-sized LruCache and fade-in
     HomeScreen.kt
     LibraryScreen.kt
     UpcomingScreen.kt
@@ -122,6 +149,17 @@ $env:JAVA_HOME = "C:\Projects\Orderly\.toolchain\jdk17"
 Quote `"-Ppaparazzi.test.record=true"` in PowerShell, otherwise `-P` is split into a task name.
 The test builds `MainViewModel(catalog, progress)` through an internal state-only constructor, so no
 device, emulator or `SharedPreferences` is involved; artwork is decoded straight from `assets/art`.
+
+Two small checkers guard against renders that look fine at a glance but are actually blank:
+
+```powershell
+node buildtools/check-shots.mjs screenshots/*.png   # mean luma, spread and mid-tone share per render
+node buildtools/diff-shots.mjs old.png new.png      # tile-by-tile detail, old vs new
+```
+
+`check-shots.mjs` flags a render with almost no mid-tones, which is what a screen of missing posters
+or covers produces. `ScreenshotTest` pins the art cache to 320 MB so no asset is evicted between
+snapshots.
 
 ## Build
 
@@ -157,9 +195,9 @@ $env:JAVA_HOME = "C:\Projects\Orderly\.toolchain\jdk17"
 
 Outputs:
 
-- `app/build/outputs/apk/debug/app-debug.apk` (`com.sequence.watchorder.debug`, `1.5-debug`)
+- `app/build/outputs/apk/debug/app-debug.apk` (`com.sequence.watchorder.debug`, `1.6-debug`)
 - `app/build/outputs/apk/release/app-release.apk` (signed with `sequence-release.jks`)
-- `Sequence-1.5.apk` — the release build copied to the project root for installing
+- `Sequence-1.6.apk` — the release build copied to the project root for installing
 
 ### Android Studio
 
@@ -192,8 +230,9 @@ local `sequence-release.jks` is not in the repository.
 
 ## Data and behaviour notes
 
-- `sequence.json` contains 20 franchises, 309 entries and 135 books/comics, with data checked
-  through 2026-11-09 (the original bundle's date).
+- `sequence.json` contains 37 franchises, 425 entries and 157 books/comics, with data checked
+  through 2026-11-09. Release dates come from Wikidata (`P577`, earliest day-precision value), with
+  three titles given hand-checked dates where Wikidata only had a premiere.
 - Upcoming titles do not count toward progress and cannot be marked seen.
 - Release order sorts by premiere date; story order uses each franchise's era order and story index.
 - Library membership = saved, or at least one entry seen, or at least one book read.

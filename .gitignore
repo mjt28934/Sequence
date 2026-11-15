@@ -21,7 +21,9 @@ local.properties
 # Local artwork-generation dependencies
 buildtools/node_modules/
 buildtools/posters-src/
+buildtools/covers-src/
 buildtools/out/
+buildtools/.date-cache.json
 
 # OS files
 Thumbs.db

@@ -3,6 +3,9 @@ package com.sequence.watchorder.ui
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.util.LruCache
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -15,9 +18,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import kotlinx.coroutines.Dispatchers
@@ -32,9 +35,25 @@ enum class ArtKind { POSTER, COVER }
  * empty space, and so snapshot tests can render artwork without a device.
  */
 object ArtRepository {
-    private val cache = object : LruCache<String, ImageBitmap>(48 * 1024) {
-        override fun sizeOf(key: String, value: ImageBitmap): Int =
-            (value.width * value.height * 4) / 1024
+    /**
+     * Decoded art is the largest thing this app keeps, so the budget follows the process heap
+     * instead of a fixed number: a phone with a small heap evicts sooner, a large one holds the
+     * whole 37-banner set and never re-decodes while scrolling.
+     *
+     * Tests pin this so every asset stays resident and screenshots always show real artwork.
+     */
+    var budgetKbOverride: Int? = null
+
+    private fun heapBudgetKb(): Int {
+        val heapMb = (Runtime.getRuntime().maxMemory() / (1024 * 1024)).toInt()
+        return (heapMb / 6).coerceIn(24, 80) * 1024
+    }
+
+    private val cache: LruCache<String, ImageBitmap> by lazy {
+        object : LruCache<String, ImageBitmap>(budgetKbOverride ?: heapBudgetKb()) {
+            override fun sizeOf(key: String, value: ImageBitmap): Int =
+                (value.width * value.height * 4) / 1024
+        }
     }
 
     /** Test hook: when set, replaces asset loading entirely. */
@@ -87,12 +106,25 @@ fun ArtImage(
     alpha: Float = 1f,
 ) {
     val context = LocalContext.current
-    var image by remember(kind, id) { mutableStateOf(ArtRepository.peek(kind, id)) }
+    val cached = remember(kind, id) { ArtRepository.peek(kind, id) }
+    var image by remember(kind, id) { mutableStateOf(cached) }
+
+    // Art that is already in memory appears instantly; art decoded on demand fades in with a small
+    // settle, so a card never pops into place mid-scroll.
+    val reveal = remember(kind, id) { Animatable(1f) }
     LaunchedEffect(kind, id) {
         if (image == null) {
-            image = withContext(Dispatchers.IO) { ArtRepository.load(context, kind, id) }
+            val loaded = withContext(Dispatchers.IO) { ArtRepository.load(context, kind, id) }
+            if (loaded != null) {
+                if (Motion.enabled) reveal.snapTo(0f)
+                image = loaded
+                if (Motion.enabled) {
+                    reveal.animateTo(1f, tween(durationMillis = 240, easing = LinearOutSlowInEasing))
+                }
+            }
         }
     }
+
     Box(
         modifier.background(MaterialTheme.colorScheme.surfaceContainerHighest),
     ) {
@@ -103,7 +135,14 @@ fun ArtImage(
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxSize()
-                    .alpha(alpha),
+                    .graphicsLayer {
+                        val p = reveal.value
+                        this.alpha = alpha * p
+                        // A 3% overscale that settles as it fades stops the edges from looking stiff.
+                        val s = 1f + 0.03f * (1f - p)
+                        scaleX = s
+                        scaleY = s
+                    },
                 contentScale = contentScale,
             )
         }

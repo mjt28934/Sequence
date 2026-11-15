@@ -54,22 +54,49 @@ const PAGES = {
   transformers: "Transformers (film)",
   "wizarding-world": "Fantastic Beasts and Where to Find Them (film)",
   "x-men": "X-Men (film)",
+  bond: "Dr. No (film)",
+  "mission-impossible": "Mission: Impossible (film)",
+  "john-wick": "John Wick (film)",
+  matrix: "The Matrix",
+  "back-to-the-future": "Back to the Future",
+  pirates: "Pirates of the Caribbean: The Curse of the Black Pearl",
+  "planet-of-the-apes": "Planet of the Apes (1968 film)",
+  rocky: "Rocky",
+  "die-hard": "Die Hard",
+  ghostbusters: "Ghostbusters",
+  "men-in-black": "Men in Black (1997 film)",
+  "toy-story": "Toy Story",
+  shrek: "Shrek",
+  sonic: "Sonic the Hedgehog (film)",
+  avatar: "Avatar (2009 film)",
+  twilight: "Twilight (2008 film)",
+  bourne: "The Bourne Identity (2002 film)",
 };
 
 const UA = { "User-Agent": "Sequence/1.5 (offline watch-order app; poster fetch)" };
 
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function get(url) {
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const res = await fetch(url, { headers: UA });
+    if (res.ok) return res;
+    if (res.status !== 429 && res.status < 500) throw new Error(`HTTP ${res.status} ${url}`);
+    await sleep(1500 * (attempt + 1));
+  }
+  throw new Error(`HTTP 429 ${url}`);
+}
+
 async function summary(title) {
   const url = "https://en.wikipedia.org/api/rest_v1/page/summary/" + encodeURIComponent(title.replace(/ /g, "_"));
-  const res = await fetch(url, { headers: UA });
-  if (!res.ok) throw new Error(`${title}: HTTP ${res.status}`);
+  const res = await get(url);
   const json = await res.json();
   if (!json.originalimage?.source) throw new Error(`${title}: no lead image`);
   return json;
 }
 
 async function download(url, dest) {
-  const res = await fetch(url.split("?")[0], { headers: UA });
-  if (!res.ok) throw new Error(`HTTP ${res.status} ${url}`);
+  const res = await get(url.split("?")[0]);
   fs.writeFileSync(dest, Buffer.from(await res.arrayBuffer()));
 }
 
@@ -95,7 +122,37 @@ async function compose(src, id) {
   const meta = await sharp(src).metadata();
   if (!meta.width || !meta.height) throw new Error(`${id}: unreadable image`);
   const ratio = meta.width / meta.height;
-  if (ratio > 0.95) throw new Error(`${id}: lead image is not a portrait poster (${meta.width}x${meta.height})`);
+
+  // Some franchises (Bond, for one) only have landscape UK quad posters on Wikipedia. Use those
+  // full-bleed instead of insetting them, which is what the 16:10 banner wants anyway.
+  if (ratio > 0.95) {
+    const wide = Buffer.from(
+      `<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
+         <defs>
+           <linearGradient id="wh" x1="0" y1="0" x2="1" y2="0">
+             <stop offset="0" stop-color="#05070c" stop-opacity="0.80"/>
+             <stop offset="0.62" stop-color="#05070c" stop-opacity="0.20"/>
+             <stop offset="1" stop-color="#05070c" stop-opacity="0"/>
+           </linearGradient>
+           <linearGradient id="wv" x1="0" y1="0" x2="0" y2="1">
+             <stop offset="0.35" stop-color="#05070c" stop-opacity="0"/>
+             <stop offset="1" stop-color="#05070c" stop-opacity="0.80"/>
+           </linearGradient>
+         </defs>
+         <rect width="${W}" height="${H}" fill="url(#wh)"/>
+         <rect width="${W}" height="${H}" fill="url(#wv)"/>
+       </svg>`,
+    );
+    const webp = await sharp(src)
+      .resize(W, H, { fit: "cover" })
+      .modulate({ brightness: 0.94, saturation: 1.02 })
+      .composite([{ input: wide, left: 0, top: 0 }])
+      .webp({ quality: 84, effort: 5 })
+      .toBuffer();
+    fs.writeFileSync(path.join(outDir, `${id}.webp`), webp);
+    fs.writeFileSync(path.join(assetDir, `${id}.webp`), webp);
+    return { w: W, h: H, bytes: webp.length, wide: true };
+  }
 
   const w = Math.round(POSTER_H * ratio);
   const h = POSTER_H;
@@ -184,7 +241,11 @@ function writeAttribution(sources) {
 
   fs.writeFileSync(
     sourcesPath,
-    JSON.stringify(sources.map(({ franchise, id, name, page, url }) => ({ franchise, id, name, page, url })), null, 2) + "\n",
+    JSON.stringify(
+      sources.map(({ franchise, id, name, page, url, width, height }) => ({ franchise, id, name, page, url, width, height })),
+      null,
+      2,
+    ) + "\n",
   );
   fs.writeFileSync(
     attributionPath,
@@ -242,6 +303,23 @@ const NAMES = {
   transformers: "Transformers",
   "wizarding-world": "Wizarding World",
   "x-men": "X-Men",
+  bond: "James Bond",
+  "mission-impossible": "Mission: Impossible",
+  "john-wick": "John Wick",
+  matrix: "The Matrix",
+  "back-to-the-future": "Back to the Future",
+  pirates: "Pirates of the Caribbean",
+  "planet-of-the-apes": "Planet of the Apes",
+  rocky: "Rocky & Creed",
+  "die-hard": "Die Hard",
+  ghostbusters: "Ghostbusters",
+  "men-in-black": "Men in Black",
+  "toy-story": "Toy Story",
+  shrek: "Shrek",
+  sonic: "Sonic the Hedgehog",
+  avatar: "Avatar",
+  twilight: "The Twilight Saga",
+  bourne: "Jason Bourne",
 };
 
 const only = process.argv.slice(2).filter((a) => !a.startsWith("-"));
@@ -256,14 +334,19 @@ let total = 0;
 const sources = [];
 for (const id of ids) {
   if (!PAGES[id]) throw new Error(`unknown franchise id: ${id}`);
-  const src = await sourcePoster(id);
-  const { w, h, bytes } = await compose(src.file, id);
-  total += bytes;
-  sources.push({ ...src, franchise: NAMES[id] });
-  if (only.length) {
-    await sharp(path.join(outDir, `${id}.webp`)).png().toFile(path.join(previewDir, `${id}.png`));
+  try {
+    const src = await sourcePoster(id);
+    const { w, h, bytes } = await compose(src.file, id);
+    total += bytes;
+    sources.push({ ...src, franchise: NAMES[id] });
+    if (only.length) {
+      await sharp(path.join(outDir, `${id}.webp`)).png().toFile(path.join(previewDir, `${id}.png`));
+    }
+    console.log(`${id.padEnd(16)} poster ${w}x${h}  ${(bytes / 1024).toFixed(1)} KB`);
+  } catch (err) {
+    console.warn(`${id.padEnd(16)} SKIPPED  ${err.message}`);
   }
-  console.log(`${id.padEnd(16)} poster ${w}x${h}  ${(bytes / 1024).toFixed(1)} KB`);
+  await sleep(600);
 }
 
 if (!only.length) {

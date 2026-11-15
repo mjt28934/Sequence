@@ -164,6 +164,7 @@ private fun BrowseGenres(vm: MainViewModel) {
                     vm.selectTab(AppTab.HOME)
                 },
                 modifier = Modifier.fillMaxWidth(),
+                count = shelf.second.size,
             )
         }
     }
@@ -189,13 +190,23 @@ private fun SearchResults(vm: MainViewModel, q: String) {
             }
         }
         if (results.franchises.isNotEmpty()) {
-            item { SectionHeader(title = "Franchises") }
+            item {
+                SectionHeader(
+                    title = "Franchises",
+                    subtitle = plural(results.franchises.size, "match", "matches"),
+                )
+            }
             items(results.franchises, key = { "f-${it.id}" }) { f ->
                 FranchiseRow(f, onClick = { vm.openFranchise(f.id) })
             }
         }
         if (results.titles.isNotEmpty()) {
-            item { SectionHeader(title = "Films and series") }
+            item {
+                SectionHeader(
+                    title = "Films and series",
+                    subtitle = plural(results.titles.size, "match", "matches"),
+                )
+            }
             items(results.titles, key = { "t-${it.franchise.id}-${it.entry.id}" }) { item ->
                 ResultRow(
                     thumb = { RowThumb(item.franchise, width = 64.dp) },
@@ -206,7 +217,12 @@ private fun SearchResults(vm: MainViewModel, q: String) {
             }
         }
         if (results.works.isNotEmpty()) {
-            item { SectionHeader(title = "Books and comics") }
+            item {
+                SectionHeader(
+                    title = "Books and comics",
+                    subtitle = plural(results.works.size, "match", "matches"),
+                )
+            }
             items(results.works, key = { "w-${it.second.id}" }) { pair ->
                 ResultRow(
                     thumb = { CoverThumb(pair.second) },
