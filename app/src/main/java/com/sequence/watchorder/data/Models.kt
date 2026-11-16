@@ -1,6 +1,6 @@
 package com.sequence.watchorder.data
 
-/** A film, series or special in a franchise's watch order. */
+/** A film, series, game or special in a franchise's watch order. */
 data class Entry(
     val id: String,
     val title: String,
@@ -13,10 +13,12 @@ data class Entry(
     val optional: Boolean = false,
 ) {
     val isFilm: Boolean get() = kind == KIND_FILM
+    val isGame: Boolean get() = kind == KIND_GAME
     val kindLabel: String
         get() = when (kind) {
             KIND_SERIES -> "Series"
             KIND_SPECIAL -> "Special"
+            KIND_GAME -> "Game"
             else -> "Film"
         }
 
@@ -24,10 +26,11 @@ data class Entry(
         const val KIND_FILM = "film"
         const val KIND_SERIES = "series"
         const val KIND_SPECIAL = "special"
+        const val KIND_GAME = "game"
     }
 }
 
-/** A movie franchise, with its entries and presentation details. */
+/** A film or game franchise, with its entries and presentation details. */
 data class Franchise(
     val id: String,
     val name: String,

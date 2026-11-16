@@ -62,12 +62,27 @@ object Logic {
 
     fun matchesKind(entry: Entry, kind: String): Boolean = when (kind) {
         "film" -> entry.isFilm
-        "series" -> !entry.isFilm
+        "series" -> entry.kind == Entry.KIND_SERIES || entry.kind == Entry.KIND_SPECIAL
+        "game" -> entry.isGame
         else -> true
     }
 
+    /** The filter groups a mixed franchise can offer: films, series/specials and games. */
+    private fun kindGroup(entry: Entry): String = when (entry.kind) {
+        Entry.KIND_FILM -> "film"
+        Entry.KIND_GAME -> "game"
+        else -> "series"
+    }
+
+    fun hasKind(franchise: Franchise, kind: String): Boolean =
+        franchise.entries.any { matchesKind(it, kind) }
+
     fun hasMixedKinds(franchise: Franchise): Boolean =
-        franchise.entries.any { !it.isFilm } && franchise.entries.any { it.isFilm }
+        franchise.entries.map { kindGroup(it) }.distinct().size > 1
+
+    /** "played" for a game-only franchise, "watched" for everything else. */
+    fun watchVerb(franchise: Franchise): String =
+        if (franchise.entries.isNotEmpty() && franchise.entries.all { it.isGame }) "played" else "watched"
 
     fun hasOptional(franchise: Franchise): Boolean = franchise.entries.any { it.optional }
 
@@ -217,8 +232,9 @@ object Logic {
     }
 
     fun describeCounts(franchise: Franchise): String {
-        val other = franchise.entries.count { !it.isFilm }
-        val parts = mutableListOf("${franchise.entries.size} titles")
+        val allGames = franchise.entries.isNotEmpty() && franchise.entries.all { it.isGame }
+        val other = franchise.entries.count { kindGroup(it) == "series" }
+        val parts = mutableListOf("${franchise.entries.size} ${if (allGames) "games" else "titles"}")
         if (other > 0) parts.add("$other series & specials")
         return parts.joinToString(" · ")
     }

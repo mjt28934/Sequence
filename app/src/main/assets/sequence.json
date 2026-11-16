@@ -1,13 +1,15 @@
 {
   "version": "1.3",
-  "dataAsOf": "2026-11-09",
+  "dataAsOf": "2026-11-16",
   "genres": [
     "Sci-fi",
     "Superhero",
     "Fantasy",
     "Horror",
     "Action",
-    "Monsters"
+    "Monsters",
+    "Crime",
+    "Games"
   ],
   "franchises": [
     {
@@ -4613,6 +4615,848 @@
           "story": 5
         }
       ]
+    },
+    {
+      "id": "scream",
+      "name": "Scream",
+      "years": "1996–2026",
+      "hook": "Seven films, one small town, one mask",
+      "blurb": "Wes Craven's slasher series kept reinventing itself: a trilogy, a fourth film, then a new generation in 2022. Release order is the only order that lets the jokes and the rules land.",
+      "storyHint": "Release order. The 2022 film is a sequel, not a remake, and Scream VI picks it up directly.",
+      "genre": "Horror",
+      "accent": "#c23b3b",
+      "eraOrder": [
+        "Films"
+      ],
+      "entries": [
+        {
+          "id": "sc-1",
+          "title": "Scream (1996)",
+          "date": "1996-12-18",
+          "year": 1996,
+          "kind": "film",
+          "era": "Films",
+          "story": 1
+        },
+        {
+          "id": "sc-2",
+          "title": "Scream 2",
+          "date": "1997-12-10",
+          "year": 1997,
+          "kind": "film",
+          "era": "Films",
+          "story": 2
+        },
+        {
+          "id": "sc-3",
+          "title": "Scream 3",
+          "date": "2000-02-03",
+          "year": 2000,
+          "kind": "film",
+          "era": "Films",
+          "story": 3
+        },
+        {
+          "id": "sc-4",
+          "title": "Scream 4",
+          "date": "2011-04-11",
+          "year": 2011,
+          "kind": "film",
+          "era": "Films",
+          "story": 4
+        },
+        {
+          "id": "sc-5",
+          "title": "Scream (2022)",
+          "date": "2022-01-12",
+          "year": 2022,
+          "kind": "film",
+          "era": "Films",
+          "story": 5,
+          "note": "A new cast, the same Woodsboro history."
+        },
+        {
+          "id": "sc-6",
+          "title": "Scream VI",
+          "date": "2023-03-08",
+          "year": 2023,
+          "kind": "film",
+          "era": "Films",
+          "story": 6,
+          "note": "Moves the survivors to New York."
+        },
+        {
+          "id": "sc-7",
+          "title": "Scream 7",
+          "date": "2026-02-25",
+          "year": 2026,
+          "kind": "film",
+          "era": "Films",
+          "story": 7
+        }
+      ]
+    },
+    {
+      "id": "final-destination",
+      "name": "Final Destination",
+      "years": "2000–2025",
+      "hook": "Death has a design, and it does not skip",
+      "blurb": "Six films built on one idea: a premonition saves a group, then death works through them in order. The set pieces are the point, so release order keeps the escalation intact.",
+      "storyHint": "Release order. Bloodlines follows the granddaughter of the first film's survivor.",
+      "genre": "Horror",
+      "accent": "#78899c",
+      "eraOrder": [
+        "Films"
+      ],
+      "entries": [
+        {
+          "id": "fd-1",
+          "title": "Final Destination",
+          "date": "2000-03-17",
+          "year": 2000,
+          "kind": "film",
+          "era": "Films",
+          "story": 1
+        },
+        {
+          "id": "fd-2",
+          "title": "Final Destination 2",
+          "date": "2003-01-31",
+          "year": 2003,
+          "kind": "film",
+          "era": "Films",
+          "story": 2
+        },
+        {
+          "id": "fd-3",
+          "title": "Final Destination 3",
+          "date": "2006-02-10",
+          "year": 2006,
+          "kind": "film",
+          "era": "Films",
+          "story": 3
+        },
+        {
+          "id": "fd-4",
+          "title": "The Final Destination",
+          "date": "2009-08-26",
+          "year": 2009,
+          "kind": "film",
+          "era": "Films",
+          "story": 4
+        },
+        {
+          "id": "fd-5",
+          "title": "Final Destination 5",
+          "date": "2011-08-12",
+          "year": 2011,
+          "kind": "film",
+          "era": "Films",
+          "story": 5,
+          "note": "Ends by looping back to the first film."
+        },
+        {
+          "id": "fd-6",
+          "title": "Final Destination Bloodlines",
+          "date": "2025-05-14",
+          "year": 2025,
+          "kind": "film",
+          "era": "Films",
+          "story": 6
+        }
+      ]
+    },
+    {
+      "id": "saw",
+      "name": "Saw",
+      "years": "2004–2023",
+      "hook": "Ten films, one puppet, a very complicated timeline",
+      "blurb": "The series ran forwards for seven films, then started filling in its own history. Story order puts Saw X between the first two films and leaves the two spin-offs for last.",
+      "storyHint": "Saw, Saw X, then Saw II to Saw 3D. Jigsaw and Spiral follow the main run; Spiral is a separate story.",
+      "genre": "Horror",
+      "accent": "#b0442c",
+      "eraOrder": [
+        "Films"
+      ],
+      "entries": [
+        {
+          "id": "sw-1",
+          "title": "Saw",
+          "date": "2004-10-29",
+          "year": 2004,
+          "kind": "film",
+          "era": "Films",
+          "story": 1
+        },
+        {
+          "id": "sw-2",
+          "title": "Saw II",
+          "date": "2005-10-28",
+          "year": 2005,
+          "kind": "film",
+          "era": "Films",
+          "story": 3
+        },
+        {
+          "id": "sw-3",
+          "title": "Saw III",
+          "date": "2006-10-27",
+          "year": 2006,
+          "kind": "film",
+          "era": "Films",
+          "story": 4
+        },
+        {
+          "id": "sw-4",
+          "title": "Saw IV",
+          "date": "2007-10-25",
+          "year": 2007,
+          "kind": "film",
+          "era": "Films",
+          "story": 5,
+          "note": "Runs alongside Saw III."
+        },
+        {
+          "id": "sw-5",
+          "title": "Saw V",
+          "date": "2008-10-23",
+          "year": 2008,
+          "kind": "film",
+          "era": "Films",
+          "story": 6
+        },
+        {
+          "id": "sw-6",
+          "title": "Saw VI",
+          "date": "2009-10-22",
+          "year": 2009,
+          "kind": "film",
+          "era": "Films",
+          "story": 7
+        },
+        {
+          "id": "sw-3d",
+          "title": "Saw 3D",
+          "date": "2010-10-21",
+          "year": 2010,
+          "kind": "film",
+          "era": "Films",
+          "story": 8
+        },
+        {
+          "id": "sw-jig",
+          "title": "Jigsaw",
+          "date": "2017-10-26",
+          "year": 2017,
+          "kind": "film",
+          "era": "Films",
+          "story": 9,
+          "note": "A later sequel that revisits the original traps."
+        },
+        {
+          "id": "sw-sp",
+          "title": "Spiral",
+          "date": "2021-05-14",
+          "year": 2021,
+          "kind": "film",
+          "era": "Films",
+          "story": 10,
+          "note": "A spin-off with a new cast, set outside the main Jigsaw story.",
+          "optional": true
+        },
+        {
+          "id": "sw-x",
+          "title": "Saw X",
+          "date": "2023-09-28",
+          "year": 2023,
+          "kind": "film",
+          "era": "Films",
+          "story": 2,
+          "note": "Set between Saw and Saw II."
+        }
+      ]
+    },
+    {
+      "id": "rambo",
+      "name": "Rambo",
+      "years": "1982–2019",
+      "hook": "One soldier, five films, four decades",
+      "blurb": "First Blood was a small film about a veteran who will not be pushed around. The sequels turned John Rambo into a one-man war, and Last Blood brought him home.",
+      "storyHint": "Release order. First Blood is the quiet one; the rest get louder.",
+      "genre": "Action",
+      "accent": "#6f7f52",
+      "eraOrder": [
+        "Films"
+      ],
+      "entries": [
+        {
+          "id": "rm-1",
+          "title": "First Blood",
+          "date": "1982-10-22",
+          "year": 1982,
+          "kind": "film",
+          "era": "Films",
+          "story": 1
+        },
+        {
+          "id": "rm-2",
+          "title": "Rambo: First Blood Part II",
+          "date": "1985-05-22",
+          "year": 1985,
+          "kind": "film",
+          "era": "Films",
+          "story": 2
+        },
+        {
+          "id": "rm-3",
+          "title": "Rambo III",
+          "date": "1988-05-25",
+          "year": 1988,
+          "kind": "film",
+          "era": "Films",
+          "story": 3
+        },
+        {
+          "id": "rm-4",
+          "title": "Rambo (2008)",
+          "date": "2008-01-25",
+          "year": 2008,
+          "kind": "film",
+          "era": "Films",
+          "story": 4
+        },
+        {
+          "id": "rm-5",
+          "title": "Rambo: Last Blood",
+          "date": "2019-09-19",
+          "year": 2019,
+          "kind": "film",
+          "era": "Films",
+          "story": 5
+        }
+      ]
+    },
+    {
+      "id": "godfather",
+      "name": "The Godfather",
+      "years": "1972–1990",
+      "hook": "Three films about one family business",
+      "blurb": "Mario Puzo's Corleones, filmed by Coppola as a trilogy that moves between the 1900s and the 1980s. Part II cuts between Vito's rise and Michael's fall, but release order is still the clearest way in.",
+      "storyHint": "Release order. Part II's flashbacks fill in Vito's history without needing to be watched first.",
+      "genre": "Crime",
+      "accent": "#b08d57",
+      "eraOrder": [
+        "Films"
+      ],
+      "entries": [
+        {
+          "id": "gf-1",
+          "title": "The Godfather",
+          "date": "1972-03-15",
+          "year": 1972,
+          "kind": "film",
+          "era": "Films",
+          "story": 1
+        },
+        {
+          "id": "gf-2",
+          "title": "The Godfather Part II",
+          "date": "1974-12-12",
+          "year": 1974,
+          "kind": "film",
+          "era": "Films",
+          "story": 2
+        },
+        {
+          "id": "gf-3",
+          "title": "The Godfather Part III",
+          "date": "1990-12-25",
+          "year": 1990,
+          "kind": "film",
+          "era": "Films",
+          "story": 3,
+          "note": "A 2020 recut, The Godfather Coda, is an alternate edit of this film."
+        }
+      ]
+    },
+    {
+      "id": "underworld",
+      "name": "Underworld",
+      "years": "2003–2016",
+      "hook": "Vampires, werewolves, and a very old feud",
+      "blurb": "Five films about the war between the vampires and the Lycans. Rise of the Lycans is a medieval prequel; the other four run in release order.",
+      "storyHint": "Rise of the Lycans first, then Underworld, Evolution, Awakening and Blood Wars.",
+      "genre": "Fantasy",
+      "accent": "#5566a8",
+      "eraOrder": [
+        "Prequel",
+        "Main"
+      ],
+      "entries": [
+        {
+          "id": "uw-1",
+          "title": "Underworld",
+          "date": "2003-09-08",
+          "year": 2003,
+          "kind": "film",
+          "era": "Main",
+          "story": 2
+        },
+        {
+          "id": "uw-2",
+          "title": "Underworld: Evolution",
+          "date": "2006-01-20",
+          "year": 2006,
+          "kind": "film",
+          "era": "Main",
+          "story": 3
+        },
+        {
+          "id": "uw-rise",
+          "title": "Underworld: Rise of the Lycans",
+          "date": "2009-01-22",
+          "year": 2009,
+          "kind": "film",
+          "era": "Prequel",
+          "story": 1,
+          "note": "A prequel set centuries before the first film."
+        },
+        {
+          "id": "uw-aw",
+          "title": "Underworld: Awakening",
+          "date": "2012-01-26",
+          "year": 2012,
+          "kind": "film",
+          "era": "Main",
+          "story": 4
+        },
+        {
+          "id": "uw-bw",
+          "title": "Underworld: Blood Wars",
+          "date": "2016-11-24",
+          "year": 2016,
+          "kind": "film",
+          "era": "Main",
+          "story": 5
+        }
+      ]
+    },
+    {
+      "id": "last-of-us",
+      "name": "The Last of Us",
+      "years": "2013–2020",
+      "hook": "Two games, one long walk across America",
+      "blurb": "Naughty Dog's post-outbreak story is told in two games and one prequel chapter. Play the first game, its Left Behind chapter, then Part II; the emotional order matters more here than in most series.",
+      "storyHint": "The Last of Us, Left Behind, then The Last of Us Part II.",
+      "genre": "Games",
+      "accent": "#5e7d5a",
+      "eraOrder": [
+        "Games"
+      ],
+      "entries": [
+        {
+          "id": "tlou-1",
+          "title": "The Last of Us",
+          "date": "2013-06-14",
+          "year": 2013,
+          "kind": "game",
+          "era": "Games",
+          "story": 1
+        },
+        {
+          "id": "tlou-lb",
+          "title": "The Last of Us: Left Behind",
+          "date": "2014-02-14",
+          "year": 2014,
+          "kind": "game",
+          "era": "Games",
+          "story": 2,
+          "note": "A two-part prequel chapter, best played after the first game.",
+          "optional": true
+        },
+        {
+          "id": "tlou-2",
+          "title": "The Last of Us Part II",
+          "date": "2020-06-19",
+          "year": 2020,
+          "kind": "game",
+          "era": "Games",
+          "story": 3
+        }
+      ]
+    },
+    {
+      "id": "uncharted",
+      "name": "Uncharted",
+      "years": "2007–2017",
+      "hook": "Six adventures, one very unlucky treasure hunter",
+      "blurb": "Naughty Dog's treasure-hunting series runs on set pieces, but the relationships build across the games. Golden Abyss is a Vita prequel, and The Lost Legacy hands the lead to Chloe.",
+      "storyHint": "Golden Abyss is optional and comes first; then Drake's Fortune through A Thief's End, then The Lost Legacy.",
+      "genre": "Games",
+      "accent": "#b2843c",
+      "eraOrder": [
+        "Prequel",
+        "Main"
+      ],
+      "entries": [
+        {
+          "id": "uc-1",
+          "title": "Uncharted: Drake's Fortune",
+          "date": "2007-11-19",
+          "year": 2007,
+          "kind": "game",
+          "era": "Main",
+          "story": 2
+        },
+        {
+          "id": "uc-2",
+          "title": "Uncharted 2: Among Thieves",
+          "date": "2009-10-13",
+          "year": 2009,
+          "kind": "game",
+          "era": "Main",
+          "story": 3
+        },
+        {
+          "id": "uc-3",
+          "title": "Uncharted 3: Drake's Deception",
+          "date": "2011-11-01",
+          "year": 2011,
+          "kind": "game",
+          "era": "Main",
+          "story": 4
+        },
+        {
+          "id": "uc-ga",
+          "title": "Uncharted: Golden Abyss",
+          "date": "2011-12-17",
+          "year": 2011,
+          "kind": "game",
+          "era": "Prequel",
+          "story": 1,
+          "note": "A Vita prequel set before Drake's Fortune.",
+          "optional": true
+        },
+        {
+          "id": "uc-4",
+          "title": "Uncharted 4: A Thief's End",
+          "date": "2016-05-10",
+          "year": 2016,
+          "kind": "game",
+          "era": "Main",
+          "story": 5
+        },
+        {
+          "id": "uc-ll",
+          "title": "Uncharted: The Lost Legacy",
+          "date": "2017-08-22",
+          "year": 2017,
+          "kind": "game",
+          "era": "Main",
+          "story": 6,
+          "note": "A standalone story with Chloe and Nadine."
+        }
+      ]
+    },
+    {
+      "id": "god-of-war",
+      "name": "God of War",
+      "years": "2005–2022",
+      "hook": "Two mythologies, eight games, one angry father",
+      "blurb": "The Greek games tell Kratos's origin out of order: Ascension and Chains of Olympus are prequels, and Ghost of Sparta sits between the first two main games. The 2018 game starts a Norse chapter with his son.",
+      "storyHint": "Greek story order first: Ascension, Chains of Olympus, God of War, Ghost of Sparta, God of War II, God of War III. Then God of War (2018) and Ragnarök.",
+      "genre": "Games",
+      "accent": "#a33b2b",
+      "eraOrder": [
+        "Greek",
+        "Norse"
+      ],
+      "entries": [
+        {
+          "id": "gow-1",
+          "title": "God of War (2005)",
+          "date": "2005-03-22",
+          "year": 2005,
+          "kind": "game",
+          "era": "Greek",
+          "story": 3
+        },
+        {
+          "id": "gow-2",
+          "title": "God of War II",
+          "date": "2007-03-13",
+          "year": 2007,
+          "kind": "game",
+          "era": "Greek",
+          "story": 5
+        },
+        {
+          "id": "gow-coo",
+          "title": "God of War: Chains of Olympus",
+          "date": "2008-03-04",
+          "year": 2008,
+          "kind": "game",
+          "era": "Greek",
+          "story": 2,
+          "note": "A prequel set ten years before the first game."
+        },
+        {
+          "id": "gow-3",
+          "title": "God of War III",
+          "date": "2010-03-16",
+          "year": 2010,
+          "kind": "game",
+          "era": "Greek",
+          "story": 6
+        },
+        {
+          "id": "gow-gos",
+          "title": "God of War: Ghost of Sparta",
+          "date": "2010-11-02",
+          "year": 2010,
+          "kind": "game",
+          "era": "Greek",
+          "story": 4,
+          "note": "Set between the first game and God of War II."
+        },
+        {
+          "id": "gow-asc",
+          "title": "God of War: Ascension",
+          "date": "2013-03-12",
+          "year": 2013,
+          "kind": "game",
+          "era": "Greek",
+          "story": 1,
+          "note": "A prequel set before Kratos's servitude to Ares.",
+          "optional": true
+        },
+        {
+          "id": "gow-4",
+          "title": "God of War (2018)",
+          "date": "2018-04-20",
+          "year": 2018,
+          "kind": "game",
+          "era": "Norse",
+          "story": 7,
+          "note": "A soft reboot that moves the story to Norse mythology."
+        },
+        {
+          "id": "gow-rag",
+          "title": "God of War Ragnarök",
+          "date": "2022-11-09",
+          "year": 2022,
+          "kind": "game",
+          "era": "Norse",
+          "story": 8
+        }
+      ]
+    },
+    {
+      "id": "mass-effect",
+      "name": "Mass Effect",
+      "years": "2007–2017",
+      "hook": "One commander, one crew, one galaxy",
+      "blurb": "BioWare's space opera is built on choices that carry between games, so the trilogy wants to be played in order with one save. Andromeda is a separate story in another galaxy.",
+      "storyHint": "Mass Effect, Mass Effect 2, Mass Effect 3. Andromeda is a distant spin-off and can be played any time after.",
+      "genre": "Games",
+      "accent": "#c05a2a",
+      "eraOrder": [
+        "Games"
+      ],
+      "entries": [
+        {
+          "id": "me-1",
+          "title": "Mass Effect",
+          "date": "2007-11-20",
+          "year": 2007,
+          "kind": "game",
+          "era": "Games",
+          "story": 1
+        },
+        {
+          "id": "me-2",
+          "title": "Mass Effect 2",
+          "date": "2010-01-26",
+          "year": 2010,
+          "kind": "game",
+          "era": "Games",
+          "story": 2,
+          "note": "Imports your choices and your Shepard from the first game."
+        },
+        {
+          "id": "me-3",
+          "title": "Mass Effect 3",
+          "date": "2012-03-06",
+          "year": 2012,
+          "kind": "game",
+          "era": "Games",
+          "story": 3
+        },
+        {
+          "id": "me-a",
+          "title": "Mass Effect: Andromeda",
+          "date": "2017-03-21",
+          "year": 2017,
+          "kind": "game",
+          "era": "Games",
+          "story": 4,
+          "note": "A separate story, set in another galaxy."
+        }
+      ]
+    },
+    {
+      "id": "halo",
+      "name": "Halo",
+      "years": "2001–2021",
+      "hook": "Eight games, one long war with the Covenant",
+      "blurb": "The Master Chief games jump around their own timeline: Reach is a prequel, and ODST runs alongside Halo 2. Story order starts at the fall of Reach and ends with Infinite.",
+      "storyHint": "Reach, Combat Evolved, Halo 2, ODST, Halo 3, Halo 4, Halo 5, then Infinite.",
+      "genre": "Games",
+      "accent": "#4f7d5c",
+      "eraOrder": [
+        "Prequel",
+        "Main"
+      ],
+      "entries": [
+        {
+          "id": "hal-1",
+          "title": "Halo: Combat Evolved",
+          "date": "2001-11-15",
+          "year": 2001,
+          "kind": "game",
+          "era": "Main",
+          "story": 2
+        },
+        {
+          "id": "hal-2",
+          "title": "Halo 2",
+          "date": "2004-11-09",
+          "year": 2004,
+          "kind": "game",
+          "era": "Main",
+          "story": 3
+        },
+        {
+          "id": "hal-3",
+          "title": "Halo 3",
+          "date": "2007-09-25",
+          "year": 2007,
+          "kind": "game",
+          "era": "Main",
+          "story": 5
+        },
+        {
+          "id": "hal-odst",
+          "title": "Halo 3: ODST",
+          "date": "2009-09-22",
+          "year": 2009,
+          "kind": "game",
+          "era": "Main",
+          "story": 4,
+          "note": "Runs alongside Halo 2 and ends before Halo 3."
+        },
+        {
+          "id": "hal-reach",
+          "title": "Halo: Reach",
+          "date": "2010-09-14",
+          "year": 2010,
+          "kind": "game",
+          "era": "Prequel",
+          "story": 1,
+          "note": "A prequel that ends where Halo: Combat Evolved begins."
+        },
+        {
+          "id": "hal-4",
+          "title": "Halo 4",
+          "date": "2012-11-06",
+          "year": 2012,
+          "kind": "game",
+          "era": "Main",
+          "story": 6
+        },
+        {
+          "id": "hal-5",
+          "title": "Halo 5: Guardians",
+          "date": "2015-10-27",
+          "year": 2015,
+          "kind": "game",
+          "era": "Main",
+          "story": 7
+        },
+        {
+          "id": "hal-inf",
+          "title": "Halo Infinite",
+          "date": "2021-12-08",
+          "year": 2021,
+          "kind": "game",
+          "era": "Main",
+          "story": 8
+        }
+      ]
+    },
+    {
+      "id": "witcher",
+      "name": "The Witcher",
+      "years": "2007–2016",
+      "hook": "Three games, two expansions, one witcher",
+      "blurb": "CD Projekt's games continue Andrzej Sapkowski's books rather than adapting them. The two Witcher 3 expansions are self-contained stories that sit after the main game.",
+      "storyHint": "The Witcher, The Witcher 2, The Witcher 3, then Hearts of Stone and Blood and Wine.",
+      "genre": "Games",
+      "accent": "#8a5a3b",
+      "eraOrder": [
+        "Games"
+      ],
+      "entries": [
+        {
+          "id": "tw-g1",
+          "title": "The Witcher",
+          "date": "2007-10-26",
+          "year": 2007,
+          "kind": "game",
+          "era": "Games",
+          "story": 1
+        },
+        {
+          "id": "tw-g2",
+          "title": "The Witcher 2: Assassins of Kings",
+          "date": "2011-05-17",
+          "year": 2011,
+          "kind": "game",
+          "era": "Games",
+          "story": 2
+        },
+        {
+          "id": "tw-g3",
+          "title": "The Witcher 3: Wild Hunt",
+          "date": "2015-05-19",
+          "year": 2015,
+          "kind": "game",
+          "era": "Games",
+          "story": 3
+        },
+        {
+          "id": "tw-hs",
+          "title": "The Witcher 3: Hearts of Stone",
+          "date": "2015-10-13",
+          "year": 2015,
+          "kind": "game",
+          "era": "Games",
+          "story": 4,
+          "note": "An expansion for The Witcher 3.",
+          "optional": true
+        },
+        {
+          "id": "tw-bw",
+          "title": "The Witcher 3: Blood and Wine",
+          "date": "2016-05-31",
+          "year": 2016,
+          "kind": "game",
+          "era": "Games",
+          "story": 5,
+          "note": "The final expansion, set in Toussaint.",
+          "optional": true
+        }
+      ]
     }
   ],
   "works": {
@@ -6237,6 +7081,78 @@
       "ink": "#0c0d11",
       "deep": "#26292b",
       "soft": "#1b1c1d"
+    },
+    "scream": {
+      "accent": "#c23b3b",
+      "ink": "#0c0d11",
+      "deep": "#331f1f",
+      "soft": "#211818"
+    },
+    "final-destination": {
+      "accent": "#78899c",
+      "ink": "#0c0d11",
+      "deep": "#26292c",
+      "soft": "#1b1c1d"
+    },
+    "saw": {
+      "accent": "#b0442c",
+      "ink": "#0c0d11",
+      "deep": "#34221e",
+      "soft": "#211917"
+    },
+    "rambo": {
+      "accent": "#6f7f52",
+      "ink": "#0c0d11",
+      "deep": "#2a2d25",
+      "soft": "#1d1e1a"
+    },
+    "godfather": {
+      "accent": "#b08d57",
+      "ink": "#0c0d11",
+      "deep": "#2f2a22",
+      "soft": "#1f1d19"
+    },
+    "underworld": {
+      "accent": "#5566a8",
+      "ink": "#0c0d11",
+      "deep": "#23252f",
+      "soft": "#191a1f"
+    },
+    "last-of-us": {
+      "accent": "#5e7d5a",
+      "ink": "#0c0d11",
+      "deep": "#262c26",
+      "soft": "#1b1d1b"
+    },
+    "uncharted": {
+      "accent": "#b2843c",
+      "ink": "#0c0d11",
+      "deep": "#322b20",
+      "soft": "#201d18"
+    },
+    "god-of-war": {
+      "accent": "#a33b2b",
+      "ink": "#0c0d11",
+      "deep": "#33211e",
+      "soft": "#211817"
+    },
+    "mass-effect": {
+      "accent": "#c05a2a",
+      "ink": "#0c0d11",
+      "deep": "#35251d",
+      "soft": "#211a17"
+    },
+    "halo": {
+      "accent": "#4f7d5c",
+      "ink": "#0c0d11",
+      "deep": "#252d27",
+      "soft": "#1a1e1b"
+    },
+    "witcher": {
+      "accent": "#8a5a3b",
+      "ink": "#0c0d11",
+      "deep": "#302721",
+      "soft": "#1f1b19"
     }
   }
 }

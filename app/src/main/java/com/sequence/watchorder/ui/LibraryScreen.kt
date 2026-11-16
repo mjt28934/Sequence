@@ -212,7 +212,8 @@ private fun LibraryRow(vm: MainViewModel, item: LibraryItem) {
             supportingContent = {
                 Column {
                     Text(
-                        "${item.franchise.years} · ${item.seen.done} of ${item.seen.total} watched",
+                        "${item.franchise.years} · ${item.seen.done} of ${item.seen.total} " +
+                            Logic.watchVerb(item.franchise),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                     )

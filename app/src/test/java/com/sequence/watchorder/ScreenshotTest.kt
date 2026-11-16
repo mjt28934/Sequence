@@ -181,6 +181,23 @@ class ScreenshotTest {
     }
 
     @Test
+    fun tagsGames() {
+        val model = vm().apply {
+            selectTab(AppTab.TAGS)
+            selectGenre("Games")
+        }
+        shot("tags-games") { TagsScreen(model) }
+    }
+
+    @Test
+    fun detailGame() {
+        val model = vm().apply { openFranchise("last-of-us") }
+        ArtRepository.warm(ArtKind.POSTER, "last-of-us")
+        val franchise = catalog.franchise("last-of-us")!!
+        shot("detail-game") { DetailScreen(model, franchise) }
+    }
+
+    @Test
     fun detailWatch() {
         val model = vm().apply { openFranchise("star-wars") }
         ArtRepository.warm(ArtKind.POSTER, "star-wars")

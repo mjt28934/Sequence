@@ -90,6 +90,15 @@
     "height": 350
   },
   {
+    "franchise": "Final Destination",
+    "id": "final-destination",
+    "name": "Final Destination 5",
+    "page": "https://en.wikipedia.org/wiki/Final_Destination_5",
+    "url": "https://upload.wikimedia.org/wikipedia/en/a/a0/FD5_poster.jpg",
+    "width": 220,
+    "height": 326
+  },
+  {
     "franchise": "Ghostbusters",
     "id": "ghostbusters",
     "name": "Ghostbusters",
@@ -97,6 +106,24 @@
     "url": "https://upload.wikimedia.org/wikipedia/en/2/2f/Ghostbusters_%281984%29_theatrical_poster.png",
     "width": 258,
     "height": 397
+  },
+  {
+    "franchise": "God of War",
+    "id": "god-of-war",
+    "name": "God of War (2018 video game)",
+    "page": "https://en.wikipedia.org/wiki/God_of_War_(2018_video_game)",
+    "url": "https://upload.wikimedia.org/wikipedia/en/a/a7/God_of_War_4_cover.jpg",
+    "width": 273,
+    "height": 364
+  },
+  {
+    "franchise": "The Godfather",
+    "id": "godfather",
+    "name": "The Godfather",
+    "page": "https://en.wikipedia.org/wiki/The_Godfather",
+    "url": "https://upload.wikimedia.org/wikipedia/en/1/1c/Godfather_ver1.jpg",
+    "width": 220,
+    "height": 330
   },
   {
     "franchise": "Godzilla",
@@ -115,6 +142,15 @@
     "url": "https://upload.wikimedia.org/wikipedia/en/a/af/Halloween_%281978%29_theatrical_poster.jpg",
     "width": 259,
     "height": 384
+  },
+  {
+    "franchise": "Halo",
+    "id": "halo",
+    "name": "Halo: Combat Evolved",
+    "page": "https://en.wikipedia.org/wiki/Halo%3A_Combat_Evolved",
+    "url": "https://upload.wikimedia.org/wikipedia/en/8/80/Halo_-_Combat_Evolved_%28XBox_version_-_box_art%29.jpg",
+    "width": 272,
+    "height": 366
   },
   {
     "franchise": "The Hunger Games",
@@ -153,6 +189,15 @@
     "height": 328
   },
   {
+    "franchise": "The Last of Us",
+    "id": "last-of-us",
+    "name": "The Last of Us Part II",
+    "page": "https://en.wikipedia.org/wiki/The_Last_of_Us_Part_II",
+    "url": "https://upload.wikimedia.org/wikipedia/en/4/4f/TLOU_P2_Box_Art_2.png",
+    "width": 273,
+    "height": 365
+  },
+  {
     "franchise": "Mad Max",
     "id": "mad-max",
     "name": "Mad Max: Fury Road",
@@ -160,6 +205,15 @@
     "url": "https://upload.wikimedia.org/wikipedia/en/6/6e/Mad_Max_Fury_Road.jpg",
     "width": 264,
     "height": 378
+  },
+  {
+    "franchise": "Mass Effect",
+    "id": "mass-effect",
+    "name": "Mass Effect (video game)",
+    "page": "https://en.wikipedia.org/wiki/Mass_Effect_(video_game)",
+    "url": "https://upload.wikimedia.org/wikipedia/en/e/e8/MassEffect.jpg",
+    "width": 283,
+    "height": 400
   },
   {
     "franchise": "The Matrix",
@@ -234,6 +288,15 @@
     "height": 382
   },
   {
+    "franchise": "Rambo",
+    "id": "rambo",
+    "name": "First Blood",
+    "page": "https://en.wikipedia.org/wiki/First_Blood",
+    "url": "https://upload.wikimedia.org/wikipedia/en/d/d6/First_blood_poster.jpg",
+    "width": 254,
+    "height": 392
+  },
+  {
     "franchise": "Rocky & Creed",
     "id": "rocky",
     "name": "Rocky",
@@ -241,6 +304,24 @@
     "url": "https://upload.wikimedia.org/wikipedia/en/1/18/Rocky_poster.jpg",
     "width": 260,
     "height": 383
+  },
+  {
+    "franchise": "Saw",
+    "id": "saw",
+    "name": "Saw (film)",
+    "page": "https://en.wikipedia.org/wiki/Saw_(film)",
+    "url": "https://upload.wikimedia.org/wikipedia/en/5/56/Saw_official_poster.jpg",
+    "width": 257,
+    "height": 387
+  },
+  {
+    "franchise": "Scream",
+    "id": "scream",
+    "name": "Scream (1996 film)",
+    "page": "https://en.wikipedia.org/wiki/Scream_(1996_film)",
+    "url": "https://upload.wikimedia.org/wikipedia/en/8/86/Scream_%281996_film%29_poster.jpg",
+    "width": 260,
+    "height": 382
   },
   {
     "franchise": "Shrek",
@@ -313,6 +394,33 @@
     "url": "https://upload.wikimedia.org/wikipedia/en/b/b6/Twilight_%282008_film%29_poster.jpg",
     "width": 250,
     "height": 370
+  },
+  {
+    "franchise": "Uncharted",
+    "id": "uncharted",
+    "name": "Uncharted 4: A Thief's End",
+    "page": "https://en.wikipedia.org/wiki/Uncharted_4%3A_A_Thief's_End",
+    "url": "https://upload.wikimedia.org/wikipedia/en/1/1a/Uncharted_4_box_artwork.jpg",
+    "width": 275,
+    "height": 361
+  },
+  {
+    "franchise": "Underworld",
+    "id": "underworld",
+    "name": "Underworld (2003 film)",
+    "page": "https://en.wikipedia.org/wiki/Underworld_(2003_film)",
+    "url": "https://upload.wikimedia.org/wikipedia/en/c/cc/Underworld_%282003_film%29_poster.jpg",
+    "width": 250,
+    "height": 371
+  },
+  {
+    "franchise": "The Witcher",
+    "id": "witcher",
+    "name": "The Witcher 3: Wild Hunt",
+    "page": "https://en.wikipedia.org/wiki/The_Witcher_3%3A_Wild_Hunt",
+    "url": "https://upload.wikimedia.org/wikipedia/en/0/0c/Witcher_3_cover_art.jpg",
+    "width": 258,
+    "height": 387
   },
   {
     "franchise": "Wizarding World",

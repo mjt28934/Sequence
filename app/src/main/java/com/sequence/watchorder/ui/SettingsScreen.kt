@@ -295,7 +295,7 @@ fun SettingsScreen(
             Spacer(Modifier.height(12.dp))
             SettingsNote(
                 "${vm.catalog.franchises.size} franchises · " +
-                    "${vm.catalog.totalEntries()} films and series · " +
+                    "${vm.catalog.totalEntries()} titles · " +
                     "no network permission",
             )
         }

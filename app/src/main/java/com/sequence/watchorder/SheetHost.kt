@@ -118,6 +118,9 @@ private fun FilterSheet(vm: MainViewModel, franchise: Franchise?) {
     val watchFilter = vm.watchFilter
     val bookFilter = vm.bookFilter
     val mixedKinds = franchise?.let { Logic.hasMixedKinds(it) } == true
+    val hasFilms = franchise?.let { Logic.hasKind(it, "film") } == true
+    val hasSeries = franchise?.let { Logic.hasKind(it, "series") } == true
+    val hasGames = franchise?.let { Logic.hasKind(it, "game") } == true
     val optionalEntries = franchise?.let { Logic.hasOptional(it) } == true
     val optionalWorks = Logic.hasOptionalWorks(works)
 
@@ -127,22 +130,34 @@ private fun FilterSheet(vm: MainViewModel, franchise: Franchise?) {
         if (mixedKinds) {
             SheetOptionRow(
                 title = "Everything",
-                subtitle = "Films, series and specials",
+                subtitle = if (hasGames) "Films, series, games and specials" else "Films, series and specials",
                 selected = watchFilter.kind == "all",
                 onClick = { vm.updateWatchFilter(watchFilter.copy(kind = "all")) },
             )
-            SheetOptionRow(
-                title = "Films only",
-                subtitle = "Skip the series and specials",
-                selected = watchFilter.kind == "film",
-                onClick = { vm.updateWatchFilter(watchFilter.copy(kind = "film")) },
-            )
-            SheetOptionRow(
-                title = "Series and specials only",
-                subtitle = "Skip the films",
-                selected = watchFilter.kind == "series",
-                onClick = { vm.updateWatchFilter(watchFilter.copy(kind = "series")) },
-            )
+            if (hasFilms) {
+                SheetOptionRow(
+                    title = "Films only",
+                    subtitle = if (hasGames) "Skip the series, games and specials" else "Skip the series and specials",
+                    selected = watchFilter.kind == "film",
+                    onClick = { vm.updateWatchFilter(watchFilter.copy(kind = "film")) },
+                )
+            }
+            if (hasSeries) {
+                SheetOptionRow(
+                    title = "Series and specials only",
+                    subtitle = if (hasGames) "Skip the films and games" else "Skip the films",
+                    selected = watchFilter.kind == "series",
+                    onClick = { vm.updateWatchFilter(watchFilter.copy(kind = "series")) },
+                )
+            }
+            if (hasGames) {
+                SheetOptionRow(
+                    title = "Games only",
+                    subtitle = "Skip the films, series and specials",
+                    selected = watchFilter.kind == "game",
+                    onClick = { vm.updateWatchFilter(watchFilter.copy(kind = "game")) },
+                )
+            }
         }
         if (optionalEntries) {
             SheetToggleRow(
@@ -273,7 +288,7 @@ private fun EntryDetailSheet(
     val meta = buildList {
         add(Logic.formatDate(entry.date))
         add(entry.kindLabel)
-        if (!entry.era.isNullOrEmpty()) add(entry.era)
+        if (!entry.era.isNullOrEmpty() && franchise.eraOrder.size > 1) add(entry.era)
         if (entry.optional) add("Optional")
     }.joinToString(" · ")
 

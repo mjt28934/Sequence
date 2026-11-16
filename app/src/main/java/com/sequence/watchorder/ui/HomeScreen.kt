@@ -241,7 +241,7 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                         EnterSection(enter, "upnext-header", 5) {
                             SectionHeader(
                                 title = "Up next",
-                                subtitle = "Tap the tick when you have watched it",
+                                subtitle = "Tap the tick when you have seen or played it",
                             )
                         }
                     }
@@ -345,7 +345,7 @@ private fun ContinueHero(
     val nextBook = card.nextBook
     val headline = next?.title ?: nextBook?.title ?: "All caught up"
     val kicker = when {
-        next != null -> "Continue watching"
+        next != null -> if (next.isGame) "Continue playing" else "Continue watching"
         nextBook != null -> "Continue reading"
         else -> "Finished"
     }
@@ -409,7 +409,13 @@ private fun ContinueHero(
                     Button(onClick = onMarkSeen) {
                         Icon(SeqIcons.Check, contentDescription = null, modifier = Modifier.size(18.dp))
                         Spacer(Modifier.width(8.dp))
-                        Text(if (next == null && nextBook != null) "Read it" else "Watched it")
+                        Text(
+                            when {
+                                next == null && nextBook != null -> "Read it"
+                                next?.isGame == true -> "Played it"
+                                else -> "Watched it"
+                            },
+                        )
                     }
                 }
             }
@@ -445,7 +451,7 @@ private fun OverallProgressCard(seen: Progress, read: Progress) {
                 .padding(18.dp),
             horizontalArrangement = Arrangement.spacedBy(20.dp),
         ) {
-            ProgressColumn("Watched", seen, Modifier.weight(1f))
+            ProgressColumn("Seen", seen, Modifier.weight(1f))
             ProgressColumn("Read", read, Modifier.weight(1f))
         }
     }

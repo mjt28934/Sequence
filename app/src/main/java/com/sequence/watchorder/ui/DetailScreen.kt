@@ -369,7 +369,7 @@ private fun Hero(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 MetaPill(
-                    text = "${seen.done} of ${seen.total} watched",
+                    text = "${seen.done} of ${seen.total} ${Logic.watchVerb(franchise)}",
                     container = accent.accent,
                     content = accent.ink,
                 )
@@ -674,7 +674,11 @@ private fun WatchRow(
                         append(entry.year)
                         append(" · ")
                         append(entry.kindLabel)
-                        if (!entry.era.isNullOrEmpty()) append(" · ").append(entry.era)
+                        // A single-era franchise ("Films", "Games") does not need the era repeated
+                        // on every row; the hero already carries the genre and the count.
+                        if (!entry.era.isNullOrEmpty() && franchise.eraOrder.size > 1) {
+                            append(" · ").append(entry.era)
+                        }
                         if (entry.optional) append(" · Optional")
                     },
                     style = MaterialTheme.typography.bodySmall,
@@ -785,6 +789,7 @@ private fun describeWatchFilter(filter: WatchFilter, franchise: Franchise): Stri
         parts += when (filter.kind) {
             "film" -> "Films only"
             "series" -> "Series and specials"
+            "game" -> "Games only"
             else -> "Everything"
         }
     } else {

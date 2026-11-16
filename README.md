@@ -1,4 +1,4 @@
-# Sequence 2.0 — 37 franchises, a steadier shell
+# Sequence 2.1 — 49 franchises, films and games
 
 A native Kotlin / Jetpack Compose rebuild of the original WebView-based **Sequence** watch-order app.
 No WebView, no JavaScript bridge, no network permission. The catalogue and all artwork are
@@ -12,7 +12,9 @@ sheets, segmented buttons, swipe-to-mark-seen with haptics, and edge-to-edge ins
 ## Ready to install
 
 - `Sequence-2.0.apk` — signed release build (`com.sequence.watchorder`, versionCode 220,
-  versionName `2.0`).
+  versionName `2.0`), the latest published release.
+- `Sequence-2.1.apk` — local build of the current source (versionCode 230, versionName `2.1`); it is
+  not published yet.
 - Minimum Android 8.0 (API 26), targets Android 15 (API 35).
 - Rendered previews of every screen are in `screenshots/`.
 
@@ -28,6 +30,7 @@ Each change ships under a new name so builds never get confused:
 | 1.5 | `Sequence-1.5.apk` | Real film posters replace the generated franchise art |
 | 1.6 | `Sequence-1.6.apk` | 17 more franchises (37 total), 116 more titles, 22 more books, real covers, and a motion pass over every screen |
 | 2.0 | `Sequence-2.0.apk` | Tags tab, inline Home search, appearance and layout settings, shared-axis transitions, a bottom bar that never re-creates, sticky upcoming months, and a reduced-motion-aware polish pass |
+| 2.1 | `Sequence-2.1.apk` | 12 more franchises (49 total): Scream, Final Destination, Saw, Rambo, The Godfather, Underworld, and six game series. Adds a Game kind, game filtering and played/playing copy. Unreleased. |
 
 Versions 1.7 through 1.10 were internal builds; their changes are part of 2.0.
 
@@ -39,10 +42,11 @@ APK name both follow it.
 
 ## What is included
 
-- **Home** — a continue hero for the next title, overall film/print progress, a continue shelf, up-next
+- **Home** — a continue hero for the next title, overall seen/read progress, a continue shelf, up-next
   and keep-reading rows with one-tap seen checks, the full franchise grid with a hide-finished empty
   state, and a media-player style mini bar above the navigation. A finished franchise carries a tick
-  badge on its poster, and a new install skips the explainer and goes straight to the catalogue.
+  badge on its poster, and a new install skips the explainer and goes straight to the catalogue. Game
+  entries say "Continue playing" and "Played it" instead of watch wording.
 - **Library** — saved and started franchises, grid/list views, progress filters, and sort by recent,
   A–Z, most left, or furthest along. Rows animate into place as the filter changes, and the bar links
   straight to settings.
@@ -50,26 +54,26 @@ APK name both follow it.
   days with seen toggles; every row opens its franchise and title sheet.
 - **Tags** — genre shelves with cover collages, and a genre view of franchise posters that animates
   as the filter changes.
-- **Search** — franchises, films/series, books and comics, with a match count on every result section;
-  it opens inline on Home and closing it keeps your place.
+- **Search** — franchises, films, series, games, books and comics, with a match count on every result
+  section; it opens inline on Home and closing it keeps your place.
 - **Franchise detail** — hero art with a scroll parallax, expandable blurb, release/story ordering,
-  watch filters, book format filters, series/special markers, optional-entry markers, swipe-right to
-  toggle seen, per-title sheets, "mark everything up to here", reading paths, cover checkmarks, and a
-  next-up FAB.
+  watch filters that include a games option for mixed franchises, book format filters, series/game/
+  special markers, optional-entry markers, swipe-right to toggle seen, per-title sheets, "mark
+  everything up to here", reading paths, cover checkmarks, and a next-up FAB.
 - **Settings** — start tab, hide finished franchises, theme and vibration, reduce motion, library
   layout and sort, watching order, export/import, clear all progress (confirmed), and reset settings.
 - **Undo snackbar** after progress and save changes, matching the original behaviour.
-- **Real artwork** for all 37 franchises and 156 of 157 books and comics, served from `assets/art`.
+- **Real artwork** for all 49 franchises and 156 of 157 books and comics, served from `assets/art`.
 
 ## Artwork
 
-Each franchise banner is 960x600 and shows the actual theatrical poster: the poster sits on the right
-at full sharpness over a blurred, darkened copy of itself, which keeps the 16:10 crop the layouts use
-and leaves the left side clear for the title text laid over it. Bond is the exception: its landscape
-UK quad posters are used full-bleed, so the set reads as one run of films.
+Each franchise banner is 960x600 and shows the actual theatrical poster or game box art: the artwork
+sits on the right at full sharpness over a blurred, darkened copy of itself, which keeps the 16:10 crop
+the layouts use and leaves the left side clear for the title text laid over it. Bond is the exception:
+its landscape UK quad posters are used full-bleed, so the set reads as one run of films.
 
-Posters come from the lead image of each film's English Wikipedia article and are re-composed locally
-by `buildtools/fetch-posters.mjs` (Sharp), then written straight into
+Posters and box art come from the lead image of each film's or game's English Wikipedia article and are
+re-composed locally by `buildtools/fetch-posters.mjs` (Sharp), then written straight into
 `app/src/main/assets/art/posters`. Source images are kept out of git; only the finished banners ship.
 `buildtools/check-posters.mjs` re-reads every banner and fails if one is missing, too small or flat.
 See `POSTERS.md` for the exact page behind each one.
@@ -210,9 +214,9 @@ $env:JAVA_HOME = "C:\Projects\Orderly\.toolchain\jdk17"
 
 Outputs:
 
-- `app/build/outputs/apk/debug/app-debug.apk` (`com.sequence.watchorder.debug`, `2.0-debug`)
+- `app/build/outputs/apk/debug/app-debug.apk` (`com.sequence.watchorder.debug`, `2.1-debug`)
 - `app/build/outputs/apk/release/app-release.apk` (signed with `sequence-release.jks`)
-- `Sequence-2.0.apk` — the release build copied to the project root for installing
+- `Sequence-2.1.apk` — the current release build copied to the project root (not published)
 
 ### Android Studio
 
@@ -245,9 +249,11 @@ local `sequence-release.jks` is not in the repository.
 
 ## Data and behaviour notes
 
-- `sequence.json` contains 37 franchises, 425 entries and 157 books/comics, with data checked
-  through 2026-11-09. Release dates come from Wikidata (`P577`, earliest day-precision value), with
-  three titles given hand-checked dates where Wikidata only had a premiere.
+- `sequence.json` contains 49 franchises, 495 entries and 157 books/comics, with data checked
+  through 2026-11-16. Release dates come from Wikidata (`P577`, earliest day-precision value), with
+  six titles given hand-checked dates where Wikidata only had a premiere or a stale scheduling claim.
+- Game entries use `kind: "game"`. They count and filter like other entries, are labelled "Game" in
+  rows and sheets, and game-only franchises say "played" instead of "watched".
 - Upcoming titles do not count toward progress and cannot be marked seen.
 - Release order sorts by premiere date; story order uses each franchise's era order and story index.
 - Library membership = saved, or at least one entry seen, or at least one book read.

@@ -195,7 +195,7 @@ private fun SearchResultsList(vm: MainViewModel, q: String) {
                 EmptyState(
                     icon = SeqIcons.Search,
                     title = "No results",
-                    body = "Nothing matches \u201C$q\u201D. Try a franchise, a film, an author or a title.",
+                    body = "Nothing matches \u201C$q\u201D. Try a franchise, a film, a game, an author or a title.",
                 )
             }
         }
@@ -213,7 +213,7 @@ private fun SearchResultsList(vm: MainViewModel, q: String) {
         if (results.titles.isNotEmpty()) {
             item {
                 SectionHeader(
-                    title = "Films and series",
+                    title = "Films, series and games",
                     subtitle = plural(results.titles.size, "match", "matches"),
                 )
             }

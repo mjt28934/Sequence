@@ -91,11 +91,11 @@ const NEW_FRANCHISES = [
       { id: "mi-1", title: "Mission: Impossible", page: "Mission: Impossible (film)", date: "1996-05-22", era: "Films" },
       { id: "mi-2", title: "Mission: Impossible 2", page: "Mission: Impossible 2", date: "2000-05-24", era: "Films" },
       { id: "mi-3", title: "Mission: Impossible III", page: "Mission: Impossible III", date: "2006-05-05", era: "Films" },
-      { id: "mi-4", title: "Mission: Impossible â€“ Ghost Protocol", page: "Mission: Impossible â€“ Ghost Protocol", date: "2011-12-21", era: "Films" },
-      { id: "mi-5", title: "Mission: Impossible â€“ Rogue Nation", page: "Mission: Impossible â€“ Rogue Nation", date: "2015-07-31", era: "Films" },
-      { id: "mi-6", title: "Mission: Impossible â€“ Fallout", page: "Mission: Impossible â€“ Fallout", date: "2018-07-27", era: "Films", note: "Direct follow-on from Rogue Nation." },
-      { id: "mi-7", title: "Mission: Impossible â€“ Dead Reckoning Part One", page: "Mission: Impossible â€“ Dead Reckoning Part One", date: "2023-07-12", era: "Films" },
-      { id: "mi-8", title: "Mission: Impossible â€“ The Final Reckoning", page: "Mission: Impossible â€“ The Final Reckoning", date: "2025-05-23", era: "Films", note: "Second half of the Dead Reckoning story." },
+      { id: "mi-4", title: "Mission: Impossible – Ghost Protocol", page: "Mission: Impossible – Ghost Protocol", date: "2011-12-21", era: "Films" },
+      { id: "mi-5", title: "Mission: Impossible – Rogue Nation", page: "Mission: Impossible – Rogue Nation", date: "2015-07-31", era: "Films" },
+      { id: "mi-6", title: "Mission: Impossible – Fallout", page: "Mission: Impossible – Fallout", date: "2018-07-27", era: "Films", note: "Direct follow-on from Rogue Nation." },
+      { id: "mi-7", title: "Mission: Impossible – Dead Reckoning Part One", page: "Mission: Impossible – Dead Reckoning Part One", date: "2023-07-12", era: "Films" },
+      { id: "mi-8", title: "Mission: Impossible – The Final Reckoning", page: "Mission: Impossible – The Final Reckoning", date: "2025-05-23", era: "Films", note: "Second half of the Dead Reckoning story." },
     ],
     works: [],
   },
@@ -114,7 +114,7 @@ const NEW_FRANCHISES = [
       { id: "jw-cont", title: "The Continental", page: "The Continental: From the World of John Wick", date: "2023-09-22", kind: "series", era: "Prequel", optional: true, note: "A three-part prequel set in 1975. Optional, but it explains the hotel." },
       { id: "jw-1", title: "John Wick", page: "John Wick (film)", date: "2014-10-24", era: "Main" },
       { id: "jw-2", title: "John Wick: Chapter 2", page: "John Wick: Chapter 2", date: "2017-02-10", era: "Main" },
-      { id: "jw-3", title: "John Wick: Chapter 3 â€“ Parabellum", page: "John Wick: Chapter 3 â€“ Parabellum", date: "2019-05-17", era: "Main" },
+      { id: "jw-3", title: "John Wick: Chapter 3 – Parabellum", page: "John Wick: Chapter 3 – Parabellum", date: "2019-05-17", era: "Main" },
       { id: "jw-bal", title: "Ballerina", page: "Ballerina (2025 film)", date: "2025-06-06", era: "Main", note: "Set during the events of Chapter 3." },
       { id: "jw-4", title: "John Wick: Chapter 4", page: "John Wick: Chapter 4", date: "2023-03-24", era: "Main" },
     ],
@@ -216,7 +216,7 @@ const NEW_FRANCHISES = [
     hook: "Nine films, one staircase",
     blurb:
       "Rocky ran from 1976 to 2006, then handed the gloves to Adonis Creed in 2015. It is one continuous story, so release order is story order.",
-    storyHint: "Rocky Iâ€“V, Rocky Balboa, then Creed, Creed II and Creed III.",
+    storyHint: "Rocky I–V, Rocky Balboa, then Creed, Creed II and Creed III.",
     eraOrder: ["Rocky", "Creed"],
     entries: [
       { id: "rk-1", title: "Rocky", page: "Rocky", date: "1976-11-21", era: "Rocky" },
@@ -385,8 +385,8 @@ const NEW_FRANCHISES = [
       { id: "tw-1", title: "Twilight", page: "Twilight (2008 film)", date: "2008-11-21" },
       { id: "tw-2", title: "The Twilight Saga: New Moon", page: "The Twilight Saga: New Moon", date: "2009-11-20" },
       { id: "tw-3", title: "The Twilight Saga: Eclipse", page: "The Twilight Saga: Eclipse", date: "2010-06-30" },
-      { id: "tw-4", title: "The Twilight Saga: Breaking Dawn â€“ Part 1", page: "The Twilight Saga: Breaking Dawn â€“ Part 1", date: "2011-11-18" },
-      { id: "tw-5", title: "The Twilight Saga: Breaking Dawn â€“ Part 2", page: "The Twilight Saga: Breaking Dawn â€“ Part 2", date: "2012-11-16" },
+      { id: "tw-4", title: "The Twilight Saga: Breaking Dawn – Part 1", page: "The Twilight Saga: Breaking Dawn – Part 1", date: "2011-11-18" },
+      { id: "tw-5", title: "The Twilight Saga: Breaking Dawn – Part 2", page: "The Twilight Saga: Breaking Dawn – Part 2", date: "2012-11-16" },
     ],
     works: [
       { id: "bk-tw-1", title: "Twilight", year: 2005, format: "novel", by: "Stephenie Meyer", page: "Twilight (Meyer novel)", path: "The Saga" },
@@ -419,6 +419,262 @@ const NEW_FRANCHISES = [
       { id: "bk-bn-3", title: "The Bourne Ultimatum", year: 1990, format: "novel", by: "Robert Ludlum", page: "The Bourne Ultimatum", path: "Novels" },
     ],
   },
+
+  /* ------------------------------------------------------------------- horror ---- */
+
+  {
+    id: "scream",
+    name: "Scream",
+    genre: "Horror",
+    accent: "#c23b3b",
+    hook: "Seven films, one small town, one mask",
+    blurb:
+      "Wes Craven's slasher series kept reinventing itself: a trilogy, a fourth film, then a new generation in 2022. Release order is the only order that lets the jokes and the rules land.",
+    storyHint: "Release order. The 2022 film is a sequel, not a remake, and Scream VI picks it up directly.",
+    eraOrder: ["Films"],
+    entries: [
+      { id: "sc-1", title: "Scream (1996)", page: "Scream (1996 film)", date: "1996-12-20", era: "Films" },
+      { id: "sc-2", title: "Scream 2", page: "Scream 2", date: "1997-12-12", era: "Films" },
+      { id: "sc-3", title: "Scream 3", page: "Scream 3", date: "2000-02-04", era: "Films" },
+      { id: "sc-4", title: "Scream 4", page: "Scream 4", date: "2011-04-15", era: "Films" },
+      { id: "sc-5", title: "Scream (2022)", page: "Scream (2022 film)", date: "2022-01-14", era: "Films", note: "A new cast, the same Woodsboro history." },
+      { id: "sc-6", title: "Scream VI", page: "Scream VI", date: "2023-03-10", era: "Films", note: "Moves the survivors to New York." },
+      { id: "sc-7", title: "Scream 7", page: "Scream 7", date: "2026-02-27", era: "Films" },
+    ],
+    works: [],
+  },
+
+  {
+    id: "final-destination",
+    name: "Final Destination",
+    genre: "Horror",
+    accent: "#78899c",
+    hook: "Death has a design, and it does not skip",
+    blurb:
+      "Six films built on one idea: a premonition saves a group, then death works through them in order. The set pieces are the point, so release order keeps the escalation intact.",
+    storyHint: "Release order. Bloodlines follows the granddaughter of the first film's survivor.",
+    eraOrder: ["Films"],
+    entries: [
+      { id: "fd-1", title: "Final Destination", page: "Final Destination", date: "2000-03-17", era: "Films" },
+      { id: "fd-2", title: "Final Destination 2", page: "Final Destination 2", date: "2003-01-31", era: "Films" },
+      { id: "fd-3", title: "Final Destination 3", page: "Final Destination 3", date: "2006-02-10", era: "Films" },
+      { id: "fd-4", title: "The Final Destination", page: "The Final Destination", date: "2009-08-28", era: "Films" },
+      { id: "fd-5", title: "Final Destination 5", page: "Final Destination 5", date: "2011-08-12", era: "Films", note: "Ends by looping back to the first film." },
+      { id: "fd-6", title: "Final Destination Bloodlines", page: "Final Destination Bloodlines", date: "2025-05-16", era: "Films" },
+    ],
+    works: [],
+  },
+
+  {
+    id: "saw",
+    name: "Saw",
+    genre: "Horror",
+    accent: "#b0442c",
+    hook: "Ten films, one puppet, a very complicated timeline",
+    blurb:
+      "The series ran forwards for seven films, then started filling in its own history. Story order puts Saw X between the first two films and leaves the two spin-offs for last.",
+    storyHint: "Saw, Saw X, then Saw II to Saw 3D. Jigsaw and Spiral follow the main run; Spiral is a separate story.",
+    eraOrder: ["Films"],
+    entries: [
+      { id: "sw-1", title: "Saw", page: "Saw (film)", date: "2004-10-29", era: "Films" },
+      { id: "sw-x", title: "Saw X", page: "Saw X", date: "2023-09-29", era: "Films", note: "Set between Saw and Saw II." },
+      { id: "sw-2", title: "Saw II", page: "Saw II", date: "2005-10-28", era: "Films" },
+      { id: "sw-3", title: "Saw III", page: "Saw III", date: "2006-10-27", era: "Films" },
+      { id: "sw-4", title: "Saw IV", page: "Saw IV", date: "2007-10-26", era: "Films", note: "Runs alongside Saw III." },
+      { id: "sw-5", title: "Saw V", page: "Saw V", date: "2008-10-24", era: "Films" },
+      { id: "sw-6", title: "Saw VI", page: "Saw VI", date: "2009-10-23", era: "Films" },
+      { id: "sw-3d", title: "Saw 3D", page: "Saw 3D", date: "2010-10-29", era: "Films" },
+      { id: "sw-jig", title: "Jigsaw", page: "Jigsaw (2017 film)", date: "2017-10-27", era: "Films", note: "A later sequel that revisits the original traps." },
+      { id: "sw-sp", title: "Spiral", page: "Spiral (2021 film)", date: "2021-05-14", era: "Films", optional: true, note: "A spin-off with a new cast, set outside the main Jigsaw story." },
+    ],
+    works: [],
+  },
+
+  {
+    id: "rambo",
+    name: "Rambo",
+    genre: "Action",
+    accent: "#6f7f52",
+    hook: "One soldier, five films, four decades",
+    blurb:
+      "First Blood was a small film about a veteran who will not be pushed around. The sequels turned John Rambo into a one-man war, and Last Blood brought him home.",
+    storyHint: "Release order. First Blood is the quiet one; the rest get louder.",
+    eraOrder: ["Films"],
+    entries: [
+      { id: "rm-1", title: "First Blood", page: "First Blood", date: "1982-10-22", era: "Films" },
+      { id: "rm-2", title: "Rambo: First Blood Part II", page: "Rambo: First Blood Part II", date: "1985-05-22", era: "Films" },
+      { id: "rm-3", title: "Rambo III", page: "Rambo III", date: "1988-05-25", era: "Films" },
+      { id: "rm-4", title: "Rambo (2008)", page: "Rambo (film)", date: "2008-01-25", era: "Films" },
+      { id: "rm-5", title: "Rambo: Last Blood", page: "Rambo: Last Blood", date: "2019-09-20", era: "Films" },
+    ],
+    works: [],
+  },
+
+  /* -------------------------------------------------------------------- crime ---- */
+
+  {
+    id: "godfather",
+    name: "The Godfather",
+    genre: "Crime",
+    accent: "#b08d57",
+    hook: "Three films about one family business",
+    blurb:
+      "Mario Puzo's Corleones, filmed by Coppola as a trilogy that moves between the 1900s and the 1980s. Part II cuts between Vito's rise and Michael's fall, but release order is still the clearest way in.",
+    storyHint: "Release order. Part II's flashbacks fill in Vito's history without needing to be watched first.",
+    eraOrder: ["Films"],
+    entries: [
+      { id: "gf-1", title: "The Godfather", page: "The Godfather", date: "1972-03-24", era: "Films" },
+      { id: "gf-2", title: "The Godfather Part II", page: "The Godfather Part II", date: "1974-12-20", era: "Films" },
+      { id: "gf-3", title: "The Godfather Part III", page: "The Godfather Part III", date: "1990-12-25", era: "Films", note: "A 2020 recut, The Godfather Coda, is an alternate edit of this film." },
+    ],
+    works: [],
+  },
+
+  {
+    id: "underworld",
+    name: "Underworld",
+    genre: "Fantasy",
+    accent: "#5566a8",
+    hook: "Vampires, werewolves, and a very old feud",
+    blurb:
+      "Five films about the war between the vampires and the Lycans. Rise of the Lycans is a medieval prequel; the other four run in release order.",
+    storyHint: "Rise of the Lycans first, then Underworld, Evolution, Awakening and Blood Wars.",
+    eraOrder: ["Prequel", "Main"],
+    entries: [
+      { id: "uw-rise", title: "Underworld: Rise of the Lycans", page: "Underworld: Rise of the Lycans", date: "2009-01-23", era: "Prequel", note: "A prequel set centuries before the first film." },
+      { id: "uw-1", title: "Underworld", page: "Underworld (2003 film)", date: "2003-09-19", era: "Main" },
+      { id: "uw-2", title: "Underworld: Evolution", page: "Underworld: Evolution", date: "2006-01-20", era: "Main" },
+      { id: "uw-aw", title: "Underworld: Awakening", page: "Underworld: Awakening", date: "2012-01-20", era: "Main" },
+      { id: "uw-bw", title: "Underworld: Blood Wars", page: "Underworld: Blood Wars", date: "2017-01-06", era: "Main" },
+    ],
+    works: [],
+  },
+
+  /* -------------------------------------------------------------------- games ---- */
+
+  {
+    id: "last-of-us",
+    name: "The Last of Us",
+    genre: "Games",
+    accent: "#5e7d5a",
+    hook: "Two games, one long walk across America",
+    blurb:
+      "Naughty Dog's post-outbreak story is told in two games and one prequel chapter. Play the first game, its Left Behind chapter, then Part II; the emotional order matters more here than in most series.",
+    storyHint: "The Last of Us, Left Behind, then The Last of Us Part II.",
+    eraOrder: ["Games"],
+    entries: [
+      { id: "tlou-1", title: "The Last of Us", page: "The Last of Us", date: "2013-06-14", kind: "game", era: "Games" },
+      { id: "tlou-lb", title: "The Last of Us: Left Behind", page: "The Last of Us: Left Behind", date: "2014-02-14", kind: "game", era: "Games", optional: true, note: "A two-part prequel chapter, best played after the first game." },
+      { id: "tlou-2", title: "The Last of Us Part II", page: "The Last of Us Part II", date: "2020-06-19", kind: "game", era: "Games" },
+    ],
+    works: [],
+  },
+
+  {
+    id: "uncharted",
+    name: "Uncharted",
+    genre: "Games",
+    accent: "#b2843c",
+    hook: "Six adventures, one very unlucky treasure hunter",
+    blurb:
+      "Naughty Dog's treasure-hunting series runs on set pieces, but the relationships build across the games. Golden Abyss is a Vita prequel, and The Lost Legacy hands the lead to Chloe.",
+    storyHint: "Golden Abyss is optional and comes first; then Drake's Fortune through A Thief's End, then The Lost Legacy.",
+    eraOrder: ["Prequel", "Main"],
+    entries: [
+      { id: "uc-ga", title: "Uncharted: Golden Abyss", page: "Uncharted: Golden Abyss", date: "2011-12-17", kind: "game", era: "Prequel", optional: true, note: "A Vita prequel set before Drake's Fortune." },
+      { id: "uc-1", title: "Uncharted: Drake's Fortune", page: "Uncharted: Drake's Fortune", date: "2007-11-19", kind: "game", era: "Main" },
+      { id: "uc-2", title: "Uncharted 2: Among Thieves", page: "Uncharted 2: Among Thieves", date: "2009-10-13", kind: "game", era: "Main" },
+      { id: "uc-3", title: "Uncharted 3: Drake's Deception", page: "Uncharted 3: Drake's Deception", date: "2011-11-01", kind: "game", era: "Main" },
+      { id: "uc-4", title: "Uncharted 4: A Thief's End", page: "Uncharted 4: A Thief's End", date: "2016-05-10", kind: "game", era: "Main" },
+      { id: "uc-ll", title: "Uncharted: The Lost Legacy", page: "Uncharted: The Lost Legacy", date: "2017-08-22", kind: "game", era: "Main", note: "A standalone story with Chloe and Nadine." },
+    ],
+    works: [],
+  },
+
+  {
+    id: "god-of-war",
+    name: "God of War",
+    genre: "Games",
+    accent: "#a33b2b",
+    hook: "Two mythologies, eight games, one angry father",
+    blurb:
+      "The Greek games tell Kratos's origin out of order: Ascension and Chains of Olympus are prequels, and Ghost of Sparta sits between the first two main games. The 2018 game starts a Norse chapter with his son.",
+    storyHint: "Greek story order first: Ascension, Chains of Olympus, God of War, Ghost of Sparta, God of War II, God of War III. Then God of War (2018) and Ragnarök.",
+    eraOrder: ["Greek", "Norse"],
+    entries: [
+      { id: "gow-asc", title: "God of War: Ascension", page: "God of War: Ascension", date: "2013-03-12", kind: "game", era: "Greek", optional: true, note: "A prequel set before Kratos's servitude to Ares." },
+      { id: "gow-coo", title: "God of War: Chains of Olympus", page: "God of War: Chains of Olympus", date: "2008-03-04", kind: "game", era: "Greek", note: "A prequel set ten years before the first game." },
+      { id: "gow-1", title: "God of War (2005)", page: "God of War (2005 video game)", date: "2005-03-22", kind: "game", era: "Greek" },
+      { id: "gow-gos", title: "God of War: Ghost of Sparta", page: "God of War: Ghost of Sparta", date: "2010-11-02", kind: "game", era: "Greek", note: "Set between the first game and God of War II." },
+      { id: "gow-2", title: "God of War II", page: "God of War II", date: "2007-03-13", kind: "game", era: "Greek" },
+      { id: "gow-3", title: "God of War III", page: "God of War III", date: "2010-03-16", kind: "game", era: "Greek" },
+      { id: "gow-4", title: "God of War (2018)", page: "God of War (2018 video game)", date: "2018-04-20", kind: "game", era: "Norse", note: "A soft reboot that moves the story to Norse mythology." },
+      { id: "gow-rag", title: "God of War Ragnarök", page: "God of War Ragnarök", date: "2022-11-09", kind: "game", era: "Norse" },
+    ],
+    works: [],
+  },
+
+  {
+    id: "mass-effect",
+    name: "Mass Effect",
+    genre: "Games",
+    accent: "#c05a2a",
+    hook: "One commander, one crew, one galaxy",
+    blurb:
+      "BioWare's space opera is built on choices that carry between games, so the trilogy wants to be played in order with one save. Andromeda is a separate story in another galaxy.",
+    storyHint: "Mass Effect, Mass Effect 2, Mass Effect 3. Andromeda is a distant spin-off and can be played any time after.",
+    eraOrder: ["Games"],
+    entries: [
+      { id: "me-1", title: "Mass Effect", page: "Mass Effect (video game)", date: "2007-11-20", kind: "game", era: "Games" },
+      { id: "me-2", title: "Mass Effect 2", page: "Mass Effect 2", date: "2010-01-26", kind: "game", era: "Games", note: "Imports your choices and your Shepard from the first game." },
+      { id: "me-3", title: "Mass Effect 3", page: "Mass Effect 3", date: "2012-03-06", kind: "game", era: "Games" },
+      { id: "me-a", title: "Mass Effect: Andromeda", page: "Mass Effect: Andromeda", date: "2017-03-21", kind: "game", era: "Games", note: "A separate story, set in another galaxy." },
+    ],
+    works: [],
+  },
+
+  {
+    id: "halo",
+    name: "Halo",
+    genre: "Games",
+    accent: "#4f7d5c",
+    hook: "Eight games, one long war with the Covenant",
+    blurb:
+      "The Master Chief games jump around their own timeline: Reach is a prequel, and ODST runs alongside Halo 2. Story order starts at the fall of Reach and ends with Infinite.",
+    storyHint: "Reach, Combat Evolved, Halo 2, ODST, Halo 3, Halo 4, Halo 5, then Infinite.",
+    eraOrder: ["Prequel", "Main"],
+    entries: [
+      { id: "hal-reach", title: "Halo: Reach", page: "Halo: Reach", date: "2010-09-14", kind: "game", era: "Prequel", note: "A prequel that ends where Halo: Combat Evolved begins." },
+      { id: "hal-1", title: "Halo: Combat Evolved", page: "Halo: Combat Evolved", date: "2001-11-15", kind: "game", era: "Main" },
+      { id: "hal-2", title: "Halo 2", page: "Halo 2", date: "2004-11-09", kind: "game", era: "Main" },
+      { id: "hal-odst", title: "Halo 3: ODST", page: "Halo 3: ODST", date: "2009-09-22", kind: "game", era: "Main", note: "Runs alongside Halo 2 and ends before Halo 3." },
+      { id: "hal-3", title: "Halo 3", page: "Halo 3", date: "2007-09-25", kind: "game", era: "Main" },
+      { id: "hal-4", title: "Halo 4", page: "Halo 4", date: "2012-11-06", kind: "game", era: "Main" },
+      { id: "hal-5", title: "Halo 5: Guardians", page: "Halo 5: Guardians", date: "2015-10-27", kind: "game", era: "Main" },
+      { id: "hal-inf", title: "Halo Infinite", page: "Halo Infinite", date: "2021-12-08", kind: "game", era: "Main" },
+    ],
+    works: [],
+  },
+
+  {
+    id: "witcher",
+    name: "The Witcher",
+    genre: "Games",
+    accent: "#8a5a3b",
+    hook: "Three games, two expansions, one witcher",
+    blurb:
+      "CD Projekt's games continue Andrzej Sapkowski's books rather than adapting them. The two Witcher 3 expansions are self-contained stories that sit after the main game.",
+    storyHint: "The Witcher, The Witcher 2, The Witcher 3, then Hearts of Stone and Blood and Wine.",
+    eraOrder: ["Games"],
+    entries: [
+      { id: "tw-g1", title: "The Witcher", page: "The Witcher (video game)", date: "2007-10-26", kind: "game", era: "Games" },
+      { id: "tw-g2", title: "The Witcher 2: Assassins of Kings", page: "The Witcher 2: Assassins of Kings", date: "2011-05-17", kind: "game", era: "Games" },
+      { id: "tw-g3", title: "The Witcher 3: Wild Hunt", page: "The Witcher 3: Wild Hunt", date: "2015-05-19", kind: "game", era: "Games" },
+      { id: "tw-hs", title: "The Witcher 3: Hearts of Stone", page: "The Witcher 3: Hearts of Stone", date: "2015-10-13", kind: "game", era: "Games", optional: true, note: "An expansion for The Witcher 3." },
+      { id: "tw-bw", title: "The Witcher 3: Blood and Wine", page: "The Witcher 3: Blood and Wine", date: "2016-05-31", kind: "game", era: "Games", optional: true, note: "The final expansion, set in Toussaint." },
+    ],
+    works: [],
+  },
 ];
 
 /* ------------------------------------------------------------------------- dates ---- */
@@ -435,6 +691,9 @@ const DATE_FIXES = {
   "bd-nt": "2021-09-30", // No Time to Die: Wikidata lists the original 2019 date first
   "av-3": "2025-12-19", // Avatar: Fire and Ash: premiere vs wide release
   "ts-5": "2026-06-19", // Toy Story 5: premiere vs wide release
+  "sw-1": "2004-10-29", // Saw: earliest P577 is the 2004 Sundance screening
+  "sw-sp": "2021-05-14", // Spiral: Wikidata keeps the pre-pandemic 2020 date
+  "uw-bw": "2016-11-24", // Blood Wars: Wikidata's earliest date is a stale scheduling claim
 };
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -550,8 +809,7 @@ async function main() {
   console.log("resolving release dates from Wikidata");
   await resolveDates(wanted.flatMap((f) => f.entries.map((e) => e.page)));
   for (const def of wanted) {
-    console.log(`${def.id}: ${def.entries.length} entries`);
-    const entries = [];
+    console.log(`${def.id}: ${def.entries.length} entries`);    const entries = [];
     for (const [index, e] of def.entries.entries()) {
       const lookup = cache[e.page];
       const date = DATE_FIXES[e.id] ?? lookup ?? e.date;
@@ -574,7 +832,7 @@ async function main() {
     const franchise = {
       id: def.id,
       name: def.name,
-      years: `${Math.min(...years)}â€“${Math.max(...years)}`,
+      years: `${Math.min(...years)}–${Math.max(...years)}`,
       hook: def.hook,
       blurb: def.blurb,
       storyHint: def.storyHint,
@@ -592,6 +850,12 @@ async function main() {
       const works = def.works.map(({ page, ...rest }) => rest);
       catalog.works[def.id] = works;
     }
+  }
+
+  // Keep the Tags shelf list in step with the genres actually present. Existing order is kept so
+  // the tab does not reshuffle; only genres introduced by a new franchise are appended.
+  for (const f of catalog.franchises) {
+    if (!catalog.genres.includes(f.genre)) catalog.genres.push(f.genre);
   }
 
   fs.writeFileSync(cachePath, JSON.stringify(cache, null, 2) + "\n");
