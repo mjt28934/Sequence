@@ -27,7 +27,7 @@ enum class AppTab(val label: String) {
     TAGS("Tags"),
 }
 
-enum class DetailTab { WATCH, BOOKS }
+enum class DetailTab { MOVIES, ANIMATIONS, BOOKS }
 
 sealed interface Sheet {
     data object Order : Sheet
@@ -78,7 +78,7 @@ class MainViewModel : AndroidViewModel {
 
     var detailId by mutableStateOf<String?>(null)
         private set
-    var detailTab by mutableStateOf(DetailTab.WATCH)
+    var detailTab by mutableStateOf(DetailTab.MOVIES)
         private set
     var watchFilter by mutableStateOf(WatchFilter())
         private set
@@ -141,7 +141,7 @@ class MainViewModel : AndroidViewModel {
     fun openFranchise(id: String, books: Boolean = false) {
         sheet = null
         detailId = id
-        detailTab = if (books) DetailTab.BOOKS else DetailTab.WATCH
+        detailTab = if (books) DetailTab.BOOKS else DetailTab.MOVIES
         watchFilter = WatchFilter()
         bookFilter = BookFilter()
         blurbOpen = false

@@ -82,7 +82,9 @@ fun DetailScreen(vm: MainViewModel, franchise: Franchise) {
     val accent = vm.catalog.accent(franchise.id).toPalette()
     val works = vm.catalog.worksFor(franchise.id)
     val hasBooks = works.isNotEmpty()
+    val hasAnimations = Logic.hasAnimation(franchise)
     val showingBooks = vm.detailTab == DetailTab.BOOKS && hasBooks
+    val showingAnimations = vm.detailTab == DetailTab.ANIMATIONS && hasAnimations
 
     val watched = vm.watchedFor(franchise.id).toSet()
     val read = vm.readFor(franchise.id).toSet()
@@ -96,6 +98,7 @@ fun DetailScreen(vm: MainViewModel, franchise: Franchise) {
     val rows: List<DetailRow> = remember(
         franchise,
         showingBooks,
+        showingAnimations,
         watched,
         read,
         today,
@@ -103,19 +106,20 @@ fun DetailScreen(vm: MainViewModel, franchise: Franchise) {
         vm.watchFilter,
         vm.bookFilter,
     ) {
-        if (showingBooks) {
-            buildBookRows(vm, franchise, read)
-        } else {
-            buildWatchRows(vm, franchise, watched, today)
+        when {
+            showingBooks -> buildBookRows(vm, franchise, read)
+            showingAnimations -> buildWatchRows(vm, franchise, watched, today, animated = true)
+            else -> buildWatchRows(vm, franchise, watched, today, animated = false)
         }
     }
 
-    val nextWatch = Logic.nextUp(
-        Logic.orderEntries(franchise, state.mode),
-        watched,
-        today,
-        vm.watchFilter,
-    )
+    val nextWatch = if (showingBooks) {
+        null
+    } else {
+        val ordered = Logic.orderEntries(franchise, state.mode)
+            .filter { it.animated == showingAnimations }
+        Logic.nextUp(ordered, watched, today, vm.watchFilter)
+    }
     val nextBook = Logic.nextToRead(Logic.orderWorks(works, state.mode), read, vm.bookFilter)
 
     Scaffold(
@@ -210,11 +214,18 @@ fun DetailScreen(vm: MainViewModel, franchise: Franchise) {
                 )
             }
 
-            if (hasBooks) {
+            if (hasBooks || hasAnimations) {
                 item("tabs") {
                     DetailTabs(
-                        showingBooks = showingBooks,
-                        onWatch = { vm.selectDetailTab(DetailTab.WATCH) },
+                        selected = when {
+                            showingBooks -> DetailTab.BOOKS
+                            showingAnimations -> DetailTab.ANIMATIONS
+                            else -> DetailTab.MOVIES
+                        },
+                        hasAnimations = hasAnimations,
+                        hasBooks = hasBooks,
+                        onMovies = { vm.selectDetailTab(DetailTab.MOVIES) },
+                        onAnimations = { vm.selectDetailTab(DetailTab.ANIMATIONS) },
                         onBooks = { vm.selectDetailTab(DetailTab.BOOKS) },
                     )
                 }
@@ -469,23 +480,37 @@ private fun SmallAction(label: String, icon: androidx.compose.ui.graphics.vector
 }
 
 @Composable
-private fun DetailTabs(showingBooks: Boolean, onWatch: () -> Unit, onBooks: () -> Unit) {
+private fun DetailTabs(
+    selected: DetailTab,
+    hasAnimations: Boolean,
+    hasBooks: Boolean,
+    onMovies: () -> Unit,
+    onAnimations: () -> Unit,
+    onBooks: () -> Unit,
+) {
+    val tabs = buildList {
+        add(DetailTab.MOVIES to "Movies")
+        if (hasAnimations) add(DetailTab.ANIMATIONS to "Animations")
+        if (hasBooks) add(DetailTab.BOOKS to "Books")
+    }
     Surface(color = MaterialTheme.colorScheme.background) {
         SingleChoiceSegmentedButtonRow(
             Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 8.dp),
         ) {
-            SegmentedButton(
-                selected = !showingBooks,
-                onClick = onWatch,
-                shape = SegmentedButtonDefaults.itemShape(index = 0, count = 2),
-            ) { Text("Watch order") }
-            SegmentedButton(
-                selected = showingBooks,
-                onClick = onBooks,
-                shape = SegmentedButtonDefaults.itemShape(index = 1, count = 2),
-            ) { Text("Books") }
+            tabs.forEachIndexed { index, tab ->
+                val (value, label) = tab
+                SegmentedButton(
+                    selected = selected == value,
+                    onClick = when (value) {
+                        DetailTab.MOVIES -> onMovies
+                        DetailTab.ANIMATIONS -> onAnimations
+                        DetailTab.BOOKS -> onBooks
+                    },
+                    shape = SegmentedButtonDefaults.itemShape(index = index, count = tabs.size),
+                ) { Text(label) }
+            }
         }
     }
 }
@@ -661,10 +686,12 @@ private fun buildWatchRows(
     franchise: Franchise,
     watched: Set<String>,
     today: String,
+    animated: Boolean,
 ): List<DetailRow> {
     val ordered = Logic.orderEntries(franchise, vm.progress.mode)
     val positions = Logic.withPositions(ordered)
     val visible = Logic.visibleItems(positions, watched, effectiveWatchFilter(vm, franchise))
+        .filter { it.entry.animated == animated }
     val groups = Logic.groupItems(visible, vm.progress.mode)
     return buildList {
         for (group in groups) {
@@ -698,7 +725,6 @@ private fun effectiveWatchFilter(vm: MainViewModel, franchise: Franchise): Watch
     kind = if (Logic.hasMixedKinds(franchise)) vm.watchFilter.kind else "all",
     hideSeen = vm.watchFilter.hideSeen,
     essentials = vm.watchFilter.essentials,
-    animatedOnly = vm.watchFilter.animatedOnly,
 )
 
 private fun effectiveBookFilter(vm: MainViewModel, works: List<Work>): BookFilter {
@@ -724,7 +750,6 @@ private fun describeWatchFilter(filter: WatchFilter, franchise: Franchise): Stri
         parts += "Everything"
     }
     if (filter.essentials) parts += "essentials only"
-    if (filter.animatedOnly) parts += "animation only"
     if (filter.hideSeen) parts += "seen hidden"
     return parts.joinToString(" · ")
 }

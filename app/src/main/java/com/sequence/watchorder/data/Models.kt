@@ -146,7 +146,6 @@ data class WatchFilter(
     val kind: String = "all",
     val hideSeen: Boolean = false,
     val essentials: Boolean = false,
-    val animatedOnly: Boolean = false,
 )
 
 data class BookFilter(

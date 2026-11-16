@@ -97,7 +97,6 @@ object Logic {
     ): List<PositionedEntry> = items.filter { item ->
         val entry = item.entry
         matchesKind(entry, filter.kind) &&
-            (!filter.animatedOnly || entry.animated) &&
             !(filter.essentials && entry.optional) &&
             !(filter.hideSeen && entry.id in watched)
     }
@@ -171,7 +170,6 @@ object Logic {
         isReleased(entry, today) &&
             entry.id !in watched &&
             (!filter.essentials || !entry.optional) &&
-            (!filter.animatedOnly || entry.animated) &&
             matchesKind(entry, filter.kind)
     }
 

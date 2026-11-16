@@ -205,6 +205,17 @@ class ScreenshotTest {
     }
 
     @Test
+    fun detailAnimations() {
+        val model = vm().apply {
+            openFranchise("dc")
+            selectDetailTab(DetailTab.ANIMATIONS)
+        }
+        ArtRepository.warm(ArtKind.POSTER, "dc")
+        val franchise = catalog.franchise("dc")!!
+        shot("detail-animations") { DetailScreen(model, franchise) }
+    }
+
+    @Test
     fun detailBooks() {
         val model = vm().apply { openFranchise("wizarding-world", books = true) }
         ArtRepository.warm(ArtKind.POSTER, "wizarding-world")
