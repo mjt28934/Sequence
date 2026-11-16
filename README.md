@@ -11,14 +11,13 @@ sheets, segmented buttons, and edge-to-edge insets.
 
 ## Ready to install
 
-- `Sequence-2.0.apk` — signed release build (`com.sequence.watchorder`, versionCode 220,
-  versionName `2.0`), the latest published release.
-- `Sequence-2.4.apk` — local build of the current source (versionCode 260, versionName `2.4`); it is
-  not published yet.
-- `Sequence-2.3.apk` — local build of the previous mini-bar removal (versionCode 250,
-  versionName `2.3`); it is not published either.
-- `Sequence-2.2.apk` — local build of the earlier Home and swipe pass (versionCode 240,
-  versionName `2.2`); it is not published either.
+- `Sequence-2.4.apk` — signed release build (`com.sequence.watchorder`, versionCode 260,
+  versionName `2.4`), the latest published release.
+- `Sequence-2.0.apk` — previous published release (versionCode 220, versionName `2.0`).
+- `Sequence-2.3.apk` — local build of the earlier mini-bar removal (versionCode 250,
+  versionName `2.3`); it was never published.
+- `Sequence-2.2.apk` — local build of the earlier Home pass (versionCode 240,
+  versionName `2.2`); it was never published either.
 - Minimum Android 8.0 (API 26), targets Android 15 (API 35).
 - Rendered previews of every screen are in `screenshots/`.
 
@@ -37,7 +36,7 @@ Each change ships under a new name so builds never get confused:
 | 2.1 | `Sequence-2.1.apk` | 12 more franchises (49 total): Scream, Final Destination, Saw, Rambo, The Godfather, Underworld, and six game series. Adds a Game kind, game filtering and played/playing copy. Unreleased. |
 | 2.2 | `Sequence-2.2.apk` | Cleaner Home: the continue hero and up-next rows are gone, so the totals, continue shelf, keep-reading shelf and franchise grid carry the page. Rows are marked seen by swiping right and unmarked by swiping left, replacing the seen circles. Unreleased. |
 | 2.3 | `Sequence-2.3.apk` | Removes the mini continue strip above the navigation bar, leaving the tab bar as the only pinned chrome. Unreleased. |
-| 2.4 | `Sequence-2.4.apk` | Removes the swipe-to-mark-seen gesture from detail and Upcoming. Rows are plain tappable rows again; marks stay available in the entry sheets and "mark everything up to here". Unreleased. |
+| 2.4 | `Sequence-2.4.apk` | Removes the swipe-to-mark-seen gesture from detail and Upcoming. Rows are plain tappable rows again; marks stay available in the entry sheets and "mark everything up to here". Current release. |
 
 Versions 1.7 through 1.10 were internal builds; their changes are part of 2.0.
 
@@ -220,7 +219,7 @@ Outputs:
 
 - `app/build/outputs/apk/debug/app-debug.apk` (`com.sequence.watchorder.debug`, `2.4-debug`)
 - `app/build/outputs/apk/release/app-release.apk` (signed with `sequence-release.jks`)
-- `Sequence-2.4.apk` — the current release build copied to the project root (not published)
+- `Sequence-2.4.apk` — the current release build, also attached to the `v2.4` GitHub release
 
 ### Android Studio
 
