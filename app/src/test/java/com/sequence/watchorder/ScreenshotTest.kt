@@ -106,6 +106,13 @@ class ScreenshotTest {
     }
 
     @Test
+    fun homeFirstRun() {
+        // A new install: no progress, so this is the very first screen anyone sees. It used to
+        // carry an order-mode explainer card; the render now guards the plainer version.
+        shot("home-first-run") { HomeScreen(vm(ProgressState())) }
+    }
+
+    @Test
     fun homeLight() {
         shot("home-light", FallbackLight) { HomeScreen(vm()) }
     }

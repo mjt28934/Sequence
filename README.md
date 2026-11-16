@@ -1,4 +1,4 @@
-# Sequence 1.6 — 37 franchises, redesigned motion
+# Sequence 2.0 — 37 franchises, a steadier shell
 
 A native Kotlin / Jetpack Compose rebuild of the original WebView-based **Sequence** watch-order app.
 No WebView, no JavaScript bridge, no network permission. The catalogue and all artwork are
@@ -11,8 +11,8 @@ sheets, segmented buttons, swipe-to-mark-seen with haptics, and edge-to-edge ins
 
 ## Ready to install
 
-- `Sequence-1.6.apk` — signed release build (`com.sequence.watchorder`, versionCode 170,
-  versionName `1.6`).
+- `Sequence-2.0.apk` — signed release build (`com.sequence.watchorder`, versionCode 220,
+  versionName `2.0`).
 - Minimum Android 8.0 (API 26), targets Android 15 (API 35).
 - Rendered previews of every screen are in `screenshots/`.
 
@@ -27,6 +27,9 @@ Each change ships under a new name so builds never get confused:
 | 1.4 | `Sequence-1.4.apk` | Material 3 redesign: dynamic colour, collapsing bars, nav bar, motion, sheets |
 | 1.5 | `Sequence-1.5.apk` | Real film posters replace the generated franchise art |
 | 1.6 | `Sequence-1.6.apk` | 17 more franchises (37 total), 116 more titles, 22 more books, real covers, and a motion pass over every screen |
+| 2.0 | `Sequence-2.0.apk` | Tags tab, inline Home search, appearance and layout settings, shared-axis transitions, a bottom bar that never re-creates, sticky upcoming months, and a reduced-motion-aware polish pass |
+
+Versions 1.7 through 1.10 were internal builds; their changes are part of 2.0.
 
 The `versionName` in `app/build.gradle.kts` is the single source of truth; the settings screen and the
 APK name both follow it.
@@ -36,20 +39,25 @@ APK name both follow it.
 
 ## What is included
 
-- **Home** — genre chips, demo order comparison, overall screen/print progress, continue shelf,
-  up-next rows with one-tap seen checks, keep-reading shelf, genre shelves, and a media-player style
-  mini bar above the navigation. A finished franchise carries a tick badge on its poster, and genre
-  tiles show how many franchises they hold.
+- **Home** — a continue hero for the next title, overall film/print progress, a continue shelf, up-next
+  and keep-reading rows with one-tap seen checks, the full franchise grid with a hide-finished empty
+  state, and a media-player style mini bar above the navigation. A finished franchise carries a tick
+  badge on its poster, and a new install skips the explainer and goes straight to the catalogue.
 - **Library** — saved and started franchises, grid/list views, progress filters, and sort by recent,
-  A–Z, most left, or furthest along. Rows animate into place as the filter changes.
-- **Upcoming** — future releases grouped by month, plus releases from the last 90 days with seen toggles.
-- **Search** — franchises, films/series, books and comics, with genre tiles for browsing and a match
-  count on every result section.
+  A–Z, most left, or furthest along. Rows animate into place as the filter changes, and the bar links
+  straight to settings.
+- **Upcoming** — future releases grouped under sticky month headers, plus releases from the last 90
+  days with seen toggles; every row opens its franchise and title sheet.
+- **Tags** — genre shelves with cover collages, and a genre view of franchise posters that animates
+  as the filter changes.
+- **Search** — franchises, films/series, books and comics, with a match count on every result section;
+  it opens inline on Home and closing it keeps your place.
 - **Franchise detail** — hero art with a scroll parallax, expandable blurb, release/story ordering,
   watch filters, book format filters, series/special markers, optional-entry markers, swipe-right to
   toggle seen, per-title sheets, "mark everything up to here", reading paths, cover checkmarks, and a
   next-up FAB.
-- **Settings** — order mode, clear all progress (confirmed), and about/offline notices.
+- **Settings** — start tab, hide finished franchises, theme and vibration, reduce motion, library
+  layout and sort, watching order, export/import, clear all progress (confirmed), and reset settings.
 - **Undo snackbar** after progress and save changes, matching the original behaviour.
 - **Real artwork** for all 37 franchises and 156 of 157 books and comics, served from `assets/art`.
 
@@ -73,23 +81,28 @@ placeholder tile.
 
 ## UI and motion
 
-- **One motion switch** — `ui/Motion.kt` holds `Motion.enabled`, which every timed animation checks.
-  Snapshot tests turn it off so renders are settled frames rather than half-faded ones.
-- **Press feedback** — cards, poster tiles, cover tiles, genre tiles, library rows, watch rows and the
-  continue hero shrink slightly while pressed, driven by the same `InteractionSource` as the ripple.
+- **One motion switch** — `ui/Motion.kt` holds `Motion.enabled`, which follows the Reduce motion
+  setting in Settings. Every timed animation checks it; snapshot tests turn it off so renders are
+  settled frames rather than half-faded ones.
+- **One set of timings** — `SeqMotion` in the same file holds the press, short, standard, navigation
+  and progress durations plus the two springs, so a press, a badge and a tab change feel related.
+- **Press feedback** — cards, poster tiles, cover tiles, genre tiles, library rows, watch rows, search
+  results and the continue hero shrink slightly while pressed, driven by the same `InteractionSource`
+  as the ripple.
 - **Entrance** — Home sections fade and lift in with a short stagger the first time they are shown;
-  an `EnterTracker` means scrolling back up never replays them.
+  a saveable `EnterTracker` means returning to the tab or scrolling back up never replays them.
 - **Art** — a poster or cover decoded on demand fades in with a 3% overscale that settles, so cards do
   not pop into place mid-scroll. Already-cached art appears instantly.
-- **Progress** — progress strips animate to their new value, so marking something seen visibly moves
-  the bar instead of teleporting it.
-- **Lists** — detail and library rows use `Modifier.animateItem()`, so filtering reflows smoothly.
+- **Progress and badges** — progress strips animate to their new value, seen/read controls ease their
+  fill and colour, and check badges spring in when a mark lands.
+- **Lists** — lazy lists animate item placement and fades as filters and marks change; under Reduce
+  motion the rows simply settle in place.
 - **Detail hero** — the artwork trails the page as it scrolls and grows just enough to avoid exposing
-  an edge.
-- **Mini bar** — slides in and out above the navigation, and its contents slide vertically when the
-  next title changes.
-- **Tabs and destinations** — `AnimatedContent` slides between tabs and cross-fades into detail and
-  settings.
+  an edge; the blurb resizes smoothly when it expands.
+- **Mini bar** — slides in and out above the navigation, shrinks on press, and slides its contents
+  vertically when the next title changes.
+- **Tabs and destinations** — `AnimatedContent` slides tabs with the same 48dp / 250ms move in both
+  directions and cross-fades into detail and settings; the bar itself never re-creates.
 
 ## Native UI details
 
@@ -119,14 +132,16 @@ app/src/main/java/com/sequence/watchorder/
     ProgressStore.kt       SharedPreferences persistence (sequence-progress JSON)
   ui/
     Theme.kt               Material 3 colour schemes (dynamic + fallback) and accent palettes
-    Motion.kt              shared motion: Motion.enabled, press scale, section entrance
+    Motion.kt              shared motion: Motion.enabled, SeqMotion timings, press scale, section moves
     Components.kt          cards, chips, rows, sheet controls, check circles
     Icons.kt               original Material SVG paths as Compose ImageVectors
     Art.kt                 bundled WebP loader with a heap-sized LruCache and fade-in
+    Feedback.kt            haptic ticks for seen and read toggles
     HomeScreen.kt
     LibraryScreen.kt
+    TagsScreen.kt
     UpcomingScreen.kt
-    SearchScreen.kt
+    SearchResults.kt       inline Home search field and result rows
     DetailScreen.kt
     SettingsScreen.kt
 app/src/test/java/com/sequence/watchorder/
@@ -195,9 +210,9 @@ $env:JAVA_HOME = "C:\Projects\Orderly\.toolchain\jdk17"
 
 Outputs:
 
-- `app/build/outputs/apk/debug/app-debug.apk` (`com.sequence.watchorder.debug`, `1.6-debug`)
+- `app/build/outputs/apk/debug/app-debug.apk` (`com.sequence.watchorder.debug`, `2.0-debug`)
 - `app/build/outputs/apk/release/app-release.apk` (signed with `sequence-release.jks`)
-- `Sequence-1.6.apk` — the release build copied to the project root for installing
+- `Sequence-2.0.apk` — the release build copied to the project root for installing
 
 ### Android Studio
 

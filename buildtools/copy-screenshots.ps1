@@ -6,6 +6,7 @@ param(
 # Maps each Paparazzi snapshot name to the file name used in the repo.
 $names = [ordered]@{
   "home"           = "01-home.png"
+  "home-first-run" = "14-home-first-run.png"
   "shell"          = "02-shell-navigation.png"
   "library-grid"   = "03-library-grid.png"
   "library-list"   = "04-library-list.png"

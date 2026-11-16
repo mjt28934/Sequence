@@ -25,7 +25,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -36,16 +35,11 @@ import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SegmentedButton
-import androidx.compose.material3.SegmentedButtonDefaults
-import androidx.compose.material3.SingleChoiceSegmentedButtonRow
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -63,7 +57,6 @@ import com.sequence.watchorder.Sheet
 import com.sequence.watchorder.data.ContinueCard
 import com.sequence.watchorder.data.Entry
 import com.sequence.watchorder.data.Logic
-import com.sequence.watchorder.data.OrderMode
 import com.sequence.watchorder.data.Progress
 import com.sequence.watchorder.data.UpNextItem
 
@@ -210,11 +203,7 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                     }
                 }
 
-                if (seenTotal.done == 0 && readTotal.done == 0) {
-                    item { EnterSection(enter, "demo", 2) { OrderDemoCard(vm) } }
-                } else {
-                    item { EnterSection(enter, "totals", 2) { OverallProgressCard(seenTotal, readTotal) } }
-                }
+                item { EnterSection(enter, "totals", 2) { OverallProgressCard(seenTotal, readTotal) } }
 
                 if (cards.size > 1) {
                     item {
@@ -529,90 +518,6 @@ private fun UpNextRow(vm: MainViewModel, item: UpNextItem, modifier: Modifier = 
             colors = ListItemDefaults.colors(containerColor = Color.Transparent),
             modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
         )
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun OrderDemoCard(vm: MainViewModel) {
-    val saga = vm.catalog.franchise("star-wars") ?: return
-    val ids = listOf("sw-1", "sw-2", "sw-3", "sw-4", "sw-5", "sw-6")
-    val entries = ids.mapNotNull { id -> saga.entries.firstOrNull { it.id == id } }
-    var mode by remember { mutableIntStateOf(1) }
-    val ordered: List<Entry> = remember(mode) {
-        Logic.orderEntries(saga.copy(entries = entries), if (mode == 1) OrderMode.STORY else OrderMode.RELEASE)
-    }
-
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 12.dp),
-        shape = RoundedCornerShape(24.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
-    ) {
-        Column(Modifier.padding(20.dp)) {
-            Text(
-                "Release order or story order?",
-                style = MaterialTheme.typography.titleMedium,
-            )
-            Text(
-                if (mode == 1) "The order the story happens." else "The order they reached cinemas.",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(top = 4.dp),
-            )
-            SingleChoiceSegmentedButtonRow(
-                Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 14.dp),
-            ) {
-                SegmentedButton(
-                    selected = mode == 0,
-                    onClick = { mode = 0 },
-                    shape = SegmentedButtonDefaults.itemShape(index = 0, count = 2),
-                ) { Text("Release") }
-                SegmentedButton(
-                    selected = mode == 1,
-                    onClick = { mode = 1 },
-                    shape = SegmentedButtonDefaults.itemShape(index = 1, count = 2),
-                ) { Text("Story") }
-            }
-            ordered.forEachIndexed { index, entry ->
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                ) {
-                    Surface(
-                        shape = CircleShape,
-                        color = MaterialTheme.colorScheme.secondaryContainer,
-                        modifier = Modifier.size(26.dp),
-                    ) {
-                        Box(contentAlignment = Alignment.Center) {
-                            Text(
-                                (index + 1).toString(),
-                                style = MaterialTheme.typography.labelSmall,
-                                color = MaterialTheme.colorScheme.onSecondaryContainer,
-                            )
-                        }
-                    }
-                    Text(
-                        entry.title.removePrefix("Episode "),
-                        modifier = Modifier.weight(1f),
-                        style = MaterialTheme.typography.bodyLarge,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                    )
-                    Text(
-                        entry.year.toString(),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                }
-            }
-        }
     }
 }
 
