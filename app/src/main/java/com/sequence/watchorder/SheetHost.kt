@@ -121,6 +121,7 @@ private fun FilterSheet(vm: MainViewModel, franchise: Franchise?) {
     val hasFilms = franchise?.let { Logic.hasKind(it, "film") } == true
     val hasSeries = franchise?.let { Logic.hasKind(it, "series") } == true
     val hasGames = franchise?.let { Logic.hasKind(it, "game") } == true
+    val hasAnimation = franchise?.let { Logic.hasAnimation(it) } == true
     val optionalEntries = franchise?.let { Logic.hasOptional(it) } == true
     val optionalWorks = Logic.hasOptionalWorks(works)
 
@@ -158,6 +159,14 @@ private fun FilterSheet(vm: MainViewModel, franchise: Franchise?) {
                     onClick = { vm.updateWatchFilter(watchFilter.copy(kind = "game")) },
                 )
             }
+        }
+        if (hasAnimation) {
+            SheetToggleRow(
+                title = "Animation only",
+                subtitle = "Cartoons, animated series and animated films",
+                checked = watchFilter.animatedOnly,
+                onCheckedChange = { vm.updateWatchFilter(watchFilter.copy(animatedOnly = it)) },
+            )
         }
         if (optionalEntries) {
             SheetToggleRow(
@@ -278,6 +287,7 @@ private fun EntryDetailSheet(
         kind = if (mixed) vm.watchFilter.kind else "all",
         hideSeen = vm.watchFilter.hideSeen,
         essentials = vm.watchFilter.essentials,
+        animatedOnly = vm.watchFilter.animatedOnly,
     )
     val ordered = Logic.orderEntries(franchise, state.mode)
     val shown = Logic.visibleItems(Logic.withPositions(ordered), watched, filter)

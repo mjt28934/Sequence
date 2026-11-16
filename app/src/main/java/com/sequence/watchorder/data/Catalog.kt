@@ -90,6 +90,7 @@ class Catalog private constructor(
             story = o.optInt("story", 0),
             note = o.stringOrNull("note"),
             optional = o.optBoolean("optional", false),
+            animated = o.optBoolean("animated", false),
         )
 
         private fun parseWork(o: JSONObject): Work = Work(

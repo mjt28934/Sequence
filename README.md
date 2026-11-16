@@ -1,4 +1,4 @@
-# Sequence 2.4 — 49 franchises, films and games
+# Sequence 2.5 — 49 franchises, animation and cartoons
 
 A native Kotlin / Jetpack Compose rebuild of the original WebView-based **Sequence** watch-order app.
 No WebView, no JavaScript bridge, no network permission. The catalogue and all artwork are
@@ -11,9 +11,9 @@ sheets, segmented buttons, and edge-to-edge insets.
 
 ## Ready to install
 
-- `Sequence-2.4.apk` — signed release build (`com.sequence.watchorder`, versionCode 260,
-  versionName `2.4`), the latest published release.
-- `Sequence-2.0.apk` — previous published release (versionCode 220, versionName `2.0`).
+- `Sequence-2.5.apk` — signed release build (`com.sequence.watchorder`, versionCode 270,
+  versionName `2.5`), the latest published release.
+- `Sequence-2.4.apk` — previous published release (versionCode 260, versionName `2.4`).
 - Minimum Android 8.0 (API 26), targets Android 15 (API 35).
 - Rendered previews of every screen are in `screenshots/`.
 
@@ -29,7 +29,8 @@ Each change ships under a new name so builds never get confused:
 | 1.5 | `Sequence-1.5.apk` | Real film posters replace the generated franchise art |
 | 1.6 | `Sequence-1.6.apk` | 17 more franchises (37 total), 116 more titles, 22 more books, real covers, and a motion pass over every screen |
 | 2.0 | `Sequence-2.0.apk` | Tags tab, inline Home search, appearance and layout settings, shared-axis transitions, a bottom bar that never re-creates, sticky upcoming months, and a reduced-motion-aware polish pass |
-| 2.4 | `Sequence-2.4.apk` | 12 more franchises (49 total), including six game series with a Game kind, game filtering and played/playing copy. A cleaner Home without the continue hero, up-next rows or mini bar. Detail and Upcoming rows are plain and tappable, with the swipe-to-mark-seen gesture removed; marks stay in the entry sheets and "mark everything up to here". Current release. |
+| 2.4 | `Sequence-2.4.apk` | 12 more franchises (49 total), including six game series with a Game kind, game filtering and played/playing copy. A cleaner Home without the continue hero, up-next rows or mini bar. Detail and Upcoming rows are plain and tappable, with the swipe-to-mark-seen gesture removed. Previous release. |
+| 2.5 | `Sequence-2.5.apk` | Animated series, cartoons and animated films added across the catalogue: 59 new optional entries, from Star Wars: Droids and The Real Ghostbusters to X-Men: The Animated Series, Batman: The Animated Series, Transformers: Prime and Sonic Prime. Animated rows are labelled, and the filter gains an "Animation only" toggle. Current release. |
 
 Versions 1.7 through 1.10 and 2.1 through 2.3 were internal builds; their changes are part of 2.0 and
 2.4 respectively.
@@ -43,7 +44,7 @@ APK name both follow it.
 ## What is included
 
 - **Home** — overall seen/read progress, a continue shelf, a keep-reading row, the full franchise grid
-  with a hide-finished empty state, and a media-player style navigation bar. A finished franchise
+  with a hide-finished empty state, and the tab bar as the only pinned chrome. A finished franchise
   carries a tick badge on its poster, and a new install skips the explainer and goes straight to the
   catalogue. Game entries say "played" instead of "watched".
 - **Library** — saved and started franchises, grid/list views, progress filters, and sort by recent,
@@ -53,12 +54,12 @@ APK name both follow it.
   days; every row opens its franchise and title sheet.
 - **Tags** — genre shelves with cover collages, and a genre view of franchise posters that animates
   as the filter changes.
-- **Search** — franchises, films, series, games, books and comics, with a match count on every result
-  section; it opens inline on Home and closing it keeps your place.
+- **Search** — franchises, films, series, games, animated titles, books and comics, with a match count
+  on every result section; it opens inline on Home and closing it keeps your place.
 - **Franchise detail** — hero art with a scroll parallax, expandable blurb, release/story ordering,
-  watch filters that include a games option for mixed franchises, book format filters, series/game/
-  special markers, optional-entry markers, per-title sheets, "mark everything up to here", reading
-  paths, cover checkmarks, and a next-up FAB.
+  watch filters that include games, plus an "Animation only" toggle wherever animation exists, book
+  format filters, series/game/special/animation markers, optional-entry markers, per-title sheets,
+  "mark everything up to here", reading paths, cover checkmarks, and a next-up FAB.
 - **Settings** — start tab, hide finished franchises, theme and vibration, reduce motion, library
   layout and sort, watching order, export/import, clear all progress (confirmed), and reset settings.
 - **Undo snackbar** after progress and save changes, matching the original behaviour.
@@ -211,9 +212,9 @@ $env:JAVA_HOME = "C:\Projects\Orderly\.toolchain\jdk17"
 
 Outputs:
 
-- `app/build/outputs/apk/debug/app-debug.apk` (`com.sequence.watchorder.debug`, `2.4-debug`)
+- `app/build/outputs/apk/debug/app-debug.apk` (`com.sequence.watchorder.debug`, `2.5-debug`)
 - `app/build/outputs/apk/release/app-release.apk` (signed with `sequence-release.jks`)
-- `Sequence-2.4.apk` — the current release build, also attached to the `v2.4` GitHub release
+- `Sequence-2.5.apk` — the current release build, also attached to the `v2.5` GitHub release
 
 ### Android Studio
 
@@ -246,9 +247,13 @@ local `sequence-release.jks` is not in the repository.
 
 ## Data and behaviour notes
 
-- `sequence.json` contains 49 franchises, 495 entries and 157 books/comics, with data checked
+- `sequence.json` contains 49 franchises, 554 entries and 157 books/comics, with data checked
   through 2026-11-16. Release dates come from Wikidata (`P577`, earliest day-precision value), with
-  six titles given hand-checked dates where Wikidata only had a premiere or a stale scheduling claim.
+  hand-checked dates where Wikidata only had a premiere or a stale scheduling claim.
+- Animated entries carry `animated: true`. They keep their normal `kind` (`film`, `series` or
+  `special`), are labelled "Animated film", "Animated series" or "Animated special" in rows and
+  sheets, and the detail filter offers an "Animation only" toggle. The 59 new animated entries are
+  optional side viewing; franchises without an official animated work were left alone.
 - Game entries use `kind: "game"`. They count and filter like other entries, are labelled "Game" in
   rows and sheets, and game-only franchises say "played" instead of "watched".
 - Upcoming titles do not count toward progress and cannot be marked seen.

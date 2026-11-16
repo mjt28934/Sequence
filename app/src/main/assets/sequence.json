@@ -28,7 +28,8 @@
         "TriStar",
         "Anime",
         "Reiwa",
-        "Monsterverse"
+        "Monsterverse",
+        "Cartoons"
       ],
       "entries": [
         {
@@ -317,7 +318,8 @@
           "year": 2017,
           "kind": "film",
           "era": "Anime",
-          "story": 1
+          "story": 1,
+          "animated": true
         },
         {
           "id": "gz-a2",
@@ -326,7 +328,8 @@
           "year": 2018,
           "kind": "film",
           "era": "Anime",
-          "story": 2
+          "story": 2,
+          "animated": true
         },
         {
           "id": "gz-a3",
@@ -335,7 +338,8 @@
           "year": 2018,
           "kind": "film",
           "era": "Anime",
-          "story": 3
+          "story": 3,
+          "animated": true
         },
         {
           "id": "gz-m1",
@@ -423,6 +427,28 @@
           "era": "Monsterverse",
           "story": 7,
           "note": "Scheduled theatrical release."
+        },
+        {
+          "id": "gz-tseries",
+          "title": "Godzilla: The Series",
+          "date": "1998-09-12",
+          "year": 1998,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 1,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "gz-sp",
+          "title": "Godzilla: Singular Point",
+          "date": "2021-06-24",
+          "year": 2021,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 2,
+          "optional": true,
+          "animated": true
         }
       ]
     },
@@ -441,7 +467,8 @@
         "Rise of the Empire",
         "Original",
         "New Republic",
-        "Sequels"
+        "Sequels",
+        "Cartoons"
       ],
       "entries": [
         {
@@ -481,7 +508,8 @@
           "kind": "series",
           "era": "Prequels",
           "story": 4,
-          "note": "Start with the 2008 film. The war runs between Episodes II and III, with a final season that overlaps Episode III."
+          "note": "Start with the 2008 film. The war runs between Episodes II and III, with a final season that overlaps Episode III.",
+          "animated": true
         },
         {
           "id": "sw-3",
@@ -500,7 +528,8 @@
           "kind": "series",
           "era": "Prequels",
           "story": 6,
-          "note": "Picks up as Episode III ends. Follows The Clone Wars."
+          "note": "Picks up as Episode III ends. Follows The Clone Wars.",
+          "animated": true
         },
         {
           "id": "sw-solo",
@@ -539,7 +568,8 @@
           "kind": "series",
           "era": "Rise of the Empire",
           "story": 10,
-          "note": "Animated. Runs alongside Andor and sets up Ahsoka."
+          "note": "Animated. Runs alongside Andor and sets up Ahsoka.",
+          "animated": true
         },
         {
           "id": "sw-an2",
@@ -673,6 +703,83 @@
           "kind": "film",
           "era": "Sequels",
           "story": 24
+        },
+        {
+          "id": "sw-droids",
+          "title": "Star Wars: Droids",
+          "date": "1985-09-07",
+          "year": 1985,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 1,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "sw-ewoks",
+          "title": "Ewoks",
+          "date": "1985-09-07",
+          "year": 1985,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 2,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "sw-cw03",
+          "title": "Star Wars: Clone Wars (2003)",
+          "date": "2003-11-07",
+          "year": 2003,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 3,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "sw-visions",
+          "title": "Star Wars: Visions",
+          "date": "2021-09-22",
+          "year": 2021,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 4,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "sw-totj",
+          "title": "Star Wars: Tales of the Jedi",
+          "date": "2022-10-26",
+          "year": 2022,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 5,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "sw-yja",
+          "title": "Star Wars: Young Jedi Adventures",
+          "date": "2023-05-04",
+          "year": 2023,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 6,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "sw-tote",
+          "title": "Star Wars: Tales of the Empire",
+          "date": "2024-05-04",
+          "year": 2024,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 7,
+          "optional": true,
+          "animated": true
         }
       ]
     },
@@ -790,6 +897,17 @@
           "kind": "film",
           "era": "Main saga",
           "story": 11
+        },
+        {
+          "id": "ff-spy",
+          "title": "Fast & Furious: Spy Racers",
+          "date": "2019-12-26",
+          "year": 2019,
+          "kind": "series",
+          "era": "Main saga",
+          "story": 12,
+          "optional": true,
+          "animated": true
         }
       ]
     },
@@ -804,7 +922,8 @@
       "accent": "#52c5a5",
       "eraOrder": [
         "Prequels",
-        "Classic"
+        "Classic",
+        "Cartoons"
       ],
       "entries": [
         {
@@ -880,6 +999,17 @@
           "kind": "film",
           "era": "Classic",
           "story": 8
+        },
+        {
+          "id": "al-isods",
+          "title": "Alien: Isolation – The Digital Series",
+          "date": "2019-02-28",
+          "year": 2019,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 1,
+          "optional": true,
+          "animated": true
         }
       ]
     },
@@ -896,7 +1026,8 @@
         "The Rings of Power",
         "The War of the Rohirrim",
         "The Hobbit",
-        "The Lord of the Rings"
+        "The Lord of the Rings",
+        "Cartoons"
       ],
       "entries": [
         {
@@ -919,7 +1050,8 @@
           "era": "The War of the Rohirrim",
           "story": 2,
           "note": "Anime prequel set centuries before The Hobbit.",
-          "optional": true
+          "optional": true,
+          "animated": true
         },
         {
           "id": "me-h1",
@@ -974,6 +1106,39 @@
           "kind": "film",
           "era": "The Lord of the Rings",
           "story": 8
+        },
+        {
+          "id": "me-h77",
+          "title": "The Hobbit",
+          "date": "1977-11-27",
+          "year": 1977,
+          "kind": "film",
+          "era": "Cartoons",
+          "story": 1,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "me-lotr78",
+          "title": "The Lord of the Rings",
+          "date": "1978-11-15",
+          "year": 1978,
+          "kind": "film",
+          "era": "Cartoons",
+          "story": 2,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "me-rotk80",
+          "title": "The Return of the King",
+          "date": "1980-05-11",
+          "year": 1980,
+          "kind": "film",
+          "era": "Cartoons",
+          "story": 3,
+          "optional": true,
+          "animated": true
         }
       ]
     },
@@ -988,7 +1153,8 @@
       "accent": "#d6b648",
       "eraOrder": [
         "Jurassic Park",
-        "Jurassic World"
+        "Jurassic World",
+        "Cartoons"
       ],
       "entries": [
         {
@@ -1044,7 +1210,8 @@
           "kind": "series",
           "era": "Jurassic World",
           "story": 6,
-          "note": "Starts during Jurassic World and runs through the gap before Dominion."
+          "note": "Starts during Jurassic World and runs through the gap before Dominion.",
+          "animated": true
         },
         {
           "id": "jw-3",
@@ -1063,7 +1230,8 @@
           "kind": "series",
           "era": "Jurassic World",
           "story": 8,
-          "note": "Follows the Camp Cretaceous kids after Dominion."
+          "note": "Follows the Camp Cretaceous kids after Dominion.",
+          "animated": true
         },
         {
           "id": "jw-4",
@@ -1073,6 +1241,17 @@
           "kind": "film",
           "era": "Jurassic World",
           "story": 9
+        },
+        {
+          "id": "jw-hidden",
+          "title": "Jurassic World: Camp Cretaceous – Hidden Adventure",
+          "date": "2022-11-15",
+          "year": 2022,
+          "kind": "special",
+          "era": "Cartoons",
+          "story": 1,
+          "optional": true,
+          "animated": true
         }
       ]
     },
@@ -1089,7 +1268,8 @@
         "Origins",
         "Infinity Saga",
         "Multiverse Saga",
-        "Other worlds"
+        "Other worlds",
+        "Cartoons"
       ],
       "entries": [
         {
@@ -1101,7 +1281,8 @@
           "era": "Origins",
           "story": 1,
           "note": "Animated. Follows Wakandan guardians across history.",
-          "optional": true
+          "optional": true,
+          "animated": true
         },
         {
           "id": "mcu-ca1",
@@ -1249,7 +1430,8 @@
           "era": "Infinity Saga",
           "story": 17,
           "note": "Animated. Early days of Peter Parker as Spider-Man.",
-          "optional": true
+          "optional": true,
+          "animated": true
         },
         {
           "id": "mcu-bw",
@@ -1652,7 +1834,8 @@
           "kind": "series",
           "era": "Other worlds",
           "story": 60,
-          "note": "Animated revival of the 1990s cartoon."
+          "note": "Animated revival of the 1990s cartoon.",
+          "animated": true
         },
         {
           "id": "mcu-wi",
@@ -1663,7 +1846,8 @@
           "era": "Other worlds",
           "story": 61,
           "note": "Animated anthology of alternate realities. Three seasons.",
-          "optional": true
+          "optional": true,
+          "animated": true
         },
         {
           "id": "mcu-mz",
@@ -1674,7 +1858,19 @@
           "era": "Other worlds",
           "story": 62,
           "note": "Animated horror spin-off from What If…?.",
-          "optional": true
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "mcu-iag",
+          "title": "I Am Groot",
+          "date": "2022-08-10",
+          "year": 2022,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 1,
+          "optional": true,
+          "animated": true
         }
       ]
     },
@@ -1693,7 +1889,8 @@
         "Original series era",
         "24th century",
         "32nd century",
-        "Kelvin timeline"
+        "Kelvin timeline",
+        "Cartoons"
       ],
       "entries": [
         {
@@ -1742,7 +1939,8 @@
           "era": "Original series era",
           "story": 5,
           "note": "Animated follow-up to the original series.",
-          "optional": true
+          "optional": true,
+          "animated": true
         },
         {
           "id": "st-tmp",
@@ -1882,7 +2080,8 @@
           "kind": "series",
           "era": "24th century",
           "story": 20,
-          "note": "Animated comedy. Works best after The Next Generation."
+          "note": "Animated comedy. Works best after The Next Generation.",
+          "animated": true
         },
         {
           "id": "st-pro",
@@ -1891,7 +2090,8 @@
           "year": 2021,
           "kind": "series",
           "era": "24th century",
-          "story": 21
+          "story": 21,
+          "animated": true
         },
         {
           "id": "st-pic",
@@ -1949,6 +2149,17 @@
           "kind": "film",
           "era": "Kelvin timeline",
           "story": 27
+        },
+        {
+          "id": "st-vst",
+          "title": "Star Trek: Very Short Treks",
+          "date": "2023-09-08",
+          "year": 2023,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 1,
+          "optional": true,
+          "animated": true
         }
       ]
     },
@@ -1964,7 +2175,8 @@
       "eraOrder": [
         "Prequels",
         "Original trilogy",
-        "Wolverine and Deadpool"
+        "Wolverine and Deadpool",
+        "Cartoons"
       ],
       "entries": [
         {
@@ -2093,6 +2305,50 @@
           "era": "Wolverine and Deadpool",
           "story": 13,
           "note": "Set in 2029. The farewell for this version of the X-Men."
+        },
+        {
+          "id": "xm-tas",
+          "title": "X-Men: The Animated Series",
+          "date": "1992-10-31",
+          "year": 1992,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 1,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "xm-evo",
+          "title": "X-Men: Evolution",
+          "date": "2000-11-04",
+          "year": 2000,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 2,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "xm-watxm",
+          "title": "Wolverine and the X-Men",
+          "date": "2009-01-23",
+          "year": 2009,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 3,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "xm-anime",
+          "title": "Marvel Anime: X-Men",
+          "date": "2011-04-01",
+          "year": 2011,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 4,
+          "optional": true,
+          "animated": true
         }
       ]
     },
@@ -2107,7 +2363,8 @@
       "accent": "#4a86e0",
       "eraOrder": [
         "DC Extended Universe",
-        "DC Universe"
+        "DC Universe",
+        "Cartoons"
       ],
       "entries": [
         {
@@ -2277,7 +2534,8 @@
           "kind": "series",
           "era": "DC Universe",
           "story": 18,
-          "note": "Animated. First title of the new DC Universe."
+          "note": "Animated. First title of the new DC Universe.",
+          "animated": true
         },
         {
           "id": "dc-sup",
@@ -2334,6 +2592,116 @@
           "era": "DC Universe",
           "story": 24,
           "note": "Scheduled theatrical release."
+        },
+        {
+          "id": "dc-btas",
+          "title": "Batman: The Animated Series",
+          "date": "1992-09-05",
+          "year": 1992,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 1,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "dc-motp",
+          "title": "Batman: Mask of the Phantasm",
+          "date": "1993-12-25",
+          "year": 1993,
+          "kind": "film",
+          "era": "Cartoons",
+          "story": 2,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "dc-stas",
+          "title": "Superman: The Animated Series",
+          "date": "1996-09-06",
+          "year": 1996,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 3,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "dc-bbeyond",
+          "title": "Batman Beyond",
+          "date": "1999-01-10",
+          "year": 1999,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 4,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "dc-jl01",
+          "title": "Justice League",
+          "date": "2001-11-17",
+          "year": 2001,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 5,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "dc-tt",
+          "title": "Teen Titans",
+          "date": "2003-07-19",
+          "year": 2003,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 6,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "dc-jlu",
+          "title": "Justice League Unlimited",
+          "date": "2004-07-31",
+          "year": 2004,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 7,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "dc-yj",
+          "title": "Young Justice",
+          "date": "2010-11-26",
+          "year": 2010,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 8,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "dc-hq",
+          "title": "Harley Quinn",
+          "date": "2019-11-29",
+          "year": 2019,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 9,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "dc-mas",
+          "title": "My Adventures with Superman",
+          "date": "2023-07-06",
+          "year": 2023,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 10,
+          "optional": true,
+          "animated": true
         }
       ]
     },
@@ -2816,7 +3184,8 @@
           "kind": "series",
           "era": "Terminator Zero",
           "story": 8,
-          "note": "Animated Netflix series in its own continuity."
+          "note": "Animated Netflix series in its own continuity.",
+          "animated": true
         }
       ]
     },
@@ -2832,7 +3201,8 @@
       "eraOrder": [
         "Cybertron",
         "Bumblebee era",
-        "Bay films"
+        "Bay films",
+        "Cartoons"
       ],
       "entries": [
         {
@@ -2909,6 +3279,61 @@
           "kind": "film",
           "era": "Bay films",
           "story": 8
+        },
+        {
+          "id": "tf-g1",
+          "title": "The Transformers",
+          "date": "1984-09-17",
+          "year": 1984,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 1,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "tf-bw",
+          "title": "Beast Wars: Transformers",
+          "date": "1996-04-22",
+          "year": 1996,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 2,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "tf-animated",
+          "title": "Transformers: Animated",
+          "date": "2007-12-26",
+          "year": 2007,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 3,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "tf-prime",
+          "title": "Transformers: Prime",
+          "date": "2010-11-29",
+          "year": 2010,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 4,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "tf-earthspark",
+          "title": "Transformers: EarthSpark",
+          "date": "2022-11-11",
+          "year": 2022,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 5,
+          "optional": true,
+          "animated": true
         }
       ]
     },
@@ -2945,7 +3370,8 @@
           "kind": "film",
           "era": "Early hunts",
           "story": 2,
-          "note": "Animated anthology across three eras of history."
+          "note": "Animated anthology across three eras of history.",
+          "animated": true
         },
         {
           "id": "pr-1",
@@ -3292,7 +3718,8 @@
       "accent": "#c9a227",
       "eraOrder": [
         "Eon",
-        "Other"
+        "Other",
+        "Cartoons"
       ],
       "entries": [
         {
@@ -3543,6 +3970,17 @@
           "kind": "film",
           "era": "Eon",
           "story": 26
+        },
+        {
+          "id": "bd-jbjr",
+          "title": "James Bond Jr.",
+          "date": "1991-09-16",
+          "year": 1991,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 1,
+          "optional": true,
+          "animated": true
         }
       ]
     },
@@ -3748,7 +4186,8 @@
           "era": "Films",
           "story": 2,
           "note": "Nine animated shorts that set up the world and the war. Watch after the first film.",
-          "optional": true
+          "optional": true,
+          "animated": true
         },
         {
           "id": "mx-3",
@@ -3819,7 +4258,8 @@
           "kind": "series",
           "era": "Animated",
           "story": 4,
-          "optional": true
+          "optional": true,
+          "animated": true
         }
       ]
     },
@@ -3895,7 +4335,8 @@
       "eraOrder": [
         "Original",
         "Remake",
-        "Caesar"
+        "Caesar",
+        "Cartoons"
       ],
       "entries": [
         {
@@ -3990,6 +4431,17 @@
           "era": "Caesar",
           "story": 10,
           "note": "Set generations after War."
+        },
+        {
+          "id": "pota-rotpota",
+          "title": "Return to the Planet of the Apes",
+          "date": "1975-09-06",
+          "year": 1975,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 1,
+          "optional": true,
+          "animated": true
         }
       ]
     },
@@ -4165,7 +4617,8 @@
       "eraOrder": [
         "Original",
         "Reboot",
-        "Afterlife"
+        "Afterlife",
+        "Cartoons"
       ],
       "entries": [
         {
@@ -4214,6 +4667,28 @@
           "kind": "film",
           "era": "Afterlife",
           "story": 5
+        },
+        {
+          "id": "gb-rg",
+          "title": "The Real Ghostbusters",
+          "date": "1986-09-13",
+          "year": 1986,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 1,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "gb-eg",
+          "title": "Extreme Ghostbusters",
+          "date": "1997-09-01",
+          "year": 1997,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 2,
+          "optional": true,
+          "animated": true
         }
       ]
     },
@@ -4267,6 +4742,17 @@
           "story": 4,
           "note": "A spin-off with new leads, set in the same world.",
           "optional": true
+        },
+        {
+          "id": "mib-series",
+          "title": "Men in Black: The Series",
+          "date": "1997-10-11",
+          "year": 1997,
+          "kind": "series",
+          "era": "Films",
+          "story": 5,
+          "optional": true,
+          "animated": true
         }
       ]
     },
@@ -4327,6 +4813,39 @@
           "kind": "film",
           "era": "Films",
           "story": 5
+        },
+        {
+          "id": "ts-terror",
+          "title": "Toy Story of Terror!",
+          "date": "2013-10-16",
+          "year": 2013,
+          "kind": "special",
+          "era": "Films",
+          "story": 6,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "ts-time",
+          "title": "Toy Story That Time Forgot",
+          "date": "2014-12-02",
+          "year": 2014,
+          "kind": "special",
+          "era": "Films",
+          "story": 7,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "ts-forky",
+          "title": "Forky Asks a Question",
+          "date": "2019-11-12",
+          "year": 2019,
+          "kind": "series",
+          "era": "Films",
+          "story": 8,
+          "optional": true,
+          "animated": true
         }
       ]
     },
@@ -4341,7 +4860,8 @@
       "accent": "#7cb342",
       "eraOrder": [
         "Shrek",
-        "Spin-offs"
+        "Spin-offs",
+        "Cartoons"
       ],
       "entries": [
         {
@@ -4398,6 +4918,50 @@
           "kind": "film",
           "era": "Spin-offs",
           "story": 6
+        },
+        {
+          "id": "sh-halls",
+          "title": "Shrek the Halls",
+          "date": "2007-11-28",
+          "year": 2007,
+          "kind": "special",
+          "era": "Cartoons",
+          "story": 1,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "sh-scared",
+          "title": "Scared Shrekless",
+          "date": "2010-10-28",
+          "year": 2010,
+          "kind": "special",
+          "era": "Cartoons",
+          "story": 2,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "sh-diablos",
+          "title": "Puss in Boots: The Three Diablos",
+          "date": "2012-02-24",
+          "year": 2012,
+          "kind": "special",
+          "era": "Cartoons",
+          "story": 3,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "sh-puss",
+          "title": "The Adventures of Puss in Boots",
+          "date": "2015-01-16",
+          "year": 2015,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 4,
+          "optional": true,
+          "animated": true
         }
       ]
     },
@@ -4450,6 +5014,72 @@
           "kind": "film",
           "era": "Films",
           "story": 4
+        },
+        {
+          "id": "sn-aosth",
+          "title": "Adventures of Sonic the Hedgehog",
+          "date": "1993-09-06",
+          "year": 1993,
+          "kind": "series",
+          "era": "Films",
+          "story": 5,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "sn-satam",
+          "title": "Sonic the Hedgehog (1993)",
+          "date": "1993-09-18",
+          "year": 1993,
+          "kind": "series",
+          "era": "Films",
+          "story": 6,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "sn-su",
+          "title": "Sonic Underground",
+          "date": "1999-01-06",
+          "year": 1999,
+          "kind": "series",
+          "era": "Films",
+          "story": 7,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "sn-x",
+          "title": "Sonic X",
+          "date": "2003-04-06",
+          "year": 2003,
+          "kind": "series",
+          "era": "Films",
+          "story": 8,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "sn-boom",
+          "title": "Sonic Boom",
+          "date": "2014-11-08",
+          "year": 2014,
+          "kind": "series",
+          "era": "Films",
+          "story": 9,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "sn-prime",
+          "title": "Sonic Prime",
+          "date": "2022-12-15",
+          "year": 2022,
+          "kind": "series",
+          "era": "Films",
+          "story": 10,
+          "optional": true,
+          "animated": true
         }
       ]
     },
@@ -4933,6 +5563,17 @@
           "kind": "film",
           "era": "Films",
           "story": 5
+        },
+        {
+          "id": "rm-fof",
+          "title": "Rambo: The Force of Freedom",
+          "date": "1986-04-07",
+          "year": 1986,
+          "kind": "series",
+          "era": "Films",
+          "story": 6,
+          "optional": true,
+          "animated": true
         }
       ]
     },
@@ -5301,6 +5942,17 @@
           "era": "Games",
           "story": 4,
           "note": "A separate story, set in another galaxy."
+        },
+        {
+          "id": "me-paragon",
+          "title": "Mass Effect: Paragon Lost",
+          "date": "2012-11-27",
+          "year": 2012,
+          "kind": "film",
+          "era": "Games",
+          "story": 5,
+          "optional": true,
+          "animated": true
         }
       ]
     },
@@ -5315,7 +5967,8 @@
       "accent": "#4f7d5c",
       "eraOrder": [
         "Prequel",
-        "Main"
+        "Main",
+        "Cartoons"
       ],
       "entries": [
         {
@@ -5391,6 +6044,28 @@
           "kind": "game",
           "era": "Main",
           "story": 8
+        },
+        {
+          "id": "hal-legends",
+          "title": "Halo Legends",
+          "date": "2010-02-16",
+          "year": 2010,
+          "kind": "special",
+          "era": "Cartoons",
+          "story": 1,
+          "optional": true,
+          "animated": true
+        },
+        {
+          "id": "hal-for",
+          "title": "Halo: The Fall of Reach",
+          "date": "2015-10-27",
+          "year": 2015,
+          "kind": "series",
+          "era": "Cartoons",
+          "story": 2,
+          "optional": true,
+          "animated": true
         }
       ]
     },
@@ -5455,6 +6130,17 @@
           "story": 5,
           "note": "The final expansion, set in Toussaint.",
           "optional": true
+        },
+        {
+          "id": "tw-notw",
+          "title": "The Witcher: Nightmare of the Wolf",
+          "date": "2021-08-23",
+          "year": 2021,
+          "kind": "film",
+          "era": "Games",
+          "story": 6,
+          "optional": true,
+          "animated": true
         }
       ]
     }

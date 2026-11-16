@@ -11,15 +11,16 @@ data class Entry(
     val story: Int = 0,
     val note: String? = null,
     val optional: Boolean = false,
+    val animated: Boolean = false,
 ) {
     val isFilm: Boolean get() = kind == KIND_FILM
     val isGame: Boolean get() = kind == KIND_GAME
     val kindLabel: String
         get() = when (kind) {
-            KIND_SERIES -> "Series"
-            KIND_SPECIAL -> "Special"
+            KIND_SERIES -> if (animated) "Animated series" else "Series"
+            KIND_SPECIAL -> if (animated) "Animated special" else "Special"
             KIND_GAME -> "Game"
-            else -> "Film"
+            else -> if (animated) "Animated film" else "Film"
         }
 
     companion object {
@@ -145,6 +146,7 @@ data class WatchFilter(
     val kind: String = "all",
     val hideSeen: Boolean = false,
     val essentials: Boolean = false,
+    val animatedOnly: Boolean = false,
 )
 
 data class BookFilter(

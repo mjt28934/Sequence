@@ -698,6 +698,7 @@ private fun effectiveWatchFilter(vm: MainViewModel, franchise: Franchise): Watch
     kind = if (Logic.hasMixedKinds(franchise)) vm.watchFilter.kind else "all",
     hideSeen = vm.watchFilter.hideSeen,
     essentials = vm.watchFilter.essentials,
+    animatedOnly = vm.watchFilter.animatedOnly,
 )
 
 private fun effectiveBookFilter(vm: MainViewModel, works: List<Work>): BookFilter {
@@ -723,6 +724,7 @@ private fun describeWatchFilter(filter: WatchFilter, franchise: Franchise): Stri
         parts += "Everything"
     }
     if (filter.essentials) parts += "essentials only"
+    if (filter.animatedOnly) parts += "animation only"
     if (filter.hideSeen) parts += "seen hidden"
     return parts.joinToString(" · ")
 }

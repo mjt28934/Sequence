@@ -27,8 +27,8 @@ android {
         applicationId = "com.sequence.watchorder"
         minSdk = 26
         targetSdk = 35
-        versionCode = 260
-        versionName = "2.4"
+        versionCode = 270
+        versionName = "2.5"
     }
 
     signingConfigs {
