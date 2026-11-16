@@ -50,14 +50,15 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.sequence.watchorder.DetailTab
@@ -545,43 +546,49 @@ private fun SwipeableWatchRow(
     watched: Boolean,
     upcoming: Boolean,
 ) {
+    val latest = rememberUpdatedState(watched to upcoming)
+    val haptics = LocalHapticFeedback.current
     val dismissState = rememberSwipeToDismissBoxState(
         confirmValueChange = { value ->
-            if (value == SwipeToDismissBoxValue.StartToEnd && !upcoming && !watched) {
-                vm.toggleSeen(franchise.id, entry)
-                true
-            } else {
-                false
+            val (isWatched, isUpcoming) = latest.value
+            when {
+                isUpcoming -> false
+                value == SwipeToDismissBoxValue.StartToEnd && !isWatched -> {
+                    Haptics.tick(haptics)
+                    vm.toggleSeen(franchise.id, entry)
+                    true
+                }
+                value == SwipeToDismissBoxValue.EndToStart && isWatched -> {
+                    Haptics.tick(haptics)
+                    vm.toggleSeen(franchise.id, entry)
+                    true
+                }
+                else -> false
             }
         },
     )
+    // Either direction leaves the row dismissed; the mark change then resets it into place.
     LaunchedEffect(watched) {
-        if (watched && dismissState.currentValue != SwipeToDismissBoxValue.Settled) {
+        if (dismissState.currentValue != SwipeToDismissBoxValue.Settled) {
             dismissState.reset()
         }
     }
 
     SwipeToDismissBox(
         state = dismissState,
-        enableDismissFromEndToStart = false,
+        enableDismissFromStartToEnd = !upcoming && !watched,
+        enableDismissFromEndToStart = !upcoming && watched,
         backgroundContent = {
-            Box(
-                Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 12.dp, vertical = 3.dp),
-            ) {
-                Row(
+            // Only while the row is actually moving: watched rows are translucent, so a resting
+            // background would otherwise tint every row with a "Mark unseen" wash.
+            if (dismissState.dismissDirection != SwipeToDismissBoxValue.Settled) {
+                SwipeSeenBackground(
+                    direction = dismissState.dismissDirection,
+                    accent = accent,
                     modifier = Modifier
                         .fillMaxSize()
-                        .clip(RoundedCornerShape(16.dp))
-                        .background(accent.accent.copy(alpha = 0.9f))
-                        .padding(horizontal = 20.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                ) {
-                    Icon(SeqIcons.Check, contentDescription = null, tint = accent.ink)
-                    Text("Mark seen", color = accent.ink, style = MaterialTheme.typography.labelLarge)
-                }
+                        .padding(horizontal = 12.dp, vertical = 3.dp),
+                )
             }
         },
     ) {
@@ -689,11 +696,6 @@ private fun WatchRow(
             }
             if (upcoming) {
                 MetaPill("Soon")
-            } else {
-                SeenToggle(
-                    checked = watched,
-                    onToggle = { vm.toggleSeen(franchise.id, entry) },
-                )
             }
         }
     }

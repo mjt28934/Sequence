@@ -18,14 +18,20 @@ import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.SwipeToDismissBox
+import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -149,18 +155,72 @@ private fun UpcomingRow(
     released: Boolean,
     modifier: Modifier = Modifier,
 ) {
+    val seen = item.entry.id in vm.progress.watched[item.franchise.id].orEmpty()
+    val latestSeen = rememberUpdatedState(seen)
+    val haptics = LocalHapticFeedback.current
+    val dismissState = rememberSwipeToDismissBoxState(
+        confirmValueChange = { value ->
+            val isSeen = latestSeen.value
+            when {
+                !released -> false
+                value == SwipeToDismissBoxValue.StartToEnd && !isSeen -> {
+                    Haptics.tick(haptics)
+                    vm.toggleSeen(item.franchise.id, item.entry)
+                    true
+                }
+                value == SwipeToDismissBoxValue.EndToStart && isSeen -> {
+                    Haptics.tick(haptics)
+                    vm.toggleSeen(item.franchise.id, item.entry)
+                    true
+                }
+                else -> false
+            }
+        },
+    )
+    // Only released titles can be marked, so the stamp is the one thing the row can change.
+    LaunchedEffect(seen) {
+        if (dismissState.currentValue != SwipeToDismissBoxValue.Settled) {
+            dismissState.reset()
+        }
+    }
+
+    SwipeToDismissBox(
+        state = dismissState,
+        modifier = modifier.fillMaxWidth(),
+        enableDismissFromStartToEnd = released && !seen,
+        enableDismissFromEndToStart = released && seen,
+        backgroundContent = {
+            // Upcoming rows paint no surface of their own, so the swipe wash only exists mid-drag.
+            if (dismissState.dismissDirection != SwipeToDismissBoxValue.Settled) {
+                SwipeSeenBackground(
+                    direction = dismissState.dismissDirection,
+                    accent = vm.catalog.accent(item.franchise.id).toPalette(),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 8.dp, vertical = 2.dp),
+                )
+            }
+        },
+    ) {
+        UpcomingRowContent(vm, item)
+    }
+}
+
+@Composable
+private fun UpcomingRowContent(vm: MainViewModel, item: UpcomingItem) {
     val accent = vm.catalog.accent(item.franchise.id).toPalette()
     val parts = item.entry.date.split("-")
     val day = parts.getOrNull(2)?.toIntOrNull() ?: 0
     val month = Logic.monthLabel(item.entry.date).take(3)
-    val seen = item.entry.id in vm.progress.watched[item.franchise.id].orEmpty()
 
     PressableRow(
         onClick = {
             vm.openFranchise(item.franchise.id)
             vm.openSheet(Sheet.EntrySheet(item.entry.id))
         },
-        modifier = modifier.padding(horizontal = 8.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 8.dp),
         color = Color.Transparent,
     ) {
         ListItem(
@@ -198,19 +258,6 @@ private fun UpcomingRow(
                         )
                     }
                 }
-            },
-            trailingContent = if (released) {
-                {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        SeenToggle(
-                            checked = seen,
-                            size = 40.dp,
-                            onToggle = { vm.toggleSeen(item.franchise.id, item.entry) },
-                        )
-                    }
-                }
-            } else {
-                null
             },
             colors = ListItemDefaults.colors(containerColor = Color.Transparent),
         )

@@ -55,7 +55,6 @@ import com.sequence.watchorder.ui.ArtImage
 import com.sequence.watchorder.ui.ArtKind
 import com.sequence.watchorder.ui.Haptics
 import com.sequence.watchorder.ui.ProgressStrip
-import com.sequence.watchorder.ui.SeenToggle
 import com.sequence.watchorder.ui.SeqIcons
 import com.sequence.watchorder.ui.SeqSnackbar
 import com.sequence.watchorder.ui.SequenceTheme
@@ -279,7 +278,6 @@ internal fun AppNavigationBar(vm: MainViewModel) {
 @Composable
 private fun MiniBar(vm: MainViewModel, card: ContinueCard) {
     val accent = vm.catalog.accent(card.franchise.id).toPalette()
-    val hasNext = card.next != null || card.nextBook != null
     val title = card.next?.title ?: card.nextBook?.title ?: "All caught up"
     val kicker = when {
         card.next != null -> "Up next"
@@ -315,17 +313,11 @@ private fun MiniBar(vm: MainViewModel, card: ContinueCard) {
                     },
                     label = "miniBar",
                 ) { shownId ->
-                    MiniBarRow(card, shownId, kicker, title, hasNext) {
-                        card.next?.let { vm.toggleSeen(card.franchise.id, it) }
-                            ?: card.nextBook?.let { vm.toggleRead(card.franchise.id, it) }
-                    }
+                    MiniBarRow(card, shownId, kicker, title)
                 }
             } else {
                 // Reduce motion: the new title replaces the old one without a slide.
-                MiniBarRow(card, card.franchise.id, kicker, title, hasNext) {
-                    card.next?.let { vm.toggleSeen(card.franchise.id, it) }
-                        ?: card.nextBook?.let { vm.toggleRead(card.franchise.id, it) }
-                }
+                MiniBarRow(card, card.franchise.id, kicker, title)
             }
             ProgressStrip(
                 pct = card.seen.pct,
@@ -337,20 +329,18 @@ private fun MiniBar(vm: MainViewModel, card: ContinueCard) {
     }
 }
 
-/** One line of the mini bar: poster, franchise, what is next, and the tick. */
+/** One line of the mini bar: poster, franchise and what is next. */
 @Composable
 private fun MiniBarRow(
     card: ContinueCard,
     shownId: String,
     kicker: String,
     title: String,
-    hasNext: Boolean,
-    onToggle: () -> Unit,
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 8.dp, end = 4.dp, top = 8.dp, bottom = 10.dp),
+            .padding(start = 8.dp, end = 12.dp, top = 8.dp, bottom = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
@@ -378,9 +368,6 @@ private fun MiniBarRow(
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
-        }
-        if (hasNext) {
-            SeenToggle(checked = false, size = 40.dp, onToggle = onToggle)
         }
     }
 }

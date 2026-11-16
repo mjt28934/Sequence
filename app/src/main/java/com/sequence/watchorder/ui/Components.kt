@@ -49,7 +49,6 @@ import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
@@ -58,6 +57,7 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarData
 import androidx.compose.material3.Surface
+import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -186,56 +186,43 @@ fun ProgressStrip(
 }
 
 /**
- * The primary tap target for marking something seen. Uses a filled icon button so it reads as a
- * real control, and fires a haptic tick exactly like the system toggles.
+ * Background revealed while a row is swiped sideways: right marks seen, left clears the mark.
+ * Both directions use the same surface so a half-swipe always says what letting go will do.
  */
 @Composable
-fun SeenToggle(
-    checked: Boolean,
-    onToggle: () -> Unit,
+fun SwipeSeenBackground(
+    direction: SwipeToDismissBoxValue,
+    accent: AccentPalette,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    size: Dp = 40.dp,
+    shape: Shape = RoundedCornerShape(16.dp),
 ) {
-    val haptics = LocalHapticFeedback.current
-    val scheme = MaterialTheme.colorScheme
-    // The fill and the tick ease between states instead of hard-swapping, and the tick lands with
-    // a short spring so the action feels acknowledged.
-    val container by animateColorAsState(
-        targetValue = if (checked) scheme.primary else Color.Transparent,
-        animationSpec = seqTween(SeqMotion.SHORT_MS),
-        label = "seenContainer",
-    )
-    val content by animateColorAsState(
-        targetValue = if (checked) scheme.onPrimary else scheme.onSurfaceVariant,
-        animationSpec = seqTween(SeqMotion.SHORT_MS),
-        label = "seenContent",
-    )
-    val pop = rememberFlagPop(checked)
+    val marking = direction == SwipeToDismissBoxValue.StartToEnd
+    val container = if (marking) {
+        accent.accent.copy(alpha = 0.9f)
+    } else {
+        MaterialTheme.colorScheme.surfaceContainerHighest
+    }
+    val ink = if (marking) accent.ink else MaterialTheme.colorScheme.onSurfaceVariant
 
-    IconButton(
-        onClick = {
-            Haptics.tick(haptics)
-            onToggle()
-        },
-        enabled = enabled,
+    Row(
         modifier = modifier
-            .size(size)
-            .semantics { contentDescription = if (checked) "Mark as unseen" else "Mark as seen" },
-        colors = IconButtonDefaults.iconButtonColors(
-            containerColor = container,
-            contentColor = content,
-        ),
+            .fillMaxSize()
+            .clip(shape)
+            .background(container)
+            .padding(horizontal = 20.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = if (marking) Arrangement.Start else Arrangement.End,
     ) {
         Icon(
-            imageVector = if (checked) SeqIcons.Check else SeqIcons.CheckOutline,
+            imageVector = if (marking) SeqIcons.Check else SeqIcons.Close,
             contentDescription = null,
-            modifier = Modifier
-                .size(size * 0.55f)
-                .graphicsLayer {
-                    scaleX = pop
-                    scaleY = pop
-                },
+            tint = ink,
+        )
+        Spacer(Modifier.width(12.dp))
+        Text(
+            text = if (marking) "Mark seen" else "Mark unseen",
+            color = ink,
+            style = MaterialTheme.typography.labelLarge,
         )
     }
 }

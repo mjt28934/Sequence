@@ -1,4 +1,4 @@
-# Sequence 2.1 — 49 franchises, films and games
+# Sequence 2.2 — 49 franchises, films and games
 
 A native Kotlin / Jetpack Compose rebuild of the original WebView-based **Sequence** watch-order app.
 No WebView, no JavaScript bridge, no network permission. The catalogue and all artwork are
@@ -13,8 +13,10 @@ sheets, segmented buttons, swipe-to-mark-seen with haptics, and edge-to-edge ins
 
 - `Sequence-2.0.apk` — signed release build (`com.sequence.watchorder`, versionCode 220,
   versionName `2.0`), the latest published release.
-- `Sequence-2.1.apk` — local build of the current source (versionCode 230, versionName `2.1`); it is
+- `Sequence-2.2.apk` — local build of the current source (versionCode 240, versionName `2.2`); it is
   not published yet.
+- `Sequence-2.1.apk` — local build of the previous catalogue pass (versionCode 230, versionName `2.1`);
+  it is not published either.
 - Minimum Android 8.0 (API 26), targets Android 15 (API 35).
 - Rendered previews of every screen are in `screenshots/`.
 
@@ -31,6 +33,7 @@ Each change ships under a new name so builds never get confused:
 | 1.6 | `Sequence-1.6.apk` | 17 more franchises (37 total), 116 more titles, 22 more books, real covers, and a motion pass over every screen |
 | 2.0 | `Sequence-2.0.apk` | Tags tab, inline Home search, appearance and layout settings, shared-axis transitions, a bottom bar that never re-creates, sticky upcoming months, and a reduced-motion-aware polish pass |
 | 2.1 | `Sequence-2.1.apk` | 12 more franchises (49 total): Scream, Final Destination, Saw, Rambo, The Godfather, Underworld, and six game series. Adds a Game kind, game filtering and played/playing copy. Unreleased. |
+| 2.2 | `Sequence-2.2.apk` | Cleaner Home: the continue hero and up-next rows are gone, so the totals, continue shelf, keep-reading shelf and franchise grid carry the page. Rows are marked seen by swiping right and unmarked by swiping left, replacing the seen circles. Unreleased. |
 
 Versions 1.7 through 1.10 were internal builds; their changes are part of 2.0.
 
@@ -42,24 +45,24 @@ APK name both follow it.
 
 ## What is included
 
-- **Home** — a continue hero for the next title, overall seen/read progress, a continue shelf, up-next
-  and keep-reading rows with one-tap seen checks, the full franchise grid with a hide-finished empty
-  state, and a media-player style mini bar above the navigation. A finished franchise carries a tick
-  badge on its poster, and a new install skips the explainer and goes straight to the catalogue. Game
-  entries say "Continue playing" and "Played it" instead of watch wording.
+- **Home** — overall seen/read progress, a continue shelf, a keep-reading row, the full franchise grid
+  with a hide-finished empty state, and a media-player style mini bar above the navigation. A finished
+  franchise carries a tick badge on its poster, and a new install skips the explainer and goes straight
+  to the catalogue. Game entries say "played" instead of "watched".
 - **Library** — saved and started franchises, grid/list views, progress filters, and sort by recent,
   A–Z, most left, or furthest along. Rows animate into place as the filter changes, and the bar links
   straight to settings.
 - **Upcoming** — future releases grouped under sticky month headers, plus releases from the last 90
-  days with seen toggles; every row opens its franchise and title sheet.
+  days where a right swipe marks the title seen and a left swipe unmarks it; every row opens its
+  franchise and title sheet.
 - **Tags** — genre shelves with cover collages, and a genre view of franchise posters that animates
   as the filter changes.
 - **Search** — franchises, films, series, games, books and comics, with a match count on every result
   section; it opens inline on Home and closing it keeps your place.
 - **Franchise detail** — hero art with a scroll parallax, expandable blurb, release/story ordering,
   watch filters that include a games option for mixed franchises, book format filters, series/game/
-  special markers, optional-entry markers, swipe-right to toggle seen, per-title sheets, "mark
-  everything up to here", reading paths, cover checkmarks, and a next-up FAB.
+  special markers, optional-entry markers, swipe right to mark seen and left to unmark, per-title
+  sheets, "mark everything up to here", reading paths, cover checkmarks, and a next-up FAB.
 - **Settings** — start tab, hide finished franchises, theme and vibration, reduce motion, library
   layout and sort, watching order, export/import, clear all progress (confirmed), and reset settings.
 - **Undo snackbar** after progress and save changes, matching the original behaviour.
@@ -214,9 +217,9 @@ $env:JAVA_HOME = "C:\Projects\Orderly\.toolchain\jdk17"
 
 Outputs:
 
-- `app/build/outputs/apk/debug/app-debug.apk` (`com.sequence.watchorder.debug`, `2.1-debug`)
+- `app/build/outputs/apk/debug/app-debug.apk` (`com.sequence.watchorder.debug`, `2.2-debug`)
 - `app/build/outputs/apk/release/app-release.apk` (signed with `sequence-release.jks`)
-- `Sequence-2.1.apk` — the current release build copied to the project root (not published)
+- `Sequence-2.2.apk` — the current release build copied to the project root (not published)
 
 ### Android Studio
 

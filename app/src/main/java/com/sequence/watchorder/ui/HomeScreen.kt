@@ -6,34 +6,25 @@ import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
-import androidx.compose.foundation.background
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.LargeTopAppBar
-import androidx.compose.material3.ListItem
-import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -46,8 +37,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.style.TextOverflow
@@ -55,10 +44,8 @@ import androidx.compose.ui.unit.dp
 import com.sequence.watchorder.MainViewModel
 import com.sequence.watchorder.Sheet
 import com.sequence.watchorder.data.ContinueCard
-import com.sequence.watchorder.data.Entry
 import com.sequence.watchorder.data.Logic
 import com.sequence.watchorder.data.Progress
-import com.sequence.watchorder.data.UpNextItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -93,7 +80,6 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
     val searchOpen = vm.searchOpen
     val focusRequester = remember { FocusRequester() }
     val keyboard = LocalSoftwareKeyboardController.current
-    val upNext = remember(cards) { Logic.upNextList(cards) }
     val readNext = remember(cards) { Logic.readNextList(cards) }
     // Held outside the search switcher, so opening and closing search returns to the same place.
     val listState = rememberLazyListState()
@@ -186,28 +172,11 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                     bottom = 24.dp,
                 ),
             ) {
+                item { EnterSection(enter, "totals", 1) { OverallProgressCard(seenTotal, readTotal) } }
+
                 if (cards.isNotEmpty()) {
                     item {
-                        EnterSection(enter, "hero", 1) {
-                            ContinueHero(
-                                card = cards.first(),
-                                accent = vm.catalog.accent(cards.first().franchise.id).toPalette(),
-                                onOpen = { vm.openFranchise(cards.first().franchise.id) },
-                                onMarkSeen = {
-                                    val first = cards.first()
-                                    first.next?.let { vm.toggleSeen(first.franchise.id, it) }
-                                        ?: first.nextBook?.let { vm.toggleRead(first.franchise.id, it) }
-                                },
-                            )
-                        }
-                    }
-                }
-
-                item { EnterSection(enter, "totals", 2) { OverallProgressCard(seenTotal, readTotal) } }
-
-                if (cards.size > 1) {
-                    item {
-                        EnterSection(enter, "continue-header", 3) {
+                        EnterSection(enter, "continue-header", 2) {
                             SectionHeader(
                                 title = "Continue",
                                 subtitle = plural(cards.size, "franchise in progress", "franchises in progress"),
@@ -215,12 +184,12 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                         }
                     }
                     item {
-                        EnterSection(enter, "continue-rail", 4) {
+                        EnterSection(enter, "continue-rail", 3) {
                             LazyRow(
                                 contentPadding = PaddingValues(horizontal = 20.dp),
                                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                             ) {
-                                items(cards.drop(1), key = { it.franchise.id }) { card ->
+                                items(cards, key = { it.franchise.id }) { card ->
                                     ShelfCard(
                                         franchise = card.franchise,
                                         title = card.franchise.name,
@@ -235,27 +204,12 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                     }
                 }
 
-                val upNext = Logic.upNextList(cards)
-                if (upNext.isNotEmpty()) {
-                    item {
-                        EnterSection(enter, "upnext-header", 5) {
-                            SectionHeader(
-                                title = "Up next",
-                                subtitle = "Tap the tick when you have seen or played it",
-                            )
-                        }
-                    }
-                    items(upNext, key = { "up-${it.franchise.id}-${it.entry.id}" }) { item ->
-                        UpNextRow(vm, item, seqItem())
-                    }
-                }
-
                 if (readNext.isNotEmpty()) {
                     item {
-                        EnterSection(enter, "reading-header", 6) { SectionHeader(title = "Keep reading") }
+                        EnterSection(enter, "reading-header", 4) { SectionHeader(title = "Keep reading") }
                     }
                     item {
-                        EnterSection(enter, "reading-rail", 7) {
+                        EnterSection(enter, "reading-rail", 5) {
                             LazyRow(
                                 contentPadding = PaddingValues(horizontal = 20.dp),
                                 horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -279,7 +233,7 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                 // No genre rails on Home any more: one flat A-Z grid of everything. Categories live
                 // on the Tags tab, so browsing here never hides a franchise behind its genre.
                 item {
-                    EnterSection(enter, "all-header", 8) {
+                    EnterSection(enter, "all-header", 6) {
                         SectionHeader(
                             title = "All franchises",
                             subtitle = plural(allFranchises.size, "franchise", "franchises"),
@@ -329,102 +283,6 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                 }
 
                 item { FooterHint(vm.catalog.dataAsOf) }
-            }
-        }
-    }
-}
-
-@Composable
-private fun ContinueHero(
-    card: ContinueCard,
-    accent: AccentPalette,
-    onOpen: () -> Unit,
-    onMarkSeen: () -> Unit,
-) {
-    val next = card.next
-    val nextBook = card.nextBook
-    val headline = next?.title ?: nextBook?.title ?: "All caught up"
-    val kicker = when {
-        next != null -> if (next.isGame) "Continue playing" else "Continue watching"
-        nextBook != null -> "Continue reading"
-        else -> "Finished"
-    }
-    val interaction = remember { MutableInteractionSource() }
-
-    Card(
-        onClick = onOpen,
-        interactionSource = interaction,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp)
-            .pressScale(interaction, pressedScale = 0.976f),
-        shape = RoundedCornerShape(24.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh),
-    ) {
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .aspectRatio(16f / 10f),
-        ) {
-            ArtImage(ArtKind.POSTER, card.franchise.id, Modifier.fillMaxSize())
-            Box(
-                Modifier
-                    .fillMaxSize()
-                    .background(
-                        Brush.verticalGradient(
-                            0.25f to Color.Transparent,
-                            1f to Color(0xF20A0B0F),
-                        ),
-                    ),
-            )
-            Column(
-                Modifier
-                    .align(Alignment.BottomStart)
-                    .padding(start = 18.dp, end = 18.dp, bottom = 16.dp),
-            ) {
-                Text(
-                    kicker.uppercase(),
-                    color = Color.White.copy(alpha = 0.82f),
-                    style = MaterialTheme.typography.labelMedium,
-                )
-                Text(
-                    headline,
-                    color = Color.White,
-                    style = MaterialTheme.typography.headlineSmall,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis,
-                )
-                Text(
-                    "${card.franchise.name} · ${card.seen.done} of ${card.seen.total}",
-                    color = Color.White.copy(alpha = 0.82f),
-                    style = MaterialTheme.typography.bodyMedium,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                )
-                Row(
-                    modifier = Modifier.padding(top = 12.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    Button(onClick = onMarkSeen) {
-                        Icon(SeqIcons.Check, contentDescription = null, modifier = Modifier.size(18.dp))
-                        Spacer(Modifier.width(8.dp))
-                        Text(
-                            when {
-                                next == null && nextBook != null -> "Read it"
-                                next?.isGame == true -> "Played it"
-                                else -> "Watched it"
-                            },
-                        )
-                    }
-                }
-            }
-            Box(
-                Modifier
-                    .align(Alignment.BottomCenter)
-                    .fillMaxWidth(),
-            ) {
-                ProgressStrip(pct = card.seen.pct, color = accent.accent, height = 4.dp)
             }
         }
     }
@@ -483,47 +341,6 @@ private fun ProgressColumn(label: String, progress: Progress, modifier: Modifier
         }
         Spacer(Modifier.height(10.dp))
         ProgressStrip(progress.pct, color = MaterialTheme.colorScheme.primary)
-    }
-}
-
-@Composable
-private fun UpNextRow(vm: MainViewModel, item: UpNextItem, modifier: Modifier = Modifier) {
-    val seen = item.entry.id in vm.progress.watched[item.franchise.id].orEmpty()
-
-    PressableRow(
-        onClick = {
-            vm.openFranchise(item.franchise.id)
-            vm.openSheet(Sheet.EntrySheet(item.entry.id))
-        },
-        modifier = modifier.padding(horizontal = 8.dp),
-        shape = RoundedCornerShape(16.dp),
-        color = MaterialTheme.colorScheme.surfaceContainerLow.copy(alpha = 0.6f),
-    ) {
-        ListItem(
-            headlineContent = {
-                Text(
-                    item.entry.title,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                )
-            },
-            supportingContent = {
-                Text(
-                    "${item.franchise.name} · #${item.position}",
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                )
-            },
-            leadingContent = { RowThumb(item.franchise, width = 64.dp) },
-            trailingContent = {
-                SeenToggle(
-                    checked = seen,
-                    onToggle = { vm.toggleSeen(item.franchise.id, item.entry) },
-                )
-            },
-            colors = ListItemDefaults.colors(containerColor = Color.Transparent),
-            modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
-        )
     }
 }
 
