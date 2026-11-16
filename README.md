@@ -14,10 +14,6 @@ sheets, segmented buttons, and edge-to-edge insets.
 - `Sequence-2.4.apk` — signed release build (`com.sequence.watchorder`, versionCode 260,
   versionName `2.4`), the latest published release.
 - `Sequence-2.0.apk` — previous published release (versionCode 220, versionName `2.0`).
-- `Sequence-2.3.apk` — local build of the earlier mini-bar removal (versionCode 250,
-  versionName `2.3`); it was never published.
-- `Sequence-2.2.apk` — local build of the earlier Home pass (versionCode 240,
-  versionName `2.2`); it was never published either.
 - Minimum Android 8.0 (API 26), targets Android 15 (API 35).
 - Rendered previews of every screen are in `screenshots/`.
 
@@ -33,12 +29,10 @@ Each change ships under a new name so builds never get confused:
 | 1.5 | `Sequence-1.5.apk` | Real film posters replace the generated franchise art |
 | 1.6 | `Sequence-1.6.apk` | 17 more franchises (37 total), 116 more titles, 22 more books, real covers, and a motion pass over every screen |
 | 2.0 | `Sequence-2.0.apk` | Tags tab, inline Home search, appearance and layout settings, shared-axis transitions, a bottom bar that never re-creates, sticky upcoming months, and a reduced-motion-aware polish pass |
-| 2.1 | `Sequence-2.1.apk` | 12 more franchises (49 total): Scream, Final Destination, Saw, Rambo, The Godfather, Underworld, and six game series. Adds a Game kind, game filtering and played/playing copy. Unreleased. |
-| 2.2 | `Sequence-2.2.apk` | Cleaner Home: the continue hero and up-next rows are gone, so the totals, continue shelf, keep-reading shelf and franchise grid carry the page. Rows are marked seen by swiping right and unmarked by swiping left, replacing the seen circles. Unreleased. |
-| 2.3 | `Sequence-2.3.apk` | Removes the mini continue strip above the navigation bar, leaving the tab bar as the only pinned chrome. Unreleased. |
-| 2.4 | `Sequence-2.4.apk` | Removes the swipe-to-mark-seen gesture from detail and Upcoming. Rows are plain tappable rows again; marks stay available in the entry sheets and "mark everything up to here". Current release. |
+| 2.4 | `Sequence-2.4.apk` | Merges the 2.1-2.3 internal passes into the public build: 12 more franchises (49 total), including six game series with a Game kind and played/playing copy; a cleaner Home without the continue hero, up-next rows or mini bar; and plain tappable detail and Upcoming rows, with the swipe-to-mark-seen gesture removed. Marks stay in the entry sheets and "mark everything up to here". Current release. |
 
-Versions 1.7 through 1.10 were internal builds; their changes are part of 2.0.
+Versions 1.7 through 1.10 and 2.1 through 2.3 were internal builds; their changes are part of 2.0 and
+2.4 respectively.
 
 The `versionName` in `app/build.gradle.kts` is the single source of truth; the settings screen and the
 APK name both follow it.
