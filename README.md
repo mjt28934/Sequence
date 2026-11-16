@@ -29,7 +29,7 @@ Each change ships under a new name so builds never get confused:
 | 1.5 | `Sequence-1.5.apk` | Real film posters replace the generated franchise art |
 | 1.6 | `Sequence-1.6.apk` | 17 more franchises (37 total), 116 more titles, 22 more books, real covers, and a motion pass over every screen |
 | 2.0 | `Sequence-2.0.apk` | Tags tab, inline Home search, appearance and layout settings, shared-axis transitions, a bottom bar that never re-creates, sticky upcoming months, and a reduced-motion-aware polish pass |
-| 2.4 | `Sequence-2.4.apk` | Merges the 2.1-2.3 internal passes into the public build: 12 more franchises (49 total), including six game series with a Game kind and played/playing copy; a cleaner Home without the continue hero, up-next rows or mini bar; and plain tappable detail and Upcoming rows, with the swipe-to-mark-seen gesture removed. Marks stay in the entry sheets and "mark everything up to here". Current release. |
+| 2.4 | `Sequence-2.4.apk` | 12 more franchises (49 total), including six game series with a Game kind, game filtering and played/playing copy. A cleaner Home without the continue hero, up-next rows or mini bar. Detail and Upcoming rows are plain and tappable, with the swipe-to-mark-seen gesture removed; marks stay in the entry sheets and "mark everything up to here". Current release. |
 
 Versions 1.7 through 1.10 and 2.1 through 2.3 were internal builds; their changes are part of 2.0 and
 2.4 respectively.
