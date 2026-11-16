@@ -91,7 +91,7 @@ fun UpcomingScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                     months.forEach { (month, rows) ->
                         stickyHeader(key = "month-$month") { MonthLabel(month) }
                         items(rows, key = { "soon-${it.franchise.id}-${it.entry.id}" }) { row ->
-                            UpcomingRow(vm, row, released = false, modifier = Modifier.animateItem())
+                            UpcomingRow(vm, row, released = false, modifier = seqItem())
                         }
                     }
                 }
@@ -107,7 +107,7 @@ fun UpcomingScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                     item { MutedLine("Nothing new in the last 90 days.") }
                 } else {
                     items(recent, key = { "recent-${it.franchise.id}-${it.entry.id}" }) { row ->
-                        UpcomingRow(vm, row, released = true, modifier = Modifier.animateItem())
+                        UpcomingRow(vm, row, released = true, modifier = seqItem())
                     }
                 }
             }

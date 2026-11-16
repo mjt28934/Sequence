@@ -203,12 +203,12 @@ fun SeenToggle(
     // a short spring so the action feels acknowledged.
     val container by animateColorAsState(
         targetValue = if (checked) scheme.primary else Color.Transparent,
-        animationSpec = tween(SeqMotion.SHORT_MS),
+        animationSpec = seqTween(SeqMotion.SHORT_MS),
         label = "seenContainer",
     )
     val content by animateColorAsState(
         targetValue = if (checked) scheme.onPrimary else scheme.onSurfaceVariant,
-        animationSpec = tween(SeqMotion.SHORT_MS),
+        animationSpec = seqTween(SeqMotion.SHORT_MS),
         label = "seenContent",
     )
     val pop = rememberFlagPop(checked)
@@ -579,27 +579,27 @@ fun CoverTile(
     // Dimming a read cover is a state change, so ease it instead of snapping to half opacity.
     val artAlpha by animateFloatAsState(
         targetValue = if (read) 0.45f else 1f,
-        animationSpec = if (Motion.enabled) tween(SeqMotion.STANDARD_MS) else snap(),
+        animationSpec = seqTween(SeqMotion.STANDARD_MS),
         label = "coverRead",
     )
     val badgeFill by animateColorAsState(
         targetValue = if (read) accent.accent else MaterialTheme.colorScheme.scrim.copy(alpha = 0.55f),
-        animationSpec = tween(SeqMotion.SHORT_MS),
+        animationSpec = seqTween(SeqMotion.SHORT_MS),
         label = "badgeFill",
     )
     val badgeStroke by animateColorAsState(
         targetValue = if (read) accent.accent else Color.White.copy(alpha = 0.75f),
-        animationSpec = tween(SeqMotion.SHORT_MS),
+        animationSpec = seqTween(SeqMotion.SHORT_MS),
         label = "badgeStroke",
     )
     val badgeInk by animateColorAsState(
         targetValue = if (read) accent.ink else Color.White,
-        animationSpec = tween(SeqMotion.SHORT_MS),
+        animationSpec = seqTween(SeqMotion.SHORT_MS),
         label = "badgeInk",
     )
     val nextBorder by animateColorAsState(
         targetValue = if (isNext) accent.accent else Color.Transparent,
-        animationSpec = tween(SeqMotion.STANDARD_MS),
+        animationSpec = seqTween(SeqMotion.STANDARD_MS),
         label = "nextBorder",
     )
     val pop = rememberFlagPop(read)

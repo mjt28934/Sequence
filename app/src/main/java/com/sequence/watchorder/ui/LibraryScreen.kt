@@ -158,7 +158,7 @@ fun LibraryScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                         verticalArrangement = Arrangement.spacedBy(16.dp),
                     ) {
                         items(items, key = { it.franchise.id }) { item ->
-                            Box(Modifier.animateItem()) {
+                            Box(seqItem()) {
                                 PosterTile(
                                     franchise = item.franchise,
                                     subtitle = subtitleFor(item),
@@ -175,7 +175,7 @@ fun LibraryScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                         contentPadding = PaddingValues(bottom = 96.dp),
                     ) {
                         items(items, key = { it.franchise.id }) { item ->
-                            Box(Modifier.animateItem()) { LibraryRow(vm, item) }
+                            Box(seqItem()) { LibraryRow(vm, item) }
                         }
                     }
                 }

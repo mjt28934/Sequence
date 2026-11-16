@@ -1,5 +1,6 @@
 package com.sequence.watchorder.ui
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.EnterExitState
 import androidx.compose.animation.fadeIn
@@ -11,14 +12,18 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.FiniteAnimationSpec
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.snap
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyItemScope
+import androidx.compose.foundation.lazy.grid.LazyGridItemScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -72,6 +77,28 @@ object SeqMotion {
     const val BADGE_DAMPING = 0.55f
     const val BADGE_STIFFNESS = 1400f
 }
+
+/**
+ * Colour and alpha changes that settle instantly under reduce motion. Colour is feedback rather
+ * than movement, so snapping it loses nothing the user asked to keep still.
+ */
+fun <T> seqTween(durationMillis: Int): FiniteAnimationSpec<T> =
+    if (Motion.enabled) tween(durationMillis) else snap()
+
+/**
+ * Lazy-list placement animation, dropped under reduce motion so rows do not slide or fade when the
+ * content underneath the user changes.
+ *
+ * The factory needs the lazy item scope, so it cannot be an extension on [Modifier] itself.
+ */
+@SuppressLint("ModifierFactoryExtensionFunction")
+@Composable
+fun LazyItemScope.seqItem(): Modifier = if (Motion.enabled) Modifier.animateItem() else Modifier
+
+/** Grid equivalent of [seqItem]; grids expose their own item scope. */
+@SuppressLint("ModifierFactoryExtensionFunction")
+@Composable
+fun LazyGridItemScope.seqItem(): Modifier = if (Motion.enabled) Modifier.animateItem() else Modifier
 
 /**
  * Remembers which entrance animations have already played, keyed by a stable name.

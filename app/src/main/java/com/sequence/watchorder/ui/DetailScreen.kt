@@ -241,7 +241,7 @@ fun DetailScreen(vm: MainViewModel, franchise: Franchise) {
                         else -> "row-$index"
                     }
                 }) { index, row ->
-                    Box(Modifier.animateItem()) {
+                    Box(seqItem()) {
                         when (row) {
                             is DetailRow.PathHeader -> EraLabel(row.label)
                             is DetailRow.CoverRow -> CoverRow(
@@ -272,7 +272,7 @@ fun DetailScreen(vm: MainViewModel, franchise: Franchise) {
                         else -> "row-$index"
                     }
                 }) { _, row ->
-                    Box(Modifier.animateItem()) {
+                    Box(seqItem()) {
                         when (row) {
                             is DetailRow.EraHeader -> EraLabel(row.label)
                             is DetailRow.WatchRow -> SwipeableWatchRow(
@@ -616,7 +616,7 @@ private fun WatchRow(
         } else {
             MaterialTheme.colorScheme.surfaceContainerLow
         },
-        animationSpec = tween(SeqMotion.STANDARD_MS),
+        animationSpec = seqTween(SeqMotion.STANDARD_MS),
         label = "rowColor",
     )
     val chipColor by animateColorAsState(
@@ -625,12 +625,12 @@ private fun WatchRow(
         } else {
             MaterialTheme.colorScheme.surfaceContainerHighest
         },
-        animationSpec = tween(SeqMotion.STANDARD_MS),
+        animationSpec = seqTween(SeqMotion.STANDARD_MS),
         label = "chipColor",
     )
     val chipInk by animateColorAsState(
         targetValue = if (watched) accent.ink else MaterialTheme.colorScheme.onSurfaceVariant,
-        animationSpec = tween(SeqMotion.STANDARD_MS),
+        animationSpec = seqTween(SeqMotion.STANDARD_MS),
         label = "chipInk",
     )
     Surface(

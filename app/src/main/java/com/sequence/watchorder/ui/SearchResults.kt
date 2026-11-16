@@ -67,7 +67,7 @@ fun HomeSearchField(
     // moving anything or replacing the field.
     val borderColor by animateColorAsState(
         targetValue = if (focused) MaterialTheme.colorScheme.primary else Color.Transparent,
-        animationSpec = tween(SeqMotion.SHORT_MS),
+        animationSpec = seqTween(SeqMotion.SHORT_MS),
         label = "searchFocus",
     )
     Surface(

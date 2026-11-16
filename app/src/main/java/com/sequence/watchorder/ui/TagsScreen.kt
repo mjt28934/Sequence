@@ -111,7 +111,7 @@ private fun TagGrid(vm: MainViewModel) {
         }
         items(shelves, key = { it.first }) { shelf ->
             val first = shelf.second.firstOrNull() ?: return@items
-            Box(Modifier.animateItem()) {
+            Box(seqItem()) {
                 GenreTile(
                     genre = shelf.first,
                     franchise = first,
@@ -147,7 +147,7 @@ private fun GenreFranchises(vm: MainViewModel, genre: String) {
             Row(
                 Modifier
                     .fillMaxWidth()
-                    .animateItem()
+                    .then(seqItem())
                     .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {

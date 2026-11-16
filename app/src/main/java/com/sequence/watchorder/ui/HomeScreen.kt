@@ -257,7 +257,7 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                         }
                     }
                     items(upNext, key = { "up-${it.franchise.id}-${it.entry.id}" }) { item ->
-                        UpNextRow(vm, item, Modifier.animateItem())
+                        UpNextRow(vm, item, seqItem())
                     }
                 }
 
@@ -301,7 +301,7 @@ fun HomeScreen(vm: MainViewModel, modifier: Modifier = Modifier) {
                     Row(
                         Modifier
                             .fillMaxWidth()
-                            .animateItem()
+                            .then(seqItem())
                             .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
                         horizontalArrangement = Arrangement.spacedBy(12.dp),
                     ) {
