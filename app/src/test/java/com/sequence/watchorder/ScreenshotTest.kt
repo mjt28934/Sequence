@@ -14,7 +14,6 @@ import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import com.sequence.watchorder.data.Catalog
 import com.sequence.watchorder.data.LibView
-import com.sequence.watchorder.data.Logic
 import com.sequence.watchorder.data.OrderMode
 import com.sequence.watchorder.data.ProgressState
 import com.sequence.watchorder.ui.ArtKind
@@ -135,11 +134,10 @@ class ScreenshotTest {
     @Test
     fun shell() {
         val model = vm()
-        val mini = Logic.continueList(catalog, model.progress, model.today(), 1).firstOrNull()
         shot("shell") {
             Column(Modifier.fillMaxSize()) {
                 Box(Modifier.weight(1f)) { HomeScreen(model) }
-                AppBottomBar(model, mini)
+                AppNavigationBar(model)
             }
         }
     }

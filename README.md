@@ -1,4 +1,4 @@
-# Sequence 2.2 — 49 franchises, films and games
+# Sequence 2.3 — 49 franchises, films and games
 
 A native Kotlin / Jetpack Compose rebuild of the original WebView-based **Sequence** watch-order app.
 No WebView, no JavaScript bridge, no network permission. The catalogue and all artwork are
@@ -13,10 +13,10 @@ sheets, segmented buttons, swipe-to-mark-seen with haptics, and edge-to-edge ins
 
 - `Sequence-2.0.apk` — signed release build (`com.sequence.watchorder`, versionCode 220,
   versionName `2.0`), the latest published release.
-- `Sequence-2.2.apk` — local build of the current source (versionCode 240, versionName `2.2`); it is
+- `Sequence-2.3.apk` — local build of the current source (versionCode 250, versionName `2.3`); it is
   not published yet.
-- `Sequence-2.1.apk` — local build of the previous catalogue pass (versionCode 230, versionName `2.1`);
-  it is not published either.
+- `Sequence-2.2.apk` — local build of the previous Home and swipe pass (versionCode 240,
+  versionName `2.2`); it is not published either.
 - Minimum Android 8.0 (API 26), targets Android 15 (API 35).
 - Rendered previews of every screen are in `screenshots/`.
 
@@ -34,6 +34,7 @@ Each change ships under a new name so builds never get confused:
 | 2.0 | `Sequence-2.0.apk` | Tags tab, inline Home search, appearance and layout settings, shared-axis transitions, a bottom bar that never re-creates, sticky upcoming months, and a reduced-motion-aware polish pass |
 | 2.1 | `Sequence-2.1.apk` | 12 more franchises (49 total): Scream, Final Destination, Saw, Rambo, The Godfather, Underworld, and six game series. Adds a Game kind, game filtering and played/playing copy. Unreleased. |
 | 2.2 | `Sequence-2.2.apk` | Cleaner Home: the continue hero and up-next rows are gone, so the totals, continue shelf, keep-reading shelf and franchise grid carry the page. Rows are marked seen by swiping right and unmarked by swiping left, replacing the seen circles. Unreleased. |
+| 2.3 | `Sequence-2.3.apk` | Removes the mini continue strip above the navigation bar, leaving the tab bar as the only pinned chrome. Unreleased. |
 
 Versions 1.7 through 1.10 were internal builds; their changes are part of 2.0.
 
@@ -46,9 +47,9 @@ APK name both follow it.
 ## What is included
 
 - **Home** — overall seen/read progress, a continue shelf, a keep-reading row, the full franchise grid
-  with a hide-finished empty state, and a media-player style mini bar above the navigation. A finished
-  franchise carries a tick badge on its poster, and a new install skips the explainer and goes straight
-  to the catalogue. Game entries say "played" instead of "watched".
+  with a hide-finished empty state, and a media-player style navigation bar. A finished franchise
+  carries a tick badge on its poster, and a new install skips the explainer and goes straight to the
+  catalogue. Game entries say "played" instead of "watched".
 - **Library** — saved and started franchises, grid/list views, progress filters, and sort by recent,
   A–Z, most left, or furthest along. Rows animate into place as the filter changes, and the bar links
   straight to settings.
@@ -106,8 +107,6 @@ placeholder tile.
   motion the rows simply settle in place.
 - **Detail hero** — the artwork trails the page as it scrolls and grows just enough to avoid exposing
   an edge; the blurb resizes smoothly when it expands.
-- **Mini bar** — slides in and out above the navigation, shrinks on press, and slides its contents
-  vertically when the next title changes.
 - **Tabs and destinations** — `AnimatedContent` slides tabs with the same 48dp / 250ms move in both
   directions and cross-fades into detail and settings; the bar itself never re-creates.
 
@@ -121,15 +120,15 @@ placeholder tile.
   for watch/books and release/story, `SwipeToDismissBox` to mark an episode seen, `ExtendedFloatingActionButton`
   for "Next up", `ModalBottomSheet` for every order/filter/detail sheet.
 - **Insets** — edge-to-edge; every screen consumes the `Scaffold` content padding so nothing hides
-  under the status bar, the navigation bar or the mini player.
-- **Haptics** — a haptic tick on every seen/read toggle.
+  under the status bar or the navigation bar.
+- **Haptics** — a haptic tick when a swipe marks a title seen or unseen, and on read toggles.
 
 ## Source layout
 
 ```
 app/src/main/java/com/sequence/watchorder/
   MainActivity.kt          edge-to-edge Compose entry point
-  App.kt                   app shell, top bars, bottom nav, mini bar, snackbar, back handling
+  App.kt                   app shell, top bars, bottom nav, snackbar, back handling
   SheetHost.kt             order/filter/more/sort/confirm and entry/work bottom sheets
   MainViewModel.kt         UI state, navigation, progress mutations and undo
   data/
@@ -140,10 +139,10 @@ app/src/main/java/com/sequence/watchorder/
   ui/
     Theme.kt               Material 3 colour schemes (dynamic + fallback) and accent palettes
     Motion.kt              shared motion: Motion.enabled, SeqMotion timings, press scale, section moves
-    Components.kt          cards, chips, rows, sheet controls, check circles
+    Components.kt          cards, chips, rows, sheet controls, swipe backgrounds
     Icons.kt               original Material SVG paths as Compose ImageVectors
     Art.kt                 bundled WebP loader with a heap-sized LruCache and fade-in
-    Feedback.kt            haptic ticks for seen and read toggles
+    Feedback.kt            haptic ticks for swipe marks and read toggles
     HomeScreen.kt
     LibraryScreen.kt
     TagsScreen.kt
@@ -217,9 +216,9 @@ $env:JAVA_HOME = "C:\Projects\Orderly\.toolchain\jdk17"
 
 Outputs:
 
-- `app/build/outputs/apk/debug/app-debug.apk` (`com.sequence.watchorder.debug`, `2.2-debug`)
+- `app/build/outputs/apk/debug/app-debug.apk` (`com.sequence.watchorder.debug`, `2.3-debug`)
 - `app/build/outputs/apk/release/app-release.apk` (signed with `sequence-release.jks`)
-- `Sequence-2.2.apk` — the current release build copied to the project root (not published)
+- `Sequence-2.3.apk` — the current release build copied to the project root (not published)
 
 ### Android Studio
 

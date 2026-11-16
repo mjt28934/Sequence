@@ -1,28 +1,11 @@
 package com.sequence.watchorder
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkVertically
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
-import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -38,38 +21,27 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.SaveableStateHolder
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.sequence.watchorder.data.ContinueCard
-import com.sequence.watchorder.data.Logic
 import com.sequence.watchorder.data.ThemeMode
-import com.sequence.watchorder.ui.ArtImage
-import com.sequence.watchorder.ui.ArtKind
-import com.sequence.watchorder.ui.Haptics
-import com.sequence.watchorder.ui.ProgressStrip
-import com.sequence.watchorder.ui.SeqIcons
-import com.sequence.watchorder.ui.SeqSnackbar
-import com.sequence.watchorder.ui.SequenceTheme
 import com.sequence.watchorder.ui.DetailScreen
+import com.sequence.watchorder.ui.Haptics
 import com.sequence.watchorder.ui.HomeScreen
 import com.sequence.watchorder.ui.LibraryScreen
 import com.sequence.watchorder.ui.Motion
 import com.sequence.watchorder.ui.SectionAxis
 import com.sequence.watchorder.ui.SectionSwitcher
-import com.sequence.watchorder.ui.SeqMotion
+import com.sequence.watchorder.ui.SeqIcons
+import com.sequence.watchorder.ui.SeqSnackbar
+import com.sequence.watchorder.ui.SequenceTheme
 import com.sequence.watchorder.ui.SettingsScreen
 import com.sequence.watchorder.ui.TagsScreen
 import com.sequence.watchorder.ui.UpcomingScreen
-import com.sequence.watchorder.ui.pressScale
-import com.sequence.watchorder.ui.toPalette
 
 @Composable
 fun SequenceApp(vm: MainViewModel) {
@@ -171,14 +143,10 @@ private fun MainTabs(
     snackbarHostState: SnackbarHostState,
     stateHolder: SaveableStateHolder,
 ) {
-    val miniCard = remember(vm.progress) {
-        Logic.continueList(vm.catalog, vm.progress, vm.today(), 1).firstOrNull()
-    }
-
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         contentWindowInsets = androidx.compose.foundation.layout.WindowInsets(0, 0, 0, 0),
-        bottomBar = { AppBottomBar(vm, miniCard) },
+        bottomBar = { AppNavigationBar(vm) },
         snackbarHost = {
             SnackbarHost(
                 hostState = snackbarHostState,
@@ -191,8 +159,8 @@ private fun MainTabs(
                 .fillMaxSize()
                 .padding(bottom = padding.calculateBottomPadding()),
         ) {
-            // Only the page moves. The strip and the navigation bar live outside the switcher, so
-            // they never re-create, flash or lose the selected state mid-transition.
+            // Only the page moves. The navigation bar lives outside the switcher, so it never
+            // re-creates, flashes or loses the selected state mid-transition.
             SectionSwitcher(
                 target = vm.tab,
                 modifier = Modifier.fillMaxSize(),
@@ -209,30 +177,6 @@ private fun MainTabs(
                 }
             }
         }
-    }
-}
-
-/** Everything pinned under the content: the continue strip, then the navigation bar. */
-@Composable
-internal fun AppBottomBar(vm: MainViewModel, miniCard: ContinueCard?) {
-    Column {
-        if (Motion.enabled) {
-            AnimatedVisibility(
-                visible = miniCard != null,
-                enter = fadeIn(tween(SeqMotion.SHORT_MS)) +
-                    expandVertically(tween(SeqMotion.STANDARD_MS), expandFrom = Alignment.Bottom),
-                exit = fadeOut(tween(SeqMotion.PRESS_MS)) +
-                    shrinkVertically(tween(SeqMotion.STANDARD_MS), shrinkTowards = Alignment.Bottom),
-            ) {
-                if (miniCard != null) {
-                    MiniBar(vm, miniCard)
-                }
-            }
-        } else if (miniCard != null) {
-            // Settled state: a snapshot has no time to run an enter transition.
-            MiniBar(vm, miniCard)
-        }
-        AppNavigationBar(vm)
     }
 }
 
@@ -269,104 +213,6 @@ internal fun AppNavigationBar(vm: MainViewModel) {
                     unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
                     unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
                 ),
-            )
-        }
-    }
-}
-
-/** The "keep going" strip that sits above the navigation bar. */
-@Composable
-private fun MiniBar(vm: MainViewModel, card: ContinueCard) {
-    val accent = vm.catalog.accent(card.franchise.id).toPalette()
-    val title = card.next?.title ?: card.nextBook?.title ?: "All caught up"
-    val kicker = when {
-        card.next != null -> "Up next"
-        card.nextBook != null -> "Read next"
-        else -> "Finished"
-    }
-    val interaction = remember { MutableInteractionSource() }
-
-    Surface(
-        onClick = { vm.openFranchise(card.franchise.id) },
-        interactionSource = interaction,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 12.dp, vertical = 6.dp)
-            .pressScale(interaction, pressedScale = 0.985f),
-        shape = RoundedCornerShape(16.dp),
-        color = MaterialTheme.colorScheme.surfaceContainerHigh,
-        tonalElevation = 3.dp,
-    ) {
-        Column {
-            // Sliding the strip's contents, rather than snapping them, when the next title changes.
-            if (Motion.enabled) {
-                AnimatedContent(
-                    targetState = card.franchise.id,
-                    transitionSpec = {
-                        (
-                            slideInVertically(tween(SeqMotion.STANDARD_MS)) { it / 3 } +
-                                fadeIn(tween(SeqMotion.STANDARD_MS))
-                            ) togetherWith (
-                            slideOutVertically(tween(SeqMotion.SHORT_MS)) { -it / 3 } +
-                                fadeOut(tween(SeqMotion.PRESS_MS))
-                            )
-                    },
-                    label = "miniBar",
-                ) { shownId ->
-                    MiniBarRow(card, shownId, kicker, title)
-                }
-            } else {
-                // Reduce motion: the new title replaces the old one without a slide.
-                MiniBarRow(card, card.franchise.id, kicker, title)
-            }
-            ProgressStrip(
-                pct = card.seen.pct,
-                color = accent.accent,
-                modifier = Modifier.padding(horizontal = 12.dp, vertical = 0.dp),
-            )
-            Box(Modifier.padding(bottom = 8.dp))
-        }
-    }
-}
-
-/** One line of the mini bar: poster, franchise and what is next. */
-@Composable
-private fun MiniBarRow(
-    card: ContinueCard,
-    shownId: String,
-    kicker: String,
-    title: String,
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 8.dp, end = 12.dp, top = 8.dp, bottom = 10.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
-    ) {
-        Box(
-            Modifier
-                .width(56.dp)
-                .aspectRatio(16f / 10f)
-                .clip(RoundedCornerShape(10.dp)),
-        ) {
-            // Keeps the outgoing poster with the outgoing text during the slide.
-            ArtImage(ArtKind.POSTER, shownId, Modifier.fillMaxSize())
-        }
-        Column(Modifier.weight(1f)) {
-            Text(
-                text = card.franchise.name,
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.onSurface,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
-            Text(
-                text = "$kicker · $title",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
             )
         }
     }
