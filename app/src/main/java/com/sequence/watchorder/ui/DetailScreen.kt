@@ -37,20 +37,15 @@ import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Surface
-import androidx.compose.material3.SwipeToDismissBox
-import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
@@ -58,7 +53,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.sequence.watchorder.DetailTab
@@ -276,7 +270,7 @@ fun DetailScreen(vm: MainViewModel, franchise: Franchise) {
                     Box(seqItem()) {
                         when (row) {
                             is DetailRow.EraHeader -> EraLabel(row.label)
-                            is DetailRow.WatchRow -> SwipeableWatchRow(
+                            is DetailRow.WatchRow -> WatchRow(
                                 vm = vm,
                                 franchise = franchise,
                                 entry = row.entry,
@@ -533,75 +527,6 @@ private fun EraLabel(label: String) {
         style = MaterialTheme.typography.titleSmall,
         color = MaterialTheme.colorScheme.primary,
     )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun SwipeableWatchRow(
-    vm: MainViewModel,
-    franchise: Franchise,
-    entry: Entry,
-    position: Int,
-    accent: AccentPalette,
-    watched: Boolean,
-    upcoming: Boolean,
-) {
-    val latest = rememberUpdatedState(watched to upcoming)
-    val haptics = LocalHapticFeedback.current
-    val dismissState = rememberSwipeToDismissBoxState(
-        confirmValueChange = { value ->
-            val (isWatched, isUpcoming) = latest.value
-            when {
-                isUpcoming -> false
-                value == SwipeToDismissBoxValue.StartToEnd && !isWatched -> {
-                    Haptics.tick(haptics)
-                    vm.toggleSeen(franchise.id, entry)
-                    true
-                }
-                value == SwipeToDismissBoxValue.EndToStart && isWatched -> {
-                    Haptics.tick(haptics)
-                    vm.toggleSeen(franchise.id, entry)
-                    true
-                }
-                else -> false
-            }
-        },
-    )
-    // Either direction leaves the row dismissed; the mark change then resets it into place.
-    LaunchedEffect(watched) {
-        if (dismissState.currentValue != SwipeToDismissBoxValue.Settled) {
-            dismissState.reset()
-        }
-    }
-
-    SwipeToDismissBox(
-        state = dismissState,
-        enableDismissFromStartToEnd = !upcoming && !watched,
-        enableDismissFromEndToStart = !upcoming && watched,
-        backgroundContent = {
-            // Only while the row is actually moving: watched rows are translucent, so a resting
-            // background would otherwise tint every row with a "Mark unseen" wash.
-            if (dismissState.dismissDirection != SwipeToDismissBoxValue.Settled) {
-                SwipeSeenBackground(
-                    direction = dismissState.dismissDirection,
-                    accent = accent,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(horizontal = 12.dp, vertical = 3.dp),
-                )
-            }
-        },
-    ) {
-        WatchRow(
-            vm = vm,
-            franchise = franchise,
-            entry = entry,
-            position = position,
-            accent = accent,
-            watched = watched,
-            upcoming = upcoming,
-        )
-    }
 }
 
 @Composable

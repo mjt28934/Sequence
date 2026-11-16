@@ -57,7 +57,6 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarData
 import androidx.compose.material3.Surface
-import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -183,48 +182,6 @@ fun ProgressStrip(
         gapSize = 0.dp,
         drawStopIndicator = {},
     )
-}
-
-/**
- * Background revealed while a row is swiped sideways: right marks seen, left clears the mark.
- * Both directions use the same surface so a half-swipe always says what letting go will do.
- */
-@Composable
-fun SwipeSeenBackground(
-    direction: SwipeToDismissBoxValue,
-    accent: AccentPalette,
-    modifier: Modifier = Modifier,
-    shape: Shape = RoundedCornerShape(16.dp),
-) {
-    val marking = direction == SwipeToDismissBoxValue.StartToEnd
-    val container = if (marking) {
-        accent.accent.copy(alpha = 0.9f)
-    } else {
-        MaterialTheme.colorScheme.surfaceContainerHighest
-    }
-    val ink = if (marking) accent.ink else MaterialTheme.colorScheme.onSurfaceVariant
-
-    Row(
-        modifier = modifier
-            .fillMaxSize()
-            .clip(shape)
-            .background(container)
-            .padding(horizontal = 20.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = if (marking) Arrangement.Start else Arrangement.End,
-    ) {
-        Icon(
-            imageVector = if (marking) SeqIcons.Check else SeqIcons.Close,
-            contentDescription = null,
-            tint = ink,
-        )
-        Spacer(Modifier.width(12.dp))
-        Text(
-            text = if (marking) "Mark seen" else "Mark unseen",
-            color = ink,
-            style = MaterialTheme.typography.labelLarge,
-        )
-    }
 }
 
 /** Small tonal label for year, kind, format and similar metadata. */
